@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/PyGame_Project_demo.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Board_class.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Map_tiles_class.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Orc_class.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Soldier_class.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Font.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/Ratanegra-Cyrillic.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Arrow01(100x100).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Money/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Money/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Money/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Money/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Money/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Money/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Attack01/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Attack01/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Attack01/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Attack01/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Attack01/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Attack01/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Attack02/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Attack02/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Attack02/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Attack02/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Attack02/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Attack02/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Death/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Death/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Death/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Death/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Hurt/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Hurt/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Hurt/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Hurt/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Walk/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Walk/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Walk/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Walk/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Walk/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Walk/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Walk/7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Orc/Orc-Walk/8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack01/attack1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack01/attack2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack01/attack3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack01/attack4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack01/attack5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack01/attack6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack02/attack1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack02/attack2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack02/attack3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack02/attack4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack02/attack5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack02/attack6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack03/attack1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack03/attack2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack03/attack3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack03/attack4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack03/attack5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack03/attack6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack03/attack7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack03/attack8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Attack03/attack9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Death/death1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Death/death2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Death/death3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Death/death4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Hurt/hurt1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Hurt/hurt2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Hurt/hurt3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Hurt/hurt4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Idle/idle1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Idle/idle2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Idle/idle3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Idle/idle4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Idle/idle5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Soldier/Soldier-Idle/idle6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/map_tiles/License.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/map_tiles/grass_tile_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/map_tiles/grass_tile_2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/map_tiles/sand_tile.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_01.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_02.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_03.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_04.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_05.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_06.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_07.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_08.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_09.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_14.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_15.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_17.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_18.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_19.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_20.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_21.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_22.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_23.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_24.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_25.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_26.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_27.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_28.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_29.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_30.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_31.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_32.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_33.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_34.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_35.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_36.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_37.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_38.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_39.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_40.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_41.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_42.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_43.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_44.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_45.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_46.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_47.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_48.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_49.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_50.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_51.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_52.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_53.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_54.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_55.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_56.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_57.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_58.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_59.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_60.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_61.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_62.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_63.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTile_64.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTileset.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/1 Tiles/FieldsTilesetTest.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/1 Shadow/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/1 Shadow/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/1 Shadow/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/1 Shadow/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/1 Shadow/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/1 Shadow/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/2 Fence/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/2 Fence/10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/2 Fence/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/2 Fence/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/2 Fence/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/2 Fence/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/2 Fence/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/2 Fence/7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/2 Fence/8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/2 Fence/9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/3 Pointer/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/3 Pointer/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/3 Pointer/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/3 Pointer/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/3 Pointer/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/3 Pointer/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/4 Stone/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/4 Stone/10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/4 Stone/11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/4 Stone/12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/4 Stone/13.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/4 Stone/14.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/4 Stone/15.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/4 Stone/16.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/4 Stone/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/4 Stone/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/4 Stone/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/4 Stone/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/4 Stone/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/4 Stone/7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/4 Stone/8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/4 Stone/9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/5 Grass/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/5 Grass/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/5 Grass/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/5 Grass/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/5 Grass/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/5 Grass/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/6 Flower/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/6 Flower/10.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/6 Flower/11.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/6 Flower/12.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/6 Flower/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/6 Flower/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/6 Flower/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/6 Flower/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/6 Flower/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/6 Flower/7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/6 Flower/8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/6 Flower/9.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Box1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Box2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Box3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Box4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Dirt1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Dirt2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Dirt3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Dirt4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Dirt5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Dirt6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Lamp1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Lamp2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Lamp3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Lamp4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Lamp5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Lamp6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Log1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Log2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Log3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Log4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Tree1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/7 Decor/Tree2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/8 Camp/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/8 Camp/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/8 Camp/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/8 Camp/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/8 Camp/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/8 Camp/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/9 Bush/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/9 Bush/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/9 Bush/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/9 Bush/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/9 Bush/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/9 Bush/6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/PlaceForTower1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/2 Objects/PlaceForTower2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/3 Animated Objects/1 Flag/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/3 Animated Objects/1 Flag/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/3 Animated Objects/1 Flag/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/3 Animated Objects/1 Flag/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/3 Animated Objects/1 Flag/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/3 Animated Objects/2 Campfire/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(32x32)/3 Animated Objects/2 Campfire/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(64x64)/Objects/camp/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(64x64)/Objects/camp/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(64x64)/Objects/decor/Tree1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(64x64)/Objects/decor/Tree2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(64x64)/Tiles/FieldsTile_31.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(64x64)/Tiles/FieldsTile_38.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(64x64)/Tiles/FieldsTile_40.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(64x64)/Tiles/FieldsTile_43.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(64x64)/Tiles/FieldsTile_44.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/new_map_tiles(64x64)/Tiles/FieldsTile_47.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo_map.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/demo_project.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/load_image_func.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sprite_groups.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2r9ucWvParUJW42iLgAzJHYD3Ql" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.demo_map.executor&quot;: &quot;Run&quot;,
+    &quot;Python.demo_project.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/PycharmProjects/PyGame_Project_demo&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\user\PycharmProjects\PyGame_Project_demo" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.demo_map">
+    <configuration name="demo_map" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PyGame_Project_demo" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/demo_map.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="demo_project" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PyGame_Project_demo" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/demo_project.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.demo_map" />
+        <item itemvalue="Python.demo_project" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-50da183f06c8-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13135.95" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="" />
+      <created>1735983691855</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1735983691855</updated>
+    </task>
+    <servers />
+  </component>
+</project>
