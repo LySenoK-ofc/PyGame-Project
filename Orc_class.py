@@ -7,8 +7,8 @@ import pygame
 IDLE = 'Idle'
 WALK = 'Walk'
 DEATH = 'Death'
-ATTACK1 = 'Attack01'
-ATTACK2 = 'Attack02'
+ATTACK = 'Attack'
+
 
 class Orc(pygame.sprite.Sprite):
     hp = 50
@@ -41,13 +41,18 @@ class Orc(pygame.sprite.Sprite):
                              load_image('animations/Orc/Orc-Attack02/5.png', reverse=True),
                              load_image('animations/Orc/Orc-Attack02/6.png', reverse=True)]
         self.mode = WALK
-        self.image = self.anim_walk[0]
-        self.mask = pygame.mask.from_surface(self.image)
-        self.rect = self.image.get_rect()
-        self.rect.x = 1200
-        self.rect.y = randrange(2, 7) * 75 + 32
-
         self.frame = 0
+        self.current_attack_number = choice([self.anim_attack1, self.anim_attack2])
+        self.current_target = None
+
+        self.image = self.anim_walk[self.frame]
+        # Создаём маску сразу, так как во время удала орк поднимает топор и залезает на другую дорожку
+        self.mask = pygame.mask.from_surface(self.image)
+
+        self.rect = self.image.get_rect()
+        self.rect.x = 1000
+        self.rect.y = randrange(2, 7) * 64
+
         self.last_update = pygame.time.get_ticks()
         self.frame_rate_walk = 250
         self.frame_rate_attack = 250
@@ -56,11 +61,13 @@ class Orc(pygame.sprite.Sprite):
         self.check = True
 
     def update(self, *args, **kwargs):
-        self.mask = pygame.mask.from_surface(self.image)
         if self.check:
             for soldier in characters:
                 if pygame.sprite.collide_mask(self, soldier):
-                    self.mode = 'Attack'
+                    # Создаём цель для моба
+                    self.current_target = soldier
+
+                    self.mode = ATTACK
                     self.frame = 0
                     self.check = False
 
@@ -68,43 +75,34 @@ class Orc(pygame.sprite.Sprite):
         if self.mode == WALK:
             if now - self.last_update > self.frame_rate_walk:
                 self.last_update = now
+                self.image = self.anim_walk[self.frame % len(self.anim_walk)]
                 self.frame += 1
-                if self.frame == len(self.anim_walk):
-                    self.frame = 0
-                self.image = self.anim_walk[self.frame]
             self.rect.x -= 3
 
-        if self.mode == DEATH:
+        elif self.mode == DEATH:
             if now - self.last_update > self.frame_rate_death:
                 self.last_update = now
                 self.frame += 1
+
+                # Если анимация закончилсь - удаляем моба
                 if self.frame == len(self.anim_death):
                     self.remove(killed_entities)
-                    self.frame = 0
-                self.image = self.anim_death[self.frame]
+                else:
+                    self.image = self.anim_death[self.frame]
 
-        if self.mode == 'Attack':
-            if self.frame == 0:
-                self.attack_number = choice([ATTACK1, ATTACK2])
+        elif self.mode == ATTACK:
             if now - self.last_update > self.frame_rate_attack:
                 self.last_update = now
                 self.frame += 1
-
-            if self.attack_number == ATTACK1:
-                self.image = self.anim_attack1[self.frame]
-            else:
-                self.image = self.anim_attack2[self.frame]
-
-            if self.frame == len(self.anim_attack1):
-                self.frame = 0
-
-            if self.frame == 4:
-                for soldier in characters:
-                    if pygame.sprite.collide_mask(self, soldier):
-                        soldier.lose_hp(Orc.atk)
-                else:
+                self.image = self.current_attack_number[self.frame % len(self.current_attack_number)]
+                # Проверка на смерть лучника
+                if self.frame % len(self.current_attack_number) == 4 and self.current_target.lose_hp(Orc.atk):
+                    self.frame = 0
                     self.mode = WALK
                     self.check = True
+                # Обновление анимации удара
+                if self.frame % len(self.current_attack_number) == len(self.current_attack_number):
+                    self.current_attack_number = choice([self.anim_attack1, self.anim_attack2])
 
     def lose_hp(self, count):
         self.hp -= count

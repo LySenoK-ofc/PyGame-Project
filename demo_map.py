@@ -40,28 +40,10 @@ if __name__ == '__main__':
     Map_tile(map_objects, (125, 200), 'new_map_tiles(64x64)/Objects/camp/1.png')
     Map_tile(map_objects, (10, 150), 'new_map_tiles(64x64)/Objects/camp/2.png')
 
-    Map_tile(map_objects, (175, 300), 'new_map_tiles(64x64)/Objects/decor/Log2.png')
-    Map_tile(map_objects, (75, 385), 'new_map_tiles(64x64)/Objects/decor/Log3.png')
-
     Map_tile(map_objects, (440, 30), 'new_map_tiles(64x64)/Objects/decor/Tree1.png')
     Map_tile(map_objects, (640, 30), 'new_map_tiles(64x64)/Objects/decor/Tree1.png')
     Map_tile(map_objects, (835, 30), 'new_map_tiles(64x64)/Objects/decor/Tree1.png')
     Map_tile(map_objects, (1030, 30), 'new_map_tiles(64x64)/Objects/decor/Tree1.png')
-
-    Animated_map_object(animated_map_objects, (85, 300),
-                        ('new_map_tiles(64x64)/Animated_Objects/campfire/active_campfire/1.png',
-                         'new_map_tiles(64x64)/Animated_Objects/campfire/active_campfire/2.png',
-                         'new_map_tiles(64x64)/Animated_Objects/campfire/active_campfire/3.png',
-                         'new_map_tiles(64x64)/Animated_Objects/campfire/active_campfire/4.png',
-                         'new_map_tiles(64x64)/Animated_Objects/campfire/active_campfire/5.png',
-                         'new_map_tiles(64x64)/Animated_Objects/campfire/active_campfire/6.png',))
-    Animated_map_object(animated_map_objects, (175, 355),
-                        ('new_map_tiles(64x64)/Animated_Objects/flag/1.png',
-                         'new_map_tiles(64x64)/Animated_Objects/flag/2.png',
-                         'new_map_tiles(64x64)/Animated_Objects/flag/3.png',
-                         'new_map_tiles(64x64)/Animated_Objects/flag/4.png',
-                         'new_map_tiles(64x64)/Animated_Objects/flag/5.png',
-                         'new_map_tiles(64x64)/Animated_Objects/flag/6.png',), True)
 
     running = True
 

@@ -110,8 +110,9 @@ class Soldier(pygame.sprite.Sprite):
             self.frame = 0
             self.add(killed_entities)
             self.remove(characters)
+            return True
         self.image = load_image('animations/Soldier/Soldier-Hurt/hurt2.png')
-
+        return False
 
 class Arrow(pygame.sprite.Sprite):
     def __init__(self, group, coord):
