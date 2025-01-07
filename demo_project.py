@@ -2,7 +2,7 @@ from Orc_class import Orc
 from Board_class import Board
 from Map_tiles_class import Map_tile
 from sprite_groups import *
-
+from constant import FPS, CELL_SIZE, WIDTH_CELL, HEIGHT_CELL
 import pygame
 
 pygame.init()
@@ -14,12 +14,10 @@ FINISH = 'Finish'
 PAUSE = 'Pause'
 PREPARE = 'Prepare'
 
-board = Board(6, 5, (64 * 6), (64 * 4), 64)
-
 if __name__ == '__main__':
     pygame.display.set_caption('demo_project')
+    board = Board(WIDTH_CELL, HEIGHT_CELL, (CELL_SIZE * 6), (CELL_SIZE * 4), CELL_SIZE)
     clock = pygame.time.Clock()
-    fps = 30
 
     for i in range(height // 64):
         for j in range(width // 64):
@@ -52,10 +50,9 @@ if __name__ == '__main__':
     Map_tile(map_objects, (835, 30), 'new_map_tiles(64x64)/Objects/decor/Tree1.png')
     Map_tile(map_objects, (1030, 30), 'new_map_tiles(64x64)/Objects/decor/Tree1.png')
 
-    running = True
-
     board.render('new_map_tiles(64x64)/Tiles/FieldsTile_47.png')
 
+    running = True
     while running:
         screen.fill('white')
         for event in pygame.event.get():
@@ -77,14 +74,13 @@ if __name__ == '__main__':
         mobs.draw(screen)
         characters.update()
         characters.draw(screen)
-        killed_entities.update()
-        killed_entities.draw(screen)
         shells.update()
         shells.draw(screen)
 
         pygame.display.flip()
         # Для наглядности, какие сущности соществуют
-        print(f'map_tiles:{map_tiles}, characters:{characters}, shells:{shells}, mobs:{mobs}, killed_entities:{killed_entities}, moneys:{moneys}, map_objects:{map_objects}, animated_map_objects:{animated_map_objects}')
-        clock.tick(fps)
+        # print(
+        #     f'map_tiles:{map_tiles}, characters:{characters}, shells:{shells}, mobs:{mobs}, killed_entities:{killed_entities}, moneys:{moneys}, map_objects:{map_objects}, animated_map_objects:{animated_map_objects}')
+        clock.tick(FPS)
 
     pygame.quit()
