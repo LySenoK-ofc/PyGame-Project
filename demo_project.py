@@ -14,16 +14,10 @@ FINISH = 'Finish'
 PAUSE = 'Pause'
 PREPARE = 'Prepare'
 
-IDLE = 'Idle'
-WALK = 'Walk'
-DEATH = 'Death'
-ATTACK1 = 'Attack01'
-ATTACK2 = 'Attack02'
-BOW_ATTACK = 'Bow_attack'
+board = Board(6, 5, (64 * 6), (64 * 4), 64)
 
 if __name__ == '__main__':
     pygame.display.set_caption('demo_project')
-    board = Board(6, 5, (64 * 6), (64 * 4), 64)
     clock = pygame.time.Clock()
     fps = 30
 
@@ -71,13 +65,6 @@ if __name__ == '__main__':
                 board.get_click(event.pos)
             if event.type == pygame.KEYDOWN:
                 keys = pygame.key.get_pressed()
-                if keys[pygame.K_SPACE]:
-                    for sprite in characters:
-                        if sprite.mode == IDLE:
-                            sprite.mode = BOW_ATTACK
-                        else:
-                            sprite.mode = IDLE
-                        sprite.frame = 0
                 if keys[pygame.K_e]:
                     Orc(mobs)
                     print("<_Successful spawned mob_>")
@@ -96,7 +83,7 @@ if __name__ == '__main__':
         shells.draw(screen)
 
         pygame.display.flip()
-        # Для наглядности, какие сучщости соществуют
+        # Для наглядности, какие сущности соществуют
         print(f'map_tiles:{map_tiles}, characters:{characters}, shells:{shells}, mobs:{mobs}, killed_entities:{killed_entities}, moneys:{moneys}, map_objects:{map_objects}, animated_map_objects:{animated_map_objects}')
         clock.tick(fps)
 

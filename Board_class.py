@@ -40,6 +40,6 @@ class Board:
     def on_click(self, cell):
         if cell is not None and not self.board[cell[1]][cell[0]]:
             Soldier(characters, (cell[0] * 64 + self.left - 120,
-                                 cell[1] * 64 + self.top - 130))  # для demo_project Soldier(characters, cell)
+                                 cell[1] * 64 + self.top - 120))  # для demo_project Soldier(characters, cell)
             self.board[cell[1]][cell[0]] = 1
         print(cell)
