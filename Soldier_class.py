@@ -53,8 +53,8 @@ class Soldier(pygame.sprite.Sprite):
         self.image = self.anim_idle[0]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
-        self.rect.x = coord[0]
-        self.rect.y = coord[1]
+        self.rect.x = coord[0] - (self.rect.size[0] // 2)
+        self.rect.y = coord[1] - (self.rect.size[1] // 2)
 
         self.frame = 0  # текущий кадр
         self.last_update = pygame.time.get_ticks()

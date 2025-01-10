@@ -1,5 +1,5 @@
 from Soldier_class import Soldier
-from Map_tiles_class import Map_tile
+from Map_constructor import Map_tile
 from sprite_groups import map_tiles, characters
 
 
@@ -39,7 +39,6 @@ class Board:
 
     def on_click(self, cell):
         if cell is not None and not self.board[cell[1]][cell[0]]:
-            Soldier(characters, (cell[0] * 64 + self.left - 120,
-                                 cell[1] * 64 + self.top - 130))  # для demo_project Soldier(characters, cell)
+            Soldier(characters, ((cell[0] + 0.5) * 75 + self.left, (cell[1] + 0.4) * 75 + self.top))
             self.board[cell[1]][cell[0]] = 1
         print(cell)
