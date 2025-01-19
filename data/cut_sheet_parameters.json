@@ -1,0 +1,328 @@
+{
+  "animation's parameters": {
+    "troops": {
+      "archer": {
+        "idle": {
+          "width": 100,
+          "height": 100,
+          "row": 0,
+          "column": 6
+        },
+        "walk": {
+          "width": 100,
+          "height": 100,
+          "row": 1,
+          "column": 8
+        },
+        "attack01": {
+          "width": 100,
+          "height": 100,
+          "row": 2,
+          "column": 9
+        },
+        "attack02": {
+          "width": 100,
+          "height": 100,
+          "row": 3,
+          "column": 12
+        },
+        "hurt": {
+          "width": 100,
+          "height": 100,
+          "row": 4,
+          "column": 4
+        },
+        "death": {
+          "width": 100,
+          "height": 100,
+          "row": 5,
+          "column": 4
+        }
+      },
+      "knight": {
+        "idle": {
+          "width": 100,
+          "height": 100,
+          "row": 0,
+          "column": 6
+        },
+        "walk": {
+          "width": 100,
+          "height": 100,
+          "row": 1,
+          "column": 8
+        },
+        "attack01": {
+          "width": 100,
+          "height": 100,
+          "row": 2,
+          "column": 7
+        },
+        "attack02": {
+          "width": 100,
+          "height": 100,
+          "row": 3,
+          "column": 10
+        },
+        "attack03": {
+          "width": 100,
+          "height": 100,
+          "row": 4,
+          "column": 11
+        },
+        "block": {
+          "width": 100,
+          "height": 100,
+          "row": 5,
+          "column": 4
+        },
+        "hurt": {
+          "width": 100,
+          "height": 100,
+          "row": 6,
+          "column": 4
+        },
+        "death": {
+          "width": 100,
+          "height": 100,
+          "row": 7,
+          "column": 4
+        }
+      },
+      "lancer": {
+        "idle": {
+          "width": 100,
+          "height": 100,
+          "row": 0,
+          "column": 6
+        },
+        "walk": {
+          "width": 100,
+          "height": 100,
+          "row": 1,
+          "column": 8
+        },
+        "attack01": {
+          "width": 100,
+          "height": 100,
+          "row": 2,
+          "column": 8
+        },
+        "attack02": {
+          "width": 100,
+          "height": 100,
+          "row": 3,
+          "column": 6
+        },
+        "attack03": {
+          "width": 100,
+          "height": 100,
+          "row": 4,
+          "column": 9
+        },
+        "attack04": {
+          "width": 100,
+          "height": 100,
+          "row": 5,
+          "column": 8
+        },
+        "hurt": {
+          "width": 100,
+          "height": 100,
+          "row": 6,
+          "column": 4
+        },
+        "death": {
+          "width": 100,
+          "height": 100,
+          "row": 7,
+          "column": 4
+        }
+      }
+    },
+    "orcs": {
+      "orc": {
+        "idle": {
+          "width": 100,
+          "height": 100,
+          "row": 0,
+          "column": 6
+        },
+        "walk": {
+          "width": 100,
+          "height": 100,
+          "row": 1,
+          "column": 8
+        },
+        "attack01": {
+          "width": 100,
+          "height": 100,
+          "row": 2,
+          "column": 6
+        },
+        "attack02": {
+          "width": 100,
+          "height": 100,
+          "row": 3,
+          "column": 6
+        },
+        "hurt": {
+          "width": 100,
+          "height": 100,
+          "row": 4,
+          "column": 4
+        },
+        "death": {
+          "width": 100,
+          "height": 100,
+          "row": 5,
+          "column": 4
+        }
+      },
+      "armored_orc": {
+        "idle": {
+          "width": 100,
+          "height": 100,
+          "row": 0,
+          "column": 6
+        },
+        "walk": {
+          "width": 100,
+          "height": 100,
+          "row": 1,
+          "column": 8
+        },
+        "attack01": {
+          "width": 100,
+          "height": 100,
+          "row": 2,
+          "column": 7
+        },
+        "attack02": {
+          "width": 100,
+          "height": 100,
+          "row": 3,
+          "column": 8
+        },
+        "attack03": {
+          "width": 100,
+          "height": 100,
+          "row": 4,
+          "column": 9
+        },
+        "block": {
+          "width": 100,
+          "height": 100,
+          "row": 5,
+          "column": 4
+        },
+        "hurt": {
+          "width": 100,
+          "height": 100,
+          "row": 6,
+          "column": 4
+        },
+        "death": {
+          "width": 100,
+          "height": 100,
+          "row": 7,
+          "column": 4
+        }
+      },
+      "elite_orc": {
+        "idle": {
+          "width": 100,
+          "height": 100,
+          "row": 0,
+          "column": 6
+        },
+        "walk": {
+          "width": 100,
+          "height": 100,
+          "row": 1,
+          "column": 8
+        },
+        "attack01": {
+          "width": 100,
+          "height": 100,
+          "row": 2,
+          "column": 7
+        },
+        "attack02": {
+          "width": 100,
+          "height": 100,
+          "row": 3,
+          "column": 11
+        },
+        "attack03": {
+          "width": 100,
+          "height": 100,
+          "row": 4,
+          "column": 9
+        },
+        "hurt": {
+          "width": 100,
+          "height": 100,
+          "row": 5,
+          "column": 4
+        },
+        "death": {
+          "width": 100,
+          "height": 100,
+          "row": 6,
+          "column": 4
+        }
+      },
+      "orc_rider": {
+        "idle": {
+          "width": 100,
+          "height": 100,
+          "row": 0,
+          "column": 6
+        },
+        "walk": {
+          "width": 100,
+          "height": 100,
+          "row": 1,
+          "column": 8
+        },
+        "attack01": {
+          "width": 100,
+          "height": 100,
+          "row": 2,
+          "column": 8
+        },
+        "attack02": {
+          "width": 100,
+          "height": 100,
+          "row": 3,
+          "column": 9
+        },
+        "attack03": {
+          "width": 100,
+          "height": 100,
+          "row": 4,
+          "column": 11
+        },
+        "block": {
+          "width": 100,
+          "height": 100,
+          "row": 5,
+          "column": 4
+        },
+        "hurt": {
+          "width": 100,
+          "height": 100,
+          "row": 6,
+          "column": 4
+        },
+        "death": {
+          "width": 100,
+          "height": 100,
+          "row": 7,
+          "column": 4
+        }
+      }
+    }
+  }
+}

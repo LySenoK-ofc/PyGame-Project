@@ -1,8 +1,8 @@
-from random import choice, randrange
-from load_image_func import load_image
-from sprite_groups import characters
-
+from random import choice
+from sprite_groups import *
 import pygame
+from load_animations import load_anim
+
 
 class Orc(pygame.sprite.Sprite):
     # Базовое хп
@@ -10,18 +10,12 @@ class Orc(pygame.sprite.Sprite):
     # Урон
     atk = 10
 
-    def __init__(self, group):
-        super().__init__(group)
+    def __init__(self, coord):
+        super().__init__(all_sprites, mobs)
 
         # Словарь анимаций орка
-        self.animations = {
-            'walk': [load_image(f'animations/Orc/Orc-Walk/{i}.png', reverse=True) for i in range(1, 9)],
-            'attack': {
-                'attack1': [load_image(f'animations/Orc/Orc-Attack01/{i}.png', reverse=True) for i in range(1, 7)],
-                'attack2': [load_image(f'animations/Orc/Orc-Attack02/{i}.png', reverse=True) for i in range(1, 7)]},
-            'hurt': [load_image(f'animations/Orc/Orc-Hurt/{i}.png', reverse=True) for i in range(1, 5)],
-            'death': [load_image(f'animations/Orc/Orc-Death/{i}.png', reverse=True) for i in range(1, 5)],
-        }
+        self.animations = load_anim("assets/animations/Orcs/orc/Orc.png", 'orcs', 'orc', True)
+        print(self.animations)
 
         # Начальный режим - "ходьба"
         self.mode = 'walk'
@@ -39,8 +33,7 @@ class Orc(pygame.sprite.Sprite):
 
         # Устанавливаем начальную позицию орка
         self.rect = self.image.get_rect()
-        self.rect.x = 800
-        self.rect.y = randrange(2, 7) * 64
+        self.rect.x, self.rect.y = coord
 
         # Время последнего обновления анимации
         self.last_update = pygame.time.get_ticks()
@@ -48,7 +41,8 @@ class Orc(pygame.sprite.Sprite):
         # Скорость смены кадров для каждого режима
         self.frame_rate = {
             'walk': 250,
-            'attack': 250,
+            'attack01': 250,
+            'attack02': 250,
             'hurt': 10,
             'death': 250,
         }
@@ -57,10 +51,9 @@ class Orc(pygame.sprite.Sprite):
 
     def set_mode(self, mode):
         # Устанавливаем новый режим и загружаем соответствующие кадры
-        if mode == 'attack':
+        if mode in ['attack01', 'attack02']:
             self.mode = mode
-            # Выбор случайной атаки
-            self.frames = self.animations[self.mode][choice(['attack1', 'attack2'])]
+            self.frames = self.animations[self.mode]
             self.frame = 0  # Сбрасываем текущий кадр
         else:
             # Если режим изменился
@@ -80,10 +73,10 @@ class Orc(pygame.sprite.Sprite):
             self.image = self.frames[self.frame]
 
             # Особая логика для режима "атака"
-            if self.mode == 'attack':
-                # Если кадры закончились, повторяем атаку
+            if self.mode in ['attack01', 'attack02']:
+                # Если кадры закончились, выбираем случайную атаку
                 if self.frame == len(self.frames) - 1:
-                    self.set_mode('attack')
+                    self.set_mode(choice(['attack01', 'attack02']))
 
                 # Удар по цели на определённом кадре
                 if self.frame == 3:
@@ -104,7 +97,7 @@ class Orc(pygame.sprite.Sprite):
                 if self.frame == len(self.frames) - 1:
                     # Возвращаемся в режим "атака" или "ходьба"
                     if self.current_target:
-                        self.set_mode('attack')
+                        self.set_mode(choice(['attack01', 'attack02']))
                     else:
                         self.set_mode('walk')
 
@@ -114,7 +107,7 @@ class Orc(pygame.sprite.Sprite):
                 for soldier in characters:
                     if pygame.sprite.collide_mask(self, soldier):
                         self.current_target = soldier  # Устанавливаем цель
-                        self.set_mode('attack')  # Переходим в режим "атака"
+                        self.set_mode(choice(['attack01', 'attack02']))  # Переходим в режим "атака"
 
         else:  # Если орк мёртв
             self.set_mode('death')  # Переходим в режим "смерть"
