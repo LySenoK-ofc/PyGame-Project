@@ -15,7 +15,6 @@ class Orc(pygame.sprite.Sprite):
 
         # Словарь анимаций орка
         self.animations = load_anim("assets/animations/Orcs/orc/Orc.png", 'orcs', 'orc', True)
-        print(self.animations)
 
         # Начальный режим - "ходьба"
         self.mode = 'walk'
@@ -32,8 +31,7 @@ class Orc(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
 
         # Устанавливаем начальную позицию орка
-        self.rect = self.image.get_rect()
-        self.rect.x, self.rect.y = coord
+        self.rect = self.image.get_rect(center=coord)
 
         # Время последнего обновления анимации
         self.last_update = pygame.time.get_ticks()

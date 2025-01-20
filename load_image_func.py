@@ -1,16 +1,12 @@
 import os
-import sys
 
 import pygame
 
 
-def load_image(name=None, file=None, reverse=None, colorkey=None):
+def load_image(file=None, reverse=None, colorkey=None, scale=()):
     try:
-        if file is None:
-            if not os.path.isfile(name):
-                print(f"Файл с изображением '{name}' не найден")
-                sys.exit()
-            image = pygame.image.load(os.path.join(name))
+        if isinstance(file, str):
+            image = pygame.image.load(os.path.join(file))
         else:
             image = file
 
@@ -23,7 +19,8 @@ def load_image(name=None, file=None, reverse=None, colorkey=None):
             image = image.convert_alpha()
         if reverse:
             image = pygame.transform.flip(image, True, False)
-        image = pygame.transform.scale(image, (290, 290))
+        if scale:
+            image = pygame.transform.scale(image, scale)
         return image
     except Exception:
-        print('Произошла ошибка! Проверьте пути к файлам и сами файлы.')
+        print(f'Произошла ошибка! Проверьте пути к файлам и сами файлы. "{file}"')

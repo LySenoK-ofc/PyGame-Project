@@ -16,6 +16,7 @@ def load_anim(path, type_mob, mob, reverse=None):
                                                   animations["animation's parameters"][type_mob][mob][i]["height"],
                                                   animations["animation's parameters"][type_mob][mob][i]["width"],
                                                   animations["animation's parameters"][type_mob][mob][i]["height"])),
-                           reverse= reverse)
+                           reverse=reverse, scale=(290, 290))
                 for x in range(animations["animation's parameters"][type_mob][mob][i]["column"])]
+
     return frames

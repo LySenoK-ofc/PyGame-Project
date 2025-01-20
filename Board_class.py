@@ -1,6 +1,8 @@
-from Soldier_class import Soldier
-from Map_tiles_class import Map_tile
 from sprite_groups import map_tiles, characters
+from Archer_class import Archer
+from Orc_class import Orc
+from random import randrange
+from Map_constructor import Map_tile
 
 
 class Board:
@@ -12,11 +14,6 @@ class Board:
         self.cell_size = cell_size
         self.board = [[0] * width for _ in range(height)]
 
-    def set_view(self, left, top, cell_size):
-        self.left = left
-        self.top = top
-        self.cell_size = cell_size
-
     def render(self, map_tile):
         for i in range(self.height):
             for j in range(self.width):
@@ -24,9 +21,9 @@ class Board:
                 y = self.top + i * self.cell_size
                 Map_tile(map_tiles, [x, y], map_tile)
 
-    def get_click(self, mouse_pos):
+    def get_click(self, mouse_pos, entity):
         cell = self.get_cell(mouse_pos)
-        self.on_click(cell)
+        self.on_click(cell, entity)
 
     def get_cell(self, mouse_pos):
         x, y = mouse_pos
@@ -37,9 +34,13 @@ class Board:
         else:
             return None
 
-    def on_click(self, cell):
-        if cell is not None and not self.board[cell[1]][cell[0]]:
-            Soldier(characters, (cell[0] * 64 + self.left - 120,
-                                 cell[1] * 64 + self.top - 130))  # для demo_project Soldier(characters, cell)
-            self.board[cell[1]][cell[0]] = 1
-        print(cell)
+    def on_click(self, cell=None, entity='orc'):
+        if entity == 'soldier':
+            if cell is not None and all([((soldier.rect.center[0] - self.left) // self.cell_size,
+                                          (soldier.rect.center[1] - self.top) // self.cell_size) != cell
+                                         for soldier in characters]):
+                Archer((cell[0] * self.cell_size + self.left + self.cell_size / 2,
+                        cell[1] * self.cell_size + self.top + self.cell_size / 2))
+                print(cell)
+        if entity == 'orc':
+            Orc((1000, randrange(0, self.height) * self.cell_size + self.top + self.cell_size / 2))
