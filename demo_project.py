@@ -1,5 +1,6 @@
 from Map_constructor import Map_constructor
 from constant import FPS
+from Archer_class import Archer, Knight
 from Board_class import Board
 from sprite_groups import *
 import pygame
@@ -24,7 +25,10 @@ if __name__ == '__main__':
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
-                board.get_click(event.pos, 'soldier')
+                if pygame.key.get_pressed()[pygame.K_1]:
+                    board.get_click(event.pos, Archer)
+                elif pygame.key.get_pressed()[pygame.K_2]:
+                    board.get_click(event.pos, Knight)
             if event.type == pygame.KEYDOWN:
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_e]:

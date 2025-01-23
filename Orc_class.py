@@ -113,12 +113,13 @@ class Orc(pygame.sprite.Sprite):
             if self.frame == len(self.animations['death']) - 1:
                 self.kill()
 
-    def lose_hp(self, count):
+    def lose_hp(self, count, killer):
         # Уменьшаем здоровье орка при получении урона
         if self.life:
             self.hp -= count
             # Если здоровье орка меньше или равно 0
             if self.hp <= 0:
                 self.life = False  # Орк умирает
+                killer.kills += 1
             if self.mode != 'hurt':
                 self.set_mode('hurt')

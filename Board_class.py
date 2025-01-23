@@ -1,5 +1,5 @@
 from sprite_groups import map_tiles, characters
-from Archer_class import Archer
+from Archer_class import Archer, Knight
 from Orc_class import Orc
 from random import randrange
 from Map_constructor import Map_tile
@@ -34,13 +34,21 @@ class Board:
         else:
             return None
 
-    def on_click(self, cell=None, entity='orc'):
-        if entity == 'soldier':
+    def on_click(self, cell=None, entity=Orc):
+        print(entity)
+        if entity== Archer:
             if cell is not None and all([((soldier.rect.center[0] - self.left) // self.cell_size,
                                           (soldier.rect.center[1] - self.top) // self.cell_size) != cell
                                          for soldier in characters]):
                 Archer((cell[0] * self.cell_size + self.left + self.cell_size / 2,
                         cell[1] * self.cell_size + self.top + self.cell_size / 2))
                 print(cell)
-        if entity == 'orc':
+        elif entity==Knight:
+            if cell is not None and all([((soldier.rect.center[0] - self.left) // self.cell_size,
+                                          (soldier.rect.center[1] - self.top) // self.cell_size) != cell
+                                         for soldier in characters]):
+                Knight((cell[0] * self.cell_size + self.left + self.cell_size / 2,
+                        cell[1] * self.cell_size + self.top + self.cell_size / 2))
+                print(cell)
+        elif entity== Orc:
             Orc((1000, randrange(0, self.height) * self.cell_size + self.top + self.cell_size / 2))
