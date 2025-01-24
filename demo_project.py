@@ -1,6 +1,5 @@
 from Map_constructor import Map_constructor
-from constant import FPS
-from Archer_class import Archer, Knight
+from Units import *
 from Board_class import Board
 from sprite_groups import *
 import pygame
@@ -11,14 +10,18 @@ screen = pygame.display.set_mode(size)
 
 if __name__ == '__main__':
     pygame.display.set_caption('demo_project')
-    board = Board(6, 5, (75 * 6), (75 * 4), 75)
+    board = Board(6, 5, LEFT, TOP, 75)
     Map_constructor(20, 11, board)
     board.render('assets/map_tiles/Tiles/FieldsTile_47.png')
+
     clock = pygame.time.Clock()
     fps = 60
 
-    running = True
 
+    for i in range(1,WIDTH_CELL):
+        Lancer((LEFT - CELL_SIZE / 2, i*CELL_SIZE+ TOP - CELL_SIZE / 2), grop_of_row=globals()[f'row{i-1}'])
+
+    running = True
     while running:
         screen.fill('black')
         for event in pygame.event.get():
@@ -33,7 +36,6 @@ if __name__ == '__main__':
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_e]:
                     board.on_click()
-                    print("<_Successful spawned mob_>")
                 if keys[pygame.K_p]:
                     print(
                         f'map_tiles:{map_tiles},\ncharacters:{characters},\nshells:{shells},\nmobs:{mobs},\nmoneys:{moneys},\nmap_objects:{map_objects},\nanimated_map_objects:{animated_map_objects}\n')

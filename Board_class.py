@@ -1,6 +1,6 @@
-from sprite_groups import map_tiles, characters
-from Archer_class import Archer, Knight
-from Orc_class import Orc
+from sprite_groups import *
+from Units import Archer, Knight
+from Mobs import Orc
 from random import randrange
 from Map_constructor import Map_tile
 
@@ -36,19 +36,24 @@ class Board:
 
     def on_click(self, cell=None, entity=Orc):
         print(entity)
-        if entity== Archer:
-            if cell is not None and all([((soldier.rect.center[0] - self.left) // self.cell_size,
-                                          (soldier.rect.center[1] - self.top) // self.cell_size) != cell
-                                         for soldier in characters]):
+
+        if entity == Archer:
+            if cell and all([((soldier.rect.center[0] - self.left) // self.cell_size,
+                              (soldier.rect.center[1] - self.top) // self.cell_size) != cell
+                             for soldier in characters]):
                 Archer((cell[0] * self.cell_size + self.left + self.cell_size / 2,
-                        cell[1] * self.cell_size + self.top + self.cell_size / 2))
-                print(cell)
-        elif entity==Knight:
-            if cell is not None and all([((soldier.rect.center[0] - self.left) // self.cell_size,
-                                          (soldier.rect.center[1] - self.top) // self.cell_size) != cell
-                                         for soldier in characters]):
+                        cell[1] * self.cell_size + self.top + self.cell_size / 2),
+                       grop_of_row=globals()[f'row{cell[1]}'])
+
+        elif entity == Knight:
+            if cell and all([((soldier.rect.center[0] - self.left) // self.cell_size,
+                              (soldier.rect.center[1] - self.top) // self.cell_size) != cell
+                             for soldier in characters]):
                 Knight((cell[0] * self.cell_size + self.left + self.cell_size / 2,
-                        cell[1] * self.cell_size + self.top + self.cell_size / 2))
-                print(cell)
-        elif entity== Orc:
-            Orc((1000, randrange(0, self.height) * self.cell_size + self.top + self.cell_size / 2))
+                        cell[1] * self.cell_size + self.top + self.cell_size / 2),
+                       grop_of_row=globals()[f'row{cell[1]}'])
+
+        elif entity == Orc:
+            for i in range(1):
+                row = randrange(0, 5)
+                Orc((1000, row * self.cell_size + self.top + self.cell_size / 2), grop_of_row=globals()[f'row{row}'])
