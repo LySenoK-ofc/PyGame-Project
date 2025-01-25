@@ -1,48 +1,53 @@
 from load_image_func import load_image
 from sprite_groups import map_tiles, map_objects, animated_map_objects, all_sprites
+from constant import CELL_SIZE
 
 import pygame
 
+used_tiles = {1: 'assets/map_tiles/Tiles/FieldsTile_38.png',
+              2: 'assets/map_tiles/Tiles/FieldsTile_31.png',
+              3: 'assets/map_tiles/Tiles/FieldsTile_40.png',
+              4: 'assets/map_tiles/Tiles/FieldsTile_43.png',
+              5: 'assets/map_tiles/Tiles/FieldsTile_44.png',
+              6: 'assets/map_tiles/Tiles/FieldsTile_47.png'}
+
+
+def load_level(filename):
+    filename = "assets/" + filename
+    # читаем уровень, убирая символы перевода строки
+    with open(filename, 'r') as mapFile:
+        level_map = [line.strip() for line in mapFile]
+
+    # и подсчитываем максимальную длину
+    max_width = max(map(len, level_map))
+
+    # дополняем каждую строку пустыми клетками ('.')
+    return list(map(lambda x: x.ljust(max_width, '.'), level_map))
+
+
+def generate_level(field):
+    x, y = None, None
+    for y in range(len(field)):
+        for x in range(len(field[y])):
+            if field[y][x] == '.':
+                Map_tile(map_tiles, (x * CELL_SIZE, y * CELL_SIZE), image=used_tiles[1])
+            elif field[y][x] == '#':
+                Map_tile(map_tiles, (x * CELL_SIZE, y * CELL_SIZE), image=used_tiles[2])
+            elif field[y][x] == '=':
+                Map_tile(map_tiles, (x * CELL_SIZE, y * CELL_SIZE), image=used_tiles[3])
+            elif field[y][x] == '(':
+                Map_tile(map_tiles, (x * CELL_SIZE, y * CELL_SIZE), image=used_tiles[4])
+            elif field[y][x] == ')':
+                Map_tile(map_tiles, (x * CELL_SIZE, y * CELL_SIZE), image=used_tiles[5])
+            elif field[y][x] == '@':
+                Map_tile(map_tiles, (x * CELL_SIZE, y * CELL_SIZE), image=used_tiles[6])
+
 
 class Map_constructor:
-    used_tiles = {1: 'assets/map_tiles/Tiles/FieldsTile_38.png',
-                  2: 'assets/map_tiles/Tiles/FieldsTile_31.png',
-                  3: 'assets/map_tiles/Tiles/FieldsTile_40.png',
-                  4: 'assets/map_tiles/Tiles/FieldsTile_43.png',
-                  5: 'assets/map_tiles/Tiles/FieldsTile_44.png',
-                  6: 'assets/map_tiles/Tiles/FieldsTile_47.png'}
-
     def __init__(self, map_width, map_height, board):
         self.map_width = map_width
         self.map_height = map_height
         self.board = board
-
-        # Создаем карту из клеток
-
-        for i in range(self.map_height):
-            for j in range(self.map_width):
-                if i >= self.map_height - 2:
-                    Map_tile(map_tiles, (j * 75, i * 75), self.used_tiles[1])
-                elif self.board.left // 64 < j and self.board.top // 64 <= i < self.map_height - 1:
-                    Map_tile(map_tiles, (j * 75, i * 75), self.used_tiles[2])
-                elif i == 2 and (j == 6 or j == 9 or j == 12 or j == 15):
-                    Map_tile(map_tiles, (j * 75, i * 75), self.used_tiles[6])
-                elif i >= self.map_height - 2:
-                    Map_tile(map_tiles, (j * 75, i * 75), self.used_tiles[1])
-                elif i == 4 and j == 5:
-                    Map_tile(map_tiles, (j * 75, i * 75), self.used_tiles[4])
-                elif j == 5 and i == 8:
-                    Map_tile(map_tiles, (j * 75, i * 75), self.used_tiles[5])
-                elif i == 1:
-                    Map_tile(map_tiles, (j * 75, i * 75), self.used_tiles[1])
-                elif 0 <= j < 5:
-                    Map_tile(map_tiles, (j * 75, i * 75), self.used_tiles[1])
-                elif i <= 3:
-                    Map_tile(map_tiles, (j * 75, i * 75), self.used_tiles[1])
-                elif j == 5:
-                    Map_tile(map_tiles, (j * 75, i * 75), self.used_tiles[3])
-
-        # Создаем объекты
 
         Map_tile(map_objects, (145, 300), 'assets/map_tiles/Objects/camp/1.png')
         Map_tile(map_objects, (10, 250), 'assets/map_tiles/Objects/camp/1.png', reverse=True)
