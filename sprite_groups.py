@@ -1,22 +1,25 @@
-import pygame
+from pygame import sprite
 
-all_sprites = pygame.sprite.Group()
+all_sprites = sprite.Group()
 
-characters = pygame.sprite.Group()
-shells = pygame.sprite.Group()
-mobs = pygame.sprite.Group()
+characters = sprite.Group()
+shells = sprite.Group()
+mobs = sprite.Group()
 
-row0 = pygame.sprite.Group()
-row1 = pygame.sprite.Group()
-row2 = pygame.sprite.Group()
-row3 = pygame.sprite.Group()
-row4 = pygame.sprite.Group()
-row5 = pygame.sprite.Group()
+shop_units = sprite.Group()
+drag_units = sprite.Group()
+
+row0 = sprite.Group()
+row1 = sprite.Group()
+row2 = sprite.Group()
+row3 = sprite.Group()
+row4 = sprite.Group()
+row5 = sprite.Group()
 
 
-moneys = pygame.sprite.Group()
+moneys = sprite.Group()
 
-map_tiles = pygame.sprite.Group()
-map_objects = pygame.sprite.Group()
-animated_map_objects = pygame.sprite.Group()
-tiles_group = pygame.sprite.Group()
+map_tiles = sprite.Group()
+map_objects = sprite.Group()
+animated_map_objects = sprite.Group()
+tiles_group = sprite.Group()

@@ -1,8 +1,9 @@
+from Map_constructor import MapTile
+from constant import WIDTH
 from sprite_groups import *
 from Units import Archer, Knight
 from Mobs import Orc
 from random import randrange
-from Map_constructor import Map_tile
 
 
 class Board:
@@ -19,7 +20,7 @@ class Board:
             for j in range(self.width):
                 x = self.left + j * self.cell_size
                 y = self.top + i * self.cell_size
-                Map_tile(map_tiles, [x, y], map_tile)
+                MapTile(map_tiles, [x, y], map_tile)
 
     def get_click(self, mouse_pos, entity):
         cell = self.get_cell(mouse_pos)
@@ -44,7 +45,6 @@ class Board:
                 Archer((cell[0] * self.cell_size + self.left + self.cell_size / 2,
                         cell[1] * self.cell_size + self.top + self.cell_size / 2),
                        grop_of_row=globals()[f'row{cell[1]}'])
-
         elif entity == Knight:
             if cell and all([((soldier.rect.center[0] - self.left) // self.cell_size,
                               (soldier.rect.center[1] - self.top) // self.cell_size) != cell
@@ -52,8 +52,7 @@ class Board:
                 Knight((cell[0] * self.cell_size + self.left + self.cell_size / 2,
                         cell[1] * self.cell_size + self.top + self.cell_size / 2),
                        grop_of_row=globals()[f'row{cell[1]}'])
-
         elif entity == Orc:
             for i in range(1):
                 row = randrange(0, 5)
-                Orc((1000, row * self.cell_size + self.top + self.cell_size / 2), grop_of_row=globals()[f'row{row}'])
+                Orc((WIDTH, row * self.cell_size + self.top + self.cell_size / 2), grop_of_row=globals()[f'row{row}'])

@@ -92,7 +92,7 @@ class Orc(Enemy):
                     self.set_mode('walk')
 
             elif self.mode == 'walk':
-                self.rect.x -= 30
+                self.rect.x -= 3
                 for mob in self.grop_of_row:
                     if mob in characters and pygame.sprite.collide_mask(self, mob):
                         self.current_target = mob
