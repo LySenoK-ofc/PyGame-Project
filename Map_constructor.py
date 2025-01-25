@@ -1,4 +1,4 @@
-from Units import Lancer, Knight, Archer
+from Units import Lancer, Knight, Archer, Wizard
 from constant import LEFT, CELL_SIZE, TOP, WIDTH_CELL
 from load_animation_func import load_anim
 from load_image_func import load_image
@@ -156,9 +156,10 @@ class MapConstructor:
         # Ставим юнитов в магазин
         units = {
             Knight: ("assets/animations/Troops/knight/Knight.png", 'troops', 'knight'),
-            Archer: ("assets/animations/Troops/archer/Archer.png", 'troops', 'archer')
+            Archer: ("assets/animations/Troops/archer/Archer.png", 'troops', 'archer'),
+            Wizard: ("assets/animations/Troops/wizard/Wizard.png", 'troops', 'wizard')
         }
-        for i, x in ((Knight, 6), (Archer, 9)):
+        for i, x in ((Knight, 6), (Archer, 9), (Wizard, 12)):
             Shop(i, (x * 75 + board.cell_size / 2, 2 * 75 + +board.cell_size / 2), load_anim(*units[i]), board,
                  price=0)
 

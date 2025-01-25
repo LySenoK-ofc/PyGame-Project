@@ -23,11 +23,6 @@ if __name__ == '__main__':
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            # if event.type == pygame.MOUSEBUTTONDOWN:
-            #     if pygame.key.get_pressed()[pygame.K_1]:
-            #         board.get_click(event.pos, Archer)
-            #     elif pygame.key.get_pressed()[pygame.K_2]:
-            #         board.get_click(event.pos, Knight)
             if event.type == pygame.KEYDOWN:
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_e]:

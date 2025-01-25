@@ -56,9 +56,10 @@ class Unit(pygame.sprite.Sprite):
                 if self.mode in ['attack01', 'attack02', 'attack03']:
 
                     area_mob = set()
-                    for mob in set(mobs):
-                        if pygame.sprite.collide_mask(self, mob):
-                            area_mob.add(mob)
+                    for mob in set(self.grop_of_row):
+                        if mob in mobs and mob.life:
+                            if pygame.sprite.collide_mask(self, mob):
+                                area_mob.add(mob)
 
                     if self.mode == 'attack01' and self.frame == 5:
                         self.current_target.lose_hp(self.atk, self)
@@ -79,11 +80,28 @@ class Unit(pygame.sprite.Sprite):
                             mob.lose_hp(self.super_atk / 1.5, self)
 
                         self.kills = 0
+
+            elif isinstance(self, Wizard):
+                if self.mode == 'attack01' and self.frame == 13:
+                    for mob in set(self.grop_of_row):
+                        if mob in mobs and mob.life:
+                            if pygame.sprite.collide_mask(self, mob):
+                                mob.lose_hp(self.atk, self)
+
+                if self.mode == 'attack02' and self.frame == 10:
+                    for mob in set(self.grop_of_row):
+                        if mob in mobs and mob.life:
+                            if ((mob.rect.y - HEIGHT_CELL) // CELL_SIZE ==
+                             (self.rect.y - HEIGHT_CELL) // CELL_SIZE and
+                             (mob.rect.x - WIDTH_CELL) // CELL_SIZE ==
+                             (self.rect.x - WIDTH_CELL + 2 * CELL_SIZE) // CELL_SIZE):
+                                mob.lose_hp(self.atk, self)
+
             elif isinstance(self, Lancer):
-                if self.mode in ['attack01', 'attack04']:
+                if self.mode == 'attack01':
                     self.rect.x += 20
                     for mob in set(self.grop_of_row):
-                        if mob in set(mobs) and mob.life and pygame.sprite.collide_mask(self, mob):
+                        if mob in mobs and mob.life and pygame.sprite.collide_mask(self, mob):
                             mob.lose_hp(self.atk, self)
 
     def lose_hp(self, count, killer=None):
@@ -115,7 +133,6 @@ class Archer(Unit):
             'idle': 250,
             'attack01': 140,
             'attack02': 140,
-            'bow_attack': 115,
             'hurt': 100,
             'death': 250,
         }
@@ -124,14 +141,10 @@ class Archer(Unit):
     def update(self):
         super().update()
         if self.life:
-            if self.mode in ('attack01', 'attack02') and not self.current_target.life:
-                self.current_target = None
-                self.set_mode('idle')
-
             if self.mode == 'hurt' and self.frame == len(self.frames) - 1:
                 self.set_mode('idle')
 
-            if self.mode == 'idle':
+            elif self.mode == 'idle':
                 mobs_on_row = []
                 for mob in set(self.grop_of_row):
                     if mob in set(mobs) and mob.life and ((mob.rect.y - HEIGHT_CELL) // CELL_SIZE ==
@@ -141,6 +154,10 @@ class Archer(Unit):
                     mobs_on_row.sort(key=lambda x: x[1])
                     self.current_target = mobs_on_row[0][0]
                     self.set_mode('attack01' if self.kills < 4 else 'attack02')
+
+            elif self.mode in ('attack01', 'attack02') and self.current_target and not self.current_target.life:
+                self.current_target = None
+                self.set_mode('idle')
 
 
 class Knight(Unit):
@@ -163,14 +180,14 @@ class Knight(Unit):
             if self.mode == 'hurt' and self.frame == len(self.frames) - 1:
                 self.set_mode('idle')
 
-            if self.mode == 'idle':
+            elif self.mode == 'idle':
                 for mob in set(self.grop_of_row):
-                    if mob in mobs and pygame.sprite.collide_mask(self, mob):
+                    if mob in mobs and mob.life and pygame.sprite.collide_mask(self, mob):
                         self.current_target = mob
                         self.set_mode(choice(['attack01', 'attack02'] if self.kills < 4 else ['attack03']))
                         break
 
-            if self.mode in ('attack01', 'attack02', 'attack03') and not self.current_target.life:
+            elif self.mode in ('attack01', 'attack02', 'attack03') and self.current_target and not self.current_target.life:
                 self.current_target = None
                 self.set_mode('idle')
 
@@ -195,9 +212,47 @@ class Lancer(Unit):
         if self.life:
             if self.mode == 'idle':
                 for mob in set(self.grop_of_row):
-                    if mob in mobs and pygame.sprite.collide_mask(self, mob):
+                    if mob in mobs and mob.life and pygame.sprite.collide_mask(self, mob):
                         self.set_mode('attack01')
                         break
+
+
+class Wizard(Unit):
+    def __init__(self, coord, grop_of_row):
+        animations = load_anim("assets/animations/Troops/wizard/Wizard.png", 'troops', 'wizard')
+        frame_rate = {
+            'idle': 250,
+            'attack01': 80,
+            'attack02': 120,
+            'hurt': 100,
+            'death': 250,
+        }
+        super().__init__(coord, animations, grop_of_row, hp=60, atk=35, frame_rate=frame_rate)
+
+    def update(self):
+        super().update()
+        if self.life:
+            if self.mode == 'hurt' and self.frame == len(self.frames) - 1:
+                self.set_mode('idle')
+
+            elif self.mode == 'idle':
+                for mob in set(self.grop_of_row):
+                    if mob in set(mobs) and mob.life:
+                        if pygame.sprite.collide_mask(self, mob):
+                            self.current_target = mob
+                            self.set_mode('attack01')
+                            break
+                        if ((mob.rect.y - HEIGHT_CELL) // CELL_SIZE ==
+                                (self.rect.y - HEIGHT_CELL) // CELL_SIZE and
+                                (mob.rect.x - WIDTH_CELL) // CELL_SIZE ==
+                                (self.rect.x - WIDTH_CELL + 2 * CELL_SIZE) // CELL_SIZE):
+                            self.current_target = mob
+                            self.set_mode('attack02')
+                            break
+
+            elif self.mode in ('attack01', 'attack02') and self.current_target and not self.current_target.life:
+                self.current_target = None
+                self.set_mode('idle')
 
 
 class Arrow(pygame.sprite.Sprite):
@@ -224,3 +279,8 @@ class Arrow(pygame.sprite.Sprite):
             self.kill()  # Удаляем стрелу
         else:
             self.rect.x += self.v  # Перемещаем стрелу вправо
+
+class FireBall(pygame.sprite.Sprite):
+    def __init__(self, archer, v, damage):
+        super().__init__(all_sprites, shells)
+        pass

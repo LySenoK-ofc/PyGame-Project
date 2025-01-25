@@ -1,7 +1,7 @@
 from Map_constructor import MapTile
 from constant import WIDTH
 from sprite_groups import *
-from Units import Archer, Knight
+from Units import Archer, Knight, Wizard
 from Mobs import Orc
 from random import randrange
 
@@ -37,21 +37,18 @@ class Board:
 
     def on_click(self, cell=None, entity=Orc):
         print(entity)
-
-        if entity == Archer:
-            if cell and all([((soldier.rect.center[0] - self.left) // self.cell_size,
-                              (soldier.rect.center[1] - self.top) // self.cell_size) != cell
-                             for soldier in characters]):
-                Archer((cell[0] * self.cell_size + self.left + self.cell_size / 2,
+        if cell and all([((soldier.rect.center[0] - self.left) // self.cell_size,
+                          (soldier.rect.center[1] - self.top) // self.cell_size) != cell
+                         for soldier in characters]):
+            setting = ((cell[0] * self.cell_size + self.left + self.cell_size / 2,
                         cell[1] * self.cell_size + self.top + self.cell_size / 2),
-                       grop_of_row=globals()[f'row{cell[1]}'])
-        elif entity == Knight:
-            if cell and all([((soldier.rect.center[0] - self.left) // self.cell_size,
-                              (soldier.rect.center[1] - self.top) // self.cell_size) != cell
-                             for soldier in characters]):
-                Knight((cell[0] * self.cell_size + self.left + self.cell_size / 2,
-                        cell[1] * self.cell_size + self.top + self.cell_size / 2),
-                       grop_of_row=globals()[f'row{cell[1]}'])
+                       globals()[f'row{cell[1]}'])
+            if entity == Archer:
+                    Archer(*setting)
+            elif entity == Knight:
+                    Knight(*setting)
+            elif entity == Wizard:
+                    Wizard(*setting)
         elif entity == Orc:
             for i in range(1):
                 row = randrange(0, 5)
