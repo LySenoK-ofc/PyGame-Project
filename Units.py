@@ -9,11 +9,14 @@ import pygame
 
 
 class Unit(pygame.sprite.Sprite):
-    def __init__(self, coord, animations, grop_of_row, hp, atk, frame_rate, super_atk=None, area_atk=None):
+    def __init__(self, coord, animations, grop_of_row, hp, atk, frame_rate, attack_radius=None, super_atk=None,
+                 area_atk=None):
         super().__init__(all_sprites, characters, grop_of_row)
         self.grop_of_row = grop_of_row
         self.hp = hp
         self.atk = atk
+
+        self.cached_nearby_mobs = None
 
         self.animations = animations
         self.mode = 'idle'
@@ -24,6 +27,9 @@ class Unit(pygame.sprite.Sprite):
         self.kills = 0
         if super_atk:
             self.super_atk = super_atk
+        if attack_radius:
+            self.attack_radius = attack_radius
+
         self.area_atk = area_atk if area_atk else self.atk / 2.5
 
         self.image = self.frames[self.frame]
@@ -113,6 +119,9 @@ class Unit(pygame.sprite.Sprite):
             self.life = False
             self.kill()
 
+        if FRAME_COUNT % 30 == 0:
+            self.cached_nearby_mobs = None
+
         self.update_animation()
         if not self.life:
             self.set_mode('death')
@@ -138,15 +147,16 @@ class Archer(Unit):
                 self.set_mode('idle')
 
             elif self.mode == 'idle':
-                mobs_on_row = []
-                for mob in self.grop_of_row:
-                    if mob in mobs and mob.life and ((mob.rect.y - HEIGHT_CELL) // CELL_SIZE ==
-                                                     (self.rect.y - HEIGHT_CELL) // CELL_SIZE):
-                        mobs_on_row.append((mob, (mob.rect.x - WIDTH_CELL) // CELL_SIZE))
-                if mobs_on_row:
-                    mobs_on_row.sort(key=lambda x: x[1])
-                    self.current_target = mobs_on_row[0][0]
-                    self.set_mode('attack01' if self.kills < 4 else 'attack02')
+                if self.cached_nearby_mobs is None:
+                    self.cached_nearby_mobs = []
+                    for mob in self.grop_of_row:
+                        if mob in mobs and mob.life and ((mob.rect.y - HEIGHT_CELL) // CELL_SIZE ==
+                                                         (self.rect.y - HEIGHT_CELL) // CELL_SIZE):
+                            self.cached_nearby_mobs.append((mob, (mob.rect.x - WIDTH_CELL) // CELL_SIZE))
+                    if self.cached_nearby_mobs:
+                        self.cached_nearby_mobs.sort(key=lambda x: x[1])
+                        self.current_target = self.cached_nearby_mobs[0][0]
+                        self.set_mode('attack01' if self.kills < 4 else 'attack02')
 
             elif self.mode in ('attack01', 'attack02') and self.current_target and not self.current_target.life:
                 self.current_target = None
@@ -164,8 +174,8 @@ class Knight(Unit):
             'hurt': 60,
             'death': 250,
         }
-        super().__init__(coord, KNIGHT, grop_of_row, hp=80, atk=20, super_atk=40, frame_rate=frame_rate)
-        self.attack_radius = 2 * CELL_SIZE
+        super().__init__(coord, KNIGHT, grop_of_row, attack_radius=2 * CELL_SIZE, hp=80, atk=20, super_atk=40,
+                         frame_rate=frame_rate)
 
     def update(self):
         super().update()
@@ -174,13 +184,14 @@ class Knight(Unit):
                 self.set_mode('idle')
 
             elif self.mode == 'idle':
-                nearby_mobs = [mob for mob in self.grop_of_row if
-                               mob in mobs and abs(self.rect.x - mob.rect.x) <= self.attack_radius]
-                for mob in nearby_mobs:
-                    if mob.life and pygame.sprite.collide_mask(self, mob):
-                        self.current_target = mob
-                        self.set_mode(choice(['attack01', 'attack02'] if self.kills < 4 else ['attack03']))
-                        break
+                if self.cached_nearby_mobs is None:
+                    self.cached_nearby_mobs = [mob for mob in self.grop_of_row if
+                                   mob in mobs and abs(self.rect.x - mob.rect.x) <= self.attack_radius]
+                    for mob in self.cached_nearby_mobs:
+                        if mob.life and pygame.sprite.collide_mask(self, mob):
+                            self.current_target = mob
+                            self.set_mode(choice(['attack01', 'attack02'] if self.kills < 4 else ['attack03']))
+                            break
 
             elif self.mode in (
                     'attack01', 'attack02', 'attack03') and self.current_target and not self.current_target.life:
@@ -200,19 +211,19 @@ class Lancer(Unit):
             'hurt': 60,
             'death': 250,
         }
-        super().__init__(coord, LANCER, grop_of_row, hp=100, atk=1000, frame_rate=frame_rate)
-        self.attack_radius = CELL_SIZE
+        super().__init__(coord, LANCER, grop_of_row, attack_radius=CELL_SIZE, hp=100, atk=1000, frame_rate=frame_rate)
 
     def update(self):
         super().update()
         if self.life:
             if self.mode == 'idle':
-                nearby_mobs = [mob for mob in self.grop_of_row if
-                               mob in mobs and abs(self.rect.x - mob.rect.x) <= self.attack_radius]
-                for mob in nearby_mobs:
-                    if mob.life and pygame.sprite.collide_mask(self, mob):
-                        self.set_mode('attack01')
-                        break
+                if self.cached_nearby_mobs is None:
+                    self.cached_nearby_mobs = [mob for mob in self.grop_of_row if
+                                   mob in mobs and abs(self.rect.x - mob.rect.x) <= self.attack_radius]
+                    for mob in self.cached_nearby_mobs:
+                        if mob.life and pygame.sprite.collide_mask(self, mob):
+                            self.set_mode('attack01')
+                            break
 
 
 class Wizard(Unit):
@@ -224,8 +235,7 @@ class Wizard(Unit):
             'hurt': 100,
             'death': 250,
         }
-        super().__init__(coord, WIZARD, grop_of_row, hp=60, atk=35, frame_rate=frame_rate)
-        self.attack_radius = 3 * CELL_SIZE
+        super().__init__(coord, WIZARD, grop_of_row, attack_radius=3 * CELL_SIZE, hp=60, atk=35, frame_rate=frame_rate)
 
     def update(self):
         super().update()
@@ -234,21 +244,22 @@ class Wizard(Unit):
                 self.set_mode('idle')
 
             elif self.mode == 'idle':
-                nearby_mobs = [mob for mob in self.grop_of_row if
-                               mob in mobs and abs(self.rect.x - mob.rect.x) <= self.attack_radius]
-                for mob in nearby_mobs:
-                    if mob in mobs and mob.life:
-                        if pygame.sprite.collide_mask(self, mob):
-                            self.current_target = mob
-                            self.set_mode('attack01')
-                            break
-                        elif ((mob.rect.y - HEIGHT_CELL) // CELL_SIZE ==
-                              (self.rect.y - HEIGHT_CELL) // CELL_SIZE and
-                              (mob.rect.x - WIDTH_CELL) // CELL_SIZE ==
-                              (self.rect.x - WIDTH_CELL + 2 * CELL_SIZE) // CELL_SIZE):
-                            self.current_target = mob
-                            self.set_mode('attack02_no_fire_ball')
-                            break
+                if self.cached_nearby_mobs is None:
+                    self.cached_nearby_mobs = [mob for mob in self.grop_of_row if
+                                   mob in mobs and abs(self.rect.x - mob.rect.x) <= self.attack_radius]
+                    for mob in self.cached_nearby_mobs:
+                        if mob in mobs and mob.life:
+                            if pygame.sprite.collide_mask(self, mob):
+                                self.current_target = mob
+                                self.set_mode('attack01')
+                                break
+                            elif ((mob.rect.y - HEIGHT_CELL) // CELL_SIZE ==
+                                  (self.rect.y - HEIGHT_CELL) // CELL_SIZE and
+                                  (mob.rect.x - WIDTH_CELL) // CELL_SIZE ==
+                                  (self.rect.x - WIDTH_CELL + 2 * CELL_SIZE) // CELL_SIZE):
+                                self.current_target = mob
+                                self.set_mode('attack02_no_fire_ball')
+                                break
 
             elif (self.mode in ('attack01', 'attack02_no_fire_ball') and
                   self.current_target and not self.current_target.life):
@@ -300,6 +311,8 @@ class FireBall(pygame.sprite.Sprite):
         self.target_mobs = False
         self.attack_radius = 60
 
+        self.cached_nearby_mobs = None
+
         self.last_update = pygame.time.get_ticks()
         self.frame = 0
         self.frames = self.moving
@@ -321,18 +334,21 @@ class FireBall(pygame.sprite.Sprite):
     def update(self, *args, **kwargs):
         self.update_animation()
 
+        if FRAME_COUNT % 30 == 0:
+            self.cached_nearby_mobs = None
+
         if self.mode == 'moving':
             # Проверяем столкновение шара с целью
             if self.rect.x < 0 or self.rect.left > WIDTH or self.rect.y < 0 or self.rect.top > HEIGHT:
                 self.kill()
-
-            nearby_mobs = [mob for mob in self.grop_of_row if
-                           mob in mobs and abs(self.rect.x - mob.rect.x) <= self.attack_radius]
-            for mob in nearby_mobs:
-                if mob in mobs and mob.life:
-                    if pygame.sprite.collide_mask(self, mob):
-                        mob.lose_hp(self.damage, self.wizard)
-                        self.target_mobs = True
+            if self.cached_nearby_mobs is None:
+                self.cached_nearby_mobs = [mob for mob in self.grop_of_row if
+                               mob in mobs and abs(self.rect.x - mob.rect.x) <= self.attack_radius]
+                for mob in self.cached_nearby_mobs:
+                    if mob in mobs and mob.life:
+                        if pygame.sprite.collide_mask(self, mob):
+                            mob.lose_hp(self.damage, self.wizard)
+                            self.target_mobs = True
 
             if self.target_mobs:
                 self.mode = 'boom'

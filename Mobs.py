@@ -7,11 +7,12 @@ from constant import *
 
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, coord, animations, grop_of_row, frame_rate, hp, atk, super_atk=None):
+    def __init__(self, coord, animations, grop_of_row, frame_rate, hp, atk, attack_radius=None,super_atk=None):
         super().__init__(all_sprites, mobs, grop_of_row)
         self.animations = animations
         self.frame_rate = frame_rate
         self.grop_of_row = grop_of_row
+        self.cached_nearby_mobs = None
 
         # Устанавливаем характеристики
         self.hp = hp
@@ -31,6 +32,8 @@ class Enemy(pygame.sprite.Sprite):
 
         if super_atk:
             self.super_atk = super_atk
+        if attack_radius:
+            self.attack_radius = attack_radius
 
     def set_mode(self, mode):
         if self.mode != mode:
@@ -64,6 +67,9 @@ class Enemy(pygame.sprite.Sprite):
             self.life = False
             self.kill()
 
+        if FRAME_COUNT % 30 == 0:
+            self.cached_nearby_mobs = None
+
         self.update_animation()
         if not self.life:
             self.set_mode('death')
@@ -80,7 +86,8 @@ class Orc(Enemy):
             'hurt': 100,
             'death': 250,
         }
-        super().__init__(coord, ORC, grop_of_row, hp=40, atk=10, frame_rate=frame_rate)
+        super().__init__(coord, ORC, grop_of_row,attack_radius=3*CELL_SIZE ,hp=40, atk=10, frame_rate=frame_rate)
+
 
     def update(self, *args, **kwargs):
         super().update()
@@ -93,10 +100,13 @@ class Orc(Enemy):
 
             elif self.mode == 'walk':
                 self.rect.x -= 3
-                for mob in self.grop_of_row:
-                    if mob in characters and pygame.sprite.collide_mask(self, mob):
-                        self.current_target = mob
-                        self.set_mode(choice(['attack01', 'attack02']))
+                if self.cached_nearby_mobs is None:
+                    self.cached_nearby_mobs = [mob for mob in self.grop_of_row if
+                                   mob in characters and abs(self.rect.x - mob.rect.x) <= self.attack_radius]
+                    for mob in self.cached_nearby_mobs:
+                        if mob.life and pygame.sprite.collide_mask(self, mob):
+                            self.current_target = mob
+                            self.set_mode(choice(['attack01', 'attack02']))
 
             elif self.mode in ['attack01', 'attack02'] and self.current_target and not self.current_target.life:
                 self.current_target = None

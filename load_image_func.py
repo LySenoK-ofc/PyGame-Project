@@ -11,14 +11,13 @@ def load_image(file=None, reverse=None, colorkey=None, scale=(), convert_to_alph
             image = file
 
         try:
-            if convert_to_alpha:
-                if colorkey is not None:
-                    image = image.convert()
-                    if colorkey == -1:
-                        colorkey = image.get_at((0, 0))
-                    image.set_colorkey(colorkey)
-                else:
-                    image = image.convert_alpha()
+            if colorkey is not None:
+                image = image.convert()
+                if colorkey == -1:
+                    colorkey = image.get_at((0, 0))
+                image.set_colorkey(colorkey)
+            else:
+                image = image.convert_alpha()
         except Exception:
             print('Не удалось конвертировать в альфу')
 

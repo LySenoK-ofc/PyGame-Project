@@ -1,32 +1,40 @@
 from Map_constructor import MapConstructor
-from constant import LEFT, TOP, FPS
+from Units import Archer, Knight, Wizard
+from constant import LEFT, TOP, FPS, FRAME_COUNT, WIDTH, HEIGHT
 from Board_class import Board
 from sprite_groups import *
 import pygame
 import time
 
 pygame.init()
-size = width, height = 1500, 825
+size = WIDTH, HEIGHT
 screen = pygame.display.set_mode(size)
+background = pygame.Surface((WIDTH, HEIGHT))
 
 if __name__ == '__main__':
     pygame.display.set_caption('demo_project')
     board = Board(6, 5, LEFT, TOP, 75)
     MapConstructor(20, 11, board)
-    board.render('assets/map_tiles/Tiles/FieldsTile_47.png')
 
     clock = pygame.time.Clock()
     fps = 60
 
     running = True
     while running:
+
         start_time = time.time()
-        screen.fill('black')
+
+        FRAME_COUNT = (FRAME_COUNT + 1) % FPS
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-            # if event.type == pygame.MOUSEBUTTONDOWN:
-            #     pass
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if pygame.key.get_pressed()[pygame.K_1]:
+                    board.get_click(pygame.mouse.get_pos(), Archer)
+                elif pygame.key.get_pressed()[pygame.K_2]:
+                    board.get_click(pygame.mouse.get_pos(), Knight)
+                elif pygame.key.get_pressed()[pygame.K_3]:
+                    board.get_click(pygame.mouse.get_pos(), Wizard)
             if event.type == pygame.KEYDOWN:
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_e]:
@@ -38,11 +46,10 @@ if __name__ == '__main__':
         all_sprites.update()
 
         all_sprites.draw(screen)
-        characters.draw(screen)
-        shop_units.draw(screen)
 
         pygame.display.flip()
         clock.tick(FPS)
+
         end_time = time.time()
         execution_time = end_time - start_time
         print(f"Время выполнения: {execution_time} секунд")

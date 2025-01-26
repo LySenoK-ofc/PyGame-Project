@@ -7,3 +7,5 @@ TOP = 75 * 4
 LEFT = 75 * 6
 
 WIDTH, HEIGHT = 1500, 825
+
+FRAME_COUNT = 0

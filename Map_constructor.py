@@ -1,6 +1,6 @@
 from Units import Lancer, Knight, Archer, Wizard
 from all_animations import KNIGHT, ARCHER, WIZARD
-from constant import LEFT, CELL_SIZE, TOP, WIDTH_CELL
+from constant import LEFT, CELL_SIZE, TOP, WIDTH_CELL, HEIGHT, HEIGHT_CELL
 from load_image_func import load_image
 from shop import Shop
 from sprite_groups import *
@@ -148,6 +148,13 @@ class MapConstructor:
                            'assets/map_tiles/Animated_Objects/flag/4.png',
                            'assets/map_tiles/Animated_Objects/flag/5.png',
                            'assets/map_tiles/Animated_Objects/flag/6.png'), True)
+
+        # Рисуем клетки
+        for i in range(HEIGHT_CELL):
+            for j in range(WIDTH_CELL):
+                x = LEFT + j * CELL_SIZE
+                y = TOP + i * CELL_SIZE
+                MapTile(map_tiles, [x, y], 'assets/map_tiles/Tiles/FieldsTile_47.png')
 
         # Ставим конницу
         for i in range(1, WIDTH_CELL):

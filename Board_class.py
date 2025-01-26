@@ -1,3 +1,5 @@
+import time
+
 from Map_constructor import MapTile
 from constant import WIDTH
 from sprite_groups import *
@@ -50,6 +52,6 @@ class Board:
             elif entity == Wizard:
                     Wizard(*setting)
         elif entity == Orc:
-            for i in range(1):
+            for i in range(10):
                 row = randrange(0, 5)
                 Orc((WIDTH, row * self.cell_size + self.top + self.cell_size / 2), grop_of_row=globals()[f'row{row}'])
