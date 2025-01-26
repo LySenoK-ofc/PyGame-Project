@@ -1,8 +1,9 @@
 from random import choice
+
+from all_animations import ORC
 from sprite_groups import *
 import pygame
 from constant import *
-from load_animation_func import load_anim
 
 
 class Enemy(pygame.sprite.Sprite):
@@ -72,7 +73,6 @@ class Enemy(pygame.sprite.Sprite):
 
 class Orc(Enemy):
     def __init__(self, coord, grop_of_row):
-        animations = load_anim("assets/animations/Orcs/orc/Orc.png", 'orcs', 'orc', True)
         frame_rate = {
             'walk': 250,
             'attack01': 250,
@@ -80,7 +80,7 @@ class Orc(Enemy):
             'hurt': 100,
             'death': 250,
         }
-        super().__init__(coord, animations, grop_of_row, hp=400, atk=10, frame_rate=frame_rate)
+        super().__init__(coord, ORC, grop_of_row, hp=40, atk=10, frame_rate=frame_rate)
 
     def update(self, *args, **kwargs):
         super().update()
@@ -92,7 +92,7 @@ class Orc(Enemy):
                     self.set_mode('walk')
 
             elif self.mode == 'walk':
-                self.rect.x -= 10
+                self.rect.x -= 3
                 for mob in self.grop_of_row:
                     if mob in characters and pygame.sprite.collide_mask(self, mob):
                         self.current_target = mob

@@ -1,6 +1,6 @@
 from Units import Lancer, Knight, Archer, Wizard
+from all_animations import KNIGHT, ARCHER, WIZARD
 from constant import LEFT, CELL_SIZE, TOP, WIDTH_CELL
-from load_animation_func import load_anim
 from load_image_func import load_image
 from shop import Shop
 from sprite_groups import *
@@ -154,13 +154,8 @@ class MapConstructor:
             Lancer((LEFT - CELL_SIZE / 2, i * CELL_SIZE + TOP - CELL_SIZE / 2), grop_of_row=globals()[f'row{i - 1}'])
 
         # Ставим юнитов в магазин
-        units = {
-            Knight: ("assets/animations/Troops/knight/Knight.png", 'troops', 'knight'),
-            Archer: ("assets/animations/Troops/archer/Archer.png", 'troops', 'archer'),
-            Wizard: ("assets/animations/Troops/wizard/Wizard.png", 'troops', 'wizard')
-        }
-        for i, x in ((Knight, 6), (Archer, 9), (Wizard, 12)):
-            Shop(i, (x * 75 + board.cell_size / 2, 2 * 75 + +board.cell_size / 2), load_anim(*units[i]), board,
+        for i, x, anim in ((Knight, 6, KNIGHT), (Archer, 9, ARCHER), (Wizard, 12, WIZARD)):
+            Shop(i, (x * 75 + board.cell_size / 2, 2 * 75 + +board.cell_size / 2), anim, board,
                  price=0)
 
 
