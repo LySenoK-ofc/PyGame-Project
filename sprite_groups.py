@@ -20,3 +20,6 @@ map_tiles = pygame.sprite.Group()
 map_objects = pygame.sprite.Group()
 animated_map_objects = pygame.sprite.Group()
 tiles_group = pygame.sprite.Group()
+
+level_doors = pygame.sprite.Group()
+buttons = pygame.sprite.Group()
