@@ -5,17 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Доделал мага. У нас проблема с оптимизацией.. 30 орков и играть невозможно..">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_01_2025_21_08_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_01_2025_21_08__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_01_2025_21_26_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_01_2025_21_26__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2025_15_17_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2025_15_17__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2025_15_19_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2025_15_19__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2025_15_20_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2025_15_20__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_20_01_2025_15_22_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_20_01_2025_15_22__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_20_01_2025_15_23_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_20_01_2025_15_23__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Board_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board_class.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Map_constructor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Map_constructor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mobs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Units.py" beforeDir="false" afterPath="$PROJECT_DIR$/Units.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/all_animations.py" beforeDir="false" afterPath="$PROJECT_DIR$/all_animations.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/constant.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/cut_sheet_parameters.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/cut_sheet_parameters.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_project.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/load_image_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/load_image_func.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprite_groups.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_groups.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -244,9 +255,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Units.py</url>
-          <line>326</line>
-          <option name="timeStamp" value="9" />
+          <url>file://$PROJECT_DIR$/Mobs.py</url>
+          <line>109</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

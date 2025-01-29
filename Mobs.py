@@ -1,13 +1,13 @@
 from random import choice
 
-from all_animations import ORC
+from all_animations import ANIMATIONS
 from sprite_groups import *
 import pygame
 from constant import *
 
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, coord, animations, grop_of_row, frame_rate, hp, atk, attack_radius=None,super_atk=None):
+    def __init__(self, coord, animations, grop_of_row, frame_rate, hp, atk, attack_radius=None, super_atk=None):
         super().__init__(all_sprites, mobs, grop_of_row)
         self.animations = animations
         self.frame_rate = frame_rate
@@ -49,7 +49,9 @@ class Enemy(pygame.sprite.Sprite):
             self.image = self.frames[self.frame]
 
             if isinstance(self, Orc):
-                if self.mode in ['attack01', 'attack02'] and self.frame == 3:
+                if (self.mode in ['attack01', 'attack02'] and
+                        abs(self.rect.x - self.current_target.rect.x) <= self.attack_radius and
+                        self.frame == 3):
                     self.current_target.lose_hp(self.atk, self)
 
     def lose_hp(self, count, killer=None):
@@ -60,6 +62,13 @@ class Enemy(pygame.sprite.Sprite):
                 if killer:
                     killer.kills += 1
             self.set_mode('hurt')
+
+    def set_target(self, new_target):
+        if self.current_target is not None:
+            if abs(self.current_target.rect.x - self.rect.x) > abs(new_target.rect.x - self.rect.x):
+                self.current_target = new_target
+        else:
+            self.current_target = new_target
 
     def update(self, *args, **kwargs):
 
@@ -86,27 +95,29 @@ class Orc(Enemy):
             'hurt': 100,
             'death': 250,
         }
-        super().__init__(coord, ORC, grop_of_row,attack_radius=3*CELL_SIZE ,hp=40, atk=10, frame_rate=frame_rate)
-
+        super().__init__(coord, ANIMATIONS['ORC'], grop_of_row, attack_radius=CELL_SIZE, hp=40, atk=10,
+                         frame_rate=frame_rate)
 
     def update(self, *args, **kwargs):
         super().update()
         if self.life:
             if self.mode == 'hurt' and self.frame == len(self.frames) - 1:
-                if self.current_target:
-                    self.set_mode(choice(['attack01', 'attack02']))
-                else:
                     self.set_mode('walk')
 
             elif self.mode == 'walk':
-                self.rect.x -= 3
-                if self.cached_nearby_mobs is None:
-                    self.cached_nearby_mobs = [mob for mob in self.grop_of_row if
-                                   mob in characters and abs(self.rect.x - mob.rect.x) <= self.attack_radius]
-                    for mob in self.cached_nearby_mobs:
-                        if mob.life and pygame.sprite.collide_mask(self, mob):
-                            self.current_target = mob
-                            self.set_mode(choice(['attack01', 'attack02']))
+                if (self.current_target is not None and
+                        abs(self.rect.x - self.current_target.rect.x) <= self.attack_radius):
+                        self.set_mode(choice(['attack01', 'attack02']))
+                else:
+                    self.rect.x -= 3
+                # if self.cached_nearby_mobs is None:
+                #     self.cached_nearby_mobs = [mob for mob in self.grop_of_row if
+                #                                mob in characters and abs(
+                #                                    self.rect.x - mob.rect.x) <= self.attack_radius]
+                #     for mob in self.cached_nearby_mobs:
+                #         if mob.life and pygame.sprite.collide_mask(self, mob):
+                #             self.current_target = mob
+                #             self.set_mode(choice(['attack01', 'attack02']))
 
             elif self.mode in ['attack01', 'attack02'] and self.current_target and not self.current_target.life:
                 self.current_target = None

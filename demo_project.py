@@ -4,6 +4,7 @@ from constant import LEFT, TOP, FPS, FRAME_COUNT, WIDTH, HEIGHT
 from Board_class import Board
 from sprite_groups import *
 import pygame
+from all_animations import ANIMATIONS
 import time
 
 pygame.init()
@@ -13,8 +14,23 @@ background = pygame.Surface((WIDTH, HEIGHT))
 
 if __name__ == '__main__':
     pygame.display.set_caption('demo_project')
+
     board = Board(6, 5, LEFT, TOP, 75)
     MapConstructor(20, 11, board)
+
+    # # Конвертируем в альфу
+    try:
+        for key, val in ANIMATIONS.items():
+            convert_val = {}
+            for key1 in val.keys():
+                try:
+                    convert_val[key1] = [frame.convert_alpha() for frame in val[key1] if
+                                         bool(frame.get_flags() & pygame.SRCALPHA)]
+                except pygame.error:
+                    print('Не удалось конвертируем в альфу')
+            ANIMATIONS[key] = convert_val
+    except Exception:
+        print('Ошибка изображения/структуры')
 
     clock = pygame.time.Clock()
     fps = 60
@@ -52,6 +68,6 @@ if __name__ == '__main__':
 
         end_time = time.time()
         execution_time = end_time - start_time
-        print(f"Время выполнения: {execution_time} секунд")
+        # print(f"{execution_time} секунд")
 
     pygame.quit()
