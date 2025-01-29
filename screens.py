@@ -11,6 +11,11 @@ from Map_constructor import generate_level, load_level, Map_constructor
 
 pygame.init()
 
+size = WIDTH, HEIGHT
+screen = pygame.display.set_mode(size)
+
+clock = pygame.time.Clock()
+
 
 def terminate():
     pygame.quit()
@@ -20,14 +25,34 @@ def terminate():
 class Button(pygame.sprite.Sprite):
     button_images = {'settings': 'assets/buttons/settings_btn.png',
                      'pause': 'assets/buttons/pause_btn.png',
-                     'return': 'assets/buttons/return_btn.png'}
+                     'return': 'assets/buttons/return_btn.png',
+                     'sketch': 'assets/buttons/sketch_btn.png'}
 
-    def __init__(self, x, y, type_btn):
+    def __init__(self, x, y, type_btn, command):
         super().__init__(buttons)
         self.image = load_image(self.button_images[type_btn])
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+        self.command = command
+
+    def update(self, *args, **kwargs):
+        if args and args[0].type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
+            map_tiles.empty()
+            map_objects.empty()
+            animated_map_objects.empty()
+            buttons.empty()
+            level_doors.empty()
+            if self.command == 'open_pick_level_screen':
+                pick_level_screen()
+            if self.command == 'open_main_lobby':
+                main_lobby()
+            if self.command == 'quit':
+                terminate()
+            if self.command == 'open_dictionary_screen':
+                dictionary_screen()
+            if self.command == 'open_options_screen':
+                options_screen()
 
 
 class Door_lock(pygame.sprite.Sprite):
@@ -62,10 +87,81 @@ class Level_door(pygame.sprite.Sprite):
         return False
 
 
-def pick_level_screen(screen):
-    clock = pygame.time.Clock()
+def main_lobby():
     font = pygame.font.Font('assets/pi-sheng.regular.otf', 64)
-    background = load_image('assets/levels_background.png')
+    background = load_image('assets/backgrounds/main_background.png')
+
+    start_game_btn = Button(900, 300, 'sketch', 'open_pick_level_screen')
+    dictionary_btn = Button(900, 425, 'sketch', 'open_dictionary_screen')
+    options_btn = Button(900, 550, 'sketch', 'open_options_screen')
+    quit_btn = Button(900, 675, 'sketch', 'quit')
+
+    start_game_text = font.render('Continue', True, 'black')
+    dictionary_text = font.render('Dictionary', True, 'black')
+    options_text = font.render('Options', True, 'black')
+    quit_text = font.render('Quit', True, 'black')
+
+    pygame.display.set_caption('Главное Лобби')
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                terminate()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                buttons.update(event)
+
+        screen.blit(background, (0, 0))
+        buttons.draw(screen)
+        screen.blit(start_game_text, (930, 315))
+        screen.blit(dictionary_text, (930, 440))
+        screen.blit(options_text, (930, 565))
+        screen.blit(quit_text, (930, 690))
+
+        pygame.display.flip()
+        clock.tick(FPS)
+
+
+def dictionary_screen():
+    pygame.display.set_caption('Бестинарий')
+
+    return_btn = Button(1300, 650, 'return', 'open_main_lobby')
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                terminate()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    buttons.update(event)
+        screen.fill('black')
+        buttons.draw(screen)
+
+        pygame.display.flip()
+
+
+def options_screen():
+    pygame.display.set_caption('Бестинарий')
+
+    return_btn = Button(1300, 650, 'return', 'open_main_lobby')
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                terminate()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    buttons.update(event)
+        screen.fill('black')
+        buttons.draw(screen)
+
+        pygame.display.flip()
+
+
+def pick_level_screen():
+    font = pygame.font.Font('assets/pi-sheng.regular.otf', 64)
+    background = load_image('assets/backgrounds/levels_background.png')
+
+    pygame.display.set_caption('Выбор уровня')
 
     door1 = Level_door(174, 120, False)
     door2 = Level_door(606, 120)
@@ -79,7 +175,7 @@ def pick_level_screen(screen):
     text_level4 = font.render('Level 4', True, 'black')
     text_level5 = font.render('Level 5', True, 'black')
 
-    return_btn = Button(1200, 500, 'return')
+    return_btn = Button(1200, 500, 'return', 'open_main_lobby')
 
     while True:
         for event in pygame.event.get():
@@ -89,8 +185,10 @@ def pick_level_screen(screen):
                 if event.button == 1:
                     level_doors.update(event)
                     for door in level_doors:
-                        if door.check():
-                            game_screen(screen)
+                        if type(door) == Level_door and door.check():
+                            buttons.empty()
+                            game_screen()
+                    buttons.update(event)
 
         screen.blit(background, (0, 3))
 
@@ -107,13 +205,14 @@ def pick_level_screen(screen):
         clock.tick(FPS)
 
 
-def game_screen(screen):
+def game_screen():
     board = Board(6, 5, (75 * 6), (75 * 4), CELL_SIZE)
-    clock = pygame.time.Clock()
 
     generate_level(load_level('map.txt'))
     Map_constructor(WIDTH, HEIGHT, board)
     board.render('assets/map_tiles/Tiles/FieldsTile_47.png')
+
+    return_btn = Button(1350, 10, 'return', 'open_pick_level_screen')
 
     while True:
         for event in pygame.event.get():
@@ -121,10 +220,13 @@ def game_screen(screen):
                 terminate()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    pass
+                    buttons.update(event)
         map_tiles.draw(screen)
         map_objects.draw(screen)
         animated_map_objects.update()
         animated_map_objects.draw(screen)
+        buttons.draw(screen)
         pygame.display.flip()
+
+        print(map_tiles, map_objects, animated_map_objects)
         clock.tick(FPS)
