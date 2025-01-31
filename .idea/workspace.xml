@@ -4,29 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Доделал мага. У нас проблема с оптимизацией.. 30 орков и играть невозможно..">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_01_2025_21_08_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_01_2025_21_08__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_01_2025_21_26_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_19_01_2025_21_26__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2025_15_17_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2025_15_17__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2025_15_19_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2025_15_19__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2025_15_20_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_20_01_2025_15_20__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_20_01_2025_15_22_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_20_01_2025_15_22__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_20_01_2025_15_23_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_20_01_2025_15_23__Changes_.xml" beforeDir="false" />
+    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Board_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board_class.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Map_constructor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Map_constructor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mobs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Units.py" beforeDir="false" afterPath="$PROJECT_DIR$/Units.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/all_animations.py" beforeDir="false" afterPath="$PROJECT_DIR$/all_animations.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/load_image_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/load_image_func.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Kirill's-Branch" />
+        <entry key="$PROJECT_DIR$" value="screen_creature" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -73,7 +56,7 @@
   "keyToString": {
     "Python.Map_constructor.executor": "Run",
     "Python.demo_map.executor": "Run",
-    "Python.demo_project.executor": "Run",
+    "Python.demo_project.executor": "Debug",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -156,8 +139,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.demo_project" />
-        <item itemvalue="Python.demo_map" />
         <item itemvalue="Python.Map_constructor" />
+        <item itemvalue="Python.demo_map" />
+        <item itemvalue="Python.demo_map" />
+        <item itemvalue="Python.demo_project" />
       </list>
     </recent_temporary>
   </component>
@@ -185,42 +170,33 @@
       <option name="project" value="LOCAL" />
       <updated>1737639897285</updated>
     </task>
-    <task id="LOCAL-00002" summary="Объекты удаляются после выхода за пределы экрана, поставил конницу, изменил логику воинов">
+    <task id="LOCAL-00002" summary="Сделал лобби выбора уровня, сам выбор уровня сделаю после того, как будет выполнен основной геймплей">
       <option name="closed" value="true" />
-      <created>1737749166535</created>
+      <created>1737904107702</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1737749166535</updated>
+      <updated>1737904107702</updated>
     </task>
-    <task id="LOCAL-00003" summary="Добавил возможность перетаскивать юнитов из магазина">
-      <option name="closed" value="true" />
-      <created>1737822315514</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1737822315514</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Добавил спрайтов. Начал делать мага">
-      <option name="closed" value="true" />
-      <created>1737835566639</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1737835566639</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Доделал мага. У нас проблема с оптимизацией.. 30 орков и играть невозможно..">
-      <option name="closed" value="true" />
-      <created>1737890549558</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1737890549558</updated>
-    </task>
-    <option name="localTasksCounter" value="6" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="screens_creature" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
@@ -245,19 +221,16 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Добавил рыцаря" />
-    <MESSAGE value="Объекты удаляются после выхода за пределы экрана, поставил конницу, изменил логику воинов" />
-    <MESSAGE value="Добавил возможность перетаскивать юнитов из магазина" />
-    <MESSAGE value="Добавил спрайтов. Начал делать мага" />
-    <MESSAGE value="Доделал мага. У нас проблема с оптимизацией.. 30 орков и играть невозможно.." />
-    <option name="LAST_COMMIT_MESSAGE" value="Доделал мага. У нас проблема с оптимизацией.. 30 орков и играть невозможно.." />
+    <MESSAGE value="Сделал лобби выбора уровня, сам выбор уровня сделаю после того, как будет выполнен основной геймплей" />
+    <option name="LAST_COMMIT_MESSAGE" value="Сделал лобби выбора уровня, сам выбор уровня сделаю после того, как будет выполнен основной геймплей" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Mobs.py</url>
-          <line>109</line>
-          <option name="timeStamp" value="20" />
+          <url>file://$PROJECT_DIR$/Units.py</url>
+          <line>267</line>
+          <option name="timeStamp" value="23" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

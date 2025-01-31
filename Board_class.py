@@ -50,6 +50,6 @@ class Board:
             elif entity == Wizard:
                     Wizard(*setting)
         elif entity == Orc:
-            for i in range(2):
+            for i in range(5):
                 row = randrange(0, 5)
                 Orc((WIDTH, row * self.cell_size + self.top + self.cell_size / 2), grop_of_row=globals()[f'row{row}'])
