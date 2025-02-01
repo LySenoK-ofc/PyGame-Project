@@ -96,7 +96,7 @@ class Unit(pygame.sprite.Sprite):
 
             elif isinstance(self, Lancer):
                 if self.mode == 'attack01':
-                    self.rect.x += 20
+                    self.rect.x += 30
                     self.area_attack(self.atk)
 
     def lose_hp(self, count, killer=None):
