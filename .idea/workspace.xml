@@ -4,17 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Улучшил поиск целей для юнитов и мобов">
+    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Добавил рыцаря">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Archer_class.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Board_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board_class.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Map_constructor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Map_constructor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mobs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Units.py" beforeDir="false" afterPath="$PROJECT_DIR$/Units.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/all_animations.py" beforeDir="false" afterPath="$PROJECT_DIR$/all_animations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Orc_class.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/constant.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/cut_sheet_parameters.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/cut_sheet_parameters.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/demo_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/load_animations.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/sprite_groups.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_groups.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="screen_creature" />
+        <entry key="$PROJECT_DIR$" value="Kirill's-Branch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -145,10 +142,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.demo_project" />
+        <item itemvalue="Python.demo_map" />
         <item itemvalue="Python.Map_constructor" />
-        <item itemvalue="Python.demo_map" />
-        <item itemvalue="Python.demo_map" />
-        <item itemvalue="Python.demo_project" />
       </list>
     </recent_temporary>
   </component>
@@ -176,41 +171,10 @@
       <option name="project" value="LOCAL" />
       <updated>1737639897285</updated>
     </task>
-    <task id="LOCAL-00002" summary="Сделал лобби выбора уровня, сам выбор уровня сделаю после того, как будет выполнен основной геймплей">
-      <option name="closed" value="true" />
-      <created>1737904107702</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1737904107702</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Улучшил поиск целей для юнитов и мобов">
-      <option name="closed" value="true" />
-      <created>1738354088975</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1738354088975</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list>
-              <RecentGroup>
-                <option name="FILTER_VALUES">
-                  <option value="screens_creature" />
-                </option>
-              </RecentGroup>
-            </list>
-          </value>
-        </entry>
-      </map>
-    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
@@ -235,19 +199,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Добавил рыцаря" />
-    <MESSAGE value="Сделал лобби выбора уровня, сам выбор уровня сделаю после того, как будет выполнен основной геймплей" />
-    <MESSAGE value="Улучшил поиск целей для юнитов и мобов" />
-    <option name="LAST_COMMIT_MESSAGE" value="Улучшил поиск целей для юнитов и мобов" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Units.py</url>
-          <line>297</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <option name="LAST_COMMIT_MESSAGE" value="Добавил рыцаря" />
   </component>
 </project>

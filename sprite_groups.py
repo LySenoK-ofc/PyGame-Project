@@ -21,3 +21,6 @@ moneys = sprite.Group()
 map_tiles = sprite.Group()
 map_objects = sprite.Group()
 animated_map_objects = sprite.Group()
+
+level_doors = sprite.Group()
+buttons = sprite.Group()
