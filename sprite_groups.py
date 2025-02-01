@@ -16,7 +16,6 @@ row3 = sprite.Group()
 row4 = sprite.Group()
 row5 = sprite.Group()
 
-
 moneys = sprite.Group()
 
 map_tiles = sprite.Group()

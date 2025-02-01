@@ -1,6 +1,7 @@
+import constant
 from Map_constructor import MapConstructor
-from Units import Archer, Knight, Wizard
-from constant import LEFT, TOP, FPS, FRAME_COUNT, WIDTH, HEIGHT
+from Units import Archer, Knight, Wizard, Priest
+from constant import LEFT, TOP, FPS, WIDTH, HEIGHT
 from Board_class import Board
 from sprite_groups import *
 import pygame
@@ -33,17 +34,17 @@ if __name__ == '__main__':
         print('Ошибка изображения/структуры')
 
     clock = pygame.time.Clock()
-    fps = 60
 
     running = True
     while running:
 
         start_time = time.time()
 
-        FRAME_COUNT = (FRAME_COUNT + 1) % FPS
+        constant.frame_count += 1
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
+
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if pygame.key.get_pressed()[pygame.K_1]:
                     board.get_click(pygame.mouse.get_pos(), Archer)
@@ -51,6 +52,9 @@ if __name__ == '__main__':
                     board.get_click(pygame.mouse.get_pos(), Knight)
                 elif pygame.key.get_pressed()[pygame.K_3]:
                     board.get_click(pygame.mouse.get_pos(), Wizard)
+                elif pygame.key.get_pressed()[pygame.K_4]:
+                    board.get_click(pygame.mouse.get_pos(), Priest)
+
             if event.type == pygame.KEYDOWN:
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_e]:
@@ -68,6 +72,6 @@ if __name__ == '__main__':
 
         end_time = time.time()
         execution_time = end_time - start_time
-        # print(f"{execution_time} секунд")
+        print(f"{execution_time} секунд", constant.frame_count)
 
     pygame.quit()

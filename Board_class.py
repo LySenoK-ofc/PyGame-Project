@@ -1,7 +1,7 @@
 from Map_constructor import MapTile
 from constant import WIDTH
 from sprite_groups import *
-from Units import Archer, Knight, Wizard
+from Units import Archer, Knight, Wizard, Priest
 from Mobs import Orc
 from random import randrange
 
@@ -44,12 +44,14 @@ class Board:
                         cell[1] * self.cell_size + self.top + self.cell_size / 2),
                        globals()[f'row{cell[1]}'])
             if entity == Archer:
-                    Archer(*setting)
+                Archer(*setting)
             elif entity == Knight:
-                    Knight(*setting)
+                Knight(*setting)
             elif entity == Wizard:
-                    Wizard(*setting)
+                Wizard(*setting)
+            elif entity == Priest:
+                Priest(*setting)
         elif entity == Orc:
-            for i in range(5):
+            for i in range(3):
                 row = randrange(0, 5)
                 Orc((WIDTH, row * self.cell_size + self.top + self.cell_size / 2), grop_of_row=globals()[f'row{row}'])

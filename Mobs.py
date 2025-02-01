@@ -1,5 +1,6 @@
 from random import choice
 
+from Units import Lancer
 from all_animations import ANIMATIONS
 from sprite_groups import *
 import pygame
@@ -8,7 +9,7 @@ from constant import *
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, coord, animations, grop_of_row, frame_rate, hp, atk, attack_radius=None, super_atk=None):
-        super().__init__(all_sprites, mobs, grop_of_row)
+        super().__init__(all_sprites,mobs, grop_of_row)
         self.animations = animations
         self.frame_rate = frame_rate
         self.grop_of_row = grop_of_row
@@ -34,6 +35,7 @@ class Enemy(pygame.sprite.Sprite):
             self.super_atk = super_atk
         if attack_radius:
             self.attack_radius = attack_radius
+
 
     def set_mode(self, mode):
         if self.mode != mode:
@@ -64,11 +66,12 @@ class Enemy(pygame.sprite.Sprite):
             self.set_mode('hurt')
 
     def set_target(self, new_target):
-        if self.current_target is None:
-            self.current_target = new_target
+        if not isinstance(new_target, Lancer):
+            if self.current_target is None:
+                self.current_target = new_target
 
-        if abs(self.current_target.rect.x - self.rect.x) > abs(new_target.rect.x - self.rect.x):
-            self.current_target = new_target
+            if abs(self.current_target.rect.x - self.rect.x) > abs(new_target.rect.x - self.rect.x):
+                self.current_target = new_target
 
     def update(self, *args, **kwargs):
 
@@ -107,7 +110,7 @@ class Orc(Enemy):
                         abs(self.rect.x - self.current_target.rect.x) <= self.attack_radius):
                     self.set_mode(choice(['attack01', 'attack02']))
                 else:
-                    self.rect.x -= 3
+                    self.rect.x -= 10
 
             elif self.mode in ['attack01', 'attack02'] and self.current_target and not self.current_target.life:
                 self.current_target = None

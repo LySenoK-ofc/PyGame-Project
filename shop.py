@@ -5,7 +5,7 @@ from sprite_groups import *
 
 class Shop(pygame.sprite.Sprite):
     def __init__(self, unit_type, coord, animations, board, price=0):
-        super().__init__(all_sprites, shop_units)
+        super().__init__(all_sprites,shop_units)
         self.animations = animations
         self.mode = 'idle'
         self.frames = self.animations[self.mode]
@@ -24,6 +24,7 @@ class Shop(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.last_update = pygame.time.get_ticks()
         self.frame_rate = {'idle': 250}
+
 
     def update(self):
         self.move()

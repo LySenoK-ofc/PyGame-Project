@@ -4,12 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="">
+    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Улучшил поиск целей для юнитов и мобов">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Board_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board_class.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Map_constructor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Map_constructor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mobs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Units.py" beforeDir="false" afterPath="$PROJECT_DIR$/Units.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/all_animations.py" beforeDir="false" afterPath="$PROJECT_DIR$/all_animations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/constant.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/cut_sheet_parameters.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/cut_sheet_parameters.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprite_groups.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_groups.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +62,7 @@
   "keyToString": {
     "Python.Map_constructor.executor": "Run",
     "Python.demo_map.executor": "Run",
-    "Python.demo_project.executor": "Debug",
+    "Python.demo_project.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -178,7 +184,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737904107702</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Улучшил поиск целей для юнитов и мобов">
+      <option name="closed" value="true" />
+      <created>1738354088975</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1738354088975</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -222,15 +236,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Добавил рыцаря" />
     <MESSAGE value="Сделал лобби выбора уровня, сам выбор уровня сделаю после того, как будет выполнен основной геймплей" />
-    <option name="LAST_COMMIT_MESSAGE" value="Сделал лобби выбора уровня, сам выбор уровня сделаю после того, как будет выполнен основной геймплей" />
+    <MESSAGE value="Улучшил поиск целей для юнитов и мобов" />
+    <option name="LAST_COMMIT_MESSAGE" value="Улучшил поиск целей для юнитов и мобов" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Units.py</url>
-          <line>267</line>
-          <option name="timeStamp" value="23" />
+          <line>297</line>
+          <option name="timeStamp" value="33" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

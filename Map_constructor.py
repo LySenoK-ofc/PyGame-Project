@@ -1,4 +1,4 @@
-from Units import Lancer, Knight, Archer, Wizard
+from Units import Lancer, Knight, Archer, Wizard, Priest
 from all_animations import ANIMATIONS
 from constant import LEFT, CELL_SIZE, TOP, WIDTH_CELL, HEIGHT_CELL
 from load_image_func import load_image
@@ -162,14 +162,14 @@ class MapConstructor:
 
         # Ставим юнитов в магазин
         for i, x, anim in (
-        (Knight, 6, ANIMATIONS['KNIGHT']), (Archer, 9, ANIMATIONS['ARCHER']), (Wizard, 12, ANIMATIONS['WIZARD'])):
+        (Knight, 6, ANIMATIONS['KNIGHT']), (Archer, 9, ANIMATIONS['ARCHER']), (Wizard, 12, ANIMATIONS['WIZARD']), (Priest, 15, ANIMATIONS['PRIEST'])):
             Shop(i, (x * 75 + board.cell_size / 2, 2 * 75 + +board.cell_size / 2), anim, board,
                  price=0)
 
 
 class MapTile(pygame.sprite.Sprite):
     def __init__(self, group, coord, image, reverse=False):
-        super().__init__(group, all_sprites)
+        super().__init__(all_sprites,group)
         self.image = load_image(file=image, reverse=reverse)
         self.rect = self.image.get_rect()
         self.rect.x = coord[0]
@@ -178,7 +178,7 @@ class MapTile(pygame.sprite.Sprite):
 
 class AnimatedMapObject(pygame.sprite.Sprite):
     def __init__(self, group, coord, images, reverse=False):
-        super().__init__(group, all_sprites)
+        super().__init__(all_sprites,group)
         self.image = load_image(images[0])
         self.frames = [load_image(file=image, reverse=reverse) for image in images]
         self.rect = self.image.get_rect()
@@ -188,6 +188,7 @@ class AnimatedMapObject(pygame.sprite.Sprite):
         self.frame = 0  # текущий кадр
         self.last_update = pygame.time.get_ticks()
         self.frame_rate = 150  # как быстро кадры меняются
+
 
     def update(self, *args, **kwargs):
         now = pygame.time.get_ticks()
