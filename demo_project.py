@@ -1,8 +1,10 @@
 import constant
-from Map_constructor import MapConstructor
+import screens
+from Map_constructor import MapConstructor, generate_level, load_level
 from Units import Archer, Knight, Wizard, Priest
 from constant import LEFT, TOP, FPS, WIDTH, HEIGHT
 from Board_class import Board
+from screens import Button
 from sprite_groups import *
 import pygame
 from all_animations import ANIMATIONS
@@ -13,31 +15,34 @@ size = WIDTH, HEIGHT
 screen = pygame.display.set_mode(size)
 background = pygame.Surface((WIDTH, HEIGHT))
 
-if __name__ == '__main__':
-    pygame.display.set_caption('demo_project')
 
-    board = Board(6, 5, LEFT, TOP, 75)
-    MapConstructor(20, 11, board)
+pygame.display.set_caption('demo_project')
 
-    # # Конвертируем в альфу
-    try:
-        for key, val in ANIMATIONS.items():
-            convert_val = {}
-            for key1 in val.keys():
-                try:
-                    convert_val[key1] = [frame.convert_alpha() for frame in val[key1] if
-                                         bool(frame.get_flags() & pygame.SRCALPHA)]
-                except pygame.error:
-                    print('Не удалось конвертируем в альфу')
-            ANIMATIONS[key] = convert_val
-    except Exception:
-        print('Ошибка изображения/структуры')
+board = Board(6, 5, LEFT, TOP, 75)
+generate_level(load_level('map.txt'))
+MapConstructor(20, 11, board)
 
+return_btn = Button(1350, 10, 'return', 'open_pick_level_screen')
+
+# Конвертируем в альфу
+try:
+    for key, val in ANIMATIONS.items():
+        convert_val = {}
+        for key1 in val.keys():
+            try:
+                convert_val[key1] = [frame.convert_alpha() for frame in val[key1] if
+                                     bool(frame.get_flags() & pygame.SRCALPHA)]
+            except pygame.error:
+                print('Не удалось конвертируем в альфу')
+        ANIMATIONS[key] = convert_val
+except Exception:
+    print('Ошибка изображения/структуры')
+
+def game_loop():
     clock = pygame.time.Clock()
 
     running = True
     while running:
-
         start_time = time.time()
 
         constant.frame_count += 1
@@ -57,6 +62,8 @@ if __name__ == '__main__':
 
             if event.type == pygame.KEYDOWN:
                 keys = pygame.key.get_pressed()
+                if keys[pygame.K_ESCAPE]:
+                    screens.main_lobby()
                 if keys[pygame.K_e]:
                     board.on_click()
                 if keys[pygame.K_p]:
@@ -64,7 +71,6 @@ if __name__ == '__main__':
                         f'map_tiles:{map_tiles},\ncharacters:{characters},\nshells:{shells},\nmobs:{mobs},\nmoneys:{moneys},\nmap_objects:{map_objects},\nanimated_map_objects:{animated_map_objects}\n')
 
         all_sprites.update()
-
         all_sprites.draw(screen)
 
         pygame.display.flip()
@@ -72,6 +78,9 @@ if __name__ == '__main__':
 
         end_time = time.time()
         execution_time = end_time - start_time
-        print(f"{execution_time} секунд", constant.frame_count)
+        print(f"{execution_time} секунд")
 
     pygame.quit()
+
+if __name__ == '__main__':
+    game_loop()

@@ -1,4 +1,3 @@
-from Map_constructor import MapTile
 from constant import WIDTH
 from sprite_groups import *
 from Units import Archer, Knight, Wizard, Priest
@@ -14,13 +13,6 @@ class Board:
         self.top = top
         self.cell_size = cell_size
         self.board = [[0] * width for _ in range(height)]
-
-    def render(self, map_tile):
-        for i in range(self.height):
-            for j in range(self.width):
-                x = self.left + j * self.cell_size
-                y = self.top + i * self.cell_size
-                MapTile(map_tiles, [x, y], map_tile)
 
     def get_click(self, mouse_pos, entity):
         cell = self.get_cell(mouse_pos)

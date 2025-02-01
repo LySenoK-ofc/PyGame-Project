@@ -2,12 +2,10 @@ import sys
 
 import pygame.sprite
 
+import demo_project
 from load_image_func import load_image
-from constant import FPS, HEIGHT, WIDTH, CELL_SIZE
+from constant import FPS, HEIGHT, WIDTH
 from sprite_groups import *
-
-from Board_class import Board
-from Map_constructor import generate_level, load_level, Map_constructor
 
 pygame.init()
 
@@ -44,7 +42,8 @@ class Button(pygame.sprite.Sprite):
             buttons.empty()
             level_doors.empty()
             if self.command == 'open_pick_level_screen':
-                pick_level_screen()
+                if pick_level_screen():
+                    demo_project.game_loop()
             if self.command == 'open_main_lobby':
                 main_lobby()
             if self.command == 'quit':
@@ -187,7 +186,7 @@ def pick_level_screen():
                     for door in level_doors:
                         if type(door) == Level_door and door.check():
                             buttons.empty()
-                            game_screen()
+                            return True
                     buttons.update(event)
 
         screen.blit(background, (0, 3))
@@ -204,29 +203,5 @@ def pick_level_screen():
         pygame.display.flip()
         clock.tick(FPS)
 
-
-def game_screen():
-    board = Board(6, 5, (75 * 6), (75 * 4), CELL_SIZE)
-
-    generate_level(load_level('map.txt'))
-    Map_constructor(WIDTH, HEIGHT, board)
-    board.render('assets/map_tiles/Tiles/FieldsTile_47.png')
-
-    return_btn = Button(1350, 10, 'return', 'open_pick_level_screen')
-
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                terminate()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    buttons.update(event)
-        map_tiles.draw(screen)
-        map_objects.draw(screen)
-        animated_map_objects.update()
-        animated_map_objects.draw(screen)
-        buttons.draw(screen)
-        pygame.display.flip()
-
-        print(map_tiles, map_objects, animated_map_objects)
-        clock.tick(FPS)
+if __name__ == '__main__':
+    main_lobby()
