@@ -1,7 +1,6 @@
+from Mobs import RiderOrc
 from constant import WIDTH
 from sprite_groups import *
-from Units import Archer, Knight, Wizard, Priest
-from Mobs import Orc
 from random import randrange
 
 
@@ -14,9 +13,9 @@ class Board:
         self.cell_size = cell_size
         self.board = [[0] * width for _ in range(height)]
 
-    def get_click(self, mouse_pos, entity):
+    def get_click(self, mouse_pos, entity_type, entity):
         cell = self.get_cell(mouse_pos)
-        self.on_click(cell, entity)
+        self.on_click(cell=cell, entity_type=entity_type, entity=entity)
 
     def get_cell(self, mouse_pos):
         x, y = mouse_pos
@@ -27,23 +26,19 @@ class Board:
         else:
             return None
 
-    def on_click(self, cell=None, entity=Orc):
+    def on_click(self, entity, entity_type='Orcs',cell=None):
         print(entity)
-        if cell and all([((soldier.rect.center[0] - self.left) // self.cell_size,
-                          (soldier.rect.center[1] - self.top) // self.cell_size) != cell
-                         for soldier in characters]):
-            setting = ((cell[0] * self.cell_size + self.left + self.cell_size / 2,
-                        cell[1] * self.cell_size + self.top + self.cell_size / 2),
-                       globals()[f'row{cell[1]}'])
-            if entity == Archer:
-                Archer(*setting)
-            elif entity == Knight:
-                Knight(*setting)
-            elif entity == Wizard:
-                Wizard(*setting)
-            elif entity == Priest:
-                Priest(*setting)
-        elif entity == Orc:
-            for i in range(3):
+        if entity_type == 'Troops':
+            if cell and all([((soldier.rect.center[0] - self.left) // self.cell_size,
+                              (soldier.rect.center[1] - self.top) // self.cell_size) != cell
+                             for soldier in characters]):
+                setting = ((cell[0] * self.cell_size + self.left + self.cell_size / 2,
+                             cell[1] * self.cell_size + self.top + self.cell_size / 2),
+                            globals()[f'row{cell[1]}'])
+                entity(*setting)
+
+        elif entity_type == 'Orcs':
+            for i in range(1):
                 row = randrange(0, 5)
-                Orc((WIDTH, row * self.cell_size + self.top + self.cell_size / 2), grop_of_row=globals()[f'row{row}'])
+                setting = ((WIDTH, row * self.cell_size + self.top + self.cell_size / 2), globals()[f'row{row}'])
+                entity(*setting)

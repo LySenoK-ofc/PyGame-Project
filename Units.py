@@ -1,4 +1,4 @@
-from random import choice
+from random import choice, randint
 
 import constant
 from sprite_groups import *
@@ -96,17 +96,38 @@ class Unit(pygame.sprite.Sprite):
 
             elif isinstance(self, Lancer):
                 if self.mode == 'attack01':
-                    self.rect.x += 30
+                    self.rect.x += 25
                     self.area_attack(self.atk)
+
+            elif isinstance(self, ArmoredAxeman):
+                if self.mode in ['attack01', 'attack02', 'attack03']:
+                    if self.mode == 'attack01' and self.frame == 5:
+                        self.current_target.lose_hp(self.atk, self)
+
+                        self.area_attack(self.area_atk)
+
+                    elif self.mode == 'attack02' and self.frame in (4, 8):
+                        self.current_target.lose_hp(self.atk, self)
+
+                        self.area_attack(self.area_atk)
+                    elif self.mode == 'attack03' and self.frame == 8:
+                        self.current_target.lose_hp(self.super_atk, self)
+
+                        self.area_attack(self.super_atk / 1.5)
+                        self.kills = 0
 
     def lose_hp(self, count, killer=None):
         if self.life:
-            self.hp -= count
+            if 'block' in self.animations and randint(1, 2) == 1:
+                self.set_mode('block')
+                self.hp -= count / 3
+            else:
+                self.set_mode('hurt')
+                self.hp -= count
             if self.hp <= 0:
                 self.life = False
                 if killer:
                     killer.kills += 1
-            self.set_mode('hurt')
 
     def find_target(self):
         self.cached_nearby_mobs = list(filter(lambda nearby_mob: nearby_mob.rect.x >= self.rect.x,
@@ -122,7 +143,7 @@ class Unit(pygame.sprite.Sprite):
             for mob in set(self.cached_nearby_mobs):
                 mob.set_target(self)
 
-            if self.current_target is not None:
+            if self.current_target:
                 return True
         return False
 
@@ -178,7 +199,7 @@ class Knight(Unit):
             'attack01': 135,
             'attack02': 135,
             'attack03': 115,
-            'block': 200,
+            'block': 60,
             'hurt': 60,
             'death': 250,
         }
@@ -188,17 +209,17 @@ class Knight(Unit):
 
     def area_attack(self, area_atk):
         for mob in self.cached_nearby_mobs:
-            if mob != self.current_target and mob.life and abs(self.rect.x - mob.rect.x) <= CELL_SIZE * 1.5:
+            if mob != self.current_target and mob.life and abs(self.rect.x - mob.rect.x) <= CELL_SIZE :
                 mob.lose_hp(area_atk, self)
 
     def update(self):
         super().update()
         if self.life:
-            if self.mode == 'hurt' and self.frame == len(self.frames) - 1:
+            if self.mode in ['hurt', 'block'] and self.frame == len(self.frames) - 1:
                 self.set_mode('idle')
 
             elif self.mode == 'idle':
-                if self.current_target is not None:
+                if self.current_target:
                     self.set_mode(choice(['attack01', 'attack02'] if self.kills < 4 else ['attack03']))
 
             elif (self.mode in ('attack01', 'attack02', 'attack03')
@@ -224,18 +245,15 @@ class Lancer(Unit):
                          frame_rate=frame_rate)
 
     def area_attack(self, area_atk):
-        for mob in self.grop_of_row:
+        for mob in self.cached_nearby_mobs:
             if mob.life and pygame.sprite.collide_mask(self, mob):
                 mob.lose_hp(area_atk, self)
-
-    def lose_hp(self, count, killer=None):
-        self.rect.x -= 10
 
     def update(self):
         super().update()
         if self.life:
             if self.mode == 'idle':
-                if self.current_target is not None:
+                if self.current_target:
                     self.set_mode('attack01')
 
 
@@ -264,7 +282,7 @@ class Wizard(Unit):
                 self.set_mode('idle')
 
             elif self.mode == 'idle':
-                if self.current_target is not None:
+                if self.current_target:
                     if abs(self.rect.x - self.current_target.rect.x) <= CELL_SIZE * 1.5:
                         self.set_mode('attack01')
                     else:
@@ -311,7 +329,7 @@ class Priest(Unit):
                 self.set_mode('idle')
 
             elif self.mode == 'idle':
-                if self.current_target is not None:
+                if self.current_target:
                     self.set_mode('attack01_no_aura')
                 else:
                     now = pygame.time.get_ticks()
@@ -320,6 +338,41 @@ class Priest(Unit):
                         self.check_healing()
 
             elif self.mode in 'attack01_no_aura' and self.current_target and not self.current_target.life:
+                self.current_target = None
+                self.set_mode('idle')
+
+
+class ArmoredAxeman(Unit):
+    def __init__(self, coord, grop_of_row):
+        frame_rate = {
+            'idle': 250,
+            'attack01': 135,
+            'attack02': 135,
+            'attack03': 115,
+            'hurt': 60,
+            'death': 250,
+        }
+        super().__init__(coord, ANIMATIONS['ARMORED_AXEMAN'], grop_of_row,
+                         detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=80, atk=20, super_atk=40,
+                         frame_rate=frame_rate)
+
+    def area_attack(self, area_atk):
+        for mob in self.cached_nearby_mobs:
+            if mob != self.current_target and mob.life and abs(self.rect.x - mob.rect.x) <= CELL_SIZE:
+                mob.lose_hp(area_atk, self)
+
+    def update(self):
+        super().update()
+        if self.life:
+            if self.mode == 'hurt' and self.frame == len(self.frames) - 1:
+                self.set_mode('idle')
+
+            elif self.mode == 'idle':
+                if self.current_target:
+                    self.set_mode(choice(['attack01', 'attack02'] if self.kills < 4 else ['attack03']))
+
+            elif (self.mode in ('attack01', 'attack02', 'attack03')
+                  and self.current_target and not self.current_target.life):
                 self.current_target = None
                 self.set_mode('idle')
 

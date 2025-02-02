@@ -1,10 +1,10 @@
 import constant
 import screens
 from Map_constructor import MapConstructor, generate_level, load_level
-from Units import Archer, Knight, Wizard, Priest
+from Mobs import EliteOrc, Orc, ArmoredOrc, RiderOrc
+from Units import Archer, Knight, Wizard, Priest, ArmoredAxeman
 from constant import LEFT, TOP, FPS, WIDTH, HEIGHT
 from Board_class import Board
-from screens import Button
 from sprite_groups import *
 import pygame
 from all_animations import ANIMATIONS
@@ -22,7 +22,6 @@ board = Board(6, 5, LEFT, TOP, 75)
 generate_level(load_level('map.txt'))
 MapConstructor(20, 11, board)
 
-return_btn = Button(1350, 10, 'return', 'open_pick_level_screen')
 
 # Конвертируем в альфу
 try:
@@ -52,20 +51,22 @@ def game_loop():
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if pygame.key.get_pressed()[pygame.K_1]:
-                    board.get_click(pygame.mouse.get_pos(), Archer)
+                    board.get_click(pygame.mouse.get_pos(),'Troops', Archer)
                 elif pygame.key.get_pressed()[pygame.K_2]:
-                    board.get_click(pygame.mouse.get_pos(), Knight)
+                    board.get_click(pygame.mouse.get_pos(), 'Troops',Knight)
                 elif pygame.key.get_pressed()[pygame.K_3]:
-                    board.get_click(pygame.mouse.get_pos(), Wizard)
+                    board.get_click(pygame.mouse.get_pos(),'Troops', Wizard)
                 elif pygame.key.get_pressed()[pygame.K_4]:
-                    board.get_click(pygame.mouse.get_pos(), Priest)
+                    board.get_click(pygame.mouse.get_pos(),'Troops', Priest)
+                elif pygame.key.get_pressed()[pygame.K_5]:
+                    board.get_click(pygame.mouse.get_pos(),'Troops', ArmoredAxeman)
 
             if event.type == pygame.KEYDOWN:
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_ESCAPE]:
                     screens.main_lobby()
                 if keys[pygame.K_e]:
-                    board.on_click()
+                    board.on_click(RiderOrc)
                 if keys[pygame.K_p]:
                     print(
                         f'map_tiles:{map_tiles},\ncharacters:{characters},\nshells:{shells},\nmobs:{mobs},\nmoneys:{moneys},\nmap_objects:{map_objects},\nanimated_map_objects:{animated_map_objects}\n')
@@ -78,7 +79,7 @@ def game_loop():
 
         end_time = time.time()
         execution_time = end_time - start_time
-        print(f"{execution_time} секунд")
+        # print(f"{execution_time} секунд")
 
     pygame.quit()
 

@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Добавил рыцаря" />
+    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Лениво совместил лобби и игру. На тебе сделать это нормально, а также почисти код в screens.py.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board_class.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mobs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Units.py" beforeDir="false" afterPath="$PROJECT_DIR$/Units.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/all_animations.py" beforeDir="false" afterPath="$PROJECT_DIR$/all_animations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/cut_sheet_parameters.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/cut_sheet_parameters.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_project.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,7 +58,7 @@
   "keyToString": {
     "Python.Map_constructor.executor": "Run",
     "Python.demo_map.executor": "Run",
-    "Python.demo_project.executor": "Debug",
+    "Python.demo_project.executor": "Run",
     "Python.screens.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -64,7 +72,7 @@
       <recent name="C:\Users\user\PycharmProjects\PyGame_Project_demo" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.screens">
+  <component name="RunManager" selected="Python.demo_project">
     <configuration name="Map_constructor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PyGame_Project_demo" />
       <option name="ENV_FILES" value="" />
@@ -155,8 +163,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.screens" />
         <item itemvalue="Python.demo_project" />
+        <item itemvalue="Python.screens" />
         <item itemvalue="Python.demo_map" />
         <item itemvalue="Python.Map_constructor" />
       </list>
@@ -186,7 +194,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737639897285</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Лениво совместил лобби и игру. На тебе сделать это нормально, а также почисти код в screens.py.">
+      <option name="closed" value="true" />
+      <created>1738436426337</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1738436426337</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -214,6 +230,28 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Добавил рыцаря" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавил рыцаря" />
+    <MESSAGE value="Лениво совместил лобби и игру. На тебе сделать это нормально, а также почисти код в screens.py." />
+    <option name="LAST_COMMIT_MESSAGE" value="Лениво совместил лобби и игру. На тебе сделать это нормально, а также почисти код в screens.py." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Mobs.py</url>
+          <line>170</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Mobs.py</url>
+          <line>161</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/all_animations.py</url>
+          <line>3</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
