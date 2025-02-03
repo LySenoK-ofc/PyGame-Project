@@ -8,8 +8,8 @@ ANIMATIONS = {
     'PRIEST': load_anim("assets/animations/Troops/priest/Priest.png", 'troops', 'priest'),
     'ARMORED_AXEMAN': load_anim("assets/animations/Troops/armored_axeman/Armored Axeman.png", 'troops', 'armored_axeman'),
     'ARROW01': load_anim("assets/animations/Troops/arrows/Arrow01(100x100).png", 'arrows', 'arrow01', scale=(230, 230)),
-    'ORC': load_anim("assets/animations/Orcs/orc/Orc.png", 'orcs', 'orc', True),
-    'ELITE_ORC': load_anim("assets/animations/Orcs/elite_orc/Elite Orc.png", 'orcs', 'elite_orc', True),
-    'ARMORED_ORC': load_anim("assets/animations/Orcs/armored_orc/Armored Orc.png", 'orcs', 'armored_orc', True),
-    'RIDER_ORC': load_anim("assets/animations/Orcs/rider_orc/Orc rider.png", 'orcs', 'rider_orc', True)
+    'ORC': load_anim("assets/animations/Mobs/orc/Orc.png", 'mobs', 'orc', True),
+    'ELITE_ORC': load_anim("assets/animations/Mobs/elite_orc/Elite Orc.png", 'mobs', 'elite_orc', True),
+    'ARMORED_ORC': load_anim("assets/animations/Mobs/armored_orc/Armored Orc.png", 'mobs', 'armored_orc', True),
+    'RIDER_ORC': load_anim("assets/animations/Mobs/rider_orc/Orc rider.png", 'mobs', 'rider_orc', True)
 }

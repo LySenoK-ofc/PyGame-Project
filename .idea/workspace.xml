@@ -5,13 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Лениво совместил лобби и игру. На тебе сделать это нормально, а также почисти код в screens.py.">
+      <change afterPath="$PROJECT_DIR$/assets/animations/Mobs/armored_skeleton/Armored Skeleton.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Mobs/greatword_skeleton/Greatsword Skeleton.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Mobs/slime/Slime.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Mobs/werebear/Werebear.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/animations/Mobs/werewolf/Werewolf.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Board_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board_class.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mobs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Units.py" beforeDir="false" afterPath="$PROJECT_DIR$/Units.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/all_animations.py" beforeDir="false" afterPath="$PROJECT_DIR$/all_animations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/animations/Orcs/armored_orc/Armored Orc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/animations/Orcs/elite_orc/Elite Orc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/animations/Orcs/orc/Orc.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/animations/Orcs/rider_orc/Orc rider.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/data/cut_sheet_parameters.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/cut_sheet_parameters.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_project.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,12 +69,16 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/user/PycharmProjects/PyGame_Project_demo"
+    "last_opened_file_path": "E:/PyCharmProjects/YandexGameProject/assets/animations/Mobs/werewolf"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\user\PycharmProjects\PyGame_Project_demo" />
+      <recent name="E:\PyCharmProjects\YandexGameProject\assets\animations\Mobs\werewolf" />
+      <recent name="E:\PyCharmProjects\YandexGameProject\assets\animations\Mobs\werebear" />
+      <recent name="E:\PyCharmProjects\YandexGameProject\assets\animations\Mobs\slime" />
+      <recent name="E:\PyCharmProjects\YandexGameProject\assets\animations\Mobs\greatword_skeleton" />
+      <recent name="E:\PyCharmProjects\YandexGameProject\assets\animations\Mobs\armored_skeleton" />
     </key>
   </component>
   <component name="RunManager" selected="Python.demo_project">

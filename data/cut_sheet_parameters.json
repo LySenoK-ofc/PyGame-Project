@@ -372,7 +372,7 @@
         }
       }
     },
-    "orcs": {
+    "mobs": {
       "orc": {
         "idle": {
           "width": 100,
@@ -552,6 +552,252 @@
           "width": 100,
           "height": 100,
           "row": 7,
+          "column": 4
+        }
+      },
+      "skeleton": {
+        "idle": {
+          "width": 100,
+          "height": 100,
+          "row": 0,
+          "column": 6
+        },
+        "walk": {
+          "width": 100,
+          "height": 100,
+          "row": 1,
+          "column": 8
+        },
+        "attack01": {
+          "width": 100,
+          "height": 100,
+          "row": 2,
+          "column": 6
+        },
+        "attack02": {
+          "width": 100,
+          "height": 100,
+          "row": 3,
+          "column": 7
+        },
+        "block": {
+          "width": 100,
+          "height": 100,
+          "row": 4,
+          "column": 4
+        },
+        "hurt": {
+          "width": 100,
+          "height": 100,
+          "row": 5,
+          "column": 4
+        },
+        "death": {
+          "width": 100,
+          "height": 100,
+          "row": 6,
+          "column": 4
+        }
+      },
+      "armored_skeleton": {
+        "idle": {
+          "width": 100,
+          "height": 100,
+          "row": 0,
+          "column": 6
+        },
+        "walk": {
+          "width": 100,
+          "height": 100,
+          "row": 1,
+          "column": 8
+        },
+        "attack01": {
+          "width": 100,
+          "height": 100,
+          "row": 2,
+          "column": 8
+        },
+        "attack02": {
+          "width": 100,
+          "height": 100,
+          "row": 3,
+          "column": 9
+        },
+        "hurt": {
+          "width": 100,
+          "height": 100,
+          "row": 4,
+          "column": 4
+        },
+        "death": {
+          "width": 100,
+          "height": 100,
+          "row": 5,
+          "column": 4
+        }
+      },
+      "greatsword_skeleton": {
+        "idle": {
+          "width": 100,
+          "height": 100,
+          "row": 0,
+          "column": 6
+        },
+        "walk": {
+          "width": 100,
+          "height": 100,
+          "row": 1,
+          "column": 9
+        },
+        "attack01": {
+          "width": 100,
+          "height": 100,
+          "row": 2,
+          "column": 9
+        },
+        "attack02": {
+          "width": 100,
+          "height": 100,
+          "row": 3,
+          "column": 9
+        },
+        "attack03": {
+          "width": 100,
+          "height": 100,
+          "row": 4,
+          "column": 12
+        },
+        "hurt": {
+          "width": 100,
+          "height": 100,
+          "row": 5,
+          "column": 4
+        },
+        "death": {
+          "width": 100,
+          "height": 100,
+          "row": 6,
+          "column": 4
+        }
+      },
+      "slime": {
+        "idle": {
+          "width": 100,
+          "height": 100,
+          "row": 0,
+          "column": 6
+        },
+        "walk": {
+          "width": 100,
+          "height": 100,
+          "row": 1,
+          "column": 6
+        },
+        "attack01": {
+          "width": 100,
+          "height": 100,
+          "row": 2,
+          "column": 6
+        },
+        "attack02": {
+          "width": 100,
+          "height": 100,
+          "row": 3,
+          "column": 12
+        },
+        "hurt": {
+          "width": 100,
+          "height": 100,
+          "row": 4,
+          "column": 4
+        },
+        "death": {
+          "width": 100,
+          "height": 100,
+          "row": 5,
+          "column": 4
+        }
+      },
+      "werebear": {
+        "idle": {
+          "width": 100,
+          "height": 100,
+          "row": 0,
+          "column": 6
+        },
+        "walk": {
+          "width": 100,
+          "height": 100,
+          "row": 1,
+          "column": 8
+        },
+        "attack01": {
+          "width": 100,
+          "height": 100,
+          "row": 2,
+          "column": 9
+        },
+        "attack02": {
+          "width": 100,
+          "height": 100,
+          "row": 3,
+          "column": 13
+        },
+        "attack03": {
+          "width": 100,
+          "height": 100,
+          "row": 4,
+          "column": 9
+        },
+        "hurt": {
+          "width": 100,
+          "height": 100,
+          "row": 5,
+          "column": 4
+        },
+        "death": {
+          "width": 100,
+          "height": 100,
+          "row": 6,
+          "column": 4
+        }
+      },
+      "werewolf": {
+        "idle": {
+          "width": 100,
+          "height": 100,
+          "row": 0,
+          "column": 6
+        },
+        "walk": {
+          "width": 100,
+          "height": 100,
+          "row": 1,
+          "column": 8
+        },
+        "attack01": {
+          "width": 100,
+          "height": 100,
+          "row": 2,
+          "column": 9
+        },
+        "attack02": {
+          "width": 100,
+          "height": 100,
+          "row": 3,
+          "column": 13
+        },
+        "hurt": {
+          "width": 100,
+          "height": 100,
+          "row": 4,
+          "column": 4
+        },
+        "death": {
+          "width": 100,
+          "height": 100,
+          "row": 5,
           "column": 4
         }
       }

@@ -1,4 +1,3 @@
-from Mobs import RiderOrc
 from constant import WIDTH
 from sprite_groups import *
 from random import randrange
