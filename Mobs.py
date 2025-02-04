@@ -238,3 +238,35 @@ class RiderOrc(Enemy):
                                'attack03'] and self.current_target and not self.current_target.life:
                 self.current_target = None
                 self.set_mode('walk')
+
+class Skeleton(Enemy):
+    def __init__(self, coord, grop_of_row):
+        frame_rate = {
+            'walk': 250,
+            'attack01': 150,
+            'attack02': 100,
+            'attack03': 90,
+            'block': 100,
+            'hurt': 100,
+            'death': 250,
+        }
+        super().__init__(coord, ANIMATIONS['RIDER_ORC'], grop_of_row,
+                         attack_radius=CELL_SIZE, hp=300, atk=25,
+                         frame_rate=frame_rate)
+
+    def update(self, *args, **kwargs):
+        super().update()
+        if self.life:
+            if self.mode in ['hurt', 'block'] and self.frame == len(self.frames) - 1:
+                self.set_mode('walk')
+
+            elif self.mode == 'walk':
+                if self.current_target and abs(self.rect.x - self.current_target.rect.x) <= self.attack_radius:
+                    self.set_mode(choice(['attack01', 'attack02', 'attack03']))
+                else:
+                    self.rect.x -= 5
+
+            elif self.mode in ['attack01', 'attack02',
+                               'attack03'] and self.current_target and not self.current_target.life:
+                self.current_target = None
+                self.set_mode('walk')

@@ -63,22 +63,20 @@ class Unit(pygame.sprite.Sprite):
                     self.kills = 0
 
             elif isinstance(self, Knight):
-                if self.mode in ['attack01', 'attack02', 'attack03']:
+                if self.mode == 'attack01' and self.frame == 5:
+                    self.current_target.lose_hp(self.atk, self)
 
-                    if self.mode == 'attack01' and self.frame == 5:
-                        self.current_target.lose_hp(self.atk, self)
+                    self.area_attack(self.area_atk)
 
-                        self.area_attack(self.area_atk)
+                elif self.mode == 'attack02' and self.frame in (4, 8):
+                    self.current_target.lose_hp(self.atk, self)
 
-                    elif self.mode == 'attack02' and self.frame in (4, 8):
-                        self.current_target.lose_hp(self.atk, self)
+                    self.area_attack(self.area_atk)
+                elif self.mode == 'attack03' and self.frame == 8:
+                    self.current_target.lose_hp(self.super_atk, self)
 
-                        self.area_attack(self.area_atk)
-                    elif self.mode == 'attack03' and self.frame == 8:
-                        self.current_target.lose_hp(self.super_atk, self)
-
-                        self.area_attack(self.super_atk / 1.5)
-                        self.kills = 0
+                    self.area_attack(self.super_atk / 1.5)
+                    self.kills = 0
 
             elif isinstance(self, Wizard):
                 if self.mode == 'attack01' and self.frame == 13:
@@ -100,67 +98,83 @@ class Unit(pygame.sprite.Sprite):
                     self.area_attack(self.atk)
 
             elif isinstance(self, ArmoredAxeman):
-                if self.mode in ['attack01', 'attack02', 'attack03']:
-                    if self.mode == 'attack01' and self.frame == 5:
-                        self.current_target.lose_hp(self.atk, self)
+                if self.mode == 'attack01' and self.frame == 5:
+                    self.current_target.lose_hp(self.atk, self)
 
-                        self.area_attack(self.area_atk)
+                    self.area_attack(self.area_atk)
 
-                    elif self.mode == 'attack02' and self.frame in (4, 8):
-                        self.current_target.lose_hp(self.atk, self)
+                elif self.mode == 'attack02' and self.frame in (4, 8):
+                    self.current_target.lose_hp(self.atk, self)
 
-                        self.area_attack(self.area_atk)
-                    elif self.mode == 'attack03' and self.frame == 8:
-                        self.current_target.lose_hp(self.super_atk, self)
+                    self.area_attack(self.area_atk)
+                elif self.mode == 'attack03' and self.frame == 8:
+                    self.current_target.lose_hp(self.super_atk, self)
 
-                        self.area_attack(self.super_atk / 1.5)
-                        self.kills = 0
+                    self.area_attack(self.super_atk / 1.5)
+                    self.kills = 0
 
-    def lose_hp(self, count, killer=None):
-        if self.life:
-            if 'block' in self.animations and randint(1, 2) == 1:
-                self.set_mode('block')
-                self.hp -= count / 3
-            else:
-                self.set_mode('hurt')
-                self.hp -= count
-            if self.hp <= 0:
-                self.life = False
-                if killer:
-                    killer.kills += 1
+            elif isinstance(self, SwordsMan):
+                if self.mode == 'attack01' and self.frame == 3:
+                    self.current_target.lose_hp(self.atk, self)
 
-    def find_target(self):
-        self.cached_nearby_mobs = list(filter(lambda nearby_mob: nearby_mob.rect.x >= self.rect.x,
-                                              [mob for mob in self.grop_of_row
-                                               if mob in mobs and mob.life
-                                               and abs(self.rect.x - mob.rect.x) <= self.detect_range]))
+                    self.area_attack(self.area_atk)
+                elif self.mode == 'attack02' and self.frame in (3, 6, 12):
+                    self.current_target.lose_hp(self.atk, self)
 
-        if self.cached_nearby_mobs:
-            nearest_mob = min(self.cached_nearby_mobs, key=lambda x: x.rect.x)
-            self.current_target = nearest_mob if abs(
-                self.rect.x - nearest_mob.rect.x) <= self.attack_range else None
+                    self.area_attack(self.area_atk)
+                elif self.mode == 'attack03' and self.frame in (6, 7, 9, 10):
+                    self.current_target.lose_hp(self.atk, self)
 
-            for mob in set(self.cached_nearby_mobs):
-                mob.set_target(self)
+                    self.area_attack(self.area_atk)
 
-            if self.current_target:
-                return True
-        return False
 
-    def update(self):
-        if constant.frame_count % 3 == 0:
-            if self.rect.right < 0 or self.rect.left > WIDTH or self.rect.bottom < 0 or self.rect.top > HEIGHT:
-                self.life = False
-                self.kill()
+def lose_hp(self, count, killer=None):
+    if self.life:
+        if 'block' in self.animations and randint(1, 2) == 1:
+            self.set_mode('block')
+            self.hp -= count / 3
+        else:
+            self.set_mode('hurt')
+            self.hp -= count
+        if self.hp <= 0:
+            self.life = False
+            if killer:
+                killer.kills += 1
 
-            self.find_target()
 
-        self.update_animation()
+def find_target(self):
+    self.cached_nearby_mobs = list(filter(lambda nearby_mob: nearby_mob.rect.x >= self.rect.x,
+                                          [mob for mob in self.grop_of_row
+                                           if mob in mobs and mob.life
+                                           and abs(self.rect.x - mob.rect.x) <= self.detect_range]))
 
-        if not self.life:
-            self.set_mode('death')
-            if self.frame == len(self.frames) - 1:
-                self.kill()
+    if self.cached_nearby_mobs:
+        nearest_mob = min(self.cached_nearby_mobs, key=lambda x: x.rect.x)
+        self.current_target = nearest_mob if abs(
+            self.rect.x - nearest_mob.rect.x) <= self.attack_range else None
+
+        for mob in set(self.cached_nearby_mobs):
+            mob.set_target(self)
+
+        if self.current_target:
+            return True
+    return False
+
+
+def update(self):
+    if constant.frame_count % 3 == 0:
+        if self.rect.right < 0 or self.rect.left > WIDTH or self.rect.bottom < 0 or self.rect.top > HEIGHT:
+            self.life = False
+            self.kill()
+
+        self.find_target()
+
+    self.update_animation()
+
+    if not self.life:
+        self.set_mode('death')
+        if self.frame == len(self.frames) - 1:
+            self.kill()
 
 
 class Archer(Unit):
@@ -209,7 +223,7 @@ class Knight(Unit):
 
     def area_attack(self, area_atk):
         for mob in self.cached_nearby_mobs:
-            if mob != self.current_target and mob.life and abs(self.rect.x - mob.rect.x) <= CELL_SIZE :
+            if mob != self.current_target and mob.life and abs(self.rect.x - mob.rect.x) <= CELL_SIZE:
                 mob.lose_hp(area_atk, self)
 
     def update(self):
@@ -358,7 +372,7 @@ class ArmoredAxeman(Unit):
 
     def area_attack(self, area_atk):
         for mob in self.cached_nearby_mobs:
-            if mob != self.current_target and mob.life and abs(self.rect.x - mob.rect.x) <= CELL_SIZE:
+            if mob != self.current_target and mob.life and abs(self.rect.x - mob.rect.x) <= self.attack_range:
                 mob.lose_hp(area_atk, self)
 
     def update(self):
@@ -370,6 +384,78 @@ class ArmoredAxeman(Unit):
             elif self.mode == 'idle':
                 if self.current_target:
                     self.set_mode(choice(['attack01', 'attack02'] if self.kills < 4 else ['attack03']))
+
+            elif (self.mode in ('attack01', 'attack02', 'attack03')
+                  and self.current_target and not self.current_target.life):
+                self.current_target = None
+                self.set_mode('idle')
+
+
+class SwordsMan(Unit):
+    def __init__(self, coord, grop_of_row):
+        frame_rate = {
+            'idle': 250,
+            'attack01': 135,
+            'attack02': 135,
+            'attack03': 115,
+            'hurt': 60,
+            'death': 250,
+        }
+        super().__init__(coord, ANIMATIONS['SWORDSMAN'], grop_of_row,
+                         detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=80, atk=20, super_atk=40,
+                         frame_rate=frame_rate)
+
+    def area_attack(self, area_atk):
+        for mob in self.cached_nearby_mobs:
+            if mob != self.current_target and mob.life and abs(self.rect.x - mob.rect.x) <= self.attack_range:
+                mob.lose_hp(area_atk, self)
+
+    def update(self):
+        super().update()
+        if self.life:
+            if self.mode == 'hurt' and self.frame == len(self.frames) - 1:
+                self.set_mode('idle')
+
+            elif self.mode == 'idle':
+                if self.current_target:
+                    self.set_mode(choice(['attack01', 'attack02', 'attack03']))
+
+            elif (self.mode in ('attack01', 'attack02', 'attack03')
+                  and self.current_target and not self.current_target.life):
+                self.current_target = None
+                self.set_mode('idle')
+
+
+class KnightTemplar(Unit):
+    def __init__(self, coord, grop_of_row):
+        frame_rate = {
+            'idle': 250,
+            'walk_block': 250,
+            'attack01': 135,
+            'attack02': 135,
+            'attack03': 115,
+            'block': 60,
+            'hurt': 60,
+            'death': 250,
+        }
+        super().__init__(coord, ANIMATIONS['KNIGHT_TEMPLAR'], grop_of_row,
+                         detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=80, atk=20, super_atk=40,
+                         frame_rate=frame_rate)
+
+    def area_attack(self, area_atk):
+        for mob in self.cached_nearby_mobs:
+            if mob != self.current_target and mob.life and abs(self.rect.x - mob.rect.x) <= self.attack_range:
+                mob.lose_hp(area_atk, self)
+
+    def update(self):
+        super().update()
+        if self.life:
+            if self.mode in ('hurt','block') and self.frame == len(self.frames) - 1:
+                self.set_mode('idle')
+
+            elif self.mode == 'idle':
+                if self.current_target:
+                    self.set_mode(choice(['attack01', 'attack02', 'attack03']))
 
             elif (self.mode in ('attack01', 'attack02', 'attack03')
                   and self.current_target and not self.current_target.life):
