@@ -7,7 +7,9 @@ from constant import FPS, HEIGHT, WIDTH, CELL_SIZE
 from sprite_groups import *
 
 from Board_class import Board
-from Map_constructor import generate_level, load_level, Map_constructor
+from Map_constructor import generate_level, load_level, Map_constructor, Map_tile
+
+from Units import *
 
 pygame.init()
 
@@ -15,6 +17,8 @@ size = WIDTH, HEIGHT
 screen = pygame.display.set_mode(size)
 
 clock = pygame.time.Clock()
+
+font = pygame.font.Font('assets/pi-sheng.regular.otf', 64)
 
 
 def terminate():
@@ -53,6 +57,16 @@ class Button(pygame.sprite.Sprite):
                 dictionary_screen()
             if self.command == 'open_options_screen':
                 options_screen()
+            if self.command == 'open_characters_page':
+                print('<_page was successfully changed_>')
+                dictionary_screen(0)
+            if self.command == 'open_mobs_page':
+                print('<_page was successfully changed_>')
+                dictionary_screen(1)
+            if self.command == 'show_soldier':
+                pass
+            if self.command == 'show_knight':
+                pass
 
 
 class Door_lock(pygame.sprite.Sprite):
@@ -88,7 +102,6 @@ class Level_door(pygame.sprite.Sprite):
 
 
 def main_lobby():
-    font = pygame.font.Font('assets/pi-sheng.regular.otf', 64)
     background = load_image('assets/backgrounds/main_background.png')
 
     start_game_btn = Button(900, 300, 'sketch', 'open_pick_level_screen')
@@ -121,10 +134,57 @@ def main_lobby():
         clock.tick(FPS)
 
 
-def dictionary_screen():
-    pygame.display.set_caption('Бестинарий')
+def dictionary_screen(page=0):
+    def characters_dictionary():
+        soldier_btn = Button(570, 200, 'sketch', 'show_soldier')
+        knight_btn = Button(570, 320, 'sketch', 'show_knight')
+        archer_btn = Button(570, 440, 'sketch', 'show_archer')
+        lancer_btn = Button(570, 560, 'sketch', 'show_lancer')
+
+        text_soldier_btn = font.render('Soldier', True, 'black')
+        text_knight_btn = font.render('Knight', True, 'black')
+        text_archer_btn = font.render('Archer', True, 'black')
+        text_lancer_btn = font.render('Lancer', True, 'black')
+
+        screen.blit(text_soldier_btn, (600, 220))
+        screen.blit(text_knight_btn, (600, 340))
+        screen.blit(text_archer_btn, (600, 460))
+        screen.blit(text_lancer_btn, (600, 580))
+
+    def mobs_dictionary():
+        pass
+
+    pygame.display.set_caption('Бестиарий')
+    background = load_image('assets/backgrounds/levels_background.png')
 
     return_btn = Button(1300, 650, 'return', 'open_main_lobby')
+    change_page_btn1 = Button(300, 60, 'sketch', 'open_characters_page')
+    change_page_btn2 = Button(800, 60, 'sketch', 'open_mobs_page')
+
+    text_change_page_btn1 = font.render('Characters', True, 'black')
+    text_change_page_btn2 = font.render('Mobs', True, 'black')
+
+    for i in range(5):
+        for j in range(6):
+            Map_tile(map_tiles, (i * 75 + 182, j * 75 + 207), 'assets/map_tiles/Tiles/FieldsTile_38.png')
+            if i == 2 and j == 3:
+                Map_tile(map_tiles, (i * 75 + 182, j * 75 + 207), 'assets/map_tiles/Tiles/FieldsTile_20.png')
+            elif i == 1 and j == 2:
+                Map_tile(map_tiles, (i * 75 + 182, j * 75 + 207), 'assets/map_tiles/Tiles/FieldsTile_10.png')
+            elif i == 3 and j == 2:
+                Map_tile(map_tiles, (i * 75 + 182, j * 75 + 207), 'assets/map_tiles/Tiles/FieldsTile_12.png')
+            elif i == 1 and j == 4:
+                Map_tile(map_tiles, (i * 75 + 182, j * 75 + 207), 'assets/map_tiles/Tiles/FieldsTile_26.png')
+            elif i == 3 and j == 4:
+                Map_tile(map_tiles, (i * 75 + 182, j * 75 + 207), 'assets/map_tiles/Tiles/FieldsTile_28.png')
+            elif i == 1 and j == 3:
+                Map_tile(map_tiles, (i * 75 + 182, j * 75 + 207), 'assets/map_tiles/Tiles/FieldsTile_13.png')
+            elif i == 3 and j == 3:
+                Map_tile(map_tiles, (i * 75 + 182, j * 75 + 207), 'assets/map_tiles/Tiles/FieldsTile_09.png')
+            elif i == 2 and j == 4:
+                Map_tile(map_tiles, (i * 75 + 182, j * 75 + 207), 'assets/map_tiles/Tiles/FieldsTile_03.png')
+            elif i == 2 and j == 2:
+                Map_tile(map_tiles, (i * 75 + 182, j * 75 + 207), 'assets/map_tiles/Tiles/FieldsTile_34.png')
 
     while True:
         for event in pygame.event.get():
@@ -133,8 +193,19 @@ def dictionary_screen():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     buttons.update(event)
-        screen.fill('black')
+
+        screen.blit(background, (0, 0))
         buttons.draw(screen)
+        screen.blit(text_change_page_btn1, (325, 75))
+        screen.blit(text_change_page_btn2, (885, 75))
+
+        pygame.draw.rect(screen, 'black', (175, 200, 389, 464), 7)
+        map_tiles.draw(screen)
+
+        if page == 0:
+            characters_dictionary()
+        else:
+            mobs_dictionary()
 
         pygame.display.flip()
 
@@ -158,7 +229,6 @@ def options_screen():
 
 
 def pick_level_screen():
-    font = pygame.font.Font('assets/pi-sheng.regular.otf', 64)
     background = load_image('assets/backgrounds/levels_background.png')
 
     pygame.display.set_caption('Выбор уровня')
@@ -190,7 +260,7 @@ def pick_level_screen():
                             game_screen()
                     buttons.update(event)
 
-        screen.blit(background, (0, 3))
+        screen.blit(background, (0, 0))
 
         level_doors.draw(screen)
         buttons.draw(screen)
@@ -207,8 +277,6 @@ def pick_level_screen():
 
 def game_screen():
     board = Board(6, 5, (75 * 6), (75 * 4), CELL_SIZE)
-
-    generate_level(load_level('map.txt'))
     Map_constructor(WIDTH, HEIGHT, board)
     board.render('assets/map_tiles/Tiles/FieldsTile_47.png')
 

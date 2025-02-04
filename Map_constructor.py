@@ -49,6 +49,8 @@ class Map_constructor:
         self.map_height = map_height
         self.board = board
 
+        generate_level(load_level('map.txt'))
+
         Map_tile(map_objects, (145, 300), 'assets/map_tiles/Objects/camp/1.png')
         Map_tile(map_objects, (10, 250), 'assets/map_tiles/Objects/camp/1.png', reverse=True)
         Map_tile(map_objects, (10, 550), 'assets/map_tiles/Objects/camp/3.png', reverse=True)
