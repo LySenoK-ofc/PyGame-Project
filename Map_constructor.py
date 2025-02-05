@@ -1,4 +1,4 @@
-from Units import Lancer, Knight, Archer, Wizard, Priest
+from Units import Lancer, Knight, Archer, Wizard, Priest, ArmoredAxeman, SwordsMan, KnightTemplar
 from all_animations import ANIMATIONS
 from constant import LEFT, CELL_SIZE, TOP, WIDTH_CELL, HEIGHT_CELL
 from load_image_func import load_image
@@ -29,7 +29,7 @@ def load_level(filename):
 
 
 def generate_level(field):
-    x, y = None, None
+    coords = []
     for y in range(len(field)):
         for x in range(len(field[y])):
             if field[y][x] == '.':
@@ -44,10 +44,12 @@ def generate_level(field):
                 MapTile(map_tiles, (x * CELL_SIZE, y * CELL_SIZE), image=used_tiles[5])
             elif field[y][x] == '@':
                 MapTile(map_tiles, (x * CELL_SIZE, y * CELL_SIZE), image=used_tiles[6])
+                coords.append((x * CELL_SIZE + CELL_SIZE / 2, y * CELL_SIZE + CELL_SIZE / 2))
+    return coords
 
 
 class MapConstructor:
-    def __init__(self, map_width, map_height, board):
+    def __init__(self, map_width, map_height, board, shop_unit_coord):
         self.map_width = map_width
         self.map_height = map_height
         self.board = board
@@ -79,15 +81,15 @@ class MapConstructor:
         MapTile(map_objects, (191, 242), 'assets/map_tiles/Objects/fences/8.png')
         MapTile(map_objects, (221, 264), 'assets/map_tiles/Objects/fences/8.png')
 
-        MapTile(map_objects, (515, 150), 'assets/map_tiles/Objects/shadows/5.png')
-        MapTile(map_objects, (740, 150), 'assets/map_tiles/Objects/shadows/5.png')
-        MapTile(map_objects, (965, 150), 'assets/map_tiles/Objects/shadows/5.png')
-        MapTile(map_objects, (1190, 150), 'assets/map_tiles/Objects/shadows/5.png')
+        MapTile(map_objects, (540, 150), 'assets/map_tiles/Objects/shadows/5.png')
+        MapTile(map_objects, (765, 150), 'assets/map_tiles/Objects/shadows/5.png')
+        MapTile(map_objects, (990, 150), 'assets/map_tiles/Objects/shadows/5.png')
+        MapTile(map_objects, (1215, 150), 'assets/map_tiles/Objects/shadows/5.png')
 
-        MapTile(map_objects, (500, 55), 'assets/map_tiles/Objects/decor/Tree1.png')
-        MapTile(map_objects, (725, 55), 'assets/map_tiles/Objects/decor/Tree1.png')
-        MapTile(map_objects, (950, 55), 'assets/map_tiles/Objects/decor/Tree1.png')
-        MapTile(map_objects, (1175, 55), 'assets/map_tiles/Objects/decor/Tree1.png')
+        MapTile(map_objects, (525, 55), 'assets/map_tiles/Objects/decor/Tree1.png')
+        MapTile(map_objects, (750, 55), 'assets/map_tiles/Objects/decor/Tree1.png')
+        MapTile(map_objects, (975, 55), 'assets/map_tiles/Objects/decor/Tree1.png')
+        MapTile(map_objects, (1200, 55), 'assets/map_tiles/Objects/decor/Tree1.png')
 
         MapTile(map_objects, (440, 680), 'assets/map_tiles/Objects/pointers/1.png')
         MapTile(map_objects, (1350, 215), 'assets/map_tiles/Objects/pointers/4.png')
@@ -97,7 +99,7 @@ class MapConstructor:
         MapTile(map_objects, (1335, 35), 'assets/map_tiles/Objects/bushes/1.png')
         MapTile(map_objects, (180, 80), 'assets/map_tiles/Objects/bushes/2.png')
         MapTile(map_objects, (560, 670), 'assets/map_tiles/Objects/bushes/2.png')
-        MapTile(map_objects, (645, 85), 'assets/map_tiles/Objects/bushes/2.png')
+        MapTile(map_objects, (615, 250), 'assets/map_tiles/Objects/bushes/2.png')
         MapTile(map_objects, (25, 115), 'assets/map_tiles/Objects/bushes/3.png')
         MapTile(map_objects, (1100, 740), 'assets/map_tiles/Objects/bushes/3.png')
         MapTile(map_objects, (415, 725), 'assets/map_tiles/Objects/bushes/3.png')
@@ -158,11 +160,17 @@ class MapConstructor:
             Lancer((LEFT - CELL_SIZE / 2, i * CELL_SIZE + TOP - CELL_SIZE / 2), grop_of_row=globals()[f'row{i - 1}'])
 
         # Ставим юнитов в магазин
-        for i, x, anim in (
-                (Knight, 6, ANIMATIONS['KNIGHT']), (Archer, 9, ANIMATIONS['ARCHER']),
-                (Wizard, 12, ANIMATIONS['WIZARD']), (Priest, 15, ANIMATIONS['PRIEST'])):
-            Shop(i, (x * 75 + board.cell_size / 2, 2 * 75 + +board.cell_size / 2), anim, board,
-                 price=0)
+        units = [(Knight, shop_unit_coord[0], ANIMATIONS['KNIGHT'], 90, 45),
+                 (Archer, shop_unit_coord[1], ANIMATIONS['ARCHER'], 50, 25),
+                 (Wizard, shop_unit_coord[2], ANIMATIONS['WIZARD'], 85, 42),
+                 (Priest, shop_unit_coord[3], ANIMATIONS['PRIEST'], 80, 40),
+                 (ArmoredAxeman, shop_unit_coord[4], ANIMATIONS['ARMORED_AXEMAN'], 70, 35),
+                 (SwordsMan, shop_unit_coord[5], ANIMATIONS['SWORDSMAN'], 80, 40),
+                 (KnightTemplar, shop_unit_coord[6], ANIMATIONS['KNIGHT_TEMPLAR'], 100, 40)]
+
+        for unit, coord, anim, price, sale in units:
+            Shop(unit, coord, anim, board,
+                 price=price, sale=sale)
 
 
 class MapTile(pygame.sprite.Sprite):

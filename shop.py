@@ -4,15 +4,16 @@ from sprite_groups import *
 
 
 class Shop(pygame.sprite.Sprite):
-    def __init__(self, unit_type, coord, animations, board, price=0):
-        super().__init__(all_sprites,shop_units)
+    def __init__(self, unit_type, coord, animations, board, price=0, sale=0):
+        super().__init__(all_sprites, shop_units)
         self.animations = animations
         self.mode = 'idle'
         self.frames = self.animations[self.mode]
         self.frame = 0
 
-        self.unit_type = unit_type
+        self.unit = unit_type
         self.price = price
+        self.sale = sale
 
         self.board = board
         self.drag = False
@@ -24,7 +25,6 @@ class Shop(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.last_update = pygame.time.get_ticks()
         self.frame_rate = {'idle': 250}
-
 
     def update(self):
         self.move()
@@ -46,7 +46,7 @@ class Shop(pygame.sprite.Sprite):
                     self.drag = True
 
                 if not mouse_button[0] and self.drag:
-                    self.board.get_click(mouse_pos, self.unit_type)
+                    self.board.get_click(mouse_pos, 'Troops', self.unit)
                     self.rect.center = self.coord
                     self.drag = False
                     drag_units.remove(self)
