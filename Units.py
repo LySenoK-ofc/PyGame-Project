@@ -2,7 +2,7 @@ from random import choice, random
 
 import constant
 from sprite_groups import *
-from constant import *
+from constant import CELL_SIZE,WIDTH,HEIGHT
 from all_animations import ANIMATIONS
 
 import pygame
@@ -24,8 +24,8 @@ class Unit(pygame.sprite.Sprite):
         self.frame = 0
         self.life = True
         self.current_target = None
-        self.kills = 0
         self.armor_hp = armor_hp
+        self.hits = 0
 
         if super_atk:
             self.super_atk = super_atk
@@ -66,16 +66,16 @@ class Unit(pygame.sprite.Sprite):
 
                 elif isinstance(self, Knight):
                     if self.mode == 'attack01' and self.frame == 5:
-                        self.current_target.lose_hp(self.atk, killer=self, armor_dmg=self.atk * 0.3)
+                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
 
                         self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
 
                     elif self.mode == 'attack02' and self.frame in (4, 8):
-                        self.current_target.lose_hp(self.atk, killer=self, armor_dmg=self.atk * 0.3)
+                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
 
                         self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
                     elif self.mode == 'attack03' and self.frame == 8:
-                        self.current_target.lose_hp(self.super_atk, killer=self, armor_dmg=self.super_atk * 0.3)
+                        self.current_target.lose_hp(self.super_atk, armor_dmg=self.super_atk * 0.3)
 
                         self.area_attack(self.super_atk / 1.5, armor_dmg=self.super_atk / 1.5 * 0.3)
 
@@ -87,53 +87,58 @@ class Unit(pygame.sprite.Sprite):
                         FireBall(self, self.grop_of_row, ANIMATIONS['WIZARD']['fire_ball'])
 
                 elif isinstance(self, Priest):
+                    print(1)
                     if self.mode == 'attack01_no_aura' and self.frame == 4:
                         PriestAura(self, self.grop_of_row, ANIMATIONS['PRIEST']['aura_for_attack01'])
 
-                    elif self.mode == 'healing' and self.frame > 1 and self.heal_target.hp != self.heal_target.full_hp:
-                        self.heal_target.hp += self.heal
+                    elif self.mode == 'healing':
+                        if self.frame in (3,5) and self.heal_target.hp != self.heal_target.full_hp:
+                            self.heal_target.hp += self.heal
+                        if self.rect.x > self.heal_target.rect.x and not self.frame == len(self.frames) - 1:
+                            self.image = pygame.transform.flip(self.image, True)
+                            # if self.frame == len(self.frames) - 1:
+                            #     self.image = pygame.transform.flip(self.image, True)
 
                 elif isinstance(self, ArmoredAxeman):
                     if self.mode == 'attack01' and self.frame == 5:
-                        self.current_target.lose_hp(self.atk, killer=self, armor_dmg=self.atk * 0.3)
+                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
 
                         self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
 
                     elif self.mode == 'attack02' and self.frame in (4, 8):
-                        self.current_target.lose_hp(self.atk, killer=self, armor_dmg=self.atk * 0.3)
+                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
 
                         self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
                     elif self.mode == 'attack03' and self.frame == 8:
-                        self.current_target.lose_hp(self.super_atk, killer=self, armor_dmg=self.super_atk * 0.3)
+                        self.current_target.lose_hp(self.super_atk, armor_dmg=self.super_atk * 0.3)
 
                         self.area_attack(self.super_atk / 1.5, armor_dmg=self.super_atk / 1.5 * 0.3)
-                        self.kills = 0
 
                 elif isinstance(self, SwordsMan):
                     if self.mode == 'attack01' and self.frame == 3:
-                        self.current_target.lose_hp(self.atk, killer=self, armor_dmg=self.atk * 0.3)
+                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
 
                         self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
                     elif self.mode == 'attack02' and self.frame in (3, 6, 12):
-                        self.current_target.lose_hp(self.atk, killer=self, armor_dmg=self.atk * 0.3)
+                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
 
                         self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
                     elif self.mode == 'attack03' and self.frame in (6, 7, 9, 10):
-                        self.current_target.lose_hp(self.atk, killer=self, armor_dmg=self.atk * 0.3)
+                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
 
                         self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
 
                 elif isinstance(self, KnightTemplar):
                     if self.mode == 'attack01' and self.frame == 4:
-                        self.current_target.lose_hp(self.atk, killer=self, armor_dmg=self.atk * 0.3)
+                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
 
                         self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
                     elif self.mode == 'attack02' and self.frame == 5:
-                        self.current_target.lose_hp(self.atk, killer=self, armor_dmg=self.atk * 0.3)
+                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
 
                         self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
                     elif self.mode == 'attack03' and self.frame in (3, 7):
-                        self.current_target.lose_hp(self.atk, killer=self, armor_dmg=self.atk * 0.3)
+                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
 
                         self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
 
@@ -142,21 +147,21 @@ class Unit(pygame.sprite.Sprite):
                     self.rect.x += 25
                     self.area_attack(self.atk)
 
-    def lose_hp(self, dmg, armor_dmg=0, killer=None):
+    def lose_hp(self, dmg, armor_dmg=0):
         if self.life:
-            if 'block' in self.animations and random() < 0.5:
+            self.hits += 1
+            if 'block' in self.animations and random() < 0.30:
                 self.set_mode('block')
                 self.hp -= dmg / 3
             else:
-                self.set_mode('hurt')
+                if self.hits % 2 == 0:
+                    self.set_mode('hurt')
                 if self.armor_hp:
                     dmg -= dmg * self.armor_def
                     self.armor_hp -= armor_dmg
                 self.hp -= dmg
             if self.hp <= 0:
                 self.life = False
-                if killer:
-                    killer.kills += 1
 
     def find_target(self):
         self.cached_nearby_mobs = list(filter(lambda nearby_mob: nearby_mob.rect.x >= self.rect.x,
@@ -193,8 +198,8 @@ class Archer(Unit):
     def __init__(self, coord, grop_of_row):
         frame_rate = {
             'idle': 250,
-            'attack01': 140,
-            'attack02': 140,
+            'attack01': 170,
+            'attack02': 170,
             'hurt': 100,
             'death': 250,
         }
@@ -210,12 +215,12 @@ class Archer(Unit):
                 self.set_mode('idle')
 
             elif self.mode == 'idle':
-                if self.current_target is not None:
-                    self.set_mode('attack01' if random() > 0.25 else 'attack02')
+                if self.current_target:
+                    self.set_mode('attack01' if random() > 0.3 else 'attack02')
 
-            elif self.mode in ('attack01', 'attack02') and not self.current_target:
-                self.current_target = None
-                self.set_mode('idle')
+            elif self.mode in ('attack01', 'attack02'):
+                if self.frame == len(self.frames) -1:
+                    self.set_mode('idle')
 
 
 class Knight(Unit):
@@ -230,13 +235,14 @@ class Knight(Unit):
             'death': 250,
         }
         super().__init__(coord, ANIMATIONS['KNIGHT'], grop_of_row,
-                         detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=200, atk=30, super_atk=50,
+                         detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=200, atk=30,
+                         super_atk=50,
                          frame_rate=frame_rate, armor_hp=50, armor_def=0.2)
 
     def area_attack(self, area_atk, armor_dmg):
         for mob in self.cached_nearby_mobs:
             if mob != self.current_target and mob.life and abs(self.rect.x - mob.rect.x) <= CELL_SIZE:
-                mob.lose_hp(area_atk, killer=self, armor_dmg=armor_dmg)
+                mob.lose_hp(area_atk, armor_dmg=armor_dmg)
 
     def update(self):
         super().update()
@@ -248,9 +254,9 @@ class Knight(Unit):
                 if self.current_target:
                     self.set_mode(choice(['attack01', 'attack02']) if random() > 0.2 else 'attack03')
 
-            elif self.mode in ('attack01', 'attack02', 'attack03') and not self.current_target:
-                self.current_target = None
-                self.set_mode('idle')
+            elif self.mode in ('attack01', 'attack02', 'attack03'):
+                if self.frame == len(self.frames) - 1:
+                    self.set_mode('idle')
 
 
 class Lancer(Unit):
@@ -272,7 +278,7 @@ class Lancer(Unit):
     def area_attack(self, area_atk):
         for mob in self.cached_nearby_mobs:
             if mob.life and pygame.sprite.collide_mask(self, mob):
-                mob.lose_hp(dmg=area_atk, killer=self)
+                mob.lose_hp(dmg=area_atk)
 
     def update(self):
         super().update()
@@ -298,7 +304,7 @@ class Wizard(Unit):
     def area_attack(self, area_atk):
         for mob in self.cached_nearby_mobs:
             if mob.life and abs(self.rect.x - mob.rect.x) <= CELL_SIZE * 1.5:
-                mob.lose_hp(area_atk, self)
+                mob.lose_hp(area_atk)
 
     def update(self):
         super().update()
@@ -313,9 +319,9 @@ class Wizard(Unit):
                     else:
                         self.set_mode('attack02_no_fire_ball')
 
-            elif self.mode in ('attack01', 'attack02_no_fire_ball') and not self.current_target:
-                self.current_target = None
-                self.set_mode('idle')
+            elif self.mode in ('attack01', 'attack02_no_fire_ball'):
+                if self.frame == len(self.frames) - 1:
+                    self.set_mode('idle')
 
 
 class Priest(Unit):
@@ -338,8 +344,8 @@ class Priest(Unit):
 
     def check_healing(self):
         for unit in self.grop_of_row:
+            print(abs(self.rect.x - unit.rect.x))
             if (unit in characters
-                    and self.rect.x < unit.rect.x
                     and abs(self.rect.x - unit.rect.x) <= self.heal_range
                     and unit.hp < unit.full_hp):
                 self.set_mode('healing')
@@ -356,16 +362,16 @@ class Priest(Unit):
                 if self.current_target:
                     self.set_mode('attack01_no_aura')
                     if random() < 0.1:
-                        self.heal_cooldown_start += 2000
+                        self.heal_cooldown_start -= 2000
                 else:
                     now = pygame.time.get_ticks()
-                    if now - self.heal_cooldown_start > 10000:
+                    if now - self.heal_cooldown_start > 1:
                         self.heal_cooldown_start = now
                         self.check_healing()
 
-            elif self.mode in 'attack01_no_aura' and not self.current_target:
-                self.current_target = None
-                self.set_mode('idle')
+            elif self.mode in 'attack01_no_aura':
+                if self.frame == len(self.frames) - 1:
+                    self.set_mode('idle')
 
 
 class ArmoredAxeman(Unit):
@@ -385,7 +391,7 @@ class ArmoredAxeman(Unit):
     def area_attack(self, area_atk, armor_dmg):
         for mob in self.cached_nearby_mobs:
             if mob != self.current_target and mob.life and abs(self.rect.x - mob.rect.x) <= self.attack_range:
-                mob.lose_hp(area_atk, killer=self, armor_dmg=armor_dmg)
+                mob.lose_hp(area_atk, armor_dmg=armor_dmg)
 
     def update(self):
         super().update()
@@ -395,11 +401,11 @@ class ArmoredAxeman(Unit):
 
             elif self.mode == 'idle':
                 if self.current_target:
-                    self.set_mode(choice(['attack01', 'attack02']) if random() > 0.25 else 'attack03')
+                    self.set_mode(choice(['attack01', 'attack02']) if random() > 0.3 else 'attack03')
 
-            elif self.mode in ('attack01', 'attack02', 'attack03') and not self.current_target:
-                self.current_target = None
-                self.set_mode('idle')
+            elif self.mode in ('attack01', 'attack02', 'attack03'):
+                if self.frame == len(self.frames) - 1:
+                    self.set_mode('idle')
 
 
 class SwordsMan(Unit):
@@ -419,7 +425,7 @@ class SwordsMan(Unit):
     def area_attack(self, area_atk, armor_dmg):
         for mob in self.cached_nearby_mobs:
             if mob != self.current_target and mob.life and abs(self.rect.x - mob.rect.x) <= self.attack_range:
-                mob.lose_hp(area_atk, killer=self, armor_dmg=armor_dmg)
+                mob.lose_hp(area_atk, armor_dmg=armor_dmg)
 
     def update(self):
         super().update()
@@ -431,9 +437,9 @@ class SwordsMan(Unit):
                 if self.current_target:
                     self.set_mode(choice(['attack01', 'attack02', 'attack03']))
 
-            elif self.mode in ('attack01', 'attack02', 'attack03') and not self.current_target:
-                self.current_target = None
-                self.set_mode('idle')
+            elif self.mode in ('attack01', 'attack02', 'attack03'):
+                if self.frame == len(self.frames) - 1:
+                    self.set_mode('idle')
 
 
 class KnightTemplar(Unit):
@@ -455,7 +461,7 @@ class KnightTemplar(Unit):
     def area_attack(self, area_atk, armor_dmg):
         for mob in self.cached_nearby_mobs:
             if mob != self.current_target and mob.life and abs(self.rect.x - mob.rect.x) <= self.attack_range:
-                mob.lose_hp(area_atk, killer=self, armor_dmg=armor_dmg)
+                mob.lose_hp(area_atk, armor_dmg=armor_dmg)
 
     def update(self):
         super().update()
@@ -467,9 +473,9 @@ class KnightTemplar(Unit):
                 if self.current_target:
                     self.set_mode(choice(['attack01', 'attack02', 'attack03']))
 
-            elif self.mode in ('attack01', 'attack02', 'attack03') and not self.current_target:
-                self.current_target = None
-                self.set_mode('idle')
+            elif self.mode in ('attack01', 'attack02', 'attack03'):
+                if self.frame == len(self.frames) - 1:
+                    self.set_mode('idle')
 
 
 class Arrow(pygame.sprite.Sprite):
@@ -478,7 +484,6 @@ class Arrow(pygame.sprite.Sprite):
         # Устанавливаем изображение и маску стрелы
         self.image = ANIMATIONS['ARROW01']['idle'][0]
         self.mask = pygame.mask.from_surface(self.image)
-        self.archer = archer
         self.v = v
         self.damage = damage
         self.archer = archer
@@ -496,7 +501,7 @@ class Arrow(pygame.sprite.Sprite):
                        if mob in mobs and abs(self.rect.x - mob.rect.x) <= 30]
         for mob in mobs_or_row:
             if mob.life and pygame.sprite.collide_mask(self, mob):
-                mob.lose_hp(dmg=self.damage, killer=self.archer, armor_dmg=self.damage*0.3)
+                mob.lose_hp(dmg=self.damage, armor_dmg=self.damage * 0.3)
                 self.kill()  # Удаляем стрелу
         else:
             self.rect.x += self.v  # Перемещаем стрелу вправо
@@ -541,7 +546,7 @@ class AttackEntity(pygame.sprite.Sprite):
 
                     for mob in cached_nearby_mobs:
                         if pygame.sprite.collide_mask(self, mob):
-                            mob.lose_hp(dmg=self.damage, killer=self.owner)
+                            mob.lose_hp(dmg=self.damage)
                             self.target_mobs = True
                 elif self.frame == len(self.frames) - 1:
                     self.kill()
@@ -574,7 +579,7 @@ class FireBall(AttackEntity):
 
                 for mob in cached_nearby_mobs:
                     if pygame.sprite.collide_mask(self, mob):
-                        mob.lose_hp(dmg=self.damage, killer=self.owner)
+                        mob.lose_hp(dmg=self.damage)
                         self.target_mobs = True
 
             if self.target_mobs:

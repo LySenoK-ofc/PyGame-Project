@@ -37,7 +37,7 @@ class Board:
                 entity(*setting)
 
         elif entity_type == 'Orcs':
-            for i in range(5):
+            for i in range(1):
                 row = randrange(0, 5)
                 setting = ((WIDTH, row * self.cell_size + self.top + self.cell_size / 2), globals()[f'row{row}'])
                 entity(*setting)

@@ -1,7 +1,6 @@
-import constant
 import screens
 from Map_constructor import MapConstructor, generate_level, load_level
-from Mobs import EliteOrc, Orc, ArmoredOrc, RiderOrc, Werewolf
+from Mobs import *
 from Units import Archer, Knight, Wizard, Priest, ArmoredAxeman, SwordsMan, KnightTemplar
 from constant import LEFT, TOP, FPS, WIDTH, HEIGHT
 from Board_class import Board
@@ -17,26 +16,26 @@ background = pygame.Surface((WIDTH, HEIGHT))
 
 pygame.display.set_caption('demo_project')
 
-board = Board(6, 5, LEFT, TOP, 75)
-shop_unit_coord = generate_level(load_level('map.txt'))
-MapConstructor(20, 11, board, shop_unit_coord)
-
-# Конвертируем в альфу
-try:
-    for key, val in ANIMATIONS.items():
-        convert_val = {}
-        for key1 in val.keys():
-            try:
-                convert_val[key1] = [frame.convert_alpha() for frame in val[key1] if
-                                     bool(frame.get_flags() & pygame.SRCALPHA)]
-            except pygame.error:
-                print('Не удалось конвертируем в альфу')
-        ANIMATIONS[key] = convert_val
-except Exception:
-    print('Ошибка изображения/структуры')
-
 
 def game_loop():
+    board = Board(6, 5, LEFT, TOP, 75)
+    shop_unit_coord = generate_level(load_level('map.txt'))
+    MapConstructor(20, 11, board, shop_unit_coord)
+
+    # Конвертируем спрайты в альфу
+    try:
+        for key, val in ANIMATIONS.items():
+            convert_val = {}
+            for key1 in val.keys():
+                try:
+                    convert_val[key1] = [frame.convert_alpha() for frame in val[key1] if
+                                         bool(frame.get_flags() & pygame.SRCALPHA)]
+                except pygame.error:
+                    print('Не удалось конвертируем в альфу')
+            ANIMATIONS[key] = convert_val
+    except Exception:
+        print('Ошибка изображения/структуры')
+
     clock = pygame.time.Clock()
 
     running = True
@@ -69,7 +68,8 @@ def game_loop():
                 if keys[pygame.K_ESCAPE]:
                     screens.main_lobby()
                 if keys[pygame.K_e]:
-                    board.on_click(EliteOrc)
+                    # board.on_click(choice([Slime,Skeleton,Orc,ArmoredOrc,EliteOrc,RiderOrc,ArmoredSkeleton,GreateswordSkeleton,Werebear,Werewolf]))
+                    board.on_click(ArmoredSkeleton)
                 if keys[pygame.K_p]:
                     print(
                         f'map_tiles:{map_tiles},\ncharacters:{characters},\nshells:{shells},\nmobs:{mobs},\nmoneys:{moneys},\nmap_objects:{map_objects},\nanimated_map_objects:{animated_map_objects}\n')

@@ -18,6 +18,7 @@ ANIMATIONS = {
     'GREATSWORD_SKELETON': load_anim("assets/animations/Mobs/greatsword_skeleton/Greatsword Skeleton.png", 'mobs', 'greatsword_skeleton', True),
     'SKELETON': load_anim("assets/animations/Mobs/skeleton/Skeleton.png", 'mobs', 'skeleton', True),
     'SLIME': load_anim("assets/animations/Mobs/slime/Slime.png", 'mobs', 'slime', True),
+    'SMALL_SLIME': load_anim("assets/animations/Mobs/slime/Slime.png", 'mobs', 'slime', True, scale=(220, 220)),
     'WEREBEAR': load_anim("assets/animations/Mobs/werebear/Werebear.png", 'mobs', 'werebear', True),
     'WEREWOLF': load_anim("assets/animations/Mobs/werewolf/Werewolf.png", 'mobs', 'werewolf', True),
 }
