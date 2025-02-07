@@ -3,7 +3,6 @@ import os
 import pygame
 
 
-
 def load_image(file=None, reverse=None, colorkey=None, scale=()):
     try:
         if isinstance(file, str):

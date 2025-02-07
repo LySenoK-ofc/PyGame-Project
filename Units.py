@@ -2,7 +2,7 @@ from random import choice, random
 
 import constant
 from sprite_groups import *
-from constant import CELL_SIZE,WIDTH,HEIGHT
+from constant import CELL_SIZE, WIDTH, HEIGHT
 from all_animations import ANIMATIONS
 
 import pygame
@@ -87,17 +87,8 @@ class Unit(pygame.sprite.Sprite):
                         FireBall(self, self.grop_of_row, ANIMATIONS['WIZARD']['fire_ball'])
 
                 elif isinstance(self, Priest):
-                    print(1)
                     if self.mode == 'attack01_no_aura' and self.frame == 4:
                         PriestAura(self, self.grop_of_row, ANIMATIONS['PRIEST']['aura_for_attack01'])
-
-                    elif self.mode == 'healing':
-                        if self.frame in (3,5) and self.heal_target.hp != self.heal_target.full_hp:
-                            self.heal_target.hp += self.heal
-                        if self.rect.x > self.heal_target.rect.x and not self.frame == len(self.frames) - 1:
-                            self.image = pygame.transform.flip(self.image, True)
-                            # if self.frame == len(self.frames) - 1:
-                            #     self.image = pygame.transform.flip(self.image, True)
 
                 elif isinstance(self, ArmoredAxeman):
                     if self.mode == 'attack01' and self.frame == 5:
@@ -146,6 +137,19 @@ class Unit(pygame.sprite.Sprite):
                 if self.mode == 'attack01':
                     self.rect.x += 25
                     self.area_attack(self.atk)
+            elif isinstance(self, Priest) and self.mode == 'healing':
+                if self.frame in (3, 5) and self.heal_target.hp != self.heal_target.full_hp:
+                    self.heal_target.hp += self.heal
+                if self.rect.x > self.heal_target.rect.x:
+                    self.image = pygame.transform.flip(self.image, True, False)
+
+            elif isinstance(self, KnightTemplar) and self.mode == 'walk_block':
+                if self.distance > self.distance_traveled:
+                    self.rect.x += self.speed
+                    self.distance_traveled += self.speed
+                else:
+                    self.distance_traveled -= self.distance
+                    self.set_mode('idle')
 
     def lose_hp(self, dmg, armor_dmg=0):
         if self.life:
@@ -211,16 +215,12 @@ class Archer(Unit):
         super().update()
         if self.life:
 
-            if self.mode == 'hurt' and self.frame == len(self.frames) - 1:
+            if self.mode in ('hurt', 'attack01', 'attack02') and self.frame == len(self.frames) - 1:
                 self.set_mode('idle')
 
             elif self.mode == 'idle':
                 if self.current_target:
                     self.set_mode('attack01' if random() > 0.3 else 'attack02')
-
-            elif self.mode in ('attack01', 'attack02'):
-                if self.frame == len(self.frames) -1:
-                    self.set_mode('idle')
 
 
 class Knight(Unit):
@@ -247,16 +247,13 @@ class Knight(Unit):
     def update(self):
         super().update()
         if self.life:
-            if self.mode in ['hurt', 'block'] and self.frame == len(self.frames) - 1:
+            if self.mode in ('hurt', 'block', 'attack01', 'attack02', 'attack03') and self.frame == len(
+                    self.frames) - 1:
                 self.set_mode('idle')
 
             elif self.mode == 'idle':
                 if self.current_target:
                     self.set_mode(choice(['attack01', 'attack02']) if random() > 0.2 else 'attack03')
-
-            elif self.mode in ('attack01', 'attack02', 'attack03'):
-                if self.frame == len(self.frames) - 1:
-                    self.set_mode('idle')
 
 
 class Lancer(Unit):
@@ -272,7 +269,7 @@ class Lancer(Unit):
             'death': 250,
         }
         super().__init__(coord, ANIMATIONS['LANCER'], grop_of_row,
-                         detect_range=2 * CELL_SIZE, attack_range=CELL_SIZE, hp=100, atk=1000,
+                         detect_range=2 * CELL_SIZE, attack_range=CELL_SIZE, hp=1000, atk=1000,
                          frame_rate=frame_rate)
 
     def area_attack(self, area_atk):
@@ -283,7 +280,7 @@ class Lancer(Unit):
     def update(self):
         super().update()
         if self.life:
-            if self.mode == 'idle':
+            if self.mode in ('idle', 'hurt'):
                 if self.current_target:
                     self.set_mode('attack01')
 
@@ -309,7 +306,7 @@ class Wizard(Unit):
     def update(self):
         super().update()
         if self.life:
-            if self.mode == 'hurt' and self.frame == len(self.frames) - 1:
+            if self.mode in ('hurt', 'attack01', 'attack02_no_fire_ball') and self.frame == len(self.frames) - 1:
                 self.set_mode('idle')
 
             elif self.mode == 'idle':
@@ -318,10 +315,6 @@ class Wizard(Unit):
                         self.set_mode('attack01')
                     else:
                         self.set_mode('attack02_no_fire_ball')
-
-            elif self.mode in ('attack01', 'attack02_no_fire_ball'):
-                if self.frame == len(self.frames) - 1:
-                    self.set_mode('idle')
 
 
 class Priest(Unit):
@@ -344,9 +337,8 @@ class Priest(Unit):
 
     def check_healing(self):
         for unit in self.grop_of_row:
-            print(abs(self.rect.x - unit.rect.x))
             if (unit in characters
-                    and abs(self.rect.x - unit.rect.x) <= self.heal_range
+                    and CELL_SIZE <= abs(self.rect.x - unit.rect.x) <= self.heal_range
                     and unit.hp < unit.full_hp):
                 self.set_mode('healing')
                 self.heal_target = unit
@@ -355,23 +347,19 @@ class Priest(Unit):
     def update(self):
         super().update()
         if self.life:
-            if self.mode == 'hurt' or self.mode == 'healing' and self.frame == len(self.frames) - 1:
+            if self.mode in ('hurt', 'healing', 'attack01_no_aura') and self.frame == len(self.frames) - 1:
                 self.set_mode('idle')
 
             elif self.mode == 'idle':
                 if self.current_target:
                     self.set_mode('attack01_no_aura')
                     if random() < 0.1:
-                        self.heal_cooldown_start -= 2000
+                        self.heal_cooldown_start -= 5000
                 else:
                     now = pygame.time.get_ticks()
-                    if now - self.heal_cooldown_start > 1:
+                    if now - self.heal_cooldown_start > 10000:
                         self.heal_cooldown_start = now
                         self.check_healing()
-
-            elif self.mode in 'attack01_no_aura':
-                if self.frame == len(self.frames) - 1:
-                    self.set_mode('idle')
 
 
 class ArmoredAxeman(Unit):
@@ -396,16 +384,12 @@ class ArmoredAxeman(Unit):
     def update(self):
         super().update()
         if self.life:
-            if self.mode == 'hurt' and self.frame == len(self.frames) - 1:
+            if self.mode in ('hurt', 'attack01', 'attack02', 'attack03') and self.frame == len(self.frames) - 1:
                 self.set_mode('idle')
 
             elif self.mode == 'idle':
                 if self.current_target:
                     self.set_mode(choice(['attack01', 'attack02']) if random() > 0.3 else 'attack03')
-
-            elif self.mode in ('attack01', 'attack02', 'attack03'):
-                if self.frame == len(self.frames) - 1:
-                    self.set_mode('idle')
 
 
 class SwordsMan(Unit):
@@ -430,16 +414,12 @@ class SwordsMan(Unit):
     def update(self):
         super().update()
         if self.life:
-            if self.mode == 'hurt' and self.frame == len(self.frames) - 1:
+            if self.mode in ('hurt', 'attack01', 'attack02', 'attack03') and self.frame == len(self.frames) - 1:
                 self.set_mode('idle')
 
             elif self.mode == 'idle':
                 if self.current_target:
                     self.set_mode(choice(['attack01', 'attack02', 'attack03']))
-
-            elif self.mode in ('attack01', 'attack02', 'attack03'):
-                if self.frame == len(self.frames) - 1:
-                    self.set_mode('idle')
 
 
 class KnightTemplar(Unit):
@@ -458,6 +438,11 @@ class KnightTemplar(Unit):
                          detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=200, atk=30,
                          frame_rate=frame_rate, armor_hp=60, armor_def=0.25)
 
+        self.speed = 4
+        self.distance = CELL_SIZE / 2
+        self.distance_traveled = 0
+        self.last_walk = pygame.time.get_ticks()
+
     def area_attack(self, area_atk, armor_dmg):
         for mob in self.cached_nearby_mobs:
             if mob != self.current_target and mob.life and abs(self.rect.x - mob.rect.x) <= self.attack_range:
@@ -466,16 +451,18 @@ class KnightTemplar(Unit):
     def update(self):
         super().update()
         if self.life:
-            if self.mode in ('hurt', 'block') and self.frame == len(self.frames) - 1:
+            if self.mode in ('hurt', 'block', 'attack01', 'attack02', 'attack03') and self.frame == len(
+                    self.frames) - 1:
                 self.set_mode('idle')
 
             elif self.mode == 'idle':
                 if self.current_target:
                     self.set_mode(choice(['attack01', 'attack02', 'attack03']))
-
-            elif self.mode in ('attack01', 'attack02', 'attack03'):
-                if self.frame == len(self.frames) - 1:
-                    self.set_mode('idle')
+                else:
+                    now = pygame.time.get_ticks()
+                    if now - self.last_walk > 25000 and not self.cached_nearby_mobs and self.rect.x < WIDTH - 500:
+                        self.last_walk = now
+                        self.set_mode('walk_block')
 
 
 class Arrow(pygame.sprite.Sprite):

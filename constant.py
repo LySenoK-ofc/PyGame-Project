@@ -8,4 +8,7 @@ LEFT = 75 * 6
 
 WIDTH, HEIGHT = 1500, 825
 
+CURRENT_LVL = 'lvl1'
+CURRENT_WAVE = 1
+
 frame_count = 0

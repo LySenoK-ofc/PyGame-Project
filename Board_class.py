@@ -25,15 +25,15 @@ class Board:
         else:
             return None
 
-    def on_click(self, entity, entity_type='Orcs',cell=None):
+    def on_click(self, entity, entity_type='Orcs', cell=None):
         print(entity)
         if entity_type == 'Troops':
             if cell and all([((soldier.rect.center[0] - self.left) // self.cell_size,
                               (soldier.rect.center[1] - self.top) // self.cell_size) != cell
                              for soldier in characters]):
                 setting = ((cell[0] * self.cell_size + self.left + self.cell_size / 2,
-                             cell[1] * self.cell_size + self.top + self.cell_size / 2),
-                            globals()[f'row{cell[1]}'])
+                            cell[1] * self.cell_size + self.top + self.cell_size / 2),
+                           globals()[f'row{cell[1]}'])
                 entity(*setting)
 
         elif entity_type == 'Orcs':

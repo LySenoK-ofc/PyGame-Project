@@ -1,7 +1,6 @@
 from random import choice, randint, random
 
 import constant
-from Units import Lancer
 from all_animations import ANIMATIONS
 from sprite_groups import *
 import pygame
@@ -9,7 +8,7 @@ from constant import *
 
 
 class Enemy(pygame.sprite.Sprite):
-    def __init__(self, coord, animations, grop_of_row, frame_rate, hp, atk,hurt_cooldown,
+    def __init__(self, coord, animations, grop_of_row, frame_rate, hp, atk, hurt_cooldown,
                  attack_radius=None, super_atk=None, armor_hp=None, armor_def=None):
         super().__init__(all_sprites, mobs, grop_of_row)
         self.animations = animations
@@ -140,6 +139,7 @@ class Enemy(pygame.sprite.Sprite):
                 self.hp -= dmg
             if self.hp <= 0:
                 self.life = False
+
     def set_target(self, new_target):
         if self.current_target is None:
             self.current_target = new_target
@@ -184,7 +184,7 @@ class Orc(Enemy):
     def update(self, *args, **kwargs):
         super().update()
         if self.life:
-            if self.mode == 'hurt' and self.frame == len(self.frames) - 1:
+            if self.mode in ['hurt', 'attack01', 'attack02'] and self.frame == len(self.frames) - 1:
                 self.set_mode('walk')
 
             elif self.mode == 'walk':
@@ -192,10 +192,6 @@ class Orc(Enemy):
                     self.set_mode(choice(['attack01', 'attack02']))
                 else:
                     self.rect.x -= 3
-
-            elif self.mode in ['attack01', 'attack02']:
-                if self.frame == len(self.frames) - 1:
-                    self.set_mode('walk')
 
 
 class EliteOrc(Enemy):
@@ -215,18 +211,14 @@ class EliteOrc(Enemy):
     def update(self, *args, **kwargs):
         super().update()
         if self.life:
-            if self.mode == 'hurt' and self.frame == len(self.frames) - 1:
+            if self.mode in ['hurt', 'attack01', 'attack02', 'attack03'] and self.frame == len(self.frames) - 1:
                 self.set_mode('walk')
 
             elif self.mode == 'walk':
                 if self.current_target and abs(self.rect.x - self.current_target.rect.x) <= self.attack_radius:
-                    self.set_mode('attack01' if random() > 0.20 else choice(['attack02', 'attack03']))
+                    self.set_mode('attack01' if random() > 0.1 else choice(['attack02', 'attack03']))
                 else:
-                    self.rect.x -= 3
-
-            elif self.mode in ['attack01', 'attack02', 'attack03']:
-                if self.frame == len(self.frames) - 1:
-                    self.set_mode('walk')
+                    self.rect.x -= 3.5
 
 
 class ArmoredOrc(Enemy):
@@ -247,18 +239,15 @@ class ArmoredOrc(Enemy):
     def update(self, *args, **kwargs):
         super().update()
         if self.life:
-            if self.mode in ['hurt', 'block'] and self.frame == len(self.frames) - 1:
+            if self.mode in ['hurt', 'block', 'attack01', 'attack02', 'attack03'] and self.frame == len(
+                    self.frames) - 1:
                 self.set_mode('walk')
 
             elif self.mode == 'walk':
                 if self.current_target and abs(self.rect.x - self.current_target.rect.x) <= self.attack_radius:
-                    self.set_mode(choice(['attack01', 'attack02']) if random() > 0.2 else 'attack03')
+                    self.set_mode(choice(['attack01', 'attack02']) if random() > 0.1 else 'attack03')
                 else:
-                    self.rect.x -= 5
-
-            elif self.mode in ['attack01', 'attack02', 'attack03']:
-                if self.frame == len(self.frames) - 1:
-                    self.set_mode('walk')
+                    self.rect.x -= 3.2
 
 
 class RiderOrc(Enemy):
@@ -279,18 +268,15 @@ class RiderOrc(Enemy):
     def update(self, *args, **kwargs):
         super().update()
         if self.life:
-            if self.mode in ['hurt', 'block'] and self.frame == len(self.frames) - 1:
+            if self.mode in ['hurt', 'block', 'attack01', 'attack02', 'attack03'] and self.frame == len(
+                    self.frames) - 1:
                 self.set_mode('walk')
 
             elif self.mode == 'walk':
                 if self.current_target and abs(self.rect.x - self.current_target.rect.x) <= self.attack_radius:
                     self.set_mode(choice(['attack01', 'attack02', 'attack03']))
                 else:
-                    self.rect.x -= 5
-
-            elif self.mode in ['attack01', 'attack02', 'attack03']:
-                if self.frame == len(self.frames) - 1:
-                    self.set_mode('walk')
+                    self.rect.x -= 3.8
 
 
 class Skeleton(Enemy):
@@ -311,18 +297,14 @@ class Skeleton(Enemy):
     def update(self, *args, **kwargs):
         super().update()
         if self.life:
-            if self.mode in ['hurt', 'block'] and self.frame == len(self.frames) - 1:
+            if self.mode in ['hurt', 'block', 'attack01', 'attack02'] and self.frame == len(self.frames) - 1:
                 self.set_mode('walk')
 
             elif self.mode == 'walk':
                 if self.current_target and abs(self.rect.x - self.current_target.rect.x) <= self.attack_radius:
                     self.set_mode(choice(['attack01', 'attack02']))
                 else:
-                    self.rect.x -= 5
-
-            elif self.mode in ['attack01', 'attack02']:
-                if self.frame == len(self.frames) - 1:
-                    self.set_mode('walk')
+                    self.rect.x -= 3
 
 
 class GreateswordSkeleton(Enemy):
@@ -342,18 +324,14 @@ class GreateswordSkeleton(Enemy):
     def update(self, *args, **kwargs):
         super().update()
         if self.life:
-            if self.mode == 'hurt' and self.frame == len(self.frames) - 1:
+            if self.mode in ['hurt', 'attack01', 'attack02', 'attack03'] and self.frame == len(self.frames) - 1:
                 self.set_mode('walk')
 
             elif self.mode == 'walk':
                 if self.current_target and abs(self.rect.x - self.current_target.rect.x) <= self.attack_radius:
                     self.set_mode(choice(['attack01', 'attack02', 'attack03']))
                 else:
-                    self.rect.x -= 5
-
-            elif self.mode in ['attack01', 'attack02', 'attack03']:
-                if self.frame == len(self.frames) - 1:
-                    self.set_mode('walk')
+                    self.rect.x -= 3.4
 
 
 class ArmoredSkeleton(Enemy):
@@ -372,18 +350,14 @@ class ArmoredSkeleton(Enemy):
     def update(self, *args, **kwargs):
         super().update()
         if self.life:
-            if self.mode == 'hurt' and self.frame == len(self.frames) - 1:
+            if self.mode in ['hurt', 'attack01', 'attack02'] and self.frame == len(self.frames) - 1:
                 self.set_mode('walk')
 
             elif self.mode == 'walk':
                 if self.current_target and abs(self.rect.x - self.current_target.rect.x) <= self.attack_radius:
-                    self.set_mode('attack01' if random() > 0.2 else 'attack02')
+                    self.set_mode('attack01' if random() > 0.1 else 'attack02')
                 else:
-                    self.rect.x -= 5
-
-            elif self.mode in ['attack01', 'attack02']:
-                if self.frame == len(self.frames) - 1:
-                    self.set_mode('walk')
+                    self.rect.x -= 3.2
 
 
 class Slime(Enemy):
@@ -402,18 +376,14 @@ class Slime(Enemy):
     def update(self, *args, **kwargs):
         super().update()
         if self.life:
-            if self.mode == 'hurt' and self.frame == len(self.frames) - 1:
+            if self.mode in ['hurt', 'attack01', 'attack02'] and self.frame == len(self.frames) - 1:
                 self.set_mode('walk')
 
             elif self.mode == 'walk':
                 if self.current_target and abs(self.rect.x - self.current_target.rect.x) <= self.attack_radius:
                     self.set_mode(choice(['attack01', 'attack02']))
                 else:
-                    self.rect.x -= 5
-
-            elif self.mode in ['attack01', 'attack02']:
-                if self.frame == len(self.frames) - 1:
-                    self.set_mode('walk')
+                    self.rect.x -= 2.5
 
 
 class Werebear(Enemy):
@@ -433,18 +403,15 @@ class Werebear(Enemy):
     def update(self, *args, **kwargs):
         super().update()
         if self.life:
-            if self.mode == 'hurt' and self.frame == len(self.frames) - 1:
+            if self.mode in ['hurt', 'attack01', 'attack02', 'attack03'] and self.frame == len(self.frames) - 1:
                 self.set_mode('walk')
 
             elif self.mode == 'walk':
                 if self.current_target and abs(self.rect.x - self.current_target.rect.x) <= self.attack_radius:
-                    self.set_mode(choice(['attack01', 'attack02']) if random() > 0.2 else 'attack03')
+                    self.set_mode(choice(['attack01', 'attack02']) if random() > 0.1 else 'attack03')
                 else:
-                    self.rect.x -= 5
+                    self.rect.x -= 3.6
 
-            elif self.mode in ['attack01', 'attack02', 'attack03']:
-                if self.frame == len(self.frames) - 1:
-                    self.set_mode('walk')
 
 class Werewolf(Enemy):
     def __init__(self, coord, grop_of_row):
@@ -462,15 +429,11 @@ class Werewolf(Enemy):
     def update(self, *args, **kwargs):
         super().update()
         if self.life:
-            if self.mode == 'hurt' and self.frame == len(self.frames) - 1:
+            if self.mode in ['hurt', 'attack01', 'attack02'] and self.frame == len(self.frames) - 1:
                 self.set_mode('walk')
 
             elif self.mode == 'walk':
                 if self.current_target and abs(self.rect.x - self.current_target.rect.x) <= self.attack_radius:
-                    self.set_mode('attack01' if random() > 0.15 else 'attack02')
+                    self.set_mode('attack01' if random() > 0.1 else 'attack02')
                 else:
-                    self.rect.x -= 5
-
-            elif self.mode in ['attack01', 'attack02']:
-                if self.frame == len(self.frames) - 1:
-                    self.set_mode('walk')
+                    self.rect.x -= 4

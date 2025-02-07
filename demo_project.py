@@ -68,8 +68,11 @@ def game_loop():
                 if keys[pygame.K_ESCAPE]:
                     screens.main_lobby()
                 if keys[pygame.K_e]:
-                    # board.on_click(choice([Slime,Skeleton,Orc,ArmoredOrc,EliteOrc,RiderOrc,ArmoredSkeleton,GreateswordSkeleton,Werebear,Werewolf]))
-                    board.on_click(ArmoredSkeleton)
+                    pass
+                # board.on_click(choice(
+                #     [Slime, Skeleton, Orc, ArmoredOrc, EliteOrc, RiderOrc, ArmoredSkeleton, GreateswordSkeleton,
+                #      Werebear, Werewolf]))
+                # board.on_click(ArmoredSkeleton)
                 if keys[pygame.K_p]:
                     print(
                         f'map_tiles:{map_tiles},\ncharacters:{characters},\nshells:{shells},\nmobs:{mobs},\nmoneys:{moneys},\nmap_objects:{map_objects},\nanimated_map_objects:{animated_map_objects}\n')
