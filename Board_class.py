@@ -14,7 +14,7 @@ class Board:
 
     def get_click(self, mouse_pos, entity_type, entity):
         cell = self.get_cell(mouse_pos)
-        self.on_click(cell=cell, entity_type=entity_type, entity=entity)
+        return self.on_click(cell=cell, entity_type=entity_type, entity=entity)
 
     def get_cell(self, mouse_pos):
         x, y = mouse_pos
@@ -35,6 +35,7 @@ class Board:
                             cell[1] * self.cell_size + self.top + self.cell_size / 2),
                            globals()[f'row{cell[1]}'])
                 entity(*setting)
+                return True
 
         elif entity_type == 'Orcs':
             for i in range(1):

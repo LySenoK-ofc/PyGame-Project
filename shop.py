@@ -1,5 +1,6 @@
 import pygame
 
+import constant
 from sprite_groups import *
 
 
@@ -46,7 +47,8 @@ class Shop(pygame.sprite.Sprite):
                     self.drag = True
 
                 if not mouse_button[0] and self.drag:
-                    self.board.get_click(mouse_pos, 'Troops', self.unit)
+                    if constant.cash - self.price >= 0 and self.board.get_click(mouse_pos, 'Troops', self.unit):
+                        constant.cash -= self.price
                     self.rect.center = self.coord
                     self.drag = False
                     drag_units.remove(self)

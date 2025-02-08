@@ -465,35 +465,6 @@ class KnightTemplar(Unit):
                         self.set_mode('walk_block')
 
 
-class Arrow(pygame.sprite.Sprite):
-    def __init__(self, archer, v, damage):
-        super().__init__(all_sprites, shells)
-        # Устанавливаем изображение и маску стрелы
-        self.image = ANIMATIONS['ARROW01']['idle'][0]
-        self.mask = pygame.mask.from_surface(self.image)
-        self.v = v
-        self.damage = damage
-        self.archer = archer
-
-        # Устанавливаем начальную позицию стрелы
-        self.rect = self.image.get_rect(center=archer.rect.center)
-        self.rect.x += 5
-
-    def update(self, *args, **kwargs):
-        # Проверяем столкновение стрелы с целью
-        if self.rect.x < 0 or self.rect.left > WIDTH or self.rect.y < 0 or self.rect.top > HEIGHT:
-            self.kill()
-
-        mobs_or_row = [mob for mob in self.archer.grop_of_row
-                       if mob in mobs and abs(self.rect.x - mob.rect.x) <= 30]
-        for mob in mobs_or_row:
-            if mob.life and pygame.sprite.collide_mask(self, mob):
-                mob.lose_hp(dmg=self.damage, armor_dmg=self.damage * 0.3)
-                self.kill()  # Удаляем стрелу
-        else:
-            self.rect.x += self.v  # Перемещаем стрелу вправо
-
-
 class AttackEntity(pygame.sprite.Sprite):
     def __init__(self, owner, grop_of_row, anim_start, damage, x, frames):
         super().__init__(all_sprites, shells)
@@ -537,6 +508,25 @@ class AttackEntity(pygame.sprite.Sprite):
                             self.target_mobs = True
                 elif self.frame == len(self.frames) - 1:
                     self.kill()
+
+
+class Arrow(AttackEntity):
+    def __init__(self, archer, v, damage):
+        super().__init__(archer, archer.grop_of_row, ANIMATIONS['ARROW01']['idle'][0], damage, 5, None)
+        self.v = v
+
+    def update(self, *args, **kwargs):
+        if self.rect.x < 0 or self.rect.left > WIDTH or self.rect.y < 0 or self.rect.top > HEIGHT:
+            self.kill()
+
+        mobs_or_row = [mob for mob in self.grop_of_row
+                       if mob in mobs and abs(self.rect.x - mob.rect.x) <= 30]
+        for mob in mobs_or_row:
+            if mob.life and pygame.sprite.collide_mask(self, mob):
+                mob.lose_hp(dmg=self.damage, armor_dmg=self.damage * 0.3)
+                self.kill()  # Удаляем стрелу
+        else:
+            self.rect.x += self.v
 
 
 class FireBall(AttackEntity):

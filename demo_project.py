@@ -2,12 +2,12 @@ import screens
 from Map_constructor import MapConstructor, generate_level, load_level
 from Mobs import *
 from Units import Archer, Knight, Wizard, Priest, ArmoredAxeman, SwordsMan, KnightTemplar
+from Waves_spawner import WaveManager
 from constant import LEFT, TOP, FPS, WIDTH, HEIGHT
 from Board_class import Board
 from sprite_groups import *
 import pygame
 from all_animations import ANIMATIONS
-import time
 
 pygame.init()
 size = WIDTH, HEIGHT
@@ -21,6 +21,8 @@ def game_loop():
     board = Board(6, 5, LEFT, TOP, 75)
     shop_unit_coord = generate_level(load_level('map.txt'))
     MapConstructor(20, 11, board, shop_unit_coord)
+
+    wave_manager = WaveManager()
 
     # Конвертируем спрайты в альфу
     try:
@@ -38,10 +40,13 @@ def game_loop():
 
     clock = pygame.time.Clock()
 
+    SPAWN_WAVE_EVENT = pygame.USEREVENT + 1
+    pygame.time.set_timer(SPAWN_WAVE_EVENT, 1500)
+
+    font = pygame.font.Font(None, 50) # Костыль
+
     running = True
     while running:
-        start_time = time.time()
-
         constant.frame_count += 1
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -68,26 +73,28 @@ def game_loop():
                 if keys[pygame.K_ESCAPE]:
                     screens.main_lobby()
                 if keys[pygame.K_e]:
-                    pass
-                # board.on_click(choice(
-                #     [Slime, Skeleton, Orc, ArmoredOrc, EliteOrc, RiderOrc, ArmoredSkeleton, GreateswordSkeleton,
-                #      Werebear, Werewolf]))
-                # board.on_click(ArmoredSkeleton)
+                    board.on_click(choice(
+                        [Slime, Skeleton, Orc, ArmoredOrc, EliteOrc, RiderOrc, ArmoredSkeleton, GreateswordSkeleton,
+                         Werebear, Werewolf]))
                 if keys[pygame.K_p]:
                     print(
                         f'map_tiles:{map_tiles},\ncharacters:{characters},\nshells:{shells},\nmobs:{mobs},\nmoneys:{moneys},\nmap_objects:{map_objects},\nanimated_map_objects:{animated_map_objects}\n')
+
+            if event.type == SPAWN_WAVE_EVENT:
+                wave_manager.start_wave()
 
         all_sprites.update()
         all_sprites.draw(screen)
 
         drag_units.draw(screen)
 
+        wave_manager.spawn_enemy()
+
+        text = font.render(f"{constant.cash}", True, (100, 255, 100)) # Костыль
+        screen.blit(text, (10, 10)) # Костыль
+
         pygame.display.flip()
         clock.tick(FPS)
-
-        end_time = time.time()
-        execution_time = end_time - start_time
-        # print(f"{execution_time} секунд")
 
     pygame.quit()
 

@@ -153,7 +153,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def update(self, *args, **kwargs):
         if constant.frame_count % 5 == 0:
-            if self.rect.x < 0 or self.rect.left > WIDTH or self.rect.y < 0 or self.rect.top > HEIGHT:
+            if self.rect.x < 0 or self.rect.left > WIDTH + 700 or self.rect.y < 0 or self.rect.top > HEIGHT:
                 self.life = False
                 self.kill()
 
