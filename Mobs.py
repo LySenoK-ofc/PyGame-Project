@@ -141,6 +141,7 @@ class Enemy(pygame.sprite.Sprite):
             if self.hp <= 0:
                 self.life = False
 
+
     def set_target(self, new_target):
         if self.current_target is None:
             self.current_target = new_target

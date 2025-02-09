@@ -2,15 +2,11 @@ import sys
 
 import pygame.sprite
 
-from constant import FPS, HEIGHT, WIDTH, CELL_SIZE
-from sprite_groups import *
-
-from Board_class import Board
-from Map_constructor import Map_constructor, Map_tile
-
+import demo_project
+from load_image_func import load_image
+from constant import FPS, HEIGHT, WIDTH
 from sound_tests import play_sound
-
-from Units import *
+from sprite_groups import groups, update_group
 
 pygame.init()
 
@@ -36,7 +32,7 @@ class Button(pygame.sprite.Sprite):
 
     def __init__(self, x, y, type_btn, command, text=None, group=None):
         if not group:
-            group = buttons
+            group = groups['buttons']
         super().__init__(group)
         self.image = load_image(self.button_images[type_btn])
         self.rect = self.image.get_rect()
@@ -44,21 +40,23 @@ class Button(pygame.sprite.Sprite):
         self.rect.y = y
         self.command = command
         if text:
-            texts.append([font.render(text, True, 'black'),  (x + 30, y + 15)])
+            texts.append([font.render(text, True, 'black'), (x + 30, y + 15)])
 
     def update(self, *args, **kwargs):
         if args and args[0].type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
-            map_tiles.empty()
-            map_objects.empty()
-            animated_map_objects.empty()
-            buttons.empty()
-            level_doors.empty()
+            groups['map_tiles'].empty()
+            groups['map_objects'].empty()
+            groups['animated_map_objects'].empty()
+            groups['buttons'].empty()
+            groups['level_doors'].empty()
             texts.clear()
 
             play_sound('button_click')
 
             if self.command == 'open_pick_level_screen':
                 pick_level_screen()
+                update_group()  # Временно
+                demo_project.game_loop()  # Временно
             if self.command == 'open_main_lobby':
                 main_lobby()
             if self.command == 'quit':
@@ -81,7 +79,7 @@ class Button(pygame.sprite.Sprite):
 
 class Door_lock(pygame.sprite.Sprite):
     def __init__(self, x, y):
-        super().__init__(level_doors)
+        super().__init__(groups['level_doors'])
         self.image = load_image('assets/doors/lock.png')
         self.rect = self.image.get_rect()
         self.rect.x = x
@@ -90,7 +88,7 @@ class Door_lock(pygame.sprite.Sprite):
 
 class Level_door(pygame.sprite.Sprite):
     def __init__(self, x, y, lock=True):
-        super().__init__(level_doors)
+        super().__init__(groups['level_doors'])
         self.image = load_image('assets/doors/close_door.png')
         self.rect = self.image.get_rect()
         self.rect.x = x
@@ -127,10 +125,10 @@ def main_lobby():
             if event.type == pygame.QUIT:
                 terminate()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                buttons.update(event)
+                groups['buttons'].update(event)
 
         screen.blit(background, (0, 0))
-        buttons.draw(screen)
+        groups['buttons'].draw(screen)
         for txt in texts:
             screen.blit(txt[0], txt[1])
 
@@ -140,10 +138,10 @@ def main_lobby():
 
 def dictionary_screen(page=0):
     def characters_dictionary():
-        characters_page.draw(screen)
+        groups['characters_page'].draw(screen)
 
     def mobs_dictionary():
-        mobs_page.draw(screen)
+        groups['mobs_page'].draw(screen)
 
     pygame.display.set_caption('Бестиарий')
     background = load_image('assets/backgrounds/levels_background.png')
@@ -152,10 +150,10 @@ def dictionary_screen(page=0):
     Button(300, 60, 'sketch', 'open_characters_page', 'Characters')
     Button(800, 60, 'sketch', 'open_mobs_page', 'Mobs')
 
-    Button(570, 200, 'sketch', 'show_soldier', 'Soldier', characters_page)
-    Button(570, 320, 'sketch', 'show_knight', 'Knight', characters_page)
-    Button(570, 440, 'sketch', 'show_archer', 'Archer', characters_page)
-    Button(570, 560, 'sketch', 'show_lancer', 'Lancer', characters_page)
+    Button(570, 200, 'sketch', 'show_soldier', 'Soldier', groups['characters_page'])
+    Button(570, 320, 'sketch', 'show_knight', 'Knight', groups['characters_page'])
+    Button(570, 440, 'sketch', 'show_archer', 'Archer', groups['characters_page'])
+    Button(570, 560, 'sketch', 'show_lancer', 'Lancer', groups['characters_page'])
 
     dictionary_field = load_image('assets/dictionary_field.png')
 
@@ -165,10 +163,10 @@ def dictionary_screen(page=0):
                 terminate()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    buttons.update(event)
+                    groups['buttons'].update(event)
 
         screen.blit(background, (0, 0))
-        buttons.draw(screen)
+        groups['buttons'].draw(screen)
 
         screen.blit(dictionary_field, (175, 200))
 
@@ -193,9 +191,9 @@ def options_screen():
                 terminate()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    buttons.update(event)
+                    groups['buttons'].update(event)
         screen.fill('black')
-        buttons.draw(screen)
+        groups['buttons'].draw(screen)
 
         pygame.display.flip()
 
@@ -225,18 +223,18 @@ def pick_level_screen():
                 terminate()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    level_doors.update(event)
-                    for door in level_doors:
+                    groups['level_doors'].update(event)
+                    for door in groups['level_doors']:
                         if type(door) == Level_door and door.check():
-                            buttons.empty()
+                            groups['buttons'].empty()
                             play_sound('open_door', 1)
-                            game_screen()
-                    buttons.update(event)
+                            return
+                    groups['buttons'].update(event)
 
         screen.blit(background, (0, 0))
 
-        level_doors.draw(screen)
-        buttons.draw(screen)
+        groups['level_doors'].draw(screen)
+        groups['buttons'].draw(screen)
 
         screen.blit(text_level1, (220, 60))
         screen.blit(text_level2, (650, 60))
@@ -248,26 +246,5 @@ def pick_level_screen():
         clock.tick(FPS)
 
 
-def game_screen():
-    board = Board(6, 5, (75 * 6), (75 * 4), CELL_SIZE)
-    Map_constructor(WIDTH, HEIGHT, board)
-    board.render('assets/map_tiles/Tiles/FieldsTile_47.png')
-
-    Button(1350, 10, 'return', 'open_pick_level_screen')
-
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                terminate()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if event.button == 1:
-                    buttons.update(event)
-        map_tiles.draw(screen)
-        map_objects.draw(screen)
-        animated_map_objects.update()
-        animated_map_objects.draw(screen)
-        buttons.draw(screen)
-        pygame.display.flip()
-
-        print(map_tiles, map_objects, animated_map_objects)
-        clock.tick(FPS)
+if __name__ == '__main__':
+    main_lobby()
