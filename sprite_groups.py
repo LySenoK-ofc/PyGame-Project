@@ -13,7 +13,6 @@ def update_group():
                         j.kill()
 
 
-# Объединяем группы в словарь
 groups = {
     "all_sprites": sprite.Group(),
 
@@ -24,7 +23,7 @@ groups = {
     "shop_units": sprite.Group(),
     "drag_units": sprite.Group(),
 
-    "rows": {  # Вложенный словарь для удобного доступа к рядам
+    "rows": {
         0: sprite.Group(),
         1: sprite.Group(),
         2: sprite.Group(),
@@ -41,4 +40,7 @@ groups = {
 
     "level_doors": sprite.Group(),
     "buttons": sprite.Group(),
+
+"characters_page": pygame.sprite.Group(),
+"mobs_page": pygame.sprite.Group()
 }

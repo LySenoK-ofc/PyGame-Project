@@ -4,22 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Волны мобов. Возможность покупать юнитов.">
-      <change afterPath="$PROJECT_DIR$/show_info.py" afterDir="false" />
+    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/assets/pi-sheng.regular.otf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Board_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board_class.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Map_constructor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Map_constructor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mobs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Units.py" beforeDir="false" afterPath="$PROJECT_DIR$/Units.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Waves_spawner.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_spawner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/constant.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/cut_sheet_parameters.json" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/cut_sheet_parameters.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/load_animation_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/load_animation_func.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map_lvls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/screens.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprite_groups.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_groups.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/buttons/cancel_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/buttons/continue_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/buttons/pause_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/buttons/return_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/buttons/settings_btn.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/buttons/sketch_btn.png" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Kirill's-Branch" />
+        <entry key="$PROJECT_DIR$" value="screen_creature" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -66,29 +59,20 @@
   "keyToString": {
     "Python.Map_constructor.executor": "Run",
     "Python.demo_map.executor": "Run",
-    "Python.demo_project.executor": "Debug",
-    "Python.screens.executor": "Run",
+    "Python.demo_project.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "E:/PyCharmProjects/YandexGameProject/assets/data",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+    "git-widget-placeholder": "44bfb540",
+    "last_opened_file_path": "C:/Users/user/PycharmProjects/PyGame_Project_demo"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\PyCharmProjects\YandexGameProject\assets\data" />
-      <recent name="E:\PyCharmProjects\YandexGameProject\data" />
-      <recent name="E:\PyCharmProjects\YandexGameProject\assets\animations\Mobs\werewolf" />
-      <recent name="E:\PyCharmProjects\YandexGameProject\assets\animations\Mobs\werebear" />
-      <recent name="E:\PyCharmProjects\YandexGameProject\assets\animations\Mobs\slime" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\PyCharmProjects\YandexGameProject\assets" />
+      <recent name="C:\Users\user\PycharmProjects\PyGame_Project_demo" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.demo_project">
+  <component name="RunManager" selected="Python.demo_map">
     <configuration name="Map_constructor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PyGame_Project_demo" />
       <option name="ENV_FILES" value="" />
@@ -155,32 +139,11 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="screens" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="PyGame_Project_demo" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/screens.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.demo_map" />
         <item itemvalue="Python.demo_project" />
-        <item itemvalue="Python.screens" />
+        <item itemvalue="Python.Map_constructor" />
         <item itemvalue="Python.demo_map" />
         <item itemvalue="Python.Map_constructor" />
       </list>
@@ -189,7 +152,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-495700d161d3-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.22562.220" />
+        <option value="bundled-python-sdk-50da183f06c8-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13135.95" />
       </set>
     </attachedChunks>
   </component>
@@ -210,75 +173,38 @@
       <option name="project" value="LOCAL" />
       <updated>1737639897285</updated>
     </task>
-    <task id="LOCAL-00002" summary="Лениво совместил лобби и игру. На тебе сделать это нормально, а также почисти код в screens.py.">
+    <task id="LOCAL-00002" summary="Сделал лобби выбора уровня, сам выбор уровня сделаю после того, как будет выполнен основной геймплей">
       <option name="closed" value="true" />
-      <created>1738436426337</created>
+      <created>1737904107702</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1738436426337</updated>
+      <updated>1737904107702</updated>
     </task>
-    <task id="LOCAL-00003" summary="Добавил несколько юнитов, над доделать">
-      <option name="closed" value="true" />
-      <created>1738675907581</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1738675907581</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Новые мобы, броня">
-      <option name="closed" value="true" />
-      <created>1738775330514</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1738775330514</updated>
-    </task>
-    <task id="LOCAL-00005" summary="немного изменил код">
-      <option name="closed" value="true" />
-      <created>1738849716595</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1738849716595</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Поделал механик">
-      <option name="closed" value="true" />
-      <created>1738955757275</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1738955757275</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Волны мобов. Возможность покупать юнитов.">
-      <option name="closed" value="true" />
-      <created>1739050154561</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1739050154561</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="screens_creature" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="master" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -286,23 +212,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Добавил рыцаря" />
-    <MESSAGE value="Лениво совместил лобби и игру. На тебе сделать это нормально, а также почисти код в screens.py." />
-    <MESSAGE value="Добавил несколько юнитов, над доделать" />
-    <MESSAGE value="Новые мобы, броня" />
-    <MESSAGE value="немного изменил код" />
-    <MESSAGE value="Поделал механик" />
-    <MESSAGE value="Волны мобов. Возможность покупать юнитов." />
-    <option name="LAST_COMMIT_MESSAGE" value="Волны мобов. Возможность покупать юнитов." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Units.py</url>
-          <line>157</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Сделал лобби выбора уровня, сам выбор уровня сделаю после того, как будет выполнен основной геймплей" />
+    <option name="LAST_COMMIT_MESSAGE" value="Сделал лобби выбора уровня, сам выбор уровня сделаю после того, как будет выполнен основной геймплей" />
   </component>
 </project>

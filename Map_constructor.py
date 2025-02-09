@@ -1,6 +1,3 @@
-from Units import Lancer, Knight, Archer, Wizard, Priest, ArmoredAxeman, SwordsMan, KnightTemplar
-from all_animations import ANIMATIONS
-from constant import LEFT, CELL_SIZE, TOP, WIDTH_CELL, HEIGHT_CELL
 from load_image_func import load_image
 from shop import Shop
 from sprite_groups import groups
@@ -53,6 +50,8 @@ class MapConstructor:
         self.map_width = map_width
         self.map_height = map_height
         self.board = board
+
+        generate_level(load_level('map.txt'))
 
         MapTile(groups['map_objects'], (145, 300), 'assets/map_tiles/Objects/camp/1.png')
         MapTile(groups['map_objects'], (10, 250), 'assets/map_tiles/Objects/camp/1.png', reverse=True)
