@@ -1,7 +1,7 @@
 from random import choice, random
 
 import constant
-from sprite_groups import *
+from sprite_groups import groups
 from constant import CELL_SIZE, WIDTH, HEIGHT
 from all_animations import ANIMATIONS
 
@@ -9,10 +9,11 @@ import pygame
 
 
 class Unit(pygame.sprite.Sprite):
-    def __init__(self, coord, animations, group_of_row, hp, atk, frame_rate,
-                 detect_range=None, attack_range=None, super_atk=None, area_atk=None, armor_hp=None, armor_def=None):
-        super().__init__(all_sprites, characters, group_of_row)
-        self.grop_of_row = group_of_row
+    def __init__(self, coord, animations, group, hp, atk, frame_rate,
+                 detect_range=None, attack_range=None, super_atk=None, area_atk=None, armor_hp=None, armor_def=None,
+                 sale=None):
+        super().__init__(groups['all_sprites'], groups['characters'], *group)
+        self.grop_of_row = group[0]
         self.hp = hp
         self.atk = atk
         self.full_hp = hp
@@ -33,6 +34,8 @@ class Unit(pygame.sprite.Sprite):
             self.attack_range = attack_range
         if detect_range:
             self.detect_range = detect_range
+        if sale:
+            self.sale = sale
         if self.armor_hp:
             self.armor_def = armor_def
 
@@ -170,7 +173,7 @@ class Unit(pygame.sprite.Sprite):
     def find_target(self):
         self.cached_nearby_mobs = list(filter(lambda nearby_mob: nearby_mob.rect.x >= self.rect.x,
                                               [mob for mob in self.grop_of_row
-                                               if mob in mobs and mob.life
+                                               if mob in groups['mobs'] and mob.life
                                                and abs(self.rect.x - mob.rect.x) <= self.detect_range]))
 
         nearest_mob = min(self.cached_nearby_mobs, key=lambda x: x.rect.x) if self.cached_nearby_mobs else []
@@ -207,8 +210,8 @@ class Archer(Unit):
             'hurt': 100,
             'death': 250,
         }
-        super().__init__(coord, ANIMATIONS['ARCHER'], grop_of_row,
-                         detect_range=WIDTH, attack_range=WIDTH, hp=100, atk=25, super_atk=40,
+        super().__init__(coord, ANIMATIONS['ARCHER'], [grop_of_row, groups['shop_units']],
+                         detect_range=WIDTH, attack_range=WIDTH, hp=100, atk=25, super_atk=40, sale=25,
                          frame_rate=frame_rate)
 
     def update(self):
@@ -234,9 +237,9 @@ class Knight(Unit):
             'hurt': 60,
             'death': 250,
         }
-        super().__init__(coord, ANIMATIONS['KNIGHT'], grop_of_row,
+        super().__init__(coord, ANIMATIONS['KNIGHT'], [grop_of_row, groups['shop_units']],
                          detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=200, atk=30,
-                         super_atk=50,
+                         super_atk=50, sale=45,
                          frame_rate=frame_rate, armor_hp=50, armor_def=0.2)
 
     def area_attack(self, area_atk, armor_dmg):
@@ -268,7 +271,7 @@ class Lancer(Unit):
             'hurt': 60,
             'death': 250,
         }
-        super().__init__(coord, ANIMATIONS['LANCER'], grop_of_row,
+        super().__init__(coord, ANIMATIONS['LANCER'], [grop_of_row],
                          detect_range=2 * CELL_SIZE, attack_range=CELL_SIZE, hp=1000, atk=1000,
                          frame_rate=frame_rate)
 
@@ -294,8 +297,8 @@ class Wizard(Unit):
             'hurt': 100,
             'death': 250,
         }
-        super().__init__(coord, ANIMATIONS['WIZARD'], grop_of_row,
-                         detect_range=3 * CELL_SIZE, attack_range=2 * CELL_SIZE, hp=110, atk=30,
+        super().__init__(coord, ANIMATIONS['WIZARD'], [grop_of_row, groups['shop_units']],
+                         detect_range=3 * CELL_SIZE, attack_range=2 * CELL_SIZE, hp=110, atk=30, sale=42,
                          frame_rate=frame_rate)
 
     def area_attack(self, area_atk):
@@ -326,8 +329,8 @@ class Priest(Unit):
             'hurt': 100,
             'death': 250,
         }
-        super().__init__(coord, ANIMATIONS['PRIEST'], grop_of_row,
-                         detect_range=3 * CELL_SIZE, attack_range=2 * CELL_SIZE, hp=120, atk=20,
+        super().__init__(coord, ANIMATIONS['PRIEST'], [grop_of_row, groups['shop_units']],
+                         detect_range=3 * CELL_SIZE, attack_range=2 * CELL_SIZE, hp=120, atk=20, sale=40,
                          frame_rate=frame_rate)
 
         self.heal_range = CELL_SIZE
@@ -337,7 +340,7 @@ class Priest(Unit):
 
     def check_healing(self):
         for unit in self.grop_of_row:
-            if (unit in characters
+            if (unit in groups['characters']
                     and CELL_SIZE <= abs(self.rect.x - unit.rect.x) <= self.heal_range
                     and unit.hp < unit.full_hp):
                 self.set_mode('healing')
@@ -372,8 +375,8 @@ class ArmoredAxeman(Unit):
             'hurt': 60,
             'death': 250,
         }
-        super().__init__(coord, ANIMATIONS['ARMORED_AXEMAN'], grop_of_row,
-                         detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=150, atk=35, super_atk=60,
+        super().__init__(coord, ANIMATIONS['ARMORED_AXEMAN'], [grop_of_row, groups['shop_units']],
+                         detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=150, atk=35, super_atk=60, sale=35,
                          frame_rate=frame_rate, armor_hp=70, armor_def=0.35)
 
     def area_attack(self, area_atk, armor_dmg):
@@ -402,8 +405,8 @@ class SwordsMan(Unit):
             'hurt': 60,
             'death': 250,
         }
-        super().__init__(coord, ANIMATIONS['SWORDSMAN'], grop_of_row,
-                         detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=150, atk=30,
+        super().__init__(coord, ANIMATIONS['SWORDSMAN'], [grop_of_row, groups['shop_units']],
+                         detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=150, atk=30, sale=40,
                          frame_rate=frame_rate, armor_hp=30, armor_def=0.2)
 
     def area_attack(self, area_atk, armor_dmg):
@@ -434,8 +437,8 @@ class KnightTemplar(Unit):
             'hurt': 60,
             'death': 250,
         }
-        super().__init__(coord, ANIMATIONS['KNIGHT_TEMPLAR'], grop_of_row,
-                         detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=200, atk=30,
+        super().__init__(coord, ANIMATIONS['KNIGHT_TEMPLAR'], [grop_of_row, groups['shop_units']],
+                         detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=200, atk=30, sale=40,
                          frame_rate=frame_rate, armor_hp=60, armor_def=0.25)
 
         self.speed = 4
@@ -467,7 +470,7 @@ class KnightTemplar(Unit):
 
 class AttackEntity(pygame.sprite.Sprite):
     def __init__(self, owner, grop_of_row, anim_start, damage, x, frames):
-        super().__init__(all_sprites, shells)
+        super().__init__(groups['all_sprites'], groups['shells'])
         self.image = anim_start
         self.mask = pygame.mask.from_surface(self.image)
 
@@ -499,7 +502,7 @@ class AttackEntity(pygame.sprite.Sprite):
                 if self.frame == 2:
                     cached_nearby_mobs = list(filter(lambda nearby_mob: nearby_mob.rect.x >= self.rect.x,
                                                      [mob for mob in self.grop_of_row
-                                                      if mob in mobs and mob.life
+                                                      if mob in groups['mobs'] and mob.life
                                                       and abs(self.rect.x - mob.rect.x) <= CELL_SIZE]))
 
                     for mob in cached_nearby_mobs:
@@ -520,7 +523,7 @@ class Arrow(AttackEntity):
             self.kill()
 
         mobs_or_row = [mob for mob in self.grop_of_row
-                       if mob in mobs and abs(self.rect.x - mob.rect.x) <= 30]
+                       if mob in groups['mobs'] and abs(self.rect.x - mob.rect.x) <= 30]
         for mob in mobs_or_row:
             if mob.life and pygame.sprite.collide_mask(self, mob):
                 mob.lose_hp(dmg=self.damage, armor_dmg=self.damage * 0.3)
@@ -551,7 +554,7 @@ class FireBall(AttackEntity):
             if constant.frame_count % 3 == 0:
                 cached_nearby_mobs = list(filter(lambda nearby_mob: nearby_mob.rect.x >= self.rect.x,
                                                  [mob for mob in self.grop_of_row
-                                                  if mob in mobs and mob.life
+                                                  if mob in groups['mobs'] and mob.life
                                                   and abs(self.rect.x - mob.rect.x) <= CELL_SIZE]))
 
                 for mob in cached_nearby_mobs:

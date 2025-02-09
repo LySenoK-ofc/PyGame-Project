@@ -1,12 +1,19 @@
+from random import choice
+
+import constant
 import screens
 from Map_constructor import MapConstructor, generate_level, load_level
-from Mobs import *
+from Mobs import Slime, Skeleton, Orc, ArmoredOrc, EliteOrc, RiderOrc, ArmoredSkeleton, GreateswordSkeleton, Werewolf, \
+    Werebear
 from Units import Archer, Knight, Wizard, Priest, ArmoredAxeman, SwordsMan, KnightTemplar
 from Waves_spawner import WaveManager
 from constant import LEFT, TOP, FPS, WIDTH, HEIGHT
 from Board_class import Board
-from sprite_groups import *
+from sale_func import sale_unit
+from show_info import show_unit_info
+from sprite_groups import groups
 import pygame
+import pygame.freetype
 from all_animations import ANIMATIONS
 
 pygame.init()
@@ -43,60 +50,86 @@ def game_loop():
     SPAWN_WAVE_EVENT = pygame.USEREVENT + 1
     pygame.time.set_timer(SPAWN_WAVE_EVENT, 1500)
 
-    font = pygame.font.Font(None, 50) # Костыль
+    money_font = pygame.freetype.Font('assets/data/Adbnorm.ttf', size=50)  # Деньги
+    info_font = pygame.freetype.Font('assets/data/Adbnorm.ttf', size=20)  # Поле для информации об юните
+    hp_font = pygame.freetype.Font('assets/data/Adbnorm.ttf', size=50)  # Деньги
+
+    info_text = ''
+    line_spacing = 10  # Расстояние между строками
+    x, y, coord_info_text = None, None, None
 
     running = True
     while running:
         constant.frame_count += 1
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_LSHIFT]:
+            info_text, coord_info_text = show_unit_info(pygame.mouse.get_pos())
+            x, y = coord_info_text
+        if keys[pygame.K_e]:
+            board.on_click(choice(
+                [Slime, Skeleton, Orc, ArmoredOrc, EliteOrc, RiderOrc, ArmoredSkeleton, GreateswordSkeleton,
+                 Werebear, Werewolf]))
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                screens.terminate()
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                if pygame.key.get_pressed()[pygame.K_1]:
-                    board.get_click(pygame.mouse.get_pos(), 'Troops', Archer)
-                elif pygame.key.get_pressed()[pygame.K_2]:
-                    board.get_click(pygame.mouse.get_pos(), 'Troops', Knight)
-                elif pygame.key.get_pressed()[pygame.K_3]:
-                    board.get_click(pygame.mouse.get_pos(), 'Troops', Wizard)
-                elif pygame.key.get_pressed()[pygame.K_4]:
-                    board.get_click(pygame.mouse.get_pos(), 'Troops', Priest)
-                elif pygame.key.get_pressed()[pygame.K_5]:
-                    board.get_click(pygame.mouse.get_pos(), 'Troops', ArmoredAxeman)
-                elif pygame.key.get_pressed()[pygame.K_6]:
-                    board.get_click(pygame.mouse.get_pos(), 'Troops', SwordsMan)
-                elif pygame.key.get_pressed()[pygame.K_7]:
-                    board.get_click(pygame.mouse.get_pos(), 'Troops', KnightTemplar)
+                if event.button == 3:
+                    sale_unit(pygame.mouse.get_pos())
+                else:
+                    if keys[pygame.K_1]:
+                        board.get_click(pygame.mouse.get_pos(), 'Troops', Archer)
+                    elif keys[pygame.K_2]:
+                        board.get_click(pygame.mouse.get_pos(), 'Troops', Knight)
+                    elif keys[pygame.K_3]:
+                        board.get_click(pygame.mouse.get_pos(), 'Troops', Wizard)
+                    elif keys[pygame.K_4]:
+                        board.get_click(pygame.mouse.get_pos(), 'Troops', Priest)
+                    elif keys[pygame.K_5]:
+                        board.get_click(pygame.mouse.get_pos(), 'Troops', ArmoredAxeman)
+                    elif keys[pygame.K_6]:
+                        board.get_click(pygame.mouse.get_pos(), 'Troops', SwordsMan)
+                    elif keys[pygame.K_7]:
+                        board.get_click(pygame.mouse.get_pos(), 'Troops', KnightTemplar)
 
             if event.type == pygame.KEYDOWN:
-                keys = pygame.key.get_pressed()
-                if keys[pygame.K_ESCAPE]:
+                if event.key == pygame.K_ESCAPE:
                     screens.main_lobby()
-                if keys[pygame.K_e]:
-                    board.on_click(choice(
-                        [Slime, Skeleton, Orc, ArmoredOrc, EliteOrc, RiderOrc, ArmoredSkeleton, GreateswordSkeleton,
-                         Werebear, Werewolf]))
-                if keys[pygame.K_p]:
-                    print(
-                        f'map_tiles:{map_tiles},\ncharacters:{characters},\nshells:{shells},\nmobs:{mobs},\nmoneys:{moneys},\nmap_objects:{map_objects},\nanimated_map_objects:{animated_map_objects}\n')
+
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_LSHIFT:
+                    info_text, coord_info_text = '', []
 
             if event.type == SPAWN_WAVE_EVENT:
                 wave_manager.start_wave()
 
-        all_sprites.update()
-        all_sprites.draw(screen)
+        groups['all_sprites'].update()
+        groups['all_sprites'].draw(screen)
 
-        drag_units.draw(screen)
+        groups['drag_units'].draw(screen)
 
         wave_manager.spawn_enemy()
 
-        text = font.render(f"{constant.cash}", True, (100, 255, 100)) # Костыль
-        screen.blit(text, (10, 10)) # Костыль
+        if info_text:  # Инфа
+            for line in info_text:
+                text_surface, text_rect = info_font.render(line, (100, 255, 100))
+                text_rect.x, text_rect.y = x, y
+                screen.blit(text_surface, text_rect)
+                y += text_rect.height + line_spacing
+            x, y = coord_info_text
+
+        text_surface, text_rect = money_font.render(f"Деньги:{constant.cash}", (100, 255, 100))  # Деньги
+        text_rect.x, text_rect.y = 10, 10  # Деньги
+        screen.blit(text_surface, text_rect)  # Деньги
+
+        text_surface, text_rect = hp_font.render(f"Хп:{constant.hp}", (100, 255, 100))  # Хп
+        text_rect.x, text_rect.y = 10, text_rect.height * 2  # Хп
+        screen.blit(text_surface, text_rect)  # Хп
 
         pygame.display.flip()
         clock.tick(FPS)
-
-    pygame.quit()
 
 
 if __name__ == '__main__':

@@ -5,7 +5,7 @@ import pygame.sprite
 import demo_project
 from load_image_func import load_image
 from constant import FPS, HEIGHT, WIDTH
-from sprite_groups import *
+from sprite_groups import groups, update_group
 
 pygame.init()
 
@@ -27,7 +27,7 @@ class Button(pygame.sprite.Sprite):
                      'sketch': 'assets/buttons/sketch_btn.png'}
 
     def __init__(self, x, y, type_btn, command):
-        super().__init__(buttons)
+        super().__init__(groups['buttons'])
         self.image = load_image(self.button_images[type_btn])
         self.rect = self.image.get_rect()
         self.rect.x = x
@@ -36,13 +36,14 @@ class Button(pygame.sprite.Sprite):
 
     def update(self, *args, **kwargs):
         if args and args[0].type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
-            map_tiles.empty()
-            map_objects.empty()
-            animated_map_objects.empty()
-            buttons.empty()
-            level_doors.empty()
+            groups['map_tiles'].empty()
+            groups['map_objects'].empty()
+            groups['animated_map_objects'].empty()
+            groups['buttons'].empty()
+            groups['level_doors'].empty()
             if self.command == 'open_pick_level_screen':
                 if pick_level_screen():
+                    update_group()
                     demo_project.game_loop()
             if self.command == 'open_main_lobby':
                 main_lobby()
@@ -56,7 +57,7 @@ class Button(pygame.sprite.Sprite):
 
 class Door_lock(pygame.sprite.Sprite):
     def __init__(self, x, y):
-        super().__init__(level_doors)
+        super().__init__(groups['level_doors'])
         self.image = load_image('assets/doors/lock.png')
         self.rect = self.image.get_rect()
         self.rect.x = x
@@ -65,7 +66,7 @@ class Door_lock(pygame.sprite.Sprite):
 
 class Level_door(pygame.sprite.Sprite):
     def __init__(self, x, y, lock=True):
-        super().__init__(level_doors)
+        super().__init__(groups['level_doors'])
         self.image = load_image('assets/doors/close_door.png')
         self.rect = self.image.get_rect()
         self.rect.x = x
@@ -107,10 +108,10 @@ def main_lobby():
             if event.type == pygame.QUIT:
                 terminate()
             if event.type == pygame.MOUSEBUTTONDOWN:
-                buttons.update(event)
+                groups['buttons'].update(event)
 
         screen.blit(background, (0, 0))
-        buttons.draw(screen)
+        groups['buttons'].draw(screen)
         screen.blit(start_game_text, (930, 315))
         screen.blit(dictionary_text, (930, 440))
         screen.blit(options_text, (930, 565))
@@ -131,9 +132,9 @@ def dictionary_screen():
                 terminate()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    buttons.update(event)
+                    groups['buttons'].update(event)
         screen.fill('black')
-        buttons.draw(screen)
+        groups['buttons'].draw(screen)
 
         pygame.display.flip()
 
@@ -149,9 +150,9 @@ def options_screen():
                 terminate()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    buttons.update(event)
+                    groups['buttons'].update(event)
         screen.fill('black')
-        buttons.draw(screen)
+        groups['buttons'].draw(screen)
 
         pygame.display.flip()
 
@@ -182,17 +183,17 @@ def pick_level_screen():
                 terminate()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    level_doors.update(event)
-                    for door in level_doors:
+                    groups['level_doors'].update(event)
+                    for door in groups['level_doors']:
                         if type(door) == Level_door and door.check():
-                            buttons.empty()
+                            groups['buttons'].empty()
                             return True
-                    buttons.update(event)
+                    groups['buttons'].update(event)
 
         screen.blit(background, (0, 3))
 
-        level_doors.draw(screen)
-        buttons.draw(screen)
+        groups['level_doors'].draw(screen)
+        groups['buttons'].draw(screen)
 
         screen.blit(text_level1, (220, 60))
         screen.blit(text_level2, (650, 60))
@@ -202,6 +203,7 @@ def pick_level_screen():
 
         pygame.display.flip()
         clock.tick(FPS)
+
 
 if __name__ == '__main__':
     main_lobby()

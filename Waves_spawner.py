@@ -1,8 +1,11 @@
 from random import randrange
 
-from Mobs import *
+import pygame
+
+from Mobs import Slime, Skeleton, Orc, ArmoredOrc, EliteOrc, RiderOrc, ArmoredSkeleton, GreateswordSkeleton, Werewolf, \
+    Werebear
 from constant import WIDTH, CELL_SIZE, TOP, CURRENT_LVL, WAVES
-from sprite_groups import row0, row1, row2, row3, row4, row5
+from sprite_groups import groups
 
 
 class WaveManager:
@@ -14,7 +17,10 @@ class WaveManager:
         self.spawn_index = 0  # Индекс текущего моба в волне
         self.current_wave_done = False  # Флаг окончания волны
         self.wave_run = False
-        self.rows = {'row0': row0, 'row1': row1, 'row2': row2, 'row3': row3, 'row4': row4, 'row5': row5}
+        self.mobs = {'Slime': Slime, 'Skeleton': Skeleton, 'Orc': Orc,
+                     'ArmoredOrc': ArmoredOrc, 'EliteOrc': EliteOrc, 'RiderOrc': RiderOrc,
+                     'ArmoredSkeleton': ArmoredSkeleton, 'GreateswordSkeleton': GreateswordSkeleton,
+                     'Werewolf': Werewolf, 'Werebear': Werebear}
 
     def start_wave(self):
         """Проверяет состояние текущей волны и переходит к следующей. Запускает новую волну."""
@@ -44,14 +50,14 @@ class WaveManager:
             self.last_spawn_time = now
 
             if self.spawn_index < len(wave_data['enemies']):
-                enemy_class, count = wave_data['enemies'][self.spawn_index]
+                enemy_class = self.mobs[wave_data['enemies'][self.spawn_index][0]]
+                count = wave_data['enemies'][self.spawn_index][1]
 
                 for _ in range(count):  # Спавним мобов
                     row = randrange(0, 5)
                     setting = (
-                        (WIDTH + randrange(100, 250), row * CELL_SIZE + TOP + CELL_SIZE / 2), self.rows[f'row{row}'])
-                    enemy = globals()[enemy_class](*setting)
-                    print(enemy)
+                        (WIDTH + randrange(100, 250), row * CELL_SIZE + TOP + CELL_SIZE / 2), groups['rows'][row])
+                    enemy = enemy_class(*setting)
                     self.enemies.add(enemy)
 
                 self.spawn_index += 1  # Переходим к следующему типу мобов в волне

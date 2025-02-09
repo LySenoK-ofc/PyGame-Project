@@ -109,4 +109,5 @@ WAVES = {
 }
 
 frame_count = 0
-cash = 200
+cash = 500
+hp = 5

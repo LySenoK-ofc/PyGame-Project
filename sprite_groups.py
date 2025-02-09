@@ -1,26 +1,44 @@
-from pygame import sprite
+import pygame.sprite as sprite
 
-all_sprites = sprite.Group()
 
-characters = sprite.Group()
-shells = sprite.Group()
-mobs = sprite.Group()
+def update_group():
+    global groups
+    for k in groups.keys():
+        for i in groups[k]:
+            try:
+                i.kill()
+            except AttributeError:
+                for k1 in groups[k].keys():
+                    for j in groups[k][k1]:
+                        j.kill()
 
-shop_units = sprite.Group()
-drag_units = sprite.Group()
 
-row0 = sprite.Group()
-row1 = sprite.Group()
-row2 = sprite.Group()
-row3 = sprite.Group()
-row4 = sprite.Group()
-row5 = sprite.Group()
+# Объединяем группы в словарь
+groups = {
+    "all_sprites": sprite.Group(),
 
-moneys = sprite.Group()
+    "characters": sprite.Group(),
+    "shells": sprite.Group(),
+    "mobs": sprite.Group(),
 
-map_tiles = sprite.Group()
-map_objects = sprite.Group()
-animated_map_objects = sprite.Group()
+    "shop_units": sprite.Group(),
+    "drag_units": sprite.Group(),
 
-level_doors = sprite.Group()
-buttons = sprite.Group()
+    "rows": {  # Вложенный словарь для удобного доступа к рядам
+        0: sprite.Group(),
+        1: sprite.Group(),
+        2: sprite.Group(),
+        3: sprite.Group(),
+        4: sprite.Group(),
+        5: sprite.Group(),
+    },
+
+    "moneys": sprite.Group(),
+
+    "map_tiles": sprite.Group(),
+    "map_objects": sprite.Group(),
+    "animated_map_objects": sprite.Group(),
+
+    "level_doors": sprite.Group(),
+    "buttons": sprite.Group(),
+}

@@ -1,16 +1,17 @@
 from random import choice, randint, random
 
 import constant
+import screens
 from all_animations import ANIMATIONS
-from sprite_groups import *
+from sprite_groups import groups
 import pygame
-from constant import *
+from constant import CELL_SIZE, HEIGHT, WIDTH
 
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, coord, animations, grop_of_row, frame_rate, hp, atk, hurt_cooldown,
                  attack_radius=None, super_atk=None, armor_hp=None, armor_def=None):
-        super().__init__(all_sprites, mobs, grop_of_row)
+        super().__init__(groups['all_sprites'], groups['mobs'], grop_of_row)
         self.animations = animations
         self.frame_rate = frame_rate
         self.grop_of_row = grop_of_row
@@ -155,6 +156,10 @@ class Enemy(pygame.sprite.Sprite):
         if constant.frame_count % 5 == 0:
             if self.rect.x < 0 or self.rect.left > WIDTH + 700 or self.rect.y < 0 or self.rect.top > HEIGHT:
                 self.life = False
+                constant.hp -= 1
+                if constant.hp <= 0:
+                    constant.hp = 5 # временно
+                    screens.main_lobby() # переход на экран окончания игры
                 self.kill()
 
             if self.current_target:

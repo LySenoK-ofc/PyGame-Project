@@ -1,12 +1,12 @@
 import pygame
 
 import constant
-from sprite_groups import *
+from sprite_groups import groups
 
 
 class Shop(pygame.sprite.Sprite):
     def __init__(self, unit_type, coord, animations, board, price=0, sale=0):
-        super().__init__(all_sprites, shop_units)
+        super().__init__(groups['all_sprites'], groups['shop_units'])
         self.animations = animations
         self.mode = 'idle'
         self.frames = self.animations[self.mode]
@@ -27,6 +27,8 @@ class Shop(pygame.sprite.Sprite):
         self.last_update = pygame.time.get_ticks()
         self.frame_rate = {'idle': 250}
 
+        self.info =f'Стоимость:{self.price}\nПродажа:{self.sale}'
+
     def update(self):
         self.move()
         now = pygame.time.get_ticks()
@@ -42,8 +44,8 @@ class Shop(pygame.sprite.Sprite):
 
         if 0 <= local_mouse_pos[0] < self.rect.width and 0 <= local_mouse_pos[1] < self.rect.height:
             if self.mask.get_at(local_mouse_pos):
-                if len(drag_units) == 0 and mouse_button[0]:
-                    drag_units.add(self)
+                if len(groups['drag_units']) == 0 and mouse_button[0]:
+                    groups['drag_units'].add(self)
                     self.drag = True
 
                 if not mouse_button[0] and self.drag:
@@ -51,7 +53,7 @@ class Shop(pygame.sprite.Sprite):
                         constant.cash -= self.price
                     self.rect.center = self.coord
                     self.drag = False
-                    drag_units.remove(self)
+                    groups['drag_units'].remove(self)
 
         if self.drag:
             self.rect.center = mouse_pos

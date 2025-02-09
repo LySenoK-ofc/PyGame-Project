@@ -4,7 +4,7 @@ import pygame
 
 
 def load_anim(path, type_mob, mob, reverse=None, scale=(290, 290)):
-    with open("data/cut_sheet_parameters.json") as f:
+    with open("assets/data/cut_sheet_parameters.json") as f:
         atlas = pygame.image.load(path)
         frames = {}
         animations = json.load(f)
