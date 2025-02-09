@@ -23,3 +23,6 @@ tiles_group = pygame.sprite.Group()
 
 level_doors = pygame.sprite.Group()
 buttons = pygame.sprite.Group()
+
+characters_page = pygame.sprite.Group()
+mobs_page = pygame.sprite.Group()

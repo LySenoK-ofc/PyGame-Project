@@ -4,12 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Сделал лобби выбора уровня, сам выбор уровня сделаю после того, как будет выполнен основной геймплей">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2025_20_50__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2025_20_50__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2025_21_13__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_01_2025_21_13__Changes_.xml" afterDir="false" />
+    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Начал делать бестиарий">
+      <change afterPath="$PROJECT_DIR$/assets/dictionary_field.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sounds/background_sounds/Shiro_Sagisu_-_Treachery_72363454.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sounds/background_sounds/lobby_sound.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sounds/entities_sounds/bow_attack.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sounds/entities_sounds/fireball_attack.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sounds/entities_sounds/sword_attack.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sounds/entities_sounds/troops_hurt.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sounds/lobby_sounds/click_button.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sounds/lobby_sounds/open_door.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sound_tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Map_constructor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Map_constructor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo_map.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_map.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/screens.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprite_groups.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_groups.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,9 +34,22 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="sounds" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="screen_creature" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -57,10 +80,12 @@
     &quot;Python.Map_constructor.executor&quot;: &quot;Run&quot;,
     &quot;Python.demo_map.executor&quot;: &quot;Run&quot;,
     &quot;Python.demo_project.executor&quot;: &quot;Run&quot;,
+    &quot;Python.screens.executor&quot;: &quot;Run&quot;,
+    &quot;Python.sound_tests.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;screen__creature&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;sounds&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/user/PycharmProjects/PyGame_Project_demo&quot;
   }
 }</component>
@@ -136,12 +161,56 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="screens" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PyGame_Project_demo" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/screens.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="sound_tests" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PyGame_Project_demo" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/sound_tests.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python.demo_map" />
+        <item itemvalue="Python.sound_tests" />
         <item itemvalue="Python.demo_project" />
-        <item itemvalue="Python.Map_constructor" />
-        <item itemvalue="Python.demo_map" />
+        <item itemvalue="Python.screens" />
         <item itemvalue="Python.Map_constructor" />
       </list>
     </recent_temporary>
@@ -178,7 +247,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737904107702</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Начал делать бестиарий">
+      <option name="closed" value="true" />
+      <created>1738656490725</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1738656490725</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -187,6 +264,11 @@
         <entry key="Branch">
           <value>
             <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="sounds" />
+                </option>
+              </RecentGroup>
               <RecentGroup>
                 <option name="FILTER_VALUES">
                   <option value="master" />
@@ -215,6 +297,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Добавил рыцаря" />
     <MESSAGE value="Сделал лобби выбора уровня, сам выбор уровня сделаю после того, как будет выполнен основной геймплей" />
-    <option name="LAST_COMMIT_MESSAGE" value="Сделал лобби выбора уровня, сам выбор уровня сделаю после того, как будет выполнен основной геймплей" />
+    <MESSAGE value="Начал делать бестиарий" />
+    <option name="LAST_COMMIT_MESSAGE" value="Начал делать бестиарий" />
   </component>
 </project>
