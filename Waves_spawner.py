@@ -2,6 +2,7 @@ from random import randrange
 
 import pygame
 
+import constant
 from Mobs import Slime, Skeleton, Orc, ArmoredOrc, EliteOrc, RiderOrc, ArmoredSkeleton, GreateswordSkeleton, Werewolf, \
     Werebear
 from constant import WIDTH, CELL_SIZE, TOP, CURRENT_LVL, WAVES
@@ -26,7 +27,7 @@ class WaveManager:
         """Проверяет состояние текущей волны и переходит к следующей. Запускает новую волну."""
         if self.current_wave_done:
             if len(self.enemies) == 0:
-                print(f"Волна {self.wave + 1} завершена")
+                constant.cash += 150
                 self.wave += 1
                 self.current_wave_done = False
         else:

@@ -1,6 +1,7 @@
 from random import choice, random
 
 import constant
+from sound_tests import play_sound
 from sprite_groups import groups
 from constant import CELL_SIZE, WIDTH, HEIGHT
 from all_animations import ANIMATIONS
@@ -167,6 +168,7 @@ class Unit(pygame.sprite.Sprite):
                     dmg -= dmg * self.armor_def
                     self.armor_hp -= armor_dmg
                 self.hp -= dmg
+                play_sound('sword')
             if self.hp <= 0:
                 self.life = False
 

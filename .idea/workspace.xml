@@ -6,8 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Волны мобов. Возможность покупать юнитов.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Map_constructor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Map_constructor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mobs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Units.py" beforeDir="false" afterPath="$PROJECT_DIR$/Units.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Waves_spawner.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_spawner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/background_sounds/Shiro_Sagisu_-_Treachery_72363454.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/background_sounds/lobby_sound.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/bow_attack.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/fireball_attack.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/sword_attack.wav" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/screens.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sound_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/sound_tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprite_groups.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_groups.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -51,20 +59,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Map_constructor.executor": "Run",
-    "Python.demo_map.executor": "Run",
-    "Python.demo_project.executor": "Run",
-    "Python.screens.executor": "Debug",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Kirill's-Branch",
-    "last_opened_file_path": "E:/PyCharmProjects/YandexGameProject/assets/data",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Map_constructor.executor&quot;: &quot;Run&quot;,
+    &quot;Python.demo_map.executor&quot;: &quot;Run&quot;,
+    &quot;Python.demo_project.executor&quot;: &quot;Run&quot;,
+    &quot;Python.screens.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Kirill's-Branch&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/PyCharmProjects/YandexGameProject/assets/data&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\PyCharmProjects\YandexGameProject\assets\data" />
@@ -288,12 +296,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Units.py</url>
-          <line>157</line>
+          <line>158</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/screens.py</url>
-          <line>228</line>
+          <line>231</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

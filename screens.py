@@ -5,7 +5,7 @@ import pygame.sprite
 import demo_project
 from load_image_func import load_image
 from constant import FPS, HEIGHT, WIDTH
-from sound_tests import play_sound
+from sound_tests import play_sound, play_background_music
 from sprite_groups import groups, update_group
 
 pygame.init()
@@ -56,6 +56,7 @@ class Button(pygame.sprite.Sprite):
             if self.command == 'open_pick_level_screen':
                 pick_level_screen()
                 update_group()  # Временно
+                play_background_music('assets/sounds/background_sounds/Shiro_Sagisu_-_Treachery_72363454.mp3')
                 demo_project.game_loop()  # Временно
             if self.command == 'open_main_lobby':
                 main_lobby()
@@ -112,6 +113,8 @@ class Level_door(pygame.sprite.Sprite):
 def main_lobby():
     background = load_image('assets/backgrounds/main_background.png')
     pygame.display.set_icon(load_image('assets/icon.png'))
+
+    play_background_music('assets/sounds/background_sounds/lobby_sound.mp3')
 
     Button(900, 300, 'sketch', 'open_pick_level_screen', 'Continue')
     Button(900, 425, 'sketch', 'open_dictionary_screen', 'Dictionary')

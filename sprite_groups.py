@@ -41,6 +41,6 @@ groups = {
     "level_doors": sprite.Group(),
     "buttons": sprite.Group(),
 
-"characters_page": sprite.Group(),
-"mobs_page": sprite.Group()
+    "characters_page": sprite.Group(),
+    "mobs_page": sprite.Group()
 }

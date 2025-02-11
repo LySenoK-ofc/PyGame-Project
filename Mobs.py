@@ -10,7 +10,7 @@ from constant import CELL_SIZE, HEIGHT, WIDTH
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self, coord, animations, grop_of_row, frame_rate, hp, atk, hurt_cooldown,
-                 attack_radius=None, super_atk=None, armor_hp=None, armor_def=None):
+                 attack_radius=None, super_atk=None, armor_hp=None, armor_def=None, money=0):
         super().__init__(groups['all_sprites'], groups['mobs'], grop_of_row)
         self.animations = animations
         self.frame_rate = frame_rate
@@ -34,6 +34,7 @@ class Enemy(pygame.sprite.Sprite):
         self.armor_hp = armor_hp
         self.hurt_cooldown = hurt_cooldown
         self.hits = 0
+        self.money = money
 
         if super_atk:
             self.super_atk = super_atk
@@ -140,7 +141,7 @@ class Enemy(pygame.sprite.Sprite):
                 self.hp -= dmg
             if self.hp <= 0:
                 self.life = False
-
+                constant.cash += self.money
 
     def set_target(self, new_target):
         if self.current_target is None:
@@ -159,8 +160,8 @@ class Enemy(pygame.sprite.Sprite):
                 self.life = False
                 constant.hp -= 1
                 if constant.hp <= 0:
-                    constant.hp = 5 # временно
-                    screens.main_lobby() # переход на экран окончания игры
+                    constant.hp = 5  # временно
+                    screens.main_lobby()  # переход на экран окончания игры
                 self.kill()
 
             if self.current_target:
@@ -185,7 +186,7 @@ class Orc(Enemy):
         }
         super().__init__(coord, ANIMATIONS['ORC'], grop_of_row,
                          attack_radius=CELL_SIZE, hp=80, atk=20,
-                         frame_rate=frame_rate, hurt_cooldown=2)
+                         frame_rate=frame_rate, hurt_cooldown=2, money=12)
 
     def update(self, *args, **kwargs):
         super().update()
@@ -212,7 +213,7 @@ class EliteOrc(Enemy):
         }
         super().__init__(coord, ANIMATIONS['ELITE_ORC'], grop_of_row,
                          attack_radius=CELL_SIZE, hp=120, atk=30, super_atk=50,
-                         frame_rate=frame_rate, armor_hp=20, armor_def=0.1, hurt_cooldown=3)
+                         frame_rate=frame_rate, armor_hp=20, armor_def=0.1, hurt_cooldown=3, money=16)
 
     def update(self, *args, **kwargs):
         super().update()
@@ -240,7 +241,7 @@ class ArmoredOrc(Enemy):
         }
         super().__init__(coord, ANIMATIONS['ARMORED_ORC'], grop_of_row,
                          attack_radius=CELL_SIZE, hp=150, atk=25, super_atk=35,
-                         frame_rate=frame_rate, armor_hp=30, armor_def=0.15, hurt_cooldown=4)
+                         frame_rate=frame_rate, armor_hp=30, armor_def=0.15, hurt_cooldown=4, money=24)
 
     def update(self, *args, **kwargs):
         super().update()
@@ -269,7 +270,7 @@ class RiderOrc(Enemy):
         }
         super().__init__(coord, ANIMATIONS['RIDER_ORC'], grop_of_row,
                          attack_radius=CELL_SIZE, hp=120, atk=25,
-                         frame_rate=frame_rate, armor_hp=40, armor_def=0.2, hurt_cooldown=3)
+                         frame_rate=frame_rate, armor_hp=40, armor_def=0.2, hurt_cooldown=3, money=14)
 
     def update(self, *args, **kwargs):
         super().update()
@@ -298,7 +299,7 @@ class Skeleton(Enemy):
         }
         super().__init__(coord, ANIMATIONS['SKELETON'], grop_of_row,
                          attack_radius=CELL_SIZE, hp=70, atk=25,
-                         frame_rate=frame_rate, hurt_cooldown=2)
+                         frame_rate=frame_rate, hurt_cooldown=2, money=12)
 
     def update(self, *args, **kwargs):
         super().update()
@@ -325,7 +326,7 @@ class GreateswordSkeleton(Enemy):
         }
         super().__init__(coord, ANIMATIONS['GREATSWORD_SKELETON'], grop_of_row,
                          attack_radius=CELL_SIZE, hp=80, atk=30,
-                         frame_rate=frame_rate, armor_hp=45, armor_def=0.2, hurt_cooldown=3)
+                         frame_rate=frame_rate, armor_hp=45, armor_def=0.2, hurt_cooldown=3, money=14)
 
     def update(self, *args, **kwargs):
         super().update()
@@ -351,7 +352,7 @@ class ArmoredSkeleton(Enemy):
         }
         super().__init__(coord, ANIMATIONS['ARMORED_SCELETON'], grop_of_row,
                          attack_radius=CELL_SIZE, hp=120, atk=25,
-                         frame_rate=frame_rate, armor_hp=50, armor_def=0.25, hurt_cooldown=4)
+                         frame_rate=frame_rate, armor_hp=50, armor_def=0.25, hurt_cooldown=4, money=18)
 
     def update(self, *args, **kwargs):
         super().update()
@@ -377,7 +378,7 @@ class Slime(Enemy):
         }
         super().__init__(coord, ANIMATIONS['SLIME'], grop_of_row,
                          attack_radius=CELL_SIZE, hp=100, atk=15, super_atk=30,
-                         frame_rate=frame_rate, hurt_cooldown=2)
+                         frame_rate=frame_rate, hurt_cooldown=2, money=9)
 
     def update(self, *args, **kwargs):
         super().update()
@@ -404,7 +405,7 @@ class Werebear(Enemy):
         }
         super().__init__(coord, ANIMATIONS['WEREBEAR'], grop_of_row,
                          attack_radius=CELL_SIZE, hp=150, atk=35, super_atk=40,
-                         frame_rate=frame_rate, hurt_cooldown=3)
+                         frame_rate=frame_rate, hurt_cooldown=3, money=15)
 
     def update(self, *args, **kwargs):
         super().update()
@@ -430,7 +431,7 @@ class Werewolf(Enemy):
         }
         super().__init__(coord, ANIMATIONS['WEREWOLF'], grop_of_row,
                          attack_radius=CELL_SIZE, hp=70, atk=25,
-                         frame_rate=frame_rate, hurt_cooldown=2)
+                         frame_rate=frame_rate, hurt_cooldown=2, money=15)
 
     def update(self, *args, **kwargs):
         super().update()
