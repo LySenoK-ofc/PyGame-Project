@@ -1,3 +1,4 @@
+import time
 from random import choice
 
 import constant
@@ -11,6 +12,7 @@ from constant import LEFT, TOP, FPS, WIDTH, HEIGHT
 from Board_class import Board
 from sale_func import sale_unit
 from show_info import show_unit_info
+from sound_tests import play_sound
 from sprite_groups import groups
 import pygame
 import pygame.freetype
@@ -47,8 +49,13 @@ def game_loop():
 
     clock = pygame.time.Clock()
 
+    step_sound_counter = 0
+    step_channel = None
+
     SPAWN_WAVE_EVENT = pygame.USEREVENT + 1
+    START_STEP_SOUND_EVENT = pygame.USEREVENT + 1
     pygame.time.set_timer(SPAWN_WAVE_EVENT, 1500)
+    pygame.time.set_timer(START_STEP_SOUND_EVENT, 1500)
 
     money_font = pygame.freetype.Font('assets/data/Adbnorm.ttf', size=50)  # Деньги
     info_font = pygame.freetype.Font('assets/data/Adbnorm.ttf', size=20)  # Поле для информации об юните
@@ -60,6 +67,9 @@ def game_loop():
 
     running = True
     while running:
+
+        start_time = time.time()
+
         constant.frame_count += 1
         keys = pygame.key.get_pressed()
 
@@ -105,6 +115,19 @@ def game_loop():
             if event.type == SPAWN_WAVE_EVENT:
                 wave_manager.start_wave()
 
+            if event.type == START_STEP_SOUND_EVENT:
+                if step_sound_counter < 6:
+                    sound = choice([pygame.mixer.Sound('assets/sounds/entities_sounds/step.wav'),
+                                    pygame.mixer.Sound('assets/sounds/entities_sounds/step1.wav'),
+                                    pygame.mixer.Sound('assets/sounds/entities_sounds/step2.wav')])
+                    step_channel = sound.play()
+                    step_channel.set_volume(0.3)
+                    step_sound_counter += 1
+                if len(groups['mobs']) == 0:
+                    if step_channel:
+                        step_channel.stop()
+                        step_sound_counter = 0
+
         groups['all_sprites'].update()
         groups['all_sprites'].draw(screen)
 
@@ -130,6 +153,10 @@ def game_loop():
 
         pygame.display.flip()
         clock.tick(FPS)
+
+        end_time = time.time()
+        execution_time = end_time - start_time
+        print(f"{execution_time} секунд")
 
 
 if __name__ == '__main__':

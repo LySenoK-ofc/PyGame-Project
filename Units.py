@@ -1,7 +1,7 @@
 from random import choice, random
 
 import constant
-from sound_tests import play_sound
+from sound_tests import play_sound, sounds
 from sprite_groups import groups
 from constant import CELL_SIZE, WIDTH, HEIGHT
 from all_animations import ANIMATIONS
@@ -65,8 +65,11 @@ class Unit(pygame.sprite.Sprite):
                 if isinstance(self, Archer):
                     if self.mode == 'attack01' and self.frame == 6:
                         Arrow(self, 12.5, self.atk)
+                        play_sound(sounds['archer']['bow_attack'], 0.3)
                     elif self.mode == 'attack02' and self.frame == 10:
                         Arrow(self, 20, self.super_atk)
+                        play_sound(sounds['archer']['bow_attack'], 0.3)
+
 
                 elif isinstance(self, Knight):
                     if self.mode == 'attack01' and self.frame == 5:
@@ -78,21 +81,27 @@ class Unit(pygame.sprite.Sprite):
                         self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
 
                         self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
+
                     elif self.mode == 'attack03' and self.frame == 8:
                         self.current_target.lose_hp(self.super_atk, armor_dmg=self.super_atk * 0.3)
+                        play_sound(sounds['sword'][10], 0.4)
 
                         self.area_attack(self.super_atk / 1.5, armor_dmg=self.super_atk / 1.5 * 0.3)
 
                 elif isinstance(self, Wizard):
                     if self.mode == 'attack01' and self.frame == 13:
                         self.area_attack(self.atk)
+                        play_sound(sounds['wizard']['ice'], 0.4)
 
                     if self.mode == 'attack02_no_fire_ball' and self.frame == len(self.frames) - 1:
                         FireBall(self, self.grop_of_row, ANIMATIONS['WIZARD']['fire_ball'])
+                        play_sound(sounds['wizard']['fireball'], 0.35)
 
                 elif isinstance(self, Priest):
                     if self.mode == 'attack01_no_aura' and self.frame == 4:
                         PriestAura(self, self.grop_of_row, ANIMATIONS['PRIEST']['aura_for_attack01'])
+                        play_sound(sounds['priest']['hex'], 0.4)
+                        play_sound(sounds['priest']['aura'], 0.3)
 
                 elif isinstance(self, ArmoredAxeman):
                     if self.mode == 'attack01' and self.frame == 5:
@@ -104,8 +113,10 @@ class Unit(pygame.sprite.Sprite):
                         self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
 
                         self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
+
                     elif self.mode == 'attack03' and self.frame == 8:
                         self.current_target.lose_hp(self.super_atk, armor_dmg=self.super_atk * 0.3)
+                        play_sound(sounds['sword'][4], 0.4)
 
                         self.area_attack(self.super_atk / 1.5, armor_dmg=self.super_atk / 1.5 * 0.3)
 
@@ -164,11 +175,18 @@ class Unit(pygame.sprite.Sprite):
             else:
                 if self.hits % 2 == 0:
                     self.set_mode('hurt')
+
+                    if isinstance(self, Priest):
+                        play_sound(*choice([(sounds['priest']['damage'], 0.2),
+                                            (sounds['priest']['damage2'], 0.2)]))
+                    else:
+                        play_sound(*choice([(sounds['hurt'][1], 0.15),
+                                            (sounds['hurt'][2], 0.1)]))
+
                 if self.armor_hp:
                     dmg -= dmg * self.armor_def
                     self.armor_hp -= armor_dmg
                 self.hp -= dmg
-                play_sound('sword')
             if self.hp <= 0:
                 self.life = False
 
@@ -187,10 +205,17 @@ class Unit(pygame.sprite.Sprite):
 
         return bool(self.current_target)
 
+    def choice_sound(self):
+        sound = choice([sounds['sword'][1],
+                        sounds['sword'][2],
+                        sounds['sword'][3],
+                        sounds['sword'][6],
+                        sounds['sword'][8]])
+        return sound
+
     def update(self):
         if constant.frame_count % 3 == 0:
             if self.rect.right < 0 or self.rect.left > WIDTH or self.rect.bottom < 0 or self.rect.top > HEIGHT:
-                self.life = False
                 self.kill()
 
             self.find_target()
@@ -198,7 +223,15 @@ class Unit(pygame.sprite.Sprite):
         self.update_animation()
 
         if not self.life:
-            self.set_mode('death')
+            if self.mode != 'death':
+                self.set_mode('death')
+                if isinstance(self, Priest):
+                    play_sound(*choice([(sounds['priest']['death1'], 0.2),
+                                        (sounds['priest']['death2'], 0.2)]))
+                else:
+                    play_sound(*choice([(sounds['death'][1], 0.15),
+                                        (sounds['death'][2], 0.15)]))
+
             if self.frame == len(self.frames) - 1:
                 self.kill()
 
@@ -258,7 +291,12 @@ class Knight(Unit):
 
             elif self.mode == 'idle':
                 if self.current_target:
-                    self.set_mode(choice(['attack01', 'attack02']) if random() > 0.2 else 'attack03')
+                    mode = choice(['attack01', 'attack02']) if random() > 0.2 else 'attack03'
+
+                    if mode != 'attack03':
+                        play_sound(self.choice_sound())
+
+                    self.set_mode(mode)
 
 
 class Lancer(Unit):
@@ -346,6 +384,7 @@ class Priest(Unit):
                     and CELL_SIZE <= abs(self.rect.x - unit.rect.x) <= self.heal_range
                     and unit.hp < unit.full_hp):
                 self.set_mode('healing')
+                play_sound(sounds['priest']['heal'])
                 self.heal_target = unit
                 break
 
@@ -394,7 +433,11 @@ class ArmoredAxeman(Unit):
 
             elif self.mode == 'idle':
                 if self.current_target:
-                    self.set_mode(choice(['attack01', 'attack02']) if random() > 0.3 else 'attack03')
+                    mode = choice(['attack01', 'attack02']) if random() > 0.3 else 'attack03'
+
+                    if mode != 'attack03':
+                        play_sound(self.choice_sound(), 0.4)
+                    self.set_mode(mode)
 
 
 class SwordsMan(Unit):
@@ -424,7 +467,14 @@ class SwordsMan(Unit):
 
             elif self.mode == 'idle':
                 if self.current_target:
-                    self.set_mode(choice(['attack01', 'attack02', 'attack03']))
+                    mode = choice(['attack01', 'attack02', 'attack03'])
+
+                    if mode == 'attack01':
+                        play_sound(self.choice_sound(), 0.3)
+                    else:
+                        play_sound(*choice([(sounds['sword'][5], 0.3),
+                                            (sounds['sword'][7], 0.3)]))
+                    self.set_mode(mode)
 
 
 class KnightTemplar(Unit):
@@ -462,7 +512,14 @@ class KnightTemplar(Unit):
 
             elif self.mode == 'idle':
                 if self.current_target:
-                    self.set_mode(choice(['attack01', 'attack02', 'attack03']))
+                    mode = choice(['attack01', 'attack02', 'attack03'])
+
+                    if mode == 'attack01':
+                        play_sound(self.choice_sound(), 0.3)
+                    else:
+                        play_sound(*choice([(sounds['sword'][8], 0.3),
+                                            (sounds['sword'][9], 0.3)]))
+                    self.set_mode(mode)
                 else:
                     now = pygame.time.get_ticks()
                     if now - self.last_walk > 25000 and not self.cached_nearby_mobs and self.rect.x < WIDTH - 500:

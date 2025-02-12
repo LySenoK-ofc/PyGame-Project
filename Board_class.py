@@ -1,4 +1,5 @@
 from constant import WIDTH
+from sound_tests import play_sound, sounds
 from sprite_groups import groups
 from random import randrange
 
@@ -26,7 +27,6 @@ class Board:
             return None
 
     def on_click(self, entity, entity_type='Orcs', cell=None):
-        print(entity)
         if entity_type == 'Troops':
             if cell and all([((soldier.rect.center[0] - self.left) // self.cell_size,
                               (soldier.rect.center[1] - self.top) // self.cell_size) != cell
@@ -35,10 +35,10 @@ class Board:
                             cell[1] * self.cell_size + self.top + self.cell_size / 2),
                            groups['rows'][cell[1]])
                 entity(*setting)
+                play_sound(sounds['unit_spawn'])
                 return True
 
         elif entity_type == 'Orcs':
-            for i in range(1):
-                row = randrange(0, 5)
-                setting = ((WIDTH, row * self.cell_size + self.top + self.cell_size / 2), groups['rows'][row])
-                entity(*setting)
+            row = randrange(0, 5)
+            setting = ((WIDTH, row * self.cell_size + self.top + self.cell_size / 2), groups['rows'][row])
+            entity(*setting)

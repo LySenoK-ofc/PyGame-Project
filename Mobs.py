@@ -3,6 +3,7 @@ from random import choice, randint, random
 import constant
 import screens
 from all_animations import ANIMATIONS
+from sound_tests import play_sound, sounds
 from sprite_groups import groups
 import pygame
 from constant import CELL_SIZE, HEIGHT, WIDTH

@@ -5,7 +5,7 @@ import pygame.sprite
 import demo_project
 from load_image_func import load_image
 from constant import FPS, HEIGHT, WIDTH
-from sound_tests import play_sound, play_background_music
+from sound_tests import play_sound, play_background_music, sounds
 from sprite_groups import groups, update_group
 
 pygame.init()
@@ -51,12 +51,12 @@ class Button(pygame.sprite.Sprite):
             groups['level_doors'].empty()
             texts.clear()
 
-            play_sound('button_click')
+            play_sound(sounds['button_click'])
 
             if self.command == 'open_pick_level_screen':
                 pick_level_screen()
                 update_group()  # Временно
-                play_background_music('assets/sounds/background_sounds/Shiro_Sagisu_-_Treachery_72363454.mp3')
+                play_background_music('assets/sounds/background_sounds/lvl/Shiro_Sagisu_-_Treachery_72363454.mp3')
                 demo_project.game_loop()  # Временно
             if self.command == 'open_main_lobby':
                 main_lobby()
@@ -114,7 +114,7 @@ def main_lobby():
     background = load_image('assets/backgrounds/main_background.png')
     pygame.display.set_icon(load_image('assets/icon.png'))
 
-    play_background_music('assets/sounds/background_sounds/lobby_sound.mp3')
+    play_background_music('assets/sounds/background_sounds/lobby/lobby_sound.mp3')
 
     Button(900, 300, 'sketch', 'open_pick_level_screen', 'Continue')
     Button(900, 425, 'sketch', 'open_dictionary_screen', 'Dictionary')
@@ -230,7 +230,7 @@ def pick_level_screen():
                     for door in groups['level_doors']:
                         if type(door) == Level_door and door.check():
                             groups['buttons'].empty()
-                            play_sound('open_door', 1)
+                            play_sound(sounds['open_door'], 1)
                             return
                     groups['buttons'].update(event)
 
