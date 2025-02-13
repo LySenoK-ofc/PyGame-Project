@@ -159,7 +159,7 @@ class MapConstructor:
 
         # Ставим конницу
         for i in range(1, WIDTH_CELL):
-            Lancer((LEFT - CELL_SIZE / 2, i * CELL_SIZE + TOP - CELL_SIZE / 2), grop_of_row=groups['rows'][i - 1])
+            Lancer((LEFT - CELL_SIZE / 2, i * CELL_SIZE + TOP - CELL_SIZE / 2), group_of_row=groups['rows'][i - 1])
 
         # Ставим юнитов в магазин
         units = [(Knight, shop_unit_coord[0], ANIMATIONS['KNIGHT'], 90, 45),

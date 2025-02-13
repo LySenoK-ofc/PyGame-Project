@@ -1,12 +1,10 @@
 from random import choice, random
-
+import pygame
 import constant
 from sound_tests import play_sound, sounds
 from sprite_groups import groups
 from constant import CELL_SIZE, WIDTH, HEIGHT
 from all_animations import ANIMATIONS
-
-import pygame
 
 
 class Unit(pygame.sprite.Sprite):
@@ -14,7 +12,7 @@ class Unit(pygame.sprite.Sprite):
                  detect_range=None, attack_range=None, super_atk=None, area_atk=None, armor_hp=None, armor_def=None,
                  sale=None):
         super().__init__(groups['all_sprites'], groups['characters'], *group)
-        self.grop_of_row = group[0]
+        self.group_of_row = group[0]
         self.hp = hp
         self.atk = atk
         self.full_hp = hp
@@ -27,7 +25,7 @@ class Unit(pygame.sprite.Sprite):
         self.life = True
         self.current_target = None
         self.armor_hp = armor_hp
-        self.hits = 0
+        self.hits = 0  # Удары, нанесённые юниту
 
         if super_atk:
             self.super_atk = super_atk
@@ -48,128 +46,34 @@ class Unit(pygame.sprite.Sprite):
         self.last_update = pygame.time.get_ticks()
         self.frame_rate = frame_rate
 
-    def set_mode(self, mode):
+        self.info = f'Хп:{self.hp}\nУрон:{self.atk}\nБроня:{self.armor_hp}'
+
+    def set_mode(self, mode: str):
+        """Меняем анимацию."""
         if self.mode != mode:
             self.mode = mode
             self.frames = self.animations[self.mode]
             self.frame = 0
 
     def update_animation(self):
+        """Обновляем анимацию."""
         now = pygame.time.get_ticks()
         if now - self.last_update > self.frame_rate[self.mode]:
             self.last_update = now
             self.frame = (self.frame + 1) % len(self.frames)
             self.image = self.frames[self.frame]
+            self.attack_frame_event()
 
-            if self.current_target:
-                if isinstance(self, Archer):
-                    if self.mode == 'attack01' and self.frame == 6:
-                        Arrow(self, 12.5, self.atk)
-                        play_sound(sounds['archer']['bow_attack'], 0.3)
-                    elif self.mode == 'attack02' and self.frame == 10:
-                        Arrow(self, 20, self.super_atk)
-                        play_sound(sounds['archer']['bow_attack'], 0.3)
-
-
-                elif isinstance(self, Knight):
-                    if self.mode == 'attack01' and self.frame == 5:
-                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
-
-                        self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
-
-                    elif self.mode == 'attack02' and self.frame in (4, 8):
-                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
-
-                        self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
-
-                    elif self.mode == 'attack03' and self.frame == 8:
-                        self.current_target.lose_hp(self.super_atk, armor_dmg=self.super_atk * 0.3)
-                        play_sound(sounds['sword'][10], 0.4)
-
-                        self.area_attack(self.super_atk / 1.5, armor_dmg=self.super_atk / 1.5 * 0.3)
-
-                elif isinstance(self, Wizard):
-                    if self.mode == 'attack01' and self.frame == 13:
-                        self.area_attack(self.atk)
-                        play_sound(sounds['wizard']['ice'], 0.4)
-
-                    if self.mode == 'attack02_no_fire_ball' and self.frame == len(self.frames) - 1:
-                        FireBall(self, self.grop_of_row, ANIMATIONS['WIZARD']['fire_ball'])
-                        play_sound(sounds['wizard']['fireball'], 0.35)
-
-                elif isinstance(self, Priest):
-                    if self.mode == 'attack01_no_aura' and self.frame == 4:
-                        PriestAura(self, self.grop_of_row, ANIMATIONS['PRIEST']['aura_for_attack01'])
-                        play_sound(sounds['priest']['hex'], 0.4)
-                        play_sound(sounds['priest']['aura'], 0.3)
-
-                elif isinstance(self, ArmoredAxeman):
-                    if self.mode == 'attack01' and self.frame == 5:
-                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
-
-                        self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
-
-                    elif self.mode == 'attack02' and self.frame in (4, 8):
-                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
-
-                        self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
-
-                    elif self.mode == 'attack03' and self.frame == 8:
-                        self.current_target.lose_hp(self.super_atk, armor_dmg=self.super_atk * 0.3)
-                        play_sound(sounds['sword'][4], 0.4)
-
-                        self.area_attack(self.super_atk / 1.5, armor_dmg=self.super_atk / 1.5 * 0.3)
-
-                elif isinstance(self, SwordsMan):
-                    if self.mode == 'attack01' and self.frame == 3:
-                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
-
-                        self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
-                    elif self.mode == 'attack02' and self.frame in (3, 6, 12):
-                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
-
-                        self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
-                    elif self.mode == 'attack03' and self.frame in (6, 7, 9, 10):
-                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
-
-                        self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
-
-                elif isinstance(self, KnightTemplar):
-                    if self.mode == 'attack01' and self.frame == 4:
-                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
-
-                        self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
-                    elif self.mode == 'attack02' and self.frame == 5:
-                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
-
-                        self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
-                    elif self.mode == 'attack03' and self.frame in (3, 7):
-                        self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
-
-                        self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
-
-            if isinstance(self, Lancer):
-                if self.mode == 'attack01':
-                    self.rect.x += 25
-                    self.area_attack(self.atk)
-            elif isinstance(self, Priest) and self.mode == 'healing':
-                if self.frame in (3, 5) and self.heal_target.hp != self.heal_target.full_hp:
-                    self.heal_target.hp += self.heal
-                if self.rect.x > self.heal_target.rect.x:
-                    self.image = pygame.transform.flip(self.image, True, False)
-
-            elif isinstance(self, KnightTemplar) and self.mode == 'walk_block':
-                if self.distance > self.distance_traveled:
-                    self.rect.x += self.speed
-                    self.distance_traveled += self.speed
-                else:
-                    self.distance_traveled -= self.distance
-                    self.set_mode('idle')
+    def attack_frame_event(self):
+        """Метод проверки фрейма удара. Переопределяется."""
+        pass
 
     def lose_hp(self, dmg, armor_dmg=0):
+        """Наносим урон юниту."""
         if self.life:
             self.hits += 1
-            if 'block' in self.animations and random() < 0.30:
+
+            if 'block' in self.animations and random() < 0.3:
                 self.set_mode('block')
                 self.hp -= dmg / 3
             else:
@@ -191,35 +95,43 @@ class Unit(pygame.sprite.Sprite):
                 self.life = False
 
     def find_target(self):
-        self.cached_nearby_mobs = list(filter(lambda nearby_mob: nearby_mob.rect.x >= self.rect.x,
-                                              [mob for mob in self.grop_of_row
+        """Ищем цель для юнита."""
+        # Список ближайших мобов, входящий в радиус видимости
+        self.cached_nearby_mobs = list(filter(lambda mob: mob.rect.x >= self.rect.x,
+                                              [mob for mob in self.group_of_row
                                                if mob in groups['mobs'] and mob.life
                                                and abs(self.rect.x - mob.rect.x) <= self.detect_range]))
+        # Берём ближайшего моба
+        nearest_mob = min(self.cached_nearby_mobs, key=lambda x: x.rect.x) if self.cached_nearby_mobs else None
 
-        nearest_mob = min(self.cached_nearby_mobs, key=lambda x: x.rect.x) if self.cached_nearby_mobs else []
-        self.current_target = min(self.cached_nearby_mobs, key=lambda x: x.rect.x) \
-            if nearest_mob and abs(self.rect.x - nearest_mob.rect.x) <= self.attack_range else None
+        # Устанавливаем цель, если получится
+        self.current_target = None
+        if nearest_mob and abs(self.rect.x - nearest_mob.rect.x) <= self.attack_range:
+            self.current_target = nearest_mob
 
+        # Передаём инфу о юните ближайшим мобам
         for mob in set(self.cached_nearby_mobs):
             mob.set_target(self)
 
+        # Возвращаем буллевое значение
         return bool(self.current_target)
 
     def choice_sound(self):
-        sound = choice([sounds['sword'][1],
-                        sounds['sword'][2],
-                        sounds['sword'][3],
-                        sounds['sword'][6],
-                        sounds['sword'][8]])
-        return sound
+        """Возвращаем случайный звук удара."""
+        return choice([sounds['sword'][1],
+                       sounds['sword'][2],
+                       sounds['sword'][3],
+                       sounds['sword'][6],
+                       sounds['sword'][8]])
 
     def update(self):
+        # Каждый 3-й фрейм проверяем координаты и мобов поблизости
         if constant.frame_count % 3 == 0:
             if self.rect.right < 0 or self.rect.left > WIDTH or self.rect.bottom < 0 or self.rect.top > HEIGHT:
                 self.kill()
-
             self.find_target()
 
+        # Апдейт анимаций
         self.update_animation()
 
         if not self.life:
@@ -231,13 +143,12 @@ class Unit(pygame.sprite.Sprite):
                 else:
                     play_sound(*choice([(sounds['death'][1], 0.15),
                                         (sounds['death'][2], 0.15)]))
-
             if self.frame == len(self.frames) - 1:
                 self.kill()
 
 
 class Archer(Unit):
-    def __init__(self, coord, grop_of_row):
+    def __init__(self, coord, group_of_row):
         frame_rate = {
             'idle': 250,
             'attack01': 170,
@@ -245,24 +156,32 @@ class Archer(Unit):
             'hurt': 100,
             'death': 250,
         }
-        super().__init__(coord, ANIMATIONS['ARCHER'], [grop_of_row, groups['shop_units']],
+        super().__init__(coord, ANIMATIONS['ARCHER'], [group_of_row, groups['shop_units']],
                          detect_range=WIDTH, attack_range=WIDTH, hp=100, atk=25, super_atk=40, sale=25,
                          frame_rate=frame_rate)
 
+    def attack_frame_event(self):
+        """Наносим удар, если надо. У других юнитов аналогично."""
+        if self.current_target:
+            if self.mode == 'attack01' and self.frame == 6:
+                Arrow(self, 12.5, self.atk)
+                play_sound(sounds['archer']['bow_attack'], 0.3)
+            elif self.mode == 'attack02' and self.frame == 10:
+                Arrow(self, 20, self.super_atk)
+                play_sound(sounds['archer']['bow_attack'], 0.3)
+
     def update(self):
+        """Вызываем родительский метод. Если юнит жив, то проверяем анимации и что-то делаем. У других юнитов аналогично."""
         super().update()
         if self.life:
-
             if self.mode in ('hurt', 'attack01', 'attack02') and self.frame == len(self.frames) - 1:
                 self.set_mode('idle')
-
-            elif self.mode == 'idle':
-                if self.current_target:
-                    self.set_mode('attack01' if random() > 0.3 else 'attack02')
+            elif self.mode == 'idle' and self.current_target:
+                self.set_mode('attack01' if random() > 0.3 else 'attack02')
 
 
 class Knight(Unit):
-    def __init__(self, coord, grop_of_row):
+    def __init__(self, coord, group_of_row):
         frame_rate = {
             'idle': 250,
             'attack01': 135,
@@ -272,12 +191,26 @@ class Knight(Unit):
             'hurt': 60,
             'death': 250,
         }
-        super().__init__(coord, ANIMATIONS['KNIGHT'], [grop_of_row, groups['shop_units']],
+        super().__init__(coord, ANIMATIONS['KNIGHT'], [group_of_row, groups['shop_units']],
                          detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=200, atk=30,
                          super_atk=50, sale=45,
                          frame_rate=frame_rate, armor_hp=50, armor_def=0.2)
 
+    def attack_frame_event(self):
+        if self.current_target:
+            if self.mode == 'attack01' and self.frame == 5:
+                self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
+                self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
+            elif self.mode == 'attack02' and self.frame in (4, 8):
+                self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
+                self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
+            elif self.mode == 'attack03' and self.frame == 8:
+                self.current_target.lose_hp(self.super_atk, armor_dmg=self.super_atk * 0.3)
+                play_sound(sounds['sword'][10], 0.4)
+                self.area_attack(self.super_atk / 1.5, armor_dmg=(self.super_atk / 1.5) * 0.3)
+
     def area_attack(self, area_atk, armor_dmg):
+        """Урон по области."""
         for mob in self.cached_nearby_mobs:
             if mob != self.current_target and mob.life and abs(self.rect.x - mob.rect.x) <= CELL_SIZE:
                 mob.lose_hp(area_atk, armor_dmg=armor_dmg)
@@ -285,22 +218,19 @@ class Knight(Unit):
     def update(self):
         super().update()
         if self.life:
-            if self.mode in ('hurt', 'block', 'attack01', 'attack02', 'attack03') and self.frame == len(
-                    self.frames) - 1:
+            if (self.mode in ('hurt', 'block', 'attack01', 'attack02', 'attack03')
+                    and self.frame == len(self.frames) - 1):
                 self.set_mode('idle')
-
-            elif self.mode == 'idle':
-                if self.current_target:
-                    mode = choice(['attack01', 'attack02']) if random() > 0.2 else 'attack03'
-
-                    if mode != 'attack03':
-                        play_sound(self.choice_sound())
-
-                    self.set_mode(mode)
+            elif self.mode == 'idle' and self.current_target:
+                mode = choice(['attack01', 'attack02']) if random() > 0.2 else 'attack03'
+                # Проигрываем звук удара, если удар не особый.
+                if mode != 'attack03':
+                    play_sound(self.choice_sound(), 0.3)
+                self.set_mode(mode)
 
 
 class Lancer(Unit):
-    def __init__(self, coord, grop_of_row):
+    def __init__(self, coord, group_of_row):
         frame_rate = {
             'idle': 250,
             'attack01': 60,
@@ -311,9 +241,15 @@ class Lancer(Unit):
             'hurt': 60,
             'death': 250,
         }
-        super().__init__(coord, ANIMATIONS['LANCER'], [grop_of_row],
+        super().__init__(coord, ANIMATIONS['LANCER'], [group_of_row],
                          detect_range=2 * CELL_SIZE, attack_range=CELL_SIZE, hp=1000, atk=1000,
                          frame_rate=frame_rate)
+
+    def attack_frame_event(self):
+        if self.mode == 'attack01':
+            # Передвигаем юнита вправо
+            self.rect.x += 25
+            self.area_attack(self.atk)
 
     def area_attack(self, area_atk):
         for mob in self.cached_nearby_mobs:
@@ -322,14 +258,12 @@ class Lancer(Unit):
 
     def update(self):
         super().update()
-        if self.life:
-            if self.mode in ('idle', 'hurt'):
-                if self.current_target:
-                    self.set_mode('attack01')
+        if self.life and self.mode in ('idle', 'hurt') and self.current_target:
+            self.set_mode('attack01')
 
 
 class Wizard(Unit):
-    def __init__(self, coord, grop_of_row):
+    def __init__(self, coord, group_of_row):
         frame_rate = {
             'idle': 250,
             'attack01': 90,
@@ -337,9 +271,19 @@ class Wizard(Unit):
             'hurt': 100,
             'death': 250,
         }
-        super().__init__(coord, ANIMATIONS['WIZARD'], [grop_of_row, groups['shop_units']],
+        super().__init__(coord, ANIMATIONS['WIZARD'], [group_of_row, groups['shop_units']],
                          detect_range=3 * CELL_SIZE, attack_range=2 * CELL_SIZE, hp=110, atk=30, sale=42,
                          frame_rate=frame_rate)
+
+    def attack_frame_event(self):
+        if self.current_target:
+            if self.mode == 'attack01' and self.frame == 13:
+                self.area_attack(self.atk)
+                play_sound(sounds['wizard']['ice'], 0.4)
+            elif self.mode == 'attack02_no_fire_ball' and self.frame == len(self.frames) - 1:
+                # Спавним фаерболл
+                FireBall(self, self.group_of_row, ANIMATIONS['WIZARD']['fire_ball'])
+                play_sound(sounds['wizard']['fireball'], 0.35)
 
     def area_attack(self, area_atk):
         for mob in self.cached_nearby_mobs:
@@ -351,17 +295,16 @@ class Wizard(Unit):
         if self.life:
             if self.mode in ('hurt', 'attack01', 'attack02_no_fire_ball') and self.frame == len(self.frames) - 1:
                 self.set_mode('idle')
-
-            elif self.mode == 'idle':
-                if self.current_target:
-                    if abs(self.rect.x - self.current_target.rect.x) <= CELL_SIZE * 1.5:
-                        self.set_mode('attack01')
-                    else:
-                        self.set_mode('attack02_no_fire_ball')
+            elif self.mode == 'idle' and self.current_target:
+                # Если моб близко, то атакуем первой атакой, иначе - фаерболл
+                if abs(self.rect.x - self.current_target.rect.x) <= CELL_SIZE * 1.5:
+                    self.set_mode('attack01')
+                else:
+                    self.set_mode('attack02_no_fire_ball')
 
 
 class Priest(Unit):
-    def __init__(self, coord, grop_of_row):
+    def __init__(self, coord, group_of_row):
         frame_rate = {
             'idle': 250,
             'attack01_no_aura': 180,
@@ -369,20 +312,32 @@ class Priest(Unit):
             'hurt': 100,
             'death': 250,
         }
-        super().__init__(coord, ANIMATIONS['PRIEST'], [grop_of_row, groups['shop_units']],
+        super().__init__(coord, ANIMATIONS['PRIEST'], [group_of_row, groups['shop_units']],
                          detect_range=3 * CELL_SIZE, attack_range=2 * CELL_SIZE, hp=120, atk=20, sale=40,
                          frame_rate=frame_rate)
-
         self.heal_range = CELL_SIZE
         self.heal_target = None
         self.heal = 15
         self.heal_cooldown_start = pygame.time.get_ticks()
 
+    def attack_frame_event(self):
+        if self.current_target:
+            if self.mode == 'attack01_no_aura' and self.frame == 4:
+                PriestAura(self, self.group_of_row, ANIMATIONS['PRIEST']['aura_for_attack01'])
+                play_sound(sounds['priest']['hex'], 0.4)
+                play_sound(sounds['priest']['aura'], 0.3)
+        elif self.mode == 'healing':
+            # Лечим справа и слева, если хп не фулл
+            if self.frame in (3, 5) and self.heal_target and self.heal_target.hp < self.heal_target.full_hp:
+                self.heal_target.hp += self.heal
+            if self.heal_target and self.rect.x > self.heal_target.rect.x:
+                self.image = pygame.transform.flip(self.image, True, False)
+
     def check_healing(self):
-        for unit in self.grop_of_row:
-            if (unit in groups['characters']
-                    and CELL_SIZE <= abs(self.rect.x - unit.rect.x) <= self.heal_range
-                    and unit.hp < unit.full_hp):
+        """Проверяем, надо ли кого-нибудь лечить."""
+        for unit in self.group_of_row:
+            if unit in groups['characters'] and CELL_SIZE <= abs(
+                    self.rect.x - unit.rect.x) <= self.heal_range and unit.hp < unit.full_hp:
                 self.set_mode('healing')
                 play_sound(sounds['priest']['heal'])
                 self.heal_target = unit
@@ -393,13 +348,13 @@ class Priest(Unit):
         if self.life:
             if self.mode in ('hurt', 'healing', 'attack01_no_aura') and self.frame == len(self.frames) - 1:
                 self.set_mode('idle')
-
             elif self.mode == 'idle':
                 if self.current_target:
                     self.set_mode('attack01_no_aura')
                     if random() < 0.1:
                         self.heal_cooldown_start -= 5000
                 else:
+                    # Таймер для начала лечения
                     now = pygame.time.get_ticks()
                     if now - self.heal_cooldown_start > 10000:
                         self.heal_cooldown_start = now
@@ -407,7 +362,7 @@ class Priest(Unit):
 
 
 class ArmoredAxeman(Unit):
-    def __init__(self, coord, grop_of_row):
+    def __init__(self, coord, group_of_row):
         frame_rate = {
             'idle': 250,
             'attack01': 135,
@@ -416,10 +371,25 @@ class ArmoredAxeman(Unit):
             'hurt': 60,
             'death': 250,
         }
-        super().__init__(coord, ANIMATIONS['ARMORED_AXEMAN'], [grop_of_row, groups['shop_units']],
+        super().__init__(coord, ANIMATIONS['ARMORED_AXEMAN'], [group_of_row, groups['shop_units']],
                          detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=150, atk=35, super_atk=60, sale=35,
                          frame_rate=frame_rate, armor_hp=70, armor_def=0.35)
 
+    def attack_frame_event(self):
+        if self.current_target:
+            if self.mode == 'attack01' and self.frame == 5:
+                self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
+                self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
+                play_sound(self.choice_sound(), 0.3)
+            elif self.mode == 'attack02' and self.frame in (4, 8):
+                self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
+                self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
+                play_sound(sounds['sword'][4], 0.3)
+            elif self.mode == 'attack03' and self.frame == 8:
+                self.current_target.lose_hp(self.super_atk, armor_dmg=self.super_atk * 0.3)
+                self.area_attack(self.super_atk / 1.5, armor_dmg=(self.super_atk / 1.5) * 0.3)
+                play_sound(sounds['sword'][4], 0.3)
+
     def area_attack(self, area_atk, armor_dmg):
         for mob in self.cached_nearby_mobs:
             if mob != self.current_target and mob.life and abs(self.rect.x - mob.rect.x) <= self.attack_range:
@@ -430,18 +400,13 @@ class ArmoredAxeman(Unit):
         if self.life:
             if self.mode in ('hurt', 'attack01', 'attack02', 'attack03') and self.frame == len(self.frames) - 1:
                 self.set_mode('idle')
-
-            elif self.mode == 'idle':
-                if self.current_target:
-                    mode = choice(['attack01', 'attack02']) if random() > 0.3 else 'attack03'
-
-                    if mode != 'attack03':
-                        play_sound(self.choice_sound(), 0.4)
-                    self.set_mode(mode)
+            elif self.mode == 'idle' and self.current_target:
+                mode = choice(['attack01', 'attack02']) if random() > 0.3 else 'attack03'
+                self.set_mode(mode)
 
 
 class SwordsMan(Unit):
-    def __init__(self, coord, grop_of_row):
+    def __init__(self, coord, group_of_row):
         frame_rate = {
             'idle': 250,
             'attack01': 135,
@@ -450,9 +415,21 @@ class SwordsMan(Unit):
             'hurt': 60,
             'death': 250,
         }
-        super().__init__(coord, ANIMATIONS['SWORDSMAN'], [grop_of_row, groups['shop_units']],
+        super().__init__(coord, ANIMATIONS['SWORDSMAN'], [group_of_row, groups['shop_units']],
                          detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=150, atk=30, sale=40,
                          frame_rate=frame_rate, armor_hp=30, armor_def=0.2)
+
+    def attack_frame_event(self):
+        if self.current_target:
+            if self.mode == 'attack01' and self.frame == 3:
+                self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
+                self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
+            elif self.mode == 'attack02' and self.frame in (3, 6, 12):
+                self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
+                self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
+            elif self.mode == 'attack03' and self.frame in (6, 7, 9, 10):
+                self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
+                self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
 
     def area_attack(self, area_atk, armor_dmg):
         for mob in self.cached_nearby_mobs:
@@ -464,21 +441,17 @@ class SwordsMan(Unit):
         if self.life:
             if self.mode in ('hurt', 'attack01', 'attack02', 'attack03') and self.frame == len(self.frames) - 1:
                 self.set_mode('idle')
-
-            elif self.mode == 'idle':
-                if self.current_target:
-                    mode = choice(['attack01', 'attack02', 'attack03'])
-
-                    if mode == 'attack01':
-                        play_sound(self.choice_sound(), 0.3)
-                    else:
-                        play_sound(*choice([(sounds['sword'][5], 0.3),
-                                            (sounds['sword'][7], 0.3)]))
-                    self.set_mode(mode)
+            elif self.mode == 'idle' and self.current_target:
+                mode = choice(['attack01', 'attack02', 'attack03'])
+                if mode == 'attack01':
+                    play_sound(self.choice_sound(), 0.3)
+                else:
+                    play_sound(choice([sounds['sword'][5], sounds['sword'][7]]), 0.3)
+                self.set_mode(mode)
 
 
 class KnightTemplar(Unit):
-    def __init__(self, coord, grop_of_row):
+    def __init__(self, coord, group_of_row):
         frame_rate = {
             'idle': 250,
             'walk_block': 250,
@@ -489,14 +462,34 @@ class KnightTemplar(Unit):
             'hurt': 60,
             'death': 250,
         }
-        super().__init__(coord, ANIMATIONS['KNIGHT_TEMPLAR'], [grop_of_row, groups['shop_units']],
+        super().__init__(coord, ANIMATIONS['KNIGHT_TEMPLAR'], [group_of_row, groups['shop_units']],
                          detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=200, atk=30, sale=40,
                          frame_rate=frame_rate, armor_hp=60, armor_def=0.25)
-
         self.speed = 4
         self.distance = CELL_SIZE / 2
         self.distance_traveled = 0
         self.last_walk = pygame.time.get_ticks()
+
+    def attack_frame_event(self):
+        if self.current_target:
+            if self.mode == 'attack01' and self.frame == 4:
+                self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
+                self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
+                play_sound(self.choice_sound(), 0.3)
+            elif self.mode == 'attack02' and self.frame == 5:
+                self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
+                self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
+            elif self.mode == 'attack03' and self.frame in (3, 7):
+                self.current_target.lose_hp(self.atk, armor_dmg=self.atk * 0.3)
+                self.area_attack(self.area_atk, armor_dmg=self.area_atk * 0.3)
+        elif self.mode == 'walk_block':
+            # Передвигаемся вправо на определённую дистанцию
+            if self.distance > self.distance_traveled:
+                self.rect.x += self.speed
+                self.distance_traveled += self.speed
+            else:
+                self.distance_traveled -= self.distance
+                self.set_mode('idle')
 
     def area_attack(self, area_atk, armor_dmg):
         for mob in self.cached_nearby_mobs:
@@ -509,40 +502,27 @@ class KnightTemplar(Unit):
             if self.mode in ('hurt', 'block', 'attack01', 'attack02', 'attack03') and self.frame == len(
                     self.frames) - 1:
                 self.set_mode('idle')
-
-            elif self.mode == 'idle':
-                if self.current_target:
-                    mode = choice(['attack01', 'attack02', 'attack03'])
-
-                    if mode == 'attack01':
-                        play_sound(self.choice_sound(), 0.3)
-                    else:
-                        play_sound(*choice([(sounds['sword'][8], 0.3),
-                                            (sounds['sword'][9], 0.3)]))
-                    self.set_mode(mode)
-                else:
-                    now = pygame.time.get_ticks()
-                    if now - self.last_walk > 25000 and not self.cached_nearby_mobs and self.rect.x < WIDTH - 500:
-                        self.last_walk = now
-                        self.set_mode('walk_block')
+            elif self.mode == 'idle' and self.current_target:
+                mode = choice(['attack01', 'attack02', 'attack03'])
+                if mode != 'attack01':
+                    play_sound(*choice([(sounds['sword'][8], 0.3),
+                                        (sounds['sword'][9], 0.3)]))
+                self.set_mode(mode)
 
 
 class AttackEntity(pygame.sprite.Sprite):
-    def __init__(self, owner, grop_of_row, anim_start, damage, x, frames):
+    def __init__(self, owner, group_of_row, anim_start, damage, x, frames):
         super().__init__(groups['all_sprites'], groups['shells'])
         self.image = anim_start
         self.mask = pygame.mask.from_surface(self.image)
-
         self.damage = damage
         self.owner = owner
-        self.grop_of_row = grop_of_row
+        self.group_of_row = group_of_row
         self.target_mobs = False
         self.attack_range = 60
-
         self.last_update = pygame.time.get_ticks()
         self.frame = 0
         self.frames = frames
-
         self.rect = self.image.get_rect(center=owner.rect.center)
         self.rect.x += x
 
@@ -552,89 +532,94 @@ class AttackEntity(pygame.sprite.Sprite):
             self.last_update = now
             self.frame = (self.frame + 1) % len(self.frames)
             self.image = self.frames[self.frame]
+            self.trigger_frame_event()
 
-            if isinstance(self, FireBall):
-                if self.mode == 'boom' and self.frame == len(self.frames) - 1:
-                    self.kill()  # Удаляем шар
+    def trigger_frame_event(self):
+        """На определённом кадре что-то делаем. Переопределяется."""
+        pass
 
-            if isinstance(self, PriestAura):
-                if self.frame == 2:
-                    cached_nearby_mobs = list(filter(lambda nearby_mob: nearby_mob.rect.x >= self.rect.x,
-                                                     [mob for mob in self.grop_of_row
-                                                      if mob in groups['mobs'] and mob.life
-                                                      and abs(self.rect.x - mob.rect.x) <= CELL_SIZE]))
-
-                    for mob in cached_nearby_mobs:
-                        if pygame.sprite.collide_mask(self, mob):
-                            mob.lose_hp(dmg=self.damage)
-                            self.target_mobs = True
-                elif self.frame == len(self.frames) - 1:
-                    self.kill()
+    def update(self, *args, **kwargs):
+        self.update_animation()
+        self.trigger_frame_event()
 
 
 class Arrow(AttackEntity):
     def __init__(self, archer, v, damage):
-        super().__init__(archer, archer.grop_of_row, ANIMATIONS['ARROW01']['idle'][0], damage, 5, None)
+        super().__init__(archer, archer.group_of_row, ANIMATIONS['ARROW01']['idle'][0], damage, 5, None)
         self.v = v
 
     def update(self, *args, **kwargs):
         if self.rect.x < 0 or self.rect.left > WIDTH or self.rect.y < 0 or self.rect.top > HEIGHT:
             self.kill()
-
-        mobs_or_row = [mob for mob in self.grop_of_row
-                       if mob in groups['mobs'] and abs(self.rect.x - mob.rect.x) <= 30]
-        for mob in mobs_or_row:
+        mobs_in_range = [mob for mob in self.group_of_row
+                         if mob in groups['mobs'] and abs(self.rect.x - mob.rect.x) <= 30]
+        for mob in mobs_in_range:
             if mob.life and pygame.sprite.collide_mask(self, mob):
                 mob.lose_hp(dmg=self.damage, armor_dmg=self.damage * 0.3)
-                self.kill()  # Удаляем стрелу
-        else:
-            self.rect.x += self.v
+                self.kill()
+                return
+        self.rect.x += self.v
 
 
 class FireBall(AttackEntity):
-    def __init__(self, wizard, grop_of_row, anim):
-        super().__init__(wizard, grop_of_row, anim[0], 35, 5, anim[:4])
+    def __init__(self, wizard, group_of_row, anim):
+        super().__init__(wizard, group_of_row, anim[0], 35, 5, anim[:4])
         self.moving = anim[:4]
         self.boom = anim[4:]
-
         self.v = 10
-
         self.frames = self.moving
         self.mode = 'moving'
 
-    def update(self, *args, **kwargs):
-        self.update_animation()
+    def trigger_frame_event(self):
+        if self.mode == 'boom' and self.frame == len(self.frames) - 1:
+            self.kill()  # Удаляем шар
 
+    def update(self, *args, **kwargs):
+        super().update_animation()
         if self.mode == 'moving':
-            # Проверяем столкновение шара с целью
+            # Проверка за вылет за границу экрана
             if self.rect.x < 0 or self.rect.left > WIDTH or self.rect.y < 0 or self.rect.top > HEIGHT:
                 self.kill()
 
+            # Каждый 3-й кадр
             if constant.frame_count % 3 == 0:
-                cached_nearby_mobs = list(filter(lambda nearby_mob: nearby_mob.rect.x >= self.rect.x,
-                                                 [mob for mob in self.grop_of_row
-                                                  if mob in groups['mobs'] and mob.life
-                                                  and abs(self.rect.x - mob.rect.x) <= CELL_SIZE]))
-
-                for mob in cached_nearby_mobs:
+                # Мобы поблизости
+                cached_nearby = [mob for mob in self.group_of_row
+                                 if mob in groups['mobs'] and mob.life and abs(self.rect.x - mob.rect.x) <= CELL_SIZE]
+                # Если есть
+                for mob in cached_nearby:
                     if pygame.sprite.collide_mask(self, mob):
                         mob.lose_hp(dmg=self.damage)
                         self.target_mobs = True
-
             if self.target_mobs:
                 self.mode = 'boom'
                 self.frames = self.boom
                 self.rect.x += CELL_SIZE / 2
             else:
                 if self.owner.rect.x + 2 * CELL_SIZE >= self.rect.x:
-                    self.rect.x += self.v  # Перемещаем шар вправо
+                    self.rect.x += self.v
                 else:
                     self.mode = 'boom'
 
 
 class PriestAura(AttackEntity):
-    def __init__(self, priest, grop_of_row, anim):
-        super().__init__(priest, grop_of_row, anim[0], 35, (priest.current_target.rect.x - priest.rect.x), anim)
+    def __init__(self, priest, group_of_row, anim):
+        super().__init__(priest, group_of_row, anim[0], 35, (priest.current_target.rect.x - priest.rect.x), anim)
+
+    def trigger_frame_event(self):
+        if self.frame == 2:
+            # Ближайшие мобы
+            cached_nearby_mobs = list(filter(lambda nearby_mob: nearby_mob.rect.x >= self.rect.x,
+                                             [mob for mob in self.group_of_row
+                                              if mob in groups['mobs'] and mob.life
+                                              and abs(self.rect.x - mob.rect.x) <= CELL_SIZE]))
+            # Если есть
+            for mob in cached_nearby_mobs:
+                if pygame.sprite.collide_mask(self, mob):
+                    mob.lose_hp(dmg=self.damage)
+                    self.target_mobs = True
+        elif self.frame == len(self.frames) - 1:
+            self.kill()
 
     def update(self, *args, **kwargs):
-        self.update_animation()
+        super().update_animation()

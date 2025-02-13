@@ -2,15 +2,18 @@ import pygame.sprite as sprite
 
 
 def update_group():
-    global groups
-    for k in groups.keys():
-        for i in groups[k]:
-            try:
-                i.kill()
-            except AttributeError:
-                for k1 in groups[k].keys():
-                    for j in groups[k][k1]:
-                        j.kill()
+    """Очищаем все группы спрайтов."""
+    for group in groups.values():
+        clear_group(group)
+
+
+def clear_group(group):
+    """Удаляет все спрайты из переданной группы."""
+    if isinstance(group, sprite.Group):
+        group.empty()
+    elif isinstance(group, dict):
+        for sub_group in group.values():
+            clear_group(sub_group)  # Рекурсивно очищаем вложенные словари
 
 
 groups = {

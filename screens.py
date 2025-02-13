@@ -55,22 +55,23 @@ class Button(pygame.sprite.Sprite):
 
             if self.command == 'open_pick_level_screen':
                 pick_level_screen()
-                update_group()  # Временно
-                play_background_music('assets/sounds/background_sounds/lvl/Shiro_Sagisu_-_Treachery_72363454.mp3')
-                demo_project.game_loop()  # Временно
+                update_group()
+                demo_project.game_loop()
             if self.command == 'open_main_lobby':
                 main_lobby()
             if self.command == 'quit':
                 terminate()
             if self.command == 'open_dictionary_screen':
-                dictionary_screen()
+                # dictionary_screen()
+                play_sound(sounds['none'])
+                main_lobby()
             if self.command == 'open_options_screen':
-                options_screen()
+                # options_screen()
+                play_sound(sounds['none'])
+                main_lobby()
             if self.command == 'open_characters_page':
-                print('<_page was successfully changed_>')
                 dictionary_screen(0)
             if self.command == 'open_mobs_page':
-                print('<_page was successfully changed_>')
                 dictionary_screen(1)
             if self.command == 'show_soldier':
                 dictionary_screen(0)
@@ -113,8 +114,6 @@ class Level_door(pygame.sprite.Sprite):
 def main_lobby():
     background = load_image('assets/backgrounds/main_background.png')
     pygame.display.set_icon(load_image('assets/icon.png'))
-
-    play_background_music('assets/sounds/background_sounds/lobby/lobby_sound.mp3')
 
     Button(900, 300, 'sketch', 'open_pick_level_screen', 'Continue')
     Button(900, 425, 'sketch', 'open_dictionary_screen', 'Dictionary')
@@ -250,4 +249,5 @@ def pick_level_screen():
 
 
 if __name__ == '__main__':
+    play_background_music('assets/sounds/background_sounds/lobby/lobby_sound.mp3')
     main_lobby()

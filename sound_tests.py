@@ -25,24 +25,21 @@ sounds = {
         'fireball': pygame.mixer.Sound('assets/sounds/entities_sounds/Wizard/fireball.wav'),
         'ice': pygame.mixer.Sound('assets/sounds/entities_sounds/Wizard/ice.wav')
     },
-    'orc': {
+    'mobs': {
         'death': {
-            1: pygame.mixer.Sound('assets/sounds/entities_sounds/Orc/death0.wav'),
-            2: pygame.mixer.Sound('assets/sounds/entities_sounds/Orc/death1.mp3'),
-            3: pygame.mixer.Sound('assets/sounds/entities_sounds/Orc/death2.mp3'),
-            4: pygame.mixer.Sound('assets/sounds/entities_sounds/Orc/death3.mp3'),
-            5: pygame.mixer.Sound('assets/sounds/entities_sounds/Orc/death4.mp3')
+            1: pygame.mixer.Sound('assets/sounds/entities_sounds/Mobs/death0.wav'),
+            2: pygame.mixer.Sound('assets/sounds/entities_sounds/Mobs/death1.mp3'),
+            3: pygame.mixer.Sound('assets/sounds/entities_sounds/Mobs/death2.mp3'),
+            4: pygame.mixer.Sound('assets/sounds/entities_sounds/Mobs/death3.mp3'),
+            5: pygame.mixer.Sound('assets/sounds/entities_sounds/Mobs/death4.mp3'),
+            6: pygame.mixer.Sound('assets/sounds/entities_sounds/Mobs/death5.mp3'),
         },
         'roar': {
-            1: pygame.mixer.Sound('assets/sounds/entities_sounds/Orc/roar.mp3'),
-            2: pygame.mixer.Sound('assets/sounds/entities_sounds/Orc/roar2.mp3'),
-            3: pygame.mixer.Sound('assets/sounds/entities_sounds/Orc/roar3.mp3'),
-            4: pygame.mixer.Sound('assets/sounds/entities_sounds/Orc/roar4.mp3'),
-            5: pygame.mixer.Sound('assets/sounds/entities_sounds/Orc/roar5.mp3')
-        },
-        'breathing': {
-            1: pygame.mixer.Sound('assets/sounds/entities_sounds/Orc/skeleton-breathing.mp3'),
-            2: pygame.mixer.Sound('assets/sounds/entities_sounds/Orc/skeleton-breathing2.mp3')
+            1: pygame.mixer.Sound('assets/sounds/entities_sounds/Mobs/roar.mp3'),
+            2: pygame.mixer.Sound('assets/sounds/entities_sounds/Mobs/roar2.mp3'),
+            3: pygame.mixer.Sound('assets/sounds/entities_sounds/Mobs/roar3.mp3'),
+            4: pygame.mixer.Sound('assets/sounds/entities_sounds/Mobs/roar4.mp3'),
+            5: pygame.mixer.Sound('assets/sounds/entities_sounds/Mobs/roar5.mp3')
         }
     },
     'priest': {
@@ -57,9 +54,12 @@ sounds = {
     'slime': {
         'damage': pygame.mixer.Sound('assets/sounds/entities_sounds/Slime/damage.wav')
     },
-    'wolf': {
-        'hurt': pygame.mixer.Sound('assets/sounds/entities_sounds/Wolf/hurt.mp3'),
-        'roar': pygame.mixer.Sound('assets/sounds/entities_sounds/Wolf/roar.mp3')
+    'animals': {
+        'wolf_hurt': pygame.mixer.Sound('assets/sounds/entities_sounds/Animals/wolf_hurt.mp3'),
+        'wolf_roar': pygame.mixer.Sound('assets/sounds/entities_sounds/Animals/wolf_roar.mp3'),
+        'bear_death': pygame.mixer.Sound('assets/sounds/entities_sounds/Animals/bear_death.mp3'),
+        'bear_roar': pygame.mixer.Sound('assets/sounds/entities_sounds/Animals/bear_roar.mp3'),
+        'bear_atk': pygame.mixer.Sound('assets/sounds/entities_sounds/Animals/bear_atk.mp3')
     },
     'archer': {
         'bow_attack': pygame.mixer.Sound('assets/sounds/entities_sounds/Archer/bow_attack.wav')
@@ -80,13 +80,21 @@ sounds = {
 }
 
 
-def play_background_music(file):
-    pygame.mixer.music.stop()
-    pygame.mixer.music.load(file)
-    pygame.mixer.music.play(-1)
-    pygame.mixer.music.set_volume(0.2)
+def play_background_music(file, volume=0.2):
+    """Проигрывает фоновую музыку"""
+    try:
+        pygame.mixer.music.stop()
+        pygame.mixer.music.load(file)
+        pygame.mixer.music.play(-1)
+        pygame.mixer.music.set_volume(volume)
+    except Exception:
+        pass
 
 
 def play_sound(sound, volume=0.5):
-    sound.set_volume(volume)
-    sound.play()
+    """Проигрывает звук (0 канал)"""
+    try:
+        sound.set_volume(volume)
+        sound.play()
+    except Exception:
+        pass

@@ -4,19 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="добавил звуков">
+    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="продолжил работу со звуком">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Board_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board_class.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Map_constructor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Map_constructor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mobs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Units.py" beforeDir="false" afterPath="$PROJECT_DIR$/Units.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Archer/bow_attack.wav" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/entities_sounds/Archer/bow_attack.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/death/2.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/troops_hurt.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Waves_spawner.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_spawner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death0.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death1.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death2.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death3.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death4.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar2.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar3.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar4.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar5.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/skeleton-breathing.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/skeleton-breathing2.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Wolf/hurt.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Wolf/roar.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/step2.wav" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/constant.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo_map.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/demo_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sale_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/sale_func.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/screens.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/show_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/show_info.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sound_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/sound_tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprite_groups.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_groups.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -263,7 +280,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739283239150</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="продолжил работу со звуком">
+      <option name="closed" value="true" />
+      <created>1739369044218</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1739369044218</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -298,20 +323,16 @@
     <MESSAGE value="Поделал механик" />
     <MESSAGE value="Волны мобов. Возможность покупать юнитов." />
     <MESSAGE value="добавил звуков" />
-    <option name="LAST_COMMIT_MESSAGE" value="добавил звуков" />
+    <MESSAGE value="продолжил работу со звуком" />
+    <option name="LAST_COMMIT_MESSAGE" value="продолжил работу со звуком" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/screens.py</url>
-          <line>231</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/screens.py</url>
-          <line>57</line>
-          <option name="timeStamp" value="9" />
+          <url>file://$PROJECT_DIR$/Board_class.py</url>
+          <line>42</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
