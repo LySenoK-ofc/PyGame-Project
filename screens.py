@@ -7,6 +7,7 @@ from load_image_func import load_image
 from constant import FPS
 from sound_tests import play_sound
 from sprite_groups import update_group
+from Map_constructor import MapTile, AnimatedMapObject
 
 from Units import *
 from Mobs import *
@@ -19,6 +20,7 @@ screen = pygame.display.set_mode(size)
 clock = pygame.time.Clock()
 
 font = pygame.font.Font('assets/pi-sheng.regular.otf', 64)
+font2 = pygame.font.Font('assets/data/Adbnorm.ttf', 32)
 
 
 def terminate():
@@ -55,11 +57,11 @@ class Button(pygame.sprite.Sprite):
             Sketch_button.texts.clear()
             groups['characters_page'].empty()
             groups['mobs_page'].empty()
-
             play_sound('button_click')
 
             if self.command == 'open_pick_level_screen':
                 pick_level_screen()
+                rulers_screen()
                 update_group()  # Временно
                 pygame.display.set_caption('Уровень *')
                 demo_project.game_loop()  # Временно
@@ -103,6 +105,8 @@ class Entity_view_button(Button):
 
     def update(self, *args, **kwargs):
         if args and args[0].type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
+            groups['buttons'].empty()
+            Sketch_button.texts.clear()
             play_sound('button_click', 0.2)
             if self.type == 'Unit':
                 dictionary_screen(0, self.entity)
@@ -301,6 +305,71 @@ def pick_level_screen():
         screen.blit(text_level3, (1100, 60))
         screen.blit(text_level4, (420, 415))
         screen.blit(text_level5, (870, 415))
+
+        pygame.display.flip()
+        clock.tick(FPS)
+
+
+def rulers_screen():
+    pygame.display.set_caption('Правила')
+    dialog = load_image('assets/dialog2.png')
+    MapTile(groups['map_tiles'], (0, 0), load_image('assets/map_tiles/Tiles/FieldsTile_38.png', scale=(1500, 825)))
+    MapTile(groups['map_objects'], (810, 50), load_image('assets/map_tiles/Objects/camp/1.png', scale=(599, 378)))
+    AnimatedMapObject(groups['animated_map_objects'], (500, 250),
+                      ('assets/map_tiles/Animated_Objects/campfire/active_campfire/1.png',
+                       'assets/map_tiles/Animated_Objects/campfire/active_campfire/2.png',
+                       'assets/map_tiles/Animated_Objects/campfire/active_campfire/3.png',
+                       'assets/map_tiles/Animated_Objects/campfire/active_campfire/4.png',
+                       'assets/map_tiles/Animated_Objects/campfire/active_campfire/5.png',
+                       'assets/map_tiles/Animated_Objects/campfire/active_campfire/6.png',), scale=(250, 250))
+
+    continue_text = font2.render('Нажмите ПРОБЕЛ, чтобы продолжить', True, 'white')
+    rulers_text = (('Ваша задча - защитить этот лагерь от монстров,',
+                    'для этого вам было выделено войско. Но помните - ',
+                    'никто не работает за бесплатно, поэтому для уси- ',
+                    'ления боевой мощи вам придется зарабатывать',
+                    'деньги, убивая врагов.'),
+                   ('На ваш счет сразу будет начислен стартовый',
+                    'капитал, а также на поле битвы будут находиться',
+                    '5 всадников, способных спасти вас в критической',
+                    'ситуации. Желаю удачи!'),
+                   ('<Помощь в управлении>',
+                    'Для размещения воина на поле боя, необходимо',
+                    'перетащить его из магазина на место, куда вы',
+                    'хотите его разместить. При зажатой клавише SHIFT',
+                    'вы можете узнать информацию о воине(здровье',
+                    'броню и урон, если он находиться на поле боя,'),
+                   ('стоимость размещения и продажи - если в магазине).',
+                    'ПКМ, чтобы продать воина. Также в игре присут-',
+                    'ствует возможность быстрого размещения войска',
+                    'для этого небходимо зажать цифру на ',
+                    'клавиатуре и кликнуть по нужной клетке',
+                    '(1-Лучник, 2-Рыцарь, 3-Маг, 4-Жрица,',
+                    '5-Дровосек, 6-Мастер Меча, 7-Королевский страж)'))
+    dialog_page = 0
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                terminate()
+            if event.type == pygame.KEYDOWN:
+                keys = pygame.key.get_pressed()
+                if keys[pygame.K_SPACE]:
+                    if dialog_page + 1 == len(rulers_text):
+                        return
+                    else:
+                        dialog_page += 1
+
+        screen.fill('black')
+        groups['map_tiles'].draw(screen)
+        groups['map_objects'].draw(screen)
+        groups['animated_map_objects'].draw(screen)
+        groups['animated_map_objects'].update()
+
+        screen.blit(dialog, (240, 400))
+        screen.blit(continue_text, (350, 20))
+        for i in range(len(rulers_text[dialog_page])):
+            screen.blit(font2.render(rulers_text[dialog_page][i], True, 'black'), (410, 540 + i * 30))
 
         pygame.display.flip()
         clock.tick(FPS)

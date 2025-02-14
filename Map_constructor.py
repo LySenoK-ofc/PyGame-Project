@@ -185,10 +185,10 @@ class MapTile(pygame.sprite.Sprite):
 
 
 class AnimatedMapObject(pygame.sprite.Sprite):
-    def __init__(self, group, coord, images, reverse=False):
+    def __init__(self, group, coord, images, reverse=False, scale=None):
         super().__init__(group, groups['all_sprites'])
         self.image = load_image(images[0])
-        self.frames = [load_image(file=image, reverse=reverse) for image in images]
+        self.frames = [load_image(file=image, reverse=reverse, scale=scale) for image in images]
         self.rect = self.image.get_rect()
         self.rect.x = coord[0]
         self.rect.y = coord[1]
