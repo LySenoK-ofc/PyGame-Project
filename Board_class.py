@@ -5,6 +5,7 @@ from random import randrange
 
 class Board:
     def __init__(self, width, height, left, top, cell_size):
+        """Доска для юнитов."""
         self.width = width
         self.height = height
         self.left = left
@@ -12,11 +13,13 @@ class Board:
         self.cell_size = cell_size
         self.board = [[0] * width for _ in range(height)]
 
-    def get_click(self, mouse_pos, entity_type, entity):
+    def get_click(self, mouse_pos, entity):
+        """Обрабатываем клик."""
         cell = self.get_cell(mouse_pos)
-        return self.on_click(cell=cell, entity_type=entity_type, entity=entity)
+        return self.on_click(cell=cell, entity=entity)
 
     def get_cell(self, mouse_pos):
+        """Проверка координат."""
         x, y = mouse_pos
         i = (y - self.top) // self.cell_size
         j = (x - self.left) // self.cell_size
@@ -25,20 +28,30 @@ class Board:
         else:
             return None
 
-    def on_click(self, entity, entity_type='Orcs', cell=None):
-        print(entity)
-        if entity_type == 'Troops':
-            if cell and all([((soldier.rect.center[0] - self.left) // self.cell_size,
-                              (soldier.rect.center[1] - self.top) // self.cell_size) != cell
-                             for soldier in groups['characters']]):
-                setting = ((cell[0] * self.cell_size + self.left + self.cell_size / 2,
-                            cell[1] * self.cell_size + self.top + self.cell_size / 2),
-                           groups['rows'][cell[1]])
-                entity(*setting)
-                return True
+    def on_click(self, entity, cell=None):
+        """Спавн юнита/моба."""
+        try:
+            # Если клетка занята, то вызываем ошибку
+            units_coord = tuple(map(lambda s: ((s.rect.centerx - self.left) // self.cell_size,
+                                               (s.rect.centery - self.top) // self.cell_size),
+                                    groups["characters"]))
+            if any(map(lambda coord: coord == cell, units_coord)):
+                return False
 
-        elif entity_type == 'Orcs':
-            for i in range(1):
-                row = randrange(0, 5)
-                setting = ((WIDTH, row * self.cell_size + self.top + self.cell_size / 2), groups['rows'][row])
-                entity(*setting)
+            # Иначе спавним юнита и возвращаем True
+            setting = ((cell[0] * self.cell_size + self.left + self.cell_size / 2,
+                        cell[1] * self.cell_size + self.top + self.cell_size / 2),
+                       groups['rows'][cell[1]])
+            entity(*setting)
+            return True
+        except Exception:
+            return False
+
+    def spawn_mob(self, entity):
+        """Спавн мобов."""
+        try:
+            row = randrange(0, 5)
+            setting = ((WIDTH, row * self.cell_size + self.top + self.cell_size / 2), groups['rows'][row])
+            entity(*setting)
+        except Exception:
+            pass

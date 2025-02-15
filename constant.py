@@ -8,18 +8,15 @@ LEFT = 75 * 6
 
 WIDTH, HEIGHT = 1500, 825
 
-CURRENT_LVL = 'lvl2'
+CURRENT_LVL = 'lvl1'
 WAVES = {
     'lvl1': [
-        # Волна 1: Простые мобы.
         {'enemies': [
             ('Orc', 2),
             ('Skeleton', 2),
             ('Slime', 1)
         ],
             'interval': 4000},
-
-        # Волна 2: Более сильные враги.
         {'enemies': [
             ('EliteOrc', 1),
             ('RiderOrc', 1),
@@ -28,8 +25,6 @@ WAVES = {
             ('ArmoredSkeleton', 1)
         ],
             'interval': 5000},
-
-        # Волна 3: Гуманоиды волк и медведь.
         {'enemies': [
             ('Werebear', 1),
             ('Werewolf', 1)
@@ -37,15 +32,12 @@ WAVES = {
             'interval': 6000}
     ],
     'lvl2': [
-        # Волна 1: Базовые мобы.
         {'enemies': [
             ('Orc', 5),
             ('Skeleton', 4),
             ('Slime', 2)
         ],
             'interval': 2000},
-
-        # Волна 2: Орки элитные и наездники.
         {'enemies': [
             ('Orc', 6),
             ('Skeleton', 5),
@@ -54,8 +46,6 @@ WAVES = {
             ('Slime', 3)
         ],
             'interval': 2500},
-
-        # Волна 3: Бронированные орки.
         {'enemies': [
             ('Orc', 6),
             ('Skeleton', 6),
@@ -65,8 +55,6 @@ WAVES = {
             ('Slime', 3)
         ],
             'interval': 3000},
-
-        # Волна 4: Гуманоиды волк и медведь.
         {'enemies': [
             ('Orc', 6),
             ('Skeleton', 6),
@@ -78,8 +66,6 @@ WAVES = {
             ('Slime', 4)
         ],
             'interval': 3000},
-
-        # Волна 5: Скелеты с мечом.
         {'enemies': [
             ('Orc', 6),
             ('Skeleton', 6),
@@ -91,8 +77,6 @@ WAVES = {
             ('GreateswordSkeleton', 2),
         ],
             'interval': 2500},
-
-        # Волна 6: Все мобы.
         {'enemies': [
             ('Orc', 8),
             ('Skeleton', 8),
@@ -111,3 +95,10 @@ WAVES = {
 frame_count = 0
 cash = 500
 hp = 5
+
+def reset_state():
+    """Сбрасываем параметры."""
+    global frame_count, cash, hp
+    frame_count = 0
+    cash = 500
+    hp = 5

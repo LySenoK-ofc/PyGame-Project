@@ -4,14 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Добавил окно с правилами при входе на уровень">
-      <change afterPath="$PROJECT_DIR$/assets/dialog.png" afterDir="false" />
+    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="продолжил работу со звуком">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board_class.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Map_constructor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Map_constructor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mobs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Units.py" beforeDir="false" afterPath="$PROJECT_DIR$/Units.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/all_animations.py" beforeDir="false" afterPath="$PROJECT_DIR$/all_animations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Waves_spawner.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_spawner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death0.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death1.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death2.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death3.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death4.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar2.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar3.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar4.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar5.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/skeleton-breathing.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/skeleton-breathing2.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Wolf/hurt.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Wolf/roar.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/step2.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/constant.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/demo_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sale_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/sale_func.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/screens.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/shop.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/show_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/show_info.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sound_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/sound_tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprite_groups.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_groups.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,20 +76,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.Map_constructor.executor&quot;: &quot;Run&quot;,
-    &quot;Python.demo_map.executor&quot;: &quot;Run&quot;,
-    &quot;Python.demo_project.executor&quot;: &quot;Run&quot;,
-    &quot;Python.screens.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Kirill's-Branch&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/PyCharmProjects/YandexGameProject/assets/data&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.Map_constructor.executor": "Run",
+    "Python.demo_map.executor": "Run",
+    "Python.demo_project.executor": "Run",
+    "Python.screens.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Kirill's-Branch",
+    "last_opened_file_path": "E:/PyCharmProjects/YandexGameProject/assets/data",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\PyCharmProjects\YandexGameProject\assets\data" />
@@ -80,7 +102,7 @@
       <recent name="E:\PyCharmProjects\YandexGameProject\assets" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.demo_map">
+  <component name="RunManager" selected="Python.demo_project">
     <configuration name="Map_constructor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PyGame_Project_demo" />
       <option name="ENV_FILES" value="" />
@@ -112,9 +134,8 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (PyGame_Project_demo)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/demo_map.py" />
@@ -135,9 +156,8 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="SDK_NAME" value="Python 3.11 (PyGame_Project_demo)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/demo_project.py" />
@@ -171,17 +191,11 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <list>
-      <item itemvalue="Python.demo_map" />
-      <item itemvalue="Python.demo_project" />
-      <item itemvalue="Python.Map_constructor" />
-      <item itemvalue="Python.screens" />
-    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.demo_map" />
-        <item itemvalue="Python.screens" />
         <item itemvalue="Python.demo_project" />
+        <item itemvalue="Python.screens" />
+        <item itemvalue="Python.demo_map" />
         <item itemvalue="Python.Map_constructor" />
       </list>
     </recent_temporary>
@@ -189,7 +203,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-50da183f06c8-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13135.95" />
+        <option value="bundled-python-sdk-495700d161d3-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.22562.220" />
       </set>
     </attachedChunks>
   </component>
@@ -258,21 +272,21 @@
       <option name="project" value="LOCAL" />
       <updated>1739050154561</updated>
     </task>
-    <task id="LOCAL-00008" summary="Почти доделал словарь, осталось добавить сами описания и рещить проблему с убегающими монстрами">
+    <task id="LOCAL-00008" summary="добавил звуков">
       <option name="closed" value="true" />
-      <created>1739473045806</created>
+      <created>1739283239150</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1739473045806</updated>
+      <updated>1739283239150</updated>
     </task>
-    <task id="LOCAL-00009" summary="Добавил окно с правилами при входе на уровень">
+    <task id="LOCAL-00009" summary="продолжил работу со звуком">
       <option name="closed" value="true" />
-      <created>1739539341677</created>
+      <created>1739369044218</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1739539341677</updated>
+      <updated>1739369044218</updated>
     </task>
     <option name="localTasksCounter" value="10" />
     <servers />
@@ -282,7 +296,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -296,27 +322,17 @@
     <MESSAGE value="немного изменил код" />
     <MESSAGE value="Поделал механик" />
     <MESSAGE value="Волны мобов. Возможность покупать юнитов." />
-    <MESSAGE value="Почти доделал словарь, осталось добавить сами описания и решить проблему с убегающими монстрами" />
-    <MESSAGE value="Добавил окно с правилами при входе на уровень" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавил окно с правилами при входе на уровень" />
+    <MESSAGE value="добавил звуков" />
+    <MESSAGE value="продолжил работу со звуком" />
+    <option name="LAST_COMMIT_MESSAGE" value="продолжил работу со звуком" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Units.py</url>
-          <line>157</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/screens.py</url>
-          <line>286</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/screens.py</url>
-          <line>59</line>
-          <option name="timeStamp" value="9" />
+          <url>file://$PROJECT_DIR$/Board_class.py</url>
+          <line>42</line>
+          <option name="timeStamp" value="15" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
