@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Исправил название анимации">
+      <change beforePath="$PROJECT_DIR$/.idea/PyGame_Project_demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PyGame_Project_demo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mobs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/screens.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,13 +56,14 @@
     &quot;Python.Map_constructor.executor&quot;: &quot;Run&quot;,
     &quot;Python.demo_map.executor&quot;: &quot;Run&quot;,
     &quot;Python.demo_project.executor&quot;: &quot;Run&quot;,
-    &quot;Python.screens.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.run.executor&quot;: &quot;Run&quot;,
+    &quot;Python.screens.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;Kirill's-Branch&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/PyCharmProjects/YandexGameProject/assets/data&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/user/PycharmProjects/PyGame-Project&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -75,7 +78,7 @@
       <recent name="E:\PyCharmProjects\YandexGameProject\assets" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.demo_project">
+  <component name="RunManager" selected="Python.screens">
     <configuration name="Map_constructor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PyGame_Project_demo" />
       <option name="ENV_FILES" value="" />
@@ -142,6 +145,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="run" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PyGame_Project_demo" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="screens" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PyGame_Project_demo" />
       <option name="ENV_FILES" value="" />
@@ -165,6 +190,7 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.run" />
       <item itemvalue="Python.demo_map" />
       <item itemvalue="Python.demo_project" />
       <item itemvalue="Python.Map_constructor" />
@@ -172,8 +198,9 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.demo_project" />
         <item itemvalue="Python.screens" />
+        <item itemvalue="Python.run" />
+        <item itemvalue="Python.demo_project" />
         <item itemvalue="Python.demo_map" />
         <item itemvalue="Python.Map_constructor" />
       </list>
@@ -182,7 +209,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-495700d161d3-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.22562.220" />
+        <option value="bundled-python-sdk-50da183f06c8-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13135.95" />
       </set>
     </attachedChunks>
   </component>
@@ -267,7 +294,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739369044218</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Исправил название анимации">
+      <option name="closed" value="true" />
+      <created>1739608935473</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1739608935473</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -275,19 +310,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="master" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -303,7 +326,8 @@
     <MESSAGE value="Волны мобов. Возможность покупать юнитов." />
     <MESSAGE value="добавил звуков" />
     <MESSAGE value="продолжил работу со звуком" />
-    <option name="LAST_COMMIT_MESSAGE" value="продолжил работу со звуком" />
+    <MESSAGE value="Исправил название анимации" />
+    <option name="LAST_COMMIT_MESSAGE" value="Исправил название анимации" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

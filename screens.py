@@ -5,7 +5,7 @@ import pygame.sprite
 import demo_project
 from load_image_func import load_image
 from constant import FPS
-from sound_tests import play_sound, play_background_music
+from sound_tests import play_background_music, play_sound
 from sprite_groups import update_group
 from Map_constructor import MapTile, AnimatedMapObject
 from shop import Shop
@@ -181,12 +181,12 @@ def dictionary_screen(page=0, entity='Knight'):
 
     Entity_view_button(600, 200, 'Knight', 'Unit', groups['characters_page'])
     Entity_view_button(600, 320, 'Archer', 'Unit', groups['characters_page'])
-    Entity_view_button(600, 440, 'Wizard', 'Unit',groups['characters_page'])
-    Entity_view_button(600, 560, 'Armored_Axeman', 'Unit',groups['characters_page'])
-    Entity_view_button(740, 200, 'SwordsMan', 'Unit',groups['characters_page'])
-    Entity_view_button(740, 320, 'Priest', 'Unit',groups['characters_page'])
-    Entity_view_button(740, 440, 'Knight_Templar', 'Unit',groups['characters_page'])
-    Entity_view_button(740, 560, 'Lancer', 'Unit',groups['characters_page'])
+    Entity_view_button(600, 440, 'Wizard', 'Unit', groups['characters_page'])
+    Entity_view_button(600, 560, 'Armored_Axeman', 'Unit', groups['characters_page'])
+    Entity_view_button(740, 200, 'SwordsMan', 'Unit', groups['characters_page'])
+    Entity_view_button(740, 320, 'Priest', 'Unit', groups['characters_page'])
+    Entity_view_button(740, 440, 'Knight_Templar', 'Unit', groups['characters_page'])
+    Entity_view_button(740, 560, 'Lancer', 'Unit', groups['characters_page'])
 
     Entity_view_button(970, 200, 'Orc', 'Mob', groups['mobs_page'])
     Entity_view_button(970, 320, 'Armored_Orc', 'Mob', groups['mobs_page'])
