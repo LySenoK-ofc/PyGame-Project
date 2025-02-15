@@ -5,7 +5,7 @@ import pygame.sprite
 import demo_project
 from load_image_func import load_image
 from constant import FPS
-from sound_tests import play_sound
+from sound_tests import play_sound, play_background_music
 from sprite_groups import update_group
 from Map_constructor import MapTile, AnimatedMapObject
 from shop import Shop
@@ -381,4 +381,5 @@ def rulers_screen():
 
 
 if __name__ == '__main__':
+    play_background_music('assets/sounds/background_sounds/lobby/lobby_sound.mp3')
     main_lobby()

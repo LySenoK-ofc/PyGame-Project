@@ -345,7 +345,7 @@ class ArmoredSkeleton(Enemy):
             'hurt': 100,
             'death': 250,
         }
-        super().__init__(coord, ANIMATIONS['ARMORED_SCELETON'], group_of_row,
+        super().__init__(coord, ANIMATIONS['ARMORED_SKELETON'], group_of_row,
                          attack_radius=CELL_SIZE, hp=120, atk=25,
                          frame_rate=frame_rate, armor_hp=50, armor_def=0.25, hurt_cooldown=4, money=18)
 

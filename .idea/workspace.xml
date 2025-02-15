@@ -4,36 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="продолжил работу со звуком">
+    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Исправил название анимации">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Board_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board_class.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Map_constructor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Map_constructor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Mobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mobs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Units.py" beforeDir="false" afterPath="$PROJECT_DIR$/Units.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Waves_spawner.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_spawner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death0.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death1.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death2.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death3.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death4.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar2.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar3.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar4.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar5.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/skeleton-breathing.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/skeleton-breathing2.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Wolf/hurt.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Wolf/roar.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/step2.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/constant.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sale_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/sale_func.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/screens.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/show_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/show_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sound_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/sound_tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprite_groups.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_groups.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +23,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Kirill's-Branch" />
+        <entry key="$PROJECT_DIR$" value="062ec396901c0072b27979623d5690fc4f9ca98d" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -76,20 +49,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Map_constructor.executor": "Run",
-    "Python.demo_map.executor": "Run",
-    "Python.demo_project.executor": "Run",
-    "Python.screens.executor": "Debug",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Kirill's-Branch",
-    "last_opened_file_path": "E:/PyCharmProjects/YandexGameProject/assets/data",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Map_constructor.executor&quot;: &quot;Run&quot;,
+    &quot;Python.demo_map.executor&quot;: &quot;Run&quot;,
+    &quot;Python.demo_project.executor&quot;: &quot;Run&quot;,
+    &quot;Python.screens.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Kirill's-Branch&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/PyCharmProjects/YandexGameProject/assets/data&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.sync&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\PyCharmProjects\YandexGameProject\assets\data" />
@@ -191,6 +164,12 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.demo_map" />
+      <item itemvalue="Python.demo_project" />
+      <item itemvalue="Python.Map_constructor" />
+      <item itemvalue="Python.screens" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.demo_project" />
