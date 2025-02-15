@@ -76,7 +76,8 @@ sounds = {
     'wave_start': pygame.mixer.Sound('assets/sounds/other_sounds/wave_start.wav'),
     'none': pygame.mixer.Sound('assets/sounds/other_sounds/none.mp3'),
     'game_start': pygame.mixer.Sound('assets/sounds/other_sounds/start_over_game/start.mp3'),
-    'game_over': pygame.mixer.Sound('assets/sounds/other_sounds/start_over_game/over.mp3')
+    'game_over': pygame.mixer.Sound('assets/sounds/other_sounds/start_over_game/over.mp3'),
+    'mumble': pygame.mixer.Sound('assets/sounds/other_sounds/mumble.wav')
 }
 
 

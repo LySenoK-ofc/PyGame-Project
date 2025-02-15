@@ -1,17 +1,22 @@
 import sys
 
 import pygame.sprite
-
-import demo_project
 from load_image_func import load_image
-from constant import FPS
-from sound_tests import play_background_music, play_sound, sounds
+from sound_tests import play_background_music
 from sprite_groups import update_group
 from Map_constructor import MapTile, AnimatedMapObject
 from shop import Shop
 
 from Units import *
 from Mobs import *
+
+from constant import LEFT, TOP, FPS, WIDTH, HEIGHT, reset_state
+from Map_constructor import MapConstructor, generate_level, load_level
+import pygame.freetype
+from Board_class import Board
+from sale_func import sale_unit
+from show_info import show_unit_info
+from Waves_spawner import WaveManager
 
 pygame.init()
 
@@ -29,14 +34,11 @@ def terminate():
     sys.exit()
 
 
-def get_class(class_name):
-    return getattr(sys.modules[__name__], class_name)
-
-
 class Button(pygame.sprite.Sprite):
     button_images = {'settings': 'assets/buttons/settings_btn.png',
                      'pause': 'assets/buttons/pause_btn.png',
                      'return': 'assets/buttons/return_btn.png',
+                     'replay': 'assets/buttons/replay_btn.png',
                      'sketch': 'assets/buttons/sketch_btn.png',
                      'entity_view': 'assets/buttons/entity_view_btn.png'}
 
@@ -58,8 +60,8 @@ class Button(pygame.sprite.Sprite):
                 pick_level_screen()
                 rulers_screen()
                 update_group()  # Временно
-                pygame.display.set_caption('Уровень *')
-                demo_project.game_loop()  # Временно
+                pygame.display.set_caption('Игра')
+                game_loop()  # Временно
             if self.command == 'open_main_lobby':
                 main_lobby()
             if self.command == 'quit':
@@ -69,11 +71,11 @@ class Button(pygame.sprite.Sprite):
             if self.command == 'open_options_screen':
                 options_screen()
             if self.command == 'open_characters_page':
-                print('<_page was successfully changed_>')
                 dictionary_screen(0)
             if self.command == 'open_mobs_page':
-                print('<_page was successfully changed_>')
                 dictionary_screen(1)
+            if self.command == 'replay':
+                game_loop()
 
 
 class Sketch_button(Button):
@@ -283,10 +285,13 @@ def pick_level_screen():
                 if event.button == 1:
                     groups['level_doors'].update(event)
                     for door in groups['level_doors']:
-                        if type(door) == Level_door and door.check():
-                            groups['buttons'].empty()
-                            play_sound('open_door', 1)
-                            return
+                        if type(door) == Level_door:
+                            if door.check():
+                                groups['buttons'].empty()
+                                play_sound(sounds['open_door'], 1)
+                                return
+                            else:
+                                play_sound(sounds['none'])
                     groups['buttons'].update(event)
 
         screen.blit(background, (0, 0))
@@ -325,11 +330,11 @@ def rulers_screen():
                        'assets/map_tiles/Animated_Objects/campfire/active_campfire/6.png',), scale=(250, 250))
 
     continue_text = font2.render('Нажмите ПРОБЕЛ, чтобы продолжить', True, 'white')
-    rulers_text = (('Ваша задча - защитить этот лагерь от монстров,',
-                    'для этого вам было выделено войско. Но помните - ',
-                    'никто не работает за бесплатно, поэтому для уси- ',
-                    'ления боевой мощи вам придется зарабатывать',
-                    'деньги, убивая врагов.'),
+    rulers_text = (('Приветствую! Ваша задча - защитить этот лагерь',
+                    'от монстров, для этого вам было выделено войско.',
+                    'Но помните - никто не работает за бесплатно,',
+                    'поэтому для усиления боевой мощи вам придется',
+                    ' зарабатывать деньги, убивая врагов.'),
                    ('На ваш счет сразу будет начислен стартовый',
                     'капитал, а также на поле битвы будут находиться',
                     '5 всадников, способных спасти вас в критической',
@@ -350,6 +355,7 @@ def rulers_screen():
     dialog_page = 0
 
     Dialog_Knight()
+    play_sound(sounds['mumble'])
 
     while True:
         for event in pygame.event.get():
@@ -362,6 +368,10 @@ def rulers_screen():
                         return
                     else:
                         dialog_page += 1
+                        play_sound(sounds['mumble'])
+                if keys[pygame.K_LEFT]:
+                    if dialog_page > 0:
+                        dialog_page -= 1
 
         screen.fill('black')
         groups['map_tiles'].draw(screen)
@@ -377,6 +387,212 @@ def rulers_screen():
             screen.blit(font2.render(rulers_text[dialog_page][i], True, 'black'), (410, 540 + i * 30))
 
         pygame.display.flip()
+        clock.tick(FPS)
+
+
+def pause_screen():
+    def unpause_music():
+        pygame.mixer.music.unpause()
+        pygame.mixer.unpause()
+        pygame.display.set_caption('Игра')
+
+    pygame.display.set_caption('Пауза')
+    pygame.mixer.music.pause()
+    pygame.mixer.pause()
+    menu = load_image('assets/game_menu.png')
+    close_btn_coord = ((1110, 115), (1170, 180))
+
+    Button(420, 275, 'replay', 'replay')
+    Button(420, 425, 'return', 'open_pick_level_screen')
+
+    Sketch_button(550, 280, 'replay', 'Replay')
+    Sketch_button(550, 440, 'open_pick_level_screen', 'Back to lobby')
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                terminate()
+            if event.type == pygame.KEYDOWN:
+                keys = pygame.key.get_pressed()
+                if keys[pygame.K_ESCAPE]:
+                    unpause_music()
+                    return
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    pos = event.pos
+                    if close_btn_coord[0][0] < pos[0] < close_btn_coord[1][0]\
+                            and close_btn_coord[0][1] < pos[1] < close_btn_coord[1][1]:
+                        unpause_music()
+                        return
+                    groups['buttons'].update(event)
+        groups['all_sprites'].draw(screen)
+        screen.blit(menu, (284, 97))
+        groups['buttons'].draw(screen)
+        for txt in Sketch_button.texts:
+            screen.blit(txt[0], txt[1])
+        pygame.display.flip()
+        clock.tick(FPS)
+
+
+def win_screen():
+    terminate()
+
+
+def lose_screen():
+    terminate()
+
+
+def alpha_convert():
+    """Конвертирует изображение в альфу"""
+    try:
+        for key, val in ANIMATIONS.items():
+            convert_val = {}
+            for key1 in val.keys():
+                try:
+                    convert_val[key1] = [frame.convert_alpha() for frame in val[key1] if
+                                         bool(frame.get_flags() & pygame.SRCALPHA)]
+                except pygame.error:
+                    print('Не удалось конвертируем в альфу')
+            ANIMATIONS[key] = convert_val
+    except Exception:
+        print('Ошибка изображения/структуры')
+
+
+def step_sound_func():
+    """Запускает звуки ходьбы"""
+    if not pygame.mixer.Channel(2).get_busy():
+        if len(groups['mobs']) > 0:
+            sound = choice([pygame.mixer.Sound('assets/sounds/entities_sounds/step.wav'),
+                            pygame.mixer.Sound('assets/sounds/entities_sounds/step1.wav')])
+            pygame.mixer.Channel(2).play(sound)
+            pygame.mixer.Channel(2).set_volume(0.1)
+    else:
+        if len(groups['mobs']) == 0:
+            pygame.mixer.Channel(2).stop()
+
+
+def info_drawer(info_text, info_font, x, y, line_spacing):
+    """Рисуем инфу по юниту"""
+    for line in info_text:
+        text_surface, text_rect = info_font.render(line, (100, 255, 100))
+        text_rect.x, text_rect.y = x, y
+        screen.blit(text_surface, text_rect)
+        y += text_rect.height + line_spacing
+
+
+def system_info_drawer(money_font, hp_font):
+    """Рисуем Монеты и Хп Игрока"""
+    text_surface, text_rect = money_font.render(f"Деньги:{constant.cash}", (100, 255, 100))  # Деньги
+    text_rect.x, text_rect.y = 10, 10
+    screen.blit(text_surface, text_rect)
+
+    text_surface, text_rect = hp_font.render(f"Хп:{constant.hp}", (100, 255, 100))  # Хп
+    text_rect.x, text_rect.y = 10, text_rect.height * 2
+    screen.blit(text_surface, text_rect)
+
+
+def entity_drawer():
+    """Рисуем динамические спрйты"""
+    groups['characters'].draw(screen)
+    groups['mobs'].draw(screen)
+    groups['shells'].draw(screen)
+    groups['shop_units'].draw(screen)
+    groups['drag_units'].draw(screen)
+    groups['animated_map_objects'].draw(screen)
+
+
+def game_loop():
+    """Основной игровой цикл"""
+    board = Board(6, 5, LEFT, TOP, 75)
+    shop_unit_coord = generate_level(load_level('map.txt'))
+    MapConstructor(20, 11, board, shop_unit_coord)
+    groups['map_tiles'].draw(screen)
+    groups['map_objects'].draw(screen)
+    reset_state()
+
+    wave_manager = WaveManager()
+    play_background_music('assets/sounds/background_sounds/lvl/Shiro_Sagisu_-_Treachery_72363454.mp3')
+    play_sound(sounds['game_start'])
+
+    static_background = pygame.Surface((WIDTH, HEIGHT))
+    static_background.blit(screen, (0, 0))
+
+    alpha_convert()
+
+    SPAWN_WAVE_EVENT = pygame.USEREVENT + 1
+    pygame.time.set_timer(SPAWN_WAVE_EVENT, 1500)
+
+    money_font = pygame.freetype.Font('assets/data/Adbnorm.ttf', size=50)  # Деньги
+    info_font = pygame.freetype.Font('assets/data/Adbnorm.ttf', size=20)  # Поле для информации об юните
+    hp_font = pygame.freetype.Font('assets/data/Adbnorm.ttf', size=50)  # Деньги
+
+    info_text = ''
+    line_spacing = 10  # Расстояние между строками
+    x, y, coord_info_text = None, None, None
+
+    # Словарь для выбора юнита
+    unit_mapping = {
+        pygame.K_1: Archer,
+        pygame.K_2: Knight,
+        pygame.K_3: Wizard,
+        pygame.K_4: Priest,
+        pygame.K_5: ArmoredAxeman,
+        pygame.K_6: SwordsMan,
+        pygame.K_7: KnightTemplar
+    }
+
+    running = True
+    while running:
+        constant.frame_count += 1
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_LSHIFT]:
+            info_text, coord_info_text = show_unit_info(pygame.mouse.get_pos())
+            x, y = coord_info_text
+
+        if keys[pygame.K_e]:
+            board.spawn_mob(choice(
+                [Slime, Skeleton, Orc, ArmoredOrc, EliteOrc, RiderOrc, ArmoredSkeleton, GreateswordSkeleton,
+                 Werebear, Werewolf]))
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                terminate()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 3:
+                    sale_unit(pygame.mouse.get_pos())
+                else:
+                    for key_code, unit_class in unit_mapping.items():
+                        if keys[key_code]:
+                            board.get_click(pygame.mouse.get_pos(), unit_class)
+                            break
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    pause_screen()
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_LSHIFT:
+                    info_text, coord_info_text = '', []
+            if event.type == SPAWN_WAVE_EVENT:
+                wave_manager.start_wave()
+
+        step_sound_func()
+
+        screen.blit(static_background, (0, 0))
+        entity_drawer()
+
+        wave_manager.spawn_enemy()
+
+        if info_text:
+            info_drawer(info_text, info_font, x, y, line_spacing)
+            x, y = coord_info_text
+
+        system_info_drawer(money_font, hp_font)
+
+        groups['all_sprites'].update()
+        pygame.display.flip()
+
+        if constant.hp <= 0:
+            lose_screen()
         clock.tick(FPS)
 
 
