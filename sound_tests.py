@@ -94,7 +94,7 @@ def play_background_music(file, volume=0.2):
 def play_sound(sound, volume=0.5):
     """Проигрывает звук (0 канал)"""
     try:
-        sounds[sound].set_volume(volume)
-        sounds[sound].play()
+        sound.set_volume(volume)
+        sound.play()
     except Exception:
         pass

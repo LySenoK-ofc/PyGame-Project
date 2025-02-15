@@ -5,7 +5,7 @@ import pygame.sprite
 import demo_project
 from load_image_func import load_image
 from constant import FPS
-from sound_tests import play_background_music, play_sound
+from sound_tests import play_background_music, play_sound, sounds
 from sprite_groups import update_group
 from Map_constructor import MapTile, AnimatedMapObject
 from shop import Shop
@@ -52,7 +52,7 @@ class Button(pygame.sprite.Sprite):
         if args and args[0].type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
             update_group()
             Sketch_button.texts.clear()
-            play_sound('button_click')
+            play_sound(sounds['button_click'])
 
             if self.command == 'open_pick_level_screen':
                 pick_level_screen()
@@ -101,7 +101,7 @@ class Entity_view_button(Button):
         if args and args[0].type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
             groups['buttons'].empty()
             Sketch_button.texts.clear()
-            play_sound('button_click', 0.2)
+            play_sound(sounds['button_click'], 0.2)
             if self.entity_type == 'Unit':
                 dictionary_screen(0, self.entity)
             else:
