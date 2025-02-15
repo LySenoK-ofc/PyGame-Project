@@ -14,11 +14,12 @@ ANIMATIONS = {
     'ELITE_ORC': load_anim("assets/animations/Mobs/elite_orc/Elite Orc.png", 'mobs', 'elite_orc', True),
     'ARMORED_ORC': load_anim("assets/animations/Mobs/armored_orc/Armored Orc.png", 'mobs', 'armored_orc', True),
     'RIDER_ORC': load_anim("assets/animations/Mobs/rider_orc/Orc rider.png", 'mobs', 'rider_orc', True),
-    'ARMORED_SCELETON': load_anim("assets/animations/Mobs/armored_skeleton/Armored Skeleton.png", 'mobs', 'armored_skeleton', True),
+    'ARMORED_SKELETON': load_anim("assets/animations/Mobs/armored_skeleton/Armored Skeleton.png", 'mobs', 'armored_skeleton', True),
     'GREATSWORD_SKELETON': load_anim("assets/animations/Mobs/greatsword_skeleton/Greatsword Skeleton.png", 'mobs', 'greatsword_skeleton', True),
     'SKELETON': load_anim("assets/animations/Mobs/skeleton/Skeleton.png", 'mobs', 'skeleton', True),
     'SLIME': load_anim("assets/animations/Mobs/slime/Slime.png", 'mobs', 'slime', True),
     'SMALL_SLIME': load_anim("assets/animations/Mobs/slime/Slime.png", 'mobs', 'slime', True, scale=(220, 220)),
     'WEREBEAR': load_anim("assets/animations/Mobs/werebear/Werebear.png", 'mobs', 'werebear', True),
     'WEREWOLF': load_anim("assets/animations/Mobs/werewolf/Werewolf.png", 'mobs', 'werewolf', True),
+    'DIALOG_KNIGHT': load_anim("assets/animations/Troops/knight/Knight.png", 'troops', 'knight', scale=(1700, 1700))
 }

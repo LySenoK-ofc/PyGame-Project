@@ -8,6 +8,7 @@ from constant import FPS
 from sound_tests import play_sound
 from sprite_groups import update_group
 from Map_constructor import MapTile, AnimatedMapObject
+from shop import Shop
 
 from Units import *
 from Mobs import *
@@ -49,14 +50,8 @@ class Button(pygame.sprite.Sprite):
 
     def update(self, *args, **kwargs):
         if args and args[0].type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
-            groups['map_tiles'].empty()
-            groups['map_objects'].empty()
-            groups['animated_map_objects'].empty()
-            groups['buttons'].empty()
-            groups['level_doors'].empty()
+            update_group()
             Sketch_button.texts.clear()
-            groups['characters_page'].empty()
-            groups['mobs_page'].empty()
             play_sound('button_click')
 
             if self.command == 'open_pick_level_screen':
@@ -93,22 +88,21 @@ class Entity_view_button(Button):
     characters_view = pygame.sprite.Group()
     mobs_view = pygame.sprite.Group()
 
-    def __init__(self, x, y, entity=None, group=groups['buttons']):
+    def __init__(self, x, y, entity=None, entity_type=None, group=groups['buttons']):
         super().__init__(x, y, 'entity_view', None, group)
-        self.entity = get_class(entity)
-        if self.entity.__bases__[0] == Unit:
-            self.characters_view.add(self.entity((x + 50, y + 50), groups['rows'][0]))
-            self.type = 'Unit'
+        self.entity = entity
+        self.entity_type = entity_type
+        if self.entity_type == 'Unit':
+            self.characters_view.add(Shop(None, (x + 50, y + 50), ANIMATIONS[entity.upper()], None))
         else:
-            self.mobs_view.add(self.entity((x + 57, y + 50), groups['rows'][1]))
-            self.type = 'Mob'
+            self.mobs_view.add(Shop(None, (x + 57, y + 50), ANIMATIONS[entity.upper()], None))
 
     def update(self, *args, **kwargs):
         if args and args[0].type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
             groups['buttons'].empty()
             Sketch_button.texts.clear()
             play_sound('button_click', 0.2)
-            if self.type == 'Unit':
+            if self.entity_type == 'Unit':
                 dictionary_screen(0, self.entity)
             else:
                 dictionary_screen(1, self.entity)
@@ -174,7 +168,7 @@ def main_lobby():
         clock.tick(FPS)
 
 
-def dictionary_screen(page=0, entity=get_class('Knight')):
+def dictionary_screen(page=0, entity='Knight'):
     pygame.display.set_caption('Бестиарий')
     background = load_image('assets/backgrounds/levels_background.png')
 
@@ -185,29 +179,29 @@ def dictionary_screen(page=0, entity=get_class('Knight')):
     Sketch_button(300, 60, 'open_characters_page', 'Characters')
     Sketch_button(800, 60, 'open_mobs_page', 'Mobs')
 
-    Entity_view_button(600, 200, 'Knight', groups['characters_page'])
-    Entity_view_button(600, 320, 'Archer', groups['characters_page'])
-    Entity_view_button(600, 440, 'Wizard', groups['characters_page'])
-    Entity_view_button(600, 560, 'ArmoredAxeman', groups['characters_page'])
-    Entity_view_button(740, 200, 'SwordsMan', groups['characters_page'])
-    Entity_view_button(740, 320, 'Priest', groups['characters_page'])
-    Entity_view_button(740, 440, 'KnightTemplar', groups['characters_page'])
-    Entity_view_button(740, 560, 'Lancer', groups['characters_page'])
+    Entity_view_button(600, 200, 'Knight', 'Unit', groups['characters_page'])
+    Entity_view_button(600, 320, 'Archer', 'Unit', groups['characters_page'])
+    Entity_view_button(600, 440, 'Wizard', 'Unit',groups['characters_page'])
+    Entity_view_button(600, 560, 'Armored_Axeman', 'Unit',groups['characters_page'])
+    Entity_view_button(740, 200, 'SwordsMan', 'Unit',groups['characters_page'])
+    Entity_view_button(740, 320, 'Priest', 'Unit',groups['characters_page'])
+    Entity_view_button(740, 440, 'Knight_Templar', 'Unit',groups['characters_page'])
+    Entity_view_button(740, 560, 'Lancer', 'Unit',groups['characters_page'])
 
-    Entity_view_button(970, 200, 'Orc', groups['mobs_page'])
-    Entity_view_button(970, 320, 'ArmoredOrc', groups['mobs_page'])
-    Entity_view_button(970, 440, 'EliteOrc', groups['mobs_page'])
-    Entity_view_button(970, 560, 'Skeleton', groups['mobs_page'])
-    Entity_view_button(1100, 200, 'ArmoredSkeleton', groups['mobs_page'])
-    Entity_view_button(1100, 320, 'GreateswordSkeleton', groups['mobs_page'])
-    Entity_view_button(1100, 440, 'Slime', groups['mobs_page'])
-    Entity_view_button(1100, 560, 'Werewolf', groups['mobs_page'])
-    Entity_view_button(1230, 200, 'Werebear', groups['mobs_page'])
-    Entity_view_button(1230, 320, 'RiderOrc', groups['mobs_page'])
+    Entity_view_button(970, 200, 'Orc', 'Mob', groups['mobs_page'])
+    Entity_view_button(970, 320, 'Armored_Orc', 'Mob', groups['mobs_page'])
+    Entity_view_button(970, 440, 'Elite_Orc', 'Mob', groups['mobs_page'])
+    Entity_view_button(970, 560, 'Skeleton', 'Mob', groups['mobs_page'])
+    Entity_view_button(1100, 200, 'Armored_Skeleton', 'Mob', groups['mobs_page'])
+    Entity_view_button(1100, 320, 'Greatsword_Skeleton', 'Mob', groups['mobs_page'])
+    Entity_view_button(1100, 440, 'Slime', 'Mob', groups['mobs_page'])
+    Entity_view_button(1100, 560, 'Werewolf', 'Mob', groups['mobs_page'])
+    Entity_view_button(1230, 200, 'Werebear', 'Mob', groups['mobs_page'])
+    Entity_view_button(1230, 320, 'Rider_Orc', 'Mob', groups['mobs_page'])
 
     dictionary_field = load_image('assets/dictionary_field.png')
     current_entity = pygame.sprite.Group()
-    current_entity.add(entity((375, 450), groups['rows'][2]))
+    current_entity.add(Shop(None, (375, 450), ANIMATIONS[entity.upper()], None))
 
     while True:
         for event in pygame.event.get():
@@ -312,9 +306,16 @@ def pick_level_screen():
 
 def rulers_screen():
     pygame.display.set_caption('Правила')
-    dialog = load_image('assets/dialog2.png')
+    dialog = load_image('assets/dialog.png')
     MapTile(groups['map_tiles'], (0, 0), load_image('assets/map_tiles/Tiles/FieldsTile_38.png', scale=(1500, 825)))
     MapTile(groups['map_objects'], (810, 50), load_image('assets/map_tiles/Objects/camp/1.png', scale=(599, 378)))
+    MapTile(groups['map_objects'], (310, 150), load_image('assets/map_tiles/Objects/decor/Box1.png', scale=(150, 150)))
+    MapTile(groups['map_objects'], (196, 170), load_image('assets/map_tiles/Objects/decor/Box1.png', scale=(150, 150)))
+    MapTile(groups['map_objects'], (245, 70), load_image('assets/map_tiles/Objects/decor/Box1.png', scale=(150, 150)))
+    MapTile(groups['map_objects'], (340, 360), load_image('assets/map_tiles/Objects/stones/1.png', scale=(66, 48)))
+    MapTile(groups['map_objects'], (270, 780), load_image('assets/map_tiles/Objects/stones/2.png', scale=(36, 24)))
+    MapTile(groups['map_objects'], (75, 100), load_image('assets/map_tiles/Objects/stones/3.png', scale=(66, 42)))
+    MapTile(groups['map_objects'], (670, 165), load_image('assets/map_tiles/Objects/stones/4.png', scale=(78, 48)))
     AnimatedMapObject(groups['animated_map_objects'], (500, 250),
                       ('assets/map_tiles/Animated_Objects/campfire/active_campfire/1.png',
                        'assets/map_tiles/Animated_Objects/campfire/active_campfire/2.png',
@@ -348,6 +349,8 @@ def rulers_screen():
                     '5-Дровосек, 6-Мастер Меча, 7-Королевский страж)'))
     dialog_page = 0
 
+    Dialog_Knight()
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -365,9 +368,11 @@ def rulers_screen():
         groups['map_objects'].draw(screen)
         groups['animated_map_objects'].draw(screen)
         groups['animated_map_objects'].update()
+        groups['shop_units'].draw(screen)
+        groups['shop_units'].update()
 
         screen.blit(dialog, (240, 400))
-        screen.blit(continue_text, (350, 20))
+        screen.blit(continue_text, (385, 20))
         for i in range(len(rulers_text[dialog_page])):
             screen.blit(font2.render(rulers_text[dialog_page][i], True, 'black'), (410, 540 + i * 30))
 

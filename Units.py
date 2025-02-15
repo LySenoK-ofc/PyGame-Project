@@ -579,3 +579,8 @@ class PriestAura(AttackEntity):
 
     def update(self, *args, **kwargs):
         self.update_animation()
+
+
+class Dialog_Knight(Unit):
+    def __init__(self):
+        super().__init__((150, 600), ANIMATIONS['DIALOG_KNIGHT'], [groups['shop_units']], 0, 0, {'idle': 250})

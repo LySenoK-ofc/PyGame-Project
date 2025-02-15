@@ -49,7 +49,7 @@ class Shop(pygame.sprite.Sprite):
                     self.drag = True
 
                 if not mouse_button[0] and self.drag:
-                    if constant.cash - self.price >= 0 and self.board.get_click(mouse_pos, 'Troops', self.unit):
+                    if constant.cash - self.price >= 0 and self.board and self.board.get_click(mouse_pos, 'Troops', self.unit):
                         constant.cash -= self.price
                     self.rect.center = self.coord
                     self.drag = False
