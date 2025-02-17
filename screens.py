@@ -39,6 +39,7 @@ class Button(pygame.sprite.Sprite):
                      'pause': 'assets/buttons/pause_btn.png',
                      'return': 'assets/buttons/return_btn.png',
                      'replay': 'assets/buttons/replay_btn.png',
+                     'continue': 'assets/buttons/continue_btn.png',
                      'sketch': 'assets/buttons/sketch_btn.png',
                      'entity_view': 'assets/buttons/entity_view_btn.png'}
 
@@ -55,12 +56,13 @@ class Button(pygame.sprite.Sprite):
             update_group()
             Sketch_button.texts.clear()
             play_sound(sounds['button_click'])
+            if not pygame.mixer.music.get_busy():
+                play_background_music('assets/sounds/background_sounds/lobby/lobby_sound.mp3')
 
             if self.command == 'open_pick_level_screen':
                 pick_level_screen()
                 rulers_screen()
                 update_group()  # Временно
-                pygame.display.set_caption('Игра')
                 game_loop()  # Временно
             if self.command == 'open_main_lobby':
                 main_lobby()
@@ -71,10 +73,12 @@ class Button(pygame.sprite.Sprite):
             if self.command == 'open_options_screen':
                 options_screen()
             if self.command == 'open_characters_page':
-                dictionary_screen(0)
+                dictionary_screen(0, entity='Knight')
             if self.command == 'open_mobs_page':
-                dictionary_screen(1)
+                dictionary_screen(1, entity='Orc')
             if self.command == 'replay':
+                game_loop()
+            if self.command == 'next_level':
                 game_loop()
 
 
@@ -126,19 +130,26 @@ class Level_door(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
-        self.open = False
+        self.click = 0
         if lock:
             self.lock = Door_lock(x + 110, y + 150)
         else:
             self.lock = None
 
     def update(self, *args, **kwargs):
-        if args and args[0].type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos) and not self.lock:
-            self.image = load_image('assets/doors/open_door.png')
-            self.open = True
+        if args and args[0].type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
+            if self.lock:
+                play_sound(sounds['door_close'], 1)
+            else:
+                self.image = load_image('assets/doors/open_door.png')
+                self.click += 1
+                if self.click == 1:
+                    play_sound(sounds['open_door'], 1)
+                if self.check():
+                    groups['buttons'].empty()
 
     def check(self):
-        if self.open:
+        if self.click >= 2:
             return True
         return False
 
@@ -201,7 +212,12 @@ def dictionary_screen(page=0, entity='Knight'):
     Entity_view_button(1230, 200, 'Werebear', 'Mob', groups['mobs_page'])
     Entity_view_button(1230, 320, 'Rider_Orc', 'Mob', groups['mobs_page'])
 
-    dictionary_field = load_image('assets/dictionary_field.png')
+    if page:
+        groups['characters_page'].empty()
+    else:
+        groups['mobs_page'].empty()
+
+    dictionary_field = load_image('assets/other_textures/dictionary_field.png')
     current_entity = pygame.sprite.Group()
     current_entity.add(Shop(None, (375, 450), ANIMATIONS[entity.upper()], None))
 
@@ -287,11 +303,7 @@ def pick_level_screen():
                     for door in groups['level_doors']:
                         if type(door) == Level_door:
                             if door.check():
-                                groups['buttons'].empty()
-                                play_sound(sounds['open_door'], 1)
                                 return
-                            else:
-                                play_sound(sounds['none'])
                     groups['buttons'].update(event)
 
         screen.blit(background, (0, 0))
@@ -311,7 +323,7 @@ def pick_level_screen():
 
 def rulers_screen():
     pygame.display.set_caption('Правила')
-    dialog = load_image('assets/dialog.png')
+    dialog = load_image('assets/other_textures/dialog.png')
     MapTile(groups['map_tiles'], (0, 0), load_image('assets/map_tiles/Tiles/FieldsTile_38.png', scale=(1500, 825)))
     MapTile(groups['map_objects'], (810, 50), load_image('assets/map_tiles/Objects/camp/1.png', scale=(599, 378)))
     MapTile(groups['map_objects'], (310, 150), load_image('assets/map_tiles/Objects/decor/Box1.png', scale=(150, 150)))
@@ -347,7 +359,7 @@ def rulers_screen():
                     'броню и урон, если он находиться на поле боя,'),
                    ('стоимость размещения и продажи - если в магазине).',
                     'ПКМ, чтобы продать воина. Также в игре присут-',
-                    'ствует возможность быстрого размещения войска',
+                    'ствует возможность быстрого размещения войска,',
                     'для этого небходимо зажать цифру на ',
                     'клавиатуре и кликнуть по нужной клетке',
                     '(1-Лучник, 2-Рыцарь, 3-Маг, 4-Жрица,',
@@ -368,7 +380,8 @@ def rulers_screen():
                         return
                     else:
                         dialog_page += 1
-                        play_sound(sounds['mumble'])
+                        if not pygame.mixer.Channel(1).get_busy():
+                            pygame.mixer.Channel(1).play(sounds['mumble'])
                 if keys[pygame.K_LEFT]:
                     if dialog_page > 0:
                         dialog_page -= 1
@@ -399,7 +412,7 @@ def pause_screen():
     pygame.display.set_caption('Пауза')
     pygame.mixer.music.pause()
     pygame.mixer.pause()
-    menu = load_image('assets/game_menu.png')
+    menu = load_image('assets/other_textures/game_menu.png')
     close_btn_coord = ((1110, 115), (1170, 180))
 
     Button(420, 275, 'replay', 'replay')
@@ -407,6 +420,8 @@ def pause_screen():
 
     Sketch_button(550, 280, 'replay', 'Replay')
     Sketch_button(550, 440, 'open_pick_level_screen', 'Back to lobby')
+
+    pause_text = load_image('assets/other_textures/pause.png')
 
     while True:
         for event in pygame.event.get():
@@ -423,10 +438,12 @@ def pause_screen():
                     if close_btn_coord[0][0] < pos[0] < close_btn_coord[1][0]\
                             and close_btn_coord[0][1] < pos[1] < close_btn_coord[1][1]:
                         unpause_music()
+                        play_sound(sounds['button_click'])
                         return
                     groups['buttons'].update(event)
         groups['all_sprites'].draw(screen)
         screen.blit(menu, (284, 97))
+        screen.blit(pause_text, (537, 115))
         groups['buttons'].draw(screen)
         for txt in Sketch_button.texts:
             screen.blit(txt[0], txt[1])
@@ -434,12 +451,96 @@ def pause_screen():
         clock.tick(FPS)
 
 
-def win_screen():
-    terminate()
+def win_screen(lvl=None):
+    pygame.mixer.music.stop()
+    pygame.mixer.stop()
+    pygame.display.set_caption('Победа!')
+
+    menu = load_image('assets/other_textures/game_menu.png')
+    victory_text = load_image('assets/other_textures/victory.png')
+    close_btn_coord = ((1110, 115), (1170, 180))
+
+    Button(420, 275, 'replay', 'replay')
+    Button(420, 425, 'return', 'open_pick_level_screen')
+    Button(420, 575, 'continue', 'next_level')
+
+    Sketch_button(550, 280, 'replay', 'Replay')
+    Sketch_button(550, 440, 'open_main_lobby', 'Back to lobby')
+    Sketch_button(550, 600, 'next_level', 'Next level')
+
+    play_sound(sounds['victory'])
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                terminate()
+            if event.type == pygame.KEYDOWN:
+                keys = pygame.key.get_pressed()
+                if keys[pygame.K_ESCAPE]:
+                    return
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    pos = event.pos
+                    if close_btn_coord[0][0] < pos[0] < close_btn_coord[1][0] \
+                            and close_btn_coord[0][1] < pos[1] < close_btn_coord[1][1]:
+                        play_sound('button_click')
+                        play_background_music('assets/sounds/background_sounds/lobby/lobby_sound.mp3')
+                        groups['buttons'].empty()
+                        pick_level_screen()
+                    groups['buttons'].update(event)
+        groups['all_sprites'].draw(screen)
+        screen.blit(menu, (284, 97))
+        screen.blit(victory_text, (549, 100))
+        groups['buttons'].draw(screen)
+        for txt in Sketch_button.texts:
+            screen.blit(txt[0], txt[1])
+        pygame.display.flip()
+        clock.tick(FPS)
 
 
 def lose_screen():
-    terminate()
+    pygame.mixer.music.stop()
+    pygame.mixer.stop()
+    pygame.display.set_caption('Поражение...')
+
+    menu = load_image('assets/other_textures/game_menu.png')
+    defeat_text = load_image('assets/other_textures/defeat.png')
+    close_btn_coord = ((1110, 115), (1170, 180))
+
+    Button(420, 275, 'replay', 'replay')
+    Button(420, 425, 'return', 'open_pick_level_screen')
+
+    Sketch_button(550, 280, 'replay', 'Replay')
+    Sketch_button(550, 440, 'open_main_lobby', 'Back to lobby')
+
+    play_sound(sounds['defeat'])
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                terminate()
+            if event.type == pygame.KEYDOWN:
+                keys = pygame.key.get_pressed()
+                if keys[pygame.K_ESCAPE]:
+                    return
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    pos = event.pos
+                    if close_btn_coord[0][0] < pos[0] < close_btn_coord[1][0] \
+                            and close_btn_coord[0][1] < pos[1] < close_btn_coord[1][1]:
+                        play_sound('button_click')
+                        play_background_music('assets/sounds/background_sounds/lobby/lobby_sound.mp3')
+                        groups['buttons'].empty()
+                        pick_level_screen()
+                    groups['buttons'].update(event)
+        groups['all_sprites'].draw(screen)
+        screen.blit(menu, (284, 97))
+        screen.blit(defeat_text, (549, 100))
+        groups['buttons'].draw(screen)
+        for txt in Sketch_button.texts:
+            screen.blit(txt[0], txt[1])
+        pygame.display.flip()
+        clock.tick(FPS)
 
 
 def alpha_convert():
@@ -502,6 +603,7 @@ def entity_drawer():
 
 
 def game_loop():
+    pygame.display.set_caption('Игра')
     """Основной игровой цикл"""
     board = Board(6, 5, LEFT, TOP, 75)
     shop_unit_coord = generate_level(load_level('map.txt'))
@@ -593,6 +695,9 @@ def game_loop():
 
         if constant.hp <= 0:
             lose_screen()
+
+        if wave_manager.check():
+            win_screen()
         clock.tick(FPS)
 
 

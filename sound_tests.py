@@ -77,7 +77,9 @@ sounds = {
     'none': pygame.mixer.Sound('assets/sounds/other_sounds/none.mp3'),
     'game_start': pygame.mixer.Sound('assets/sounds/other_sounds/start_over_game/start.mp3'),
     'game_over': pygame.mixer.Sound('assets/sounds/other_sounds/start_over_game/over.mp3'),
-    'mumble': pygame.mixer.Sound('assets/sounds/other_sounds/mumble.wav')
+    'mumble': pygame.mixer.Sound('assets/sounds/other_sounds/mumble.wav'),
+    'victory': pygame.mixer.Sound('assets/sounds/background_sounds/lvl/victory.wav'),
+    'defeat': pygame.mixer.Sound('assets/sounds/background_sounds/lvl/defeat.wav')
 }
 
 

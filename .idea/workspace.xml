@@ -4,17 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Исправил название анимации">
-      <change afterPath="$PROJECT_DIR$/assets/buttons/replay_btn.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/game_menu.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sounds/other_sounds/mumble.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_02_2025_20_37__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_02_2025_20_37__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_02_2025_20_39__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_02_2025_20_39__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_09_02_2025_20_39__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_09_02_2025_20_39__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_09_02_2025_20_40__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_09_02_2025_20_40__Changes_.xml" afterDir="false" />
+    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Перенес игровой цикл к остальным экрнанам из-за неудобного импорта, сделал экран паузы">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_02_2025_20_37_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_02_2025_20_37__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_02_2025_20_39_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_09_02_2025_20_39__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_09_02_2025_20_39_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_09_02_2025_20_39__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_09_02_2025_20_40_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_09_02_2025_20_40__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mobs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/buttons/settings_btn.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/buttons/settings_btn.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Waves_spawner.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_spawner.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/Font.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/dialog.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/dictionary_field.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/game_menu.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/constant.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/screens.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sound_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/sound_tests.py" afterDir="false" />
     </list>
@@ -66,6 +71,7 @@
     &quot;Python.demo_project.executor&quot;: &quot;Run&quot;,
     &quot;Python.run.executor&quot;: &quot;Run&quot;,
     &quot;Python.screens.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
@@ -87,28 +93,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.screens">
-    <configuration name="Map_constructor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="PyGame_Project_demo" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Map_constructor.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="demo_map" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PyGame_Project_demo" />
       <option name="ENV_FILES" value="" />
@@ -197,20 +181,42 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PyGame_Project_demo" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
+      <item itemvalue="Python.test" />
       <item itemvalue="Python.run" />
       <item itemvalue="Python.demo_map" />
       <item itemvalue="Python.demo_project" />
-      <item itemvalue="Python.Map_constructor" />
       <item itemvalue="Python.screens" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.screens" />
+        <item itemvalue="Python.test" />
         <item itemvalue="Python.run" />
         <item itemvalue="Python.demo_project" />
         <item itemvalue="Python.demo_map" />
-        <item itemvalue="Python.Map_constructor" />
       </list>
     </recent_temporary>
   </component>
@@ -310,7 +316,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739608935473</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Перенес игровой цикл к остальным экрнанам из-за неудобного импорта, сделал экран паузы">
+      <option name="closed" value="true" />
+      <created>1739628377842</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1739628377842</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -335,7 +349,8 @@
     <MESSAGE value="добавил звуков" />
     <MESSAGE value="продолжил работу со звуком" />
     <MESSAGE value="Исправил название анимации" />
-    <option name="LAST_COMMIT_MESSAGE" value="Исправил название анимации" />
+    <MESSAGE value="Перенес игровой цикл к остальным экрнанам из-за неудобного импорта, сделал экран паузы" />
+    <option name="LAST_COMMIT_MESSAGE" value="Перенес игровой цикл к остальным экрнанам из-за неудобного импорта, сделал экран паузы" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

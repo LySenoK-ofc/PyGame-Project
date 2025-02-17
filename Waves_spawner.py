@@ -29,6 +29,8 @@ class WaveManager:
                      'ArmoredSkeleton': ArmoredSkeleton, 'GreateswordSkeleton': GreateswordSkeleton,
                      'Werewolf': Werewolf, 'Werebear': Werebear}
 
+        self.lvl_done = False
+
     def start_wave(self):
         """Проверяет состояние текущей волны и переходит к следующей. Запускает новую волну."""
         if self.current_wave_done and len(self.enemies) == 0:
@@ -40,13 +42,16 @@ class WaveManager:
                 if self.wave < len(self.waves):
                     self.spawn_index = 0
                     self.wave_running = True
-                    pygame.mixer.Channel(1).play(sounds['wave_start'])
+                    pygame.mixer.Channel(2).play(sounds['wave_start'])
                 else:
-                    pygame.mixer.Channel(1).play(sounds['game_over'])
+                    if not pygame.mixer.Channel(1).get_busy():
+                        pygame.mixer.Channel(1).play(sounds['game_over'])
+        if self.wave >= len(self.waves):
+            self.lvl_done = True
 
     def spawn_enemy(self):
         """Создаёт мобов текущей волны."""
-        if self.wave >= len(self.waves) or not self.wave_running:
+        if self.wave >= len(self.waves) or self.current_wave_done:
             return  # Все волны пройдены
 
         now = pygame.time.get_ticks()
@@ -69,6 +74,7 @@ class WaveManager:
                     self.current_wave_done = True  # Все мобы из волны заспавнены
                     self.wave_running = False
             except Exception:
+                print(Exception)
                 pass
 
     def spawn_mob(self, enemy_class):
@@ -77,3 +83,8 @@ class WaveManager:
                    groups['rows'][row])
         enemy = enemy_class(*setting)
         self.enemies.add(enemy)
+
+    def check(self):
+        if self.lvl_done:
+            return True
+        return False
