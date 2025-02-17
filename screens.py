@@ -2,10 +2,10 @@ import sys
 
 import pygame.sprite
 
-import demo_project
+import Game
 from load_image_func import load_image
 from constant import FPS, HEIGHT, WIDTH
-from sound_tests import play_sound, play_background_music, sounds
+from sounds_manager import play_sound, play_background_music, sounds
 from sprite_groups import groups, update_group
 
 pygame.init()
@@ -56,7 +56,7 @@ class Button(pygame.sprite.Sprite):
             if self.command == 'open_pick_level_screen':
                 pick_level_screen()
                 update_group()
-                demo_project.game_loop()
+                Game.game_loop()
             if self.command == 'open_main_lobby':
                 main_lobby()
             if self.command == 'quit':
@@ -111,9 +111,12 @@ class Level_door(pygame.sprite.Sprite):
         return False
 
 
-def main_lobby():
+def main_lobby(replay_lobby_music=False):
     background = load_image('assets/backgrounds/main_background.png')
     pygame.display.set_icon(load_image('assets/icon.png'))
+
+    if replay_lobby_music:
+        play_background_music('assets/sounds/background_sounds/lobby/lobby_sound.mp3')
 
     Button(900, 300, 'sketch', 'open_pick_level_screen', 'Continue')
     Button(900, 425, 'sketch', 'open_dictionary_screen', 'Dictionary')
@@ -249,5 +252,4 @@ def pick_level_screen():
 
 
 if __name__ == '__main__':
-    play_background_music('assets/sounds/background_sounds/lobby/lobby_sound.mp3')
-    main_lobby()
+    main_lobby(True)

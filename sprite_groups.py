@@ -10,7 +10,10 @@ def update_group():
 def clear_group(group):
     """Удаляет все спрайты из переданной группы."""
     if isinstance(group, sprite.Group):
-        group.empty()
+        try:
+            group.empty()
+        except Exception as er:
+            print(f'Произошла ошибка! "{er}"')
     elif isinstance(group, dict):
         for sub_group in group.values():
             clear_group(sub_group)  # Рекурсивно очищаем вложенные словари

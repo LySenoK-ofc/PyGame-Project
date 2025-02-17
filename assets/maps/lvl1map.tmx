@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="11" tilewidth="75" tileheight="75" infinite="0" nextlayerid="12" nextobjectid="65">
+ <tileset firstgid="1" source="tiles/FieldsTile_31.tsx"/>
+ <tileset firstgid="2" source="tiles/FieldsTile_47.tsx"/>
+ <tileset firstgid="3" source="tiles/FieldsTile_44.tsx"/>
+ <tileset firstgid="4" source="tiles/FieldsTile_38.tsx"/>
+ <tileset firstgid="5" source="tiles/bush1.tsx"/>
+ <tileset firstgid="6" source="tiles/bush2.tsx"/>
+ <tileset firstgid="7" source="tiles/bush3.tsx"/>
+ <tileset firstgid="8" source="tiles/bush4.tsx"/>
+ <tileset firstgid="9" source="tiles/bush5.tsx"/>
+ <tileset firstgid="10" name="bush6" tilewidth="80" tileheight="52" tilecount="1" columns="1">
+  <image source="E:/PyCharmProjects/YandexGameProject/assets/map_tiles/Objects/bushes/6.png" width="80" height="52"/>
+ </tileset>
+ <tileset firstgid="11" source="tiles/camp1.tsx"/>
+ <tileset firstgid="12" source="tiles/camp2.tsx"/>
+ <tileset firstgid="13" source="tiles/camp3.tsx"/>
+ <tileset firstgid="14" source="tiles/camp4.tsx"/>
+ <tileset firstgid="15" source="tiles/box1.tsx"/>
+ <tileset firstgid="16" source="tiles/box2.tsx"/>
+ <tileset firstgid="17" source="tiles/log2.tsx"/>
+ <tileset firstgid="18" source="tiles/log3.tsx"/>
+ <tileset firstgid="19" source="tiles/tree1.tsx"/>
+ <tileset firstgid="20" source="tiles/tree2.tsx"/>
+ <tileset firstgid="21" source="tiles/fence1.tsx"/>
+ <tileset firstgid="22" source="tiles/fence2.tsx"/>
+ <tileset firstgid="23" source="tiles/shadow.tsx"/>
+ <tileset firstgid="24" source="tiles/stone2.tsx"/>
+ <tileset firstgid="25" source="tiles/stone3.tsx"/>
+ <tileset firstgid="26" source="tiles/stone4.tsx"/>
+ <tileset firstgid="27" source="tiles/stone5.tsx"/>
+ <tileset firstgid="28" source="tiles/pointer.tsx"/>
+ <tileset firstgid="29" source="tiles/flower1.tsx"/>
+ <tileset firstgid="30" name="flower2" tilewidth="12" tileheight="10" tilecount="1" columns="1">
+  <image source="E:/PyCharmProjects/YandexGameProject/assets/map_tiles/Objects/flowers/2.png" width="12" height="10"/>
+ </tileset>
+ <tileset firstgid="31" source="tiles/grass1.tsx"/>
+ <tileset firstgid="32" source="tiles/grass2.tsx"/>
+ <tileset firstgid="33" source="tiles/grass3.tsx"/>
+ <layer id="1" name="floor" width="20" height="11">
+  <data encoding="csv">
+4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+4,4,4,4,4,2,4,4,2,4,4,2,4,4,2,4,4,4,4,4,
+4,4,4,4,4,2,4,4,2,4,4,2,4,4,2,4,4,4,4,4,
+4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+4,4,4,4,3,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,
+4,4,4,4,3,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,
+4,4,4,4,3,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,
+4,4,4,4,3,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,
+4,4,4,4,3,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,
+4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,
+4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4
+</data>
+ </layer>
+ <layer id="2" name="objects" width="20" height="11">
+  <data encoding="csv">
+0,0,33,7,0,0,0,10,0,0,0,0,8,0,0,0,33,0,0,9,
+8,0,0,0,33,0,0,30,0,0,0,0,0,0,0,29,0,5,33,0,
+0,3758096413,0,5,32,0,0,0,0,0,0,0,0,0,0,0,0,2147483677,0,0,
+0,0,33,0,10,0,30,10,0,6,0,31,0,0,0,9,0,31,0,8,
+16,15,11,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+2147483662,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,17,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+2147483661,0,15,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,10,3758096413,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+6,0,0,9,33,0,10,0,31,0,8,0,30,33,10,31,0,0,7,33,
+31,8,0,5,33,0,0,7,0,0,0,0,0,9,0,0,6,32,0,0
+</data>
+ </layer>
+ <layer id="5" name="shadow" width="20" height="11">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,28,0,0,0,0,23,0,0,23,0,0,1073741847,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+2147483659,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,28,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <layer id="4" name="log" width="20" height="11">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,27,0,0,0,0,
+0,17,0,26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,27,0,0,0,0,0,0,0,0,0,0,0,0,0,20,0,24,0,
+24,0,0,20,0,0,19,0,0,19,0,0,19,0,27,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,18,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,26,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,20,0,0,0,0,0,0,26,0,0,0,0,0,0,25,0,0,0,
+0,0,0,0,0,24,0,0,0,0,0,20,0,0,0,0,0,0,0,25
+</data>
+ </layer>
+ <objectgroup id="8" name="user_cell" visible="0">
+  <object id="1" x="375" y="300">
+   <point/>
+  </object>
+  <object id="2" x="375" y="375">
+   <point/>
+  </object>
+  <object id="3" x="375" y="450">
+   <point/>
+  </object>
+  <object id="4" x="375" y="525">
+   <point/>
+  </object>
+  <object id="9" x="375" y="600">
+   <point/>
+  </object>
+  <object id="10" x="450" y="300">
+   <point/>
+  </object>
+  <object id="11" x="525" y="300">
+   <point/>
+  </object>
+  <object id="12" x="600" y="300">
+   <point/>
+  </object>
+  <object id="13" x="675" y="300">
+   <point/>
+  </object>
+  <object id="15" x="750" y="300">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="9" name="shop_unit_spawn" visible="0">
+  <object id="16" x="375" y="75">
+   <point/>
+  </object>
+  <object id="17" x="375" y="150">
+   <point/>
+  </object>
+  <object id="18" x="600" y="75">
+   <point/>
+  </object>
+  <object id="19" x="600" y="150">
+   <point/>
+  </object>
+  <object id="20" x="825" y="75">
+   <point/>
+  </object>
+  <object id="21" x="825" y="150">
+   <point/>
+  </object>
+  <object id="22" x="1050" y="75">
+   <point/>
+  </object>
+  <object id="23" x="1050" y="150">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="11" name="anim_objects">
+  <object id="26" name="camp_fire" x="174.121" y="454.02">
+   <point/>
+  </object>
+  <object id="28" name="flag" x="256.157" y="542.086">
+   <point/>
+  </object>
+  <object id="59" name="leaves" x="525" y="225">
+   <point/>
+  </object>
+  <object id="61" name="leaves" x="300" y="225">
+   <point/>
+  </object>
+  <object id="62" name="leaves" x="750" y="225">
+   <point/>
+  </object>
+  <object id="63" name="leaves" x="975" y="225">
+   <point/>
+  </object>
+ </objectgroup>
+</map>

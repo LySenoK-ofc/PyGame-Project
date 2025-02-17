@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="20" height="11" tilewidth="75" tileheight="75" infinite="0" nextlayerid="8" nextobjectid="108">
+ <tileset firstgid="1" source="tiles/Tiles_Dirt_Free.tsx"/>
+ <tileset firstgid="115" source="tiles/Tiles_BircksandWalls_Free.tsx"/>
+ <tileset firstgid="297" source="tiles/camp1.tsx"/>
+ <tileset firstgid="298" source="tiles/camp2.tsx"/>
+ <tileset firstgid="299" source="tiles/camp4.tsx"/>
+ <tileset firstgid="300" source="tiles/camp3.tsx"/>
+ <tileset firstgid="301" source="tiles/Skull.tsx"/>
+ <tileset firstgid="302" source="tiles/plants1.tsx"/>
+ <tileset firstgid="303" source="tiles/stones1.tsx"/>
+ <tileset firstgid="304" source="tiles/bones.tsx"/>
+ <tileset firstgid="310" source="tiles/plants2.tsx"/>
+ <tileset firstgid="311" source="tiles/plants3.tsx"/>
+ <tileset firstgid="312" source="tiles/plants4.tsx"/>
+ <tileset firstgid="313" source="tiles/stones2.tsx"/>
+ <tileset firstgid="314" source="tiles/pointer.tsx"/>
+ <tileset firstgid="315" source="tiles/cocoon.tsx"/>
+ <layer id="1" name="floor" width="20" height="11">
+  <data encoding="csv">
+32,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,33,34,
+38,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,40,
+38,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,40,
+38,42,42,42,42,31,35,35,35,35,35,105,105,105,105,105,105,105,105,106,
+38,42,42,42,42,37,35,35,35,35,35,105,105,105,105,105,105,105,105,106,
+38,42,42,42,42,37,35,35,35,35,35,105,105,105,105,105,105,105,105,106,
+38,42,42,42,42,37,35,35,35,35,35,105,105,105,105,105,105,105,105,106,
+38,42,42,42,42,37,35,35,35,35,35,105,105,105,105,105,105,105,105,106,
+38,42,42,42,42,43,35,35,35,35,35,105,105,105,105,105,105,105,105,106,
+38,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,42,40,
+44,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,45,46
+</data>
+ </layer>
+ <layer id="4" name="floor1" width="20" height="11">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,196,198,199,198,198,197,199,199,200,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</data>
+ </layer>
+ <objectgroup id="5" name="lancer_spawn"/>
+ <objectgroup id="6" name="shop_unit_spawn">
+  <object id="100" x="525" y="150">
+   <point/>
+  </object>
+  <object id="101" x="600" y="150">
+   <point/>
+  </object>
+  <object id="102" x="675" y="150">
+   <point/>
+  </object>
+  <object id="103" x="750" y="150">
+   <point/>
+  </object>
+  <object id="104" x="825" y="150">
+   <point/>
+  </object>
+  <object id="105" x="900" y="150">
+   <point/>
+  </object>
+  <object id="106" x="975" y="150">
+   <point/>
+  </object>
+ </objectgroup>
+ <objectgroup id="7" name="user_cell">
+  <object id="90" x="450" y="225">
+   <point/>
+  </object>
+  <object id="91" x="450" y="300">
+   <point/>
+  </object>
+  <object id="92" x="450" y="375">
+   <point/>
+  </object>
+  <object id="93" x="450" y="450">
+   <point/>
+  </object>
+  <object id="94" x="450" y="525">
+   <point/>
+  </object>
+  <object id="95" x="450" y="600">
+   <point/>
+  </object>
+  <object id="96" x="675" y="225">
+   <point/>
+  </object>
+  <object id="97" x="525" y="225">
+   <point/>
+  </object>
+  <object id="98" x="600" y="225">
+   <point/>
+  </object>
+  <object id="99" x="750" y="225">
+   <point/>
+  </object>
+ </objectgroup>
+ <layer id="2" name="objects" width="20" height="11">
+  <data encoding="csv">
+0,0,0,0,0,0,0,0,305,0,307,0,0,304,0,0,0,0,0,0,
+313,0,0,0,0,302,0,0,0,0,0,0,0,0,0,313,0,315,0,0,
+311,304,303,0,0,312,0,0,308,0,0,0,0,0,0,306,302,2147483958,307,0,
+0,0,300,0,306,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+298,302,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+2147483947,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+2147483945,301,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,2147483945,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+302,0,0,0,308,0,314,0,307,0,0,0,0,0,0,304,0,0,307,0,
+0,310,305,0,311,0,0,0,0,302,0,313,311,0,315,0,311,0,315,0
+</data>
+ </layer>
+</map>

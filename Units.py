@@ -1,7 +1,7 @@
 from random import choice, random
 import pygame
 import constant
-from sound_tests import play_sound, sounds
+from sounds_manager import play_sound, sounds
 from sprite_groups import groups
 from constant import CELL_SIZE, WIDTH, HEIGHT
 from all_animations import ANIMATIONS
@@ -89,8 +89,12 @@ class Unit(pygame.sprite.Sprite):
 
                 if self.armor_hp:
                     dmg -= dmg * self.armor_def
-                    self.armor_hp -= armor_dmg
-                self.hp -= dmg
+                    self.armor_hp = max(0, self.armor_hp - armor_dmg)  # Что бы минимум был 0
+                self.hp = max(0, self.hp - dmg)
+
+                # Обновляем инфу о юните
+                self.info = f'Хп:{self.hp}\nУрон:{self.atk}\nБроня:{self.armor_hp}'
+
             if self.hp <= 0:
                 self.life = False
 
@@ -157,7 +161,7 @@ class Archer(Unit):
             'death': 250,
         }
         super().__init__(coord, ANIMATIONS['ARCHER'], [group_of_row, groups['shop_units']],
-                         detect_range=WIDTH, attack_range=WIDTH, hp=100, atk=25, super_atk=40, sale=25,
+                         detect_range=CELL_SIZE * 10, attack_range=CELL_SIZE * 7, hp=100, atk=20, super_atk=30, sale=25,
                          frame_rate=frame_rate)
 
     def attack_frame_event(self):
@@ -177,7 +181,7 @@ class Archer(Unit):
             if self.mode in ('hurt', 'attack01', 'attack02') and self.frame == len(self.frames) - 1:
                 self.set_mode('idle')
             elif self.mode == 'idle' and self.current_target:
-                self.set_mode('attack01' if random() > 0.3 else 'attack02')
+                self.set_mode('attack01' if random() > 0.1 else 'attack02')
 
 
 class Knight(Unit):
@@ -192,7 +196,7 @@ class Knight(Unit):
             'death': 250,
         }
         super().__init__(coord, ANIMATIONS['KNIGHT'], [group_of_row, groups['shop_units']],
-                         detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=200, atk=30,
+                         detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=150, atk=30,
                          super_atk=50, sale=45,
                          frame_rate=frame_rate, armor_hp=50, armor_def=0.2)
 
@@ -373,7 +377,7 @@ class ArmoredAxeman(Unit):
         }
         super().__init__(coord, ANIMATIONS['ARMORED_AXEMAN'], [group_of_row, groups['shop_units']],
                          detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=150, atk=35, super_atk=60, sale=35,
-                         frame_rate=frame_rate, armor_hp=70, armor_def=0.35)
+                         frame_rate=frame_rate, armor_hp=85, armor_def=0.35)
 
     def attack_frame_event(self):
         if self.current_target:
@@ -463,8 +467,8 @@ class KnightTemplar(Unit):
             'death': 250,
         }
         super().__init__(coord, ANIMATIONS['KNIGHT_TEMPLAR'], [group_of_row, groups['shop_units']],
-                         detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=200, atk=30, sale=40,
-                         frame_rate=frame_rate, armor_hp=60, armor_def=0.25)
+                         detect_range=4 * CELL_SIZE, attack_range=CELL_SIZE, hp=150, atk=30, sale=40,
+                         frame_rate=frame_rate, armor_hp=80, armor_def=0.25)
         self.speed = 4
         self.distance = CELL_SIZE / 2
         self.distance_traveled = 0

@@ -1,9 +1,8 @@
 from random import choice, randint, random
 import pygame
 import constant
-import screens
 from all_animations import ANIMATIONS
-from sound_tests import play_sound, sounds
+from sounds_manager import play_sound, sounds
 from sprite_groups import groups
 from constant import CELL_SIZE, HEIGHT, WIDTH
 
@@ -107,9 +106,10 @@ class Enemy(pygame.sprite.Sprite):
             if self.rect.x < 0 or self.rect.left > WIDTH + 700 or self.rect.y < 0 or self.rect.top > HEIGHT:
                 self.life = False
                 constant.hp -= 1
+                # Проверка на проигрыш
                 if constant.hp <= 0:
-                    constant.hp = 5
-                    screens.main_lobby()
+                    constant.GAME_MODE = 'LOSE'
+
                 self.kill()
             if self.current_target:
                 self.check_target()

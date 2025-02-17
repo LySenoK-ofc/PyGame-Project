@@ -8,7 +8,20 @@ LEFT = 75 * 6
 
 WIDTH, HEIGHT = 1500, 825
 
+GAME_MODE = 'GAME'
+
 CURRENT_LVL = 'lvl1'
+
+# Настройки уровней
+LVL_PARAMS = {
+    'lvl1': {
+        'dark_filter': False
+    },
+    'lvl2': {
+        'dark_filter': True
+    }
+}
+
 WAVES = {
     'lvl1': [
         {'enemies': [
@@ -24,12 +37,12 @@ WAVES = {
             ('GreateswordSkeleton', 1),
             ('ArmoredSkeleton', 1)
         ],
-            'interval': 5000},
+            'interval': 4000},
         {'enemies': [
             ('Werebear', 1),
             ('Werewolf', 1)
         ],
-            'interval': 6000}
+            'interval': 4000}
     ],
     'lvl2': [
         {'enemies': [
@@ -95,6 +108,7 @@ WAVES = {
 frame_count = 0
 cash = 500
 hp = 5
+
 
 def reset_state():
     """Сбрасываем параметры."""
