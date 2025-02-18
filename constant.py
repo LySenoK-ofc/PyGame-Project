@@ -110,7 +110,6 @@ cash = 250
 hp = 5
 
 
-
 def reset_state():
     """Сбрасываем параметры."""
     global frame_count, cash, hp
