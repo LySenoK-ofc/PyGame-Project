@@ -21,6 +21,7 @@ ANIMATIONS = {
     'SMALL_SLIME': load_anim("assets/animations/Mobs/slime/Slime.png", 'mobs', 'slime', True, scale=(220, 220)),
     'WEREBEAR': load_anim("assets/animations/Mobs/werebear/Werebear.png", 'mobs', 'werebear', True),
     'WEREWOLF': load_anim("assets/animations/Mobs/werewolf/Werewolf.png", 'mobs', 'werewolf', True),
+    'DIALOG_KNIGHT': load_anim("assets/animations/Troops/knight/Knight.png", 'troops', 'knight', scale=(1700, 1700))
     'CAMP_FIRE': load_anim("assets/animations/Animated_objects/camp_fire.png", 'anim_object', 'camp_fire', scale=(70,70)),
     'FLAG': load_anim("assets/animations/Animated_objects/flag.png", 'anim_object', 'flag', reverse=True,scale=(64,128)),
     'LEAVES': load_anim("assets/animations/Animated_objects/leaves.png", 'anim_object', 'leaves', scale=(150,150))

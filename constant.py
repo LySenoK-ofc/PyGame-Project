@@ -106,13 +106,14 @@ WAVES = {
 }
 
 frame_count = 0
-cash = 500
-hp = 5
+cash = 250
+hp = 1
+
 
 
 def reset_state():
     """Сбрасываем параметры."""
     global frame_count, cash, hp
     frame_count = 0
-    cash = 500
-    hp = 5
+    cash = 250
+    hp = 1

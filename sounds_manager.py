@@ -75,6 +75,7 @@ sounds = {
     'door_close': pygame.mixer.Sound('assets/sounds/other_sounds/door_close.wav'),
     'wave_start': pygame.mixer.Sound('assets/sounds/other_sounds/wave_start.wav'),
     'none': pygame.mixer.Sound('assets/sounds/other_sounds/none.mp3'),
+    'mumble': pygame.mixer.Sound('assets/sounds/other_sounds/mumble.wav'),
     'game_start': pygame.mixer.Sound('assets/sounds/other_sounds/start_over_game/start.mp3'),
     'game_win': pygame.mixer.Sound('assets/sounds/other_sounds/start_over_game/win.wav'),
     'game_lose': pygame.mixer.Sound('assets/sounds/other_sounds/start_over_game/lose.wav')
