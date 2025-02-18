@@ -107,7 +107,7 @@ WAVES = {
 
 frame_count = 0
 cash = 250
-hp = 1
+hp = 5
 
 
 
@@ -116,4 +116,4 @@ def reset_state():
     global frame_count, cash, hp
     frame_count = 0
     cash = 250
-    hp = 1
+    hp = 5

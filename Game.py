@@ -209,7 +209,7 @@ def game_loop():
                             break
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    screens.main_lobby(True)
+                    screens.pause_screen()
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LSHIFT:
                     info_text, coord_info_text = '', []
@@ -239,11 +239,11 @@ def game_loop():
         # Выигрыш/проигрыш
         if constant.GAME_MODE == 'WIN':
             pygame.mixer.Channel(1).play(sounds['game_win'])
-            screens.main_lobby(True)
+            screens.win_screen()
         elif constant.GAME_MODE == 'LOSE':
             pygame.mixer.Channel(1).play(sounds['game_lose'])
             pygame.mixer.Channel(2).stop()
-            screens.main_lobby(True)
+            screens.lose_screen()
 
         groups['all_sprites'].update()
         pygame.display.flip()

@@ -5,35 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="продолжил работу со звуком">
+      <change beforePath="$PROJECT_DIR$/.idea/PyGame_Project_demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PyGame_Project_demo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Board_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board_class.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Map_constructor.py" beforeDir="false" afterPath="$PROJECT_DIR$/Map_constructor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mobs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Units.py" beforeDir="false" afterPath="$PROJECT_DIR$/Units.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Waves_spawner.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_spawner.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death0.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death1.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death2.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death3.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/death4.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar2.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar3.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar4.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/roar5.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/skeleton-breathing.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Orc/skeleton-breathing2.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Wolf/hurt.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/Wolf/roar.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sounds/entities_sounds/step2.wav" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Map_constructor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Waves_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/all_animations.py" beforeDir="false" afterPath="$PROJECT_DIR$/all_animations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/pi-sheng.regular.otf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/font/pi-sheng.regular.otf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/constant.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/demo_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/demo_project.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sale_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/sale_func.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/screens.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shop.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/show_info.py" beforeDir="false" afterPath="$PROJECT_DIR$/show_info.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sound_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/sound_tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprite_groups.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_groups.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,28 +62,51 @@
     "Python.Map_constructor.executor": "Run",
     "Python.demo_map.executor": "Run",
     "Python.demo_project.executor": "Run",
-    "Python.screens.executor": "Debug",
+    "Python.screens.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Kirill's-Branch",
-    "last_opened_file_path": "E:/PyCharmProjects/YandexGameProject/assets/data",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "E:/PyCharmProjects/YandexGameProject/assets/data/font",
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\PyCharmProjects\YandexGameProject\assets\data\font" />
       <recent name="E:\PyCharmProjects\YandexGameProject\assets\data" />
       <recent name="E:\PyCharmProjects\YandexGameProject\data" />
       <recent name="E:\PyCharmProjects\YandexGameProject\assets\animations\Mobs\werewolf" />
       <recent name="E:\PyCharmProjects\YandexGameProject\assets\animations\Mobs\werebear" />
-      <recent name="E:\PyCharmProjects\YandexGameProject\assets\animations\Mobs\slime" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\PyCharmProjects\YandexGameProject\assets\data\font" />
       <recent name="E:\PyCharmProjects\YandexGameProject\assets" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.demo_project">
+  <component name="RunManager" selected="Python.screens">
+    <configuration name="Game" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PyGame_Project_demo" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Game.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="Map_constructor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="PyGame_Project_demo" />
       <option name="ENV_FILES" value="" />
@@ -191,12 +195,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.Game" />
+      <item itemvalue="Python.Map_constructor" />
+      <item itemvalue="Python.demo_map" />
+      <item itemvalue="Python.demo_project" />
+      <item itemvalue="Python.screens" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.demo_project" />
         <item itemvalue="Python.screens" />
+        <item itemvalue="Python.demo_project" />
         <item itemvalue="Python.demo_map" />
         <item itemvalue="Python.Map_constructor" />
+        <item itemvalue="Python.Game" />
       </list>
     </recent_temporary>
   </component>
@@ -325,16 +337,5 @@
     <MESSAGE value="добавил звуков" />
     <MESSAGE value="продолжил работу со звуком" />
     <option name="LAST_COMMIT_MESSAGE" value="продолжил работу со звуком" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Board_class.py</url>
-          <line>42</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

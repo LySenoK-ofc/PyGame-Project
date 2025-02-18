@@ -5,7 +5,7 @@ import pygame
 import constant
 from Mobs import Slime, Skeleton, Orc, ArmoredOrc, EliteOrc, RiderOrc, ArmoredSkeleton, GreateswordSkeleton, Werewolf, \
     Werebear
-from constant import WIDTH, CELL_SIZE, TOP, CURRENT_LVL, WAVES
+from constant import WIDTH, CURRENT_LVL, WAVES
 from sounds_manager import sounds
 from sprite_groups import groups
 
@@ -75,7 +75,7 @@ class WaveManager:
 
     def spawn_mob(self, enemy_class):
         row = randrange(0, self.board.height)
-        setting = ((WIDTH + randrange(100, 250), row * CELL_SIZE + self.board.top + CELL_SIZE / 2),
+        setting = ((WIDTH + randrange(100, 250), row * self.board.cell_size + self.board.top + self.board.cell_size / 2),
                    groups['rows'][row])
         enemy = enemy_class(*setting)
         self.enemies.add(enemy)
