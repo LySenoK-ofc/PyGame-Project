@@ -6,7 +6,6 @@ import Game
 from load_image_func import load_image
 from sounds_manager import play_background_music
 from sprite_groups import update_group
-# from Map_constructor import MapTile, AnimatedMapObject
 from shop_units import Shop
 
 from Units import *

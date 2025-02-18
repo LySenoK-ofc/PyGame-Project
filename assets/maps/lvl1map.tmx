@@ -9,9 +9,7 @@
  <tileset firstgid="7" source="tiles/bush3.tsx"/>
  <tileset firstgid="8" source="tiles/bush4.tsx"/>
  <tileset firstgid="9" source="tiles/bush5.tsx"/>
- <tileset firstgid="10" name="bush6" tilewidth="80" tileheight="52" tilecount="1" columns="1">
-  <image source="E:/PyCharmProjects/YandexGameProject/assets/map_tiles/Objects/bushes/6.png" width="80" height="52"/>
- </tileset>
+ <tileset firstgid="10" source="tiles/bush6.tsx"/>
  <tileset firstgid="11" source="tiles/camp1.tsx"/>
  <tileset firstgid="12" source="tiles/camp2.tsx"/>
  <tileset firstgid="13" source="tiles/camp3.tsx"/>
@@ -31,9 +29,7 @@
  <tileset firstgid="27" source="tiles/stone5.tsx"/>
  <tileset firstgid="28" source="tiles/pointer.tsx"/>
  <tileset firstgid="29" source="tiles/flower1.tsx"/>
- <tileset firstgid="30" name="flower2" tilewidth="12" tileheight="10" tilecount="1" columns="1">
-  <image source="E:/PyCharmProjects/YandexGameProject/assets/map_tiles/Objects/flowers/2.png" width="12" height="10"/>
- </tileset>
+ <tileset firstgid="30" source="tiles/flower2.tsx"/>
  <tileset firstgid="31" source="tiles/grass1.tsx"/>
  <tileset firstgid="32" source="tiles/grass2.tsx"/>
  <tileset firstgid="33" source="tiles/grass3.tsx"/>

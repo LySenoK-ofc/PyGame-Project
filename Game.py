@@ -28,8 +28,8 @@ background = pygame.Surface((WIDTH, HEIGHT))
 
 try:
     tmx_data = pytmx.load_pygame(f"assets/maps/{CURRENT_LVL}map.tmx")
-except FileNotFoundError:
-    screens.main_lobby(True)
+except Exception as er:
+    print(f'Произошла ошибка! "{er}"')
 
 pygame.display.set_caption('demo_project')
 
