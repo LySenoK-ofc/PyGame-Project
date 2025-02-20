@@ -3,6 +3,7 @@ from random import randrange
 import pygame
 
 import constant
+import game_statistics
 from Mobs import Slime, Skeleton, Orc, ArmoredOrc, EliteOrc, RiderOrc, ArmoredSkeleton, GreateswordSkeleton, Werewolf, \
     Werebear
 from constant import WIDTH, CURRENT_LVL, WAVES
@@ -34,7 +35,7 @@ class WaveManager:
     def start_wave(self):
         """Проверяет состояние текущей волны и переходит к следующей. Запускает новую волну."""
         if self.current_wave_done and len(self.enemies) == 0:
-            constant.cash += 150  # Награда за волну
+            game_statistics.cash += 150  # Награда за волну
             self.wave += 1
             self.current_wave_done = False
             self.wave_running = False

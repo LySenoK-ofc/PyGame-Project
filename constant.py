@@ -1,10 +1,5 @@
 CELL_SIZE = 75
 FPS = 30
-WIDTH_CELL = 6
-HEIGHT_CELL = 5
-
-TOP = 75 * 4
-LEFT = 75 * 6
 
 WIDTH, HEIGHT = 1500, 825
 
@@ -104,16 +99,3 @@ WAVES = {
         ],
             'interval': 3500}]
 }
-
-frame_count = 0
-cash = 250
-hp = 5
-
-
-
-def reset_state():
-    """Сбрасываем параметры."""
-    global frame_count, cash, hp
-    frame_count = 0
-    cash = 250
-    hp = 5

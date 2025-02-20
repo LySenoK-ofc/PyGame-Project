@@ -1,3 +1,4 @@
+import game_statistics
 from constant import WIDTH
 from sprite_groups import groups
 from random import randrange
@@ -41,6 +42,7 @@ class Board:
                         cell[1] * self.cell_size + self.top + self.cell_size / 2),
                        groups['rows'][cell[1]])
             entity(*setting)
+            game_statistics.spawn_units += 1
             return True
         except Exception:
             return False
@@ -51,5 +53,6 @@ class Board:
             row = randrange(0, self.height)
             setting = ((WIDTH, row * self.cell_size + self.top + self.cell_size / 2), groups['rows'][row])
             entity(*setting)
-        except Exception:
+        except Exception as er:
+            print(f'Произошла ошибка! "{er}"')
             pass
