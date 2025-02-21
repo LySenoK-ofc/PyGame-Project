@@ -48,5 +48,6 @@ groups = {
     "buttons": sprite.Group(),
 
     "characters_page": sprite.Group(),
-    "mobs_page": sprite.Group()
+    "mobs_page": sprite.Group(),
+    "current_dict_entity": sprite.Group()
 }

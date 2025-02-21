@@ -14,7 +14,7 @@ ANIMATIONS = {
     'ELITE_ORC': load_anim("assets/animations/Mobs/elite_orc/Elite Orc.png", 'mobs', 'elite_orc', True),
     'ARMORED_ORC': load_anim("assets/animations/Mobs/armored_orc/Armored Orc.png", 'mobs', 'armored_orc', True),
     'RIDER_ORC': load_anim("assets/animations/Mobs/rider_orc/Orc rider.png", 'mobs', 'rider_orc', True),
-    'ARMORED_SCELETON': load_anim("assets/animations/Mobs/armored_skeleton/Armored Skeleton.png", 'mobs', 'armored_skeleton', True),
+    'ARMORED_SKELETON': load_anim("assets/animations/Mobs/armored_skeleton/Armored Skeleton.png", 'mobs', 'armored_skeleton', True),
     'GREATSWORD_SKELETON': load_anim("assets/animations/Mobs/greatsword_skeleton/Greatsword Skeleton.png", 'mobs', 'greatsword_skeleton', True),
     'SKELETON': load_anim("assets/animations/Mobs/skeleton/Skeleton.png", 'mobs', 'skeleton', True),
     'SLIME': load_anim("assets/animations/Mobs/slime/Slime.png", 'mobs', 'slime', True),
@@ -23,6 +23,7 @@ ANIMATIONS = {
     'WEREWOLF': load_anim("assets/animations/Mobs/werewolf/Werewolf.png", 'mobs', 'werewolf', True),
     'DIALOG_KNIGHT': load_anim("assets/animations/Troops/knight/Knight.png", 'troops', 'knight', scale=(1700, 1700)),
     'CAMP_FIRE': load_anim("assets/animations/Animated_objects/camp_fire.png", 'anim_object', 'camp_fire', scale=(70,70)),
+    'BIG_CAMP_FIRE': load_anim("assets/animations/Animated_objects/camp_fire.png", 'anim_object', 'camp_fire', scale=(250,250)),
     'FLAG': load_anim("assets/animations/Animated_objects/flag.png", 'anim_object', 'flag', reverse=True,scale=(64,128)),
     'LEAVES': load_anim("assets/animations/Animated_objects/leaves.png", 'anim_object', 'leaves', scale=(150,150))
 }

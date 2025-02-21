@@ -6,9 +6,7 @@ import Game
 from load_image_func import load_image
 from sounds_manager import play_background_music
 from sprite_groups import update_group
-# from Map_constructor import MapTile, AnimatedMapObject
-from shop_units import Shop
-
+from animated_objects import AnimatedMapObject
 from Units import *
 from Mobs import *
 
@@ -29,6 +27,27 @@ font2 = pygame.font.Font('assets/data/font/Adbnorm.ttf', 32)
 def terminate():
     pygame.quit()
     sys.exit()
+
+
+class View_entity(pygame.sprite.Sprite):
+    def __init__(self, coord, animations, type_entity, frame_rate, group):
+        super().__init__(group)
+        self.animations = animations
+        self.mode = 'idle'
+        self.frames = self.animations[self.mode]
+        self.frame = 0
+        self.image = self.frames[self.frame]
+        self.rect = self.image.get_rect(center=coord)
+        self.last_update = pygame.time.get_ticks()
+        self.frame_rate = frame_rate
+        self.type_entity = type_entity
+
+    def update(self, *args, **kwargs):
+        now = pygame.time.get_ticks()
+        if now - self.last_update > self.frame_rate and self.type_entity == 'view':
+            self.last_update = now
+            self.frame = (self.frame + 1) % len(self.frames)
+            self.image = self.frames[self.frame]
 
 
 class Button(pygame.sprite.Sprite):
@@ -58,9 +77,8 @@ class Button(pygame.sprite.Sprite):
 
             if self.command == 'open_pick_level_screen':
                 pick_level_screen()
-                # rulers_screen()
-                update_group()
-                Game.game_loop()
+                rulers_screen()
+                terminate()
             if self.command == 'open_main_lobby':
                 main_lobby()
             if self.command == 'quit':
@@ -96,9 +114,9 @@ class Entity_view_button(Button):
         self.entity = entity
         self.entity_type = entity_type
         if self.entity_type == 'Unit':
-            self.characters_view.add(Shop(None, (x + 50, y + 50), ANIMATIONS[entity.upper()], None))
+            View_entity((x + 50, y + 50), ANIMATIONS[entity.upper()], None, 250, self.characters_view)
         else:
-            self.mobs_view.add(Shop(None, (x + 57, y + 50), ANIMATIONS[entity.upper()], None))
+            View_entity((x + 57, y + 50), ANIMATIONS[entity.upper()], None, 250, self.mobs_view)
 
     def update(self, *args, **kwargs):
         if args and args[0].type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
@@ -219,7 +237,7 @@ def dictionary_screen(page=0, entity='Knight'):
 
     dictionary_field = load_image('assets/other_textures/dictionary_field.png')
     current_entity = pygame.sprite.Group()
-    current_entity.add(Shop(None, (375, 450), ANIMATIONS[entity.upper()], None))
+    entity = View_entity((375, 450), ANIMATIONS[entity.upper()], 'view', 250, current_entity)
 
     while True:
         for event in pygame.event.get():
@@ -323,23 +341,10 @@ def pick_level_screen():
 
 def rulers_screen():
     pygame.display.set_caption('Правила')
+    rulers_map = load_image('assets/other_textures/rulers_screen_map.png')
     dialog = load_image('assets/other_textures/dialog.png')
-    # MapTile(groups['map_tiles'], (0, 0), load_image('assets/map_tiles/Tiles/FieldsTile_38.png', scale=(1500, 825)))
-    # MapTile(groups['map_objects'], (810, 50), load_image('assets/map_tiles/Objects/camp/1.png', scale=(599, 378)))
-    # MapTile(groups['map_objects'], (310, 150), load_image('assets/map_tiles/Objects/decor/Box1.png', scale=(150, 150)))
-    # MapTile(groups['map_objects'], (196, 170), load_image('assets/map_tiles/Objects/decor/Box1.png', scale=(150, 150)))
-    # MapTile(groups['map_objects'], (245, 70), load_image('assets/map_tiles/Objects/decor/Box1.png', scale=(150, 150)))
-    # MapTile(groups['map_objects'], (340, 360), load_image('assets/map_tiles/Objects/stones/1.png', scale=(66, 48)))
-    # MapTile(groups['map_objects'], (270, 780), load_image('assets/map_tiles/Objects/stones/2.png', scale=(36, 24)))
-    # MapTile(groups['map_objects'], (75, 100), load_image('assets/map_tiles/Objects/stones/3.png', scale=(66, 42)))
-    # MapTile(groups['map_objects'], (670, 165), load_image('assets/map_tiles/Objects/stones/4.png', scale=(78, 48)))
-    # AnimatedMapObject(groups['animated_map_objects'], (500, 250),
-    #                   ('assets/map_tiles/Animated_Objects/campfire/active_campfire/1.png',
-    #                    'assets/map_tiles/Animated_Objects/campfire/active_campfire/2.png',
-    #                    'assets/map_tiles/Animated_Objects/campfire/active_campfire/3.png',
-    #                    'assets/map_tiles/Animated_Objects/campfire/active_campfire/4.png',
-    #                    'assets/map_tiles/Animated_Objects/campfire/active_campfire/5.png',
-    #                    'assets/map_tiles/Animated_Objects/campfire/active_campfire/6.png',), scale=(250, 250))
+
+    AnimatedMapObject((600, 300), 'BIG_CAMP_FIRE')
 
     continue_text = font2.render('Нажмите ПРОБЕЛ, чтобы продолжить', True, 'white')
     rulers_text = (('Приветствую! Ваша задча - защитить этот лагерь',
@@ -387,6 +392,7 @@ def rulers_screen():
                         dialog_page -= 1
 
         screen.fill('black')
+        screen.blit(rulers_map, (0, 0))
         groups['map_tiles'].draw(screen)
         groups['map_objects'].draw(screen)
         groups['animated_map_objects'].draw(screen)

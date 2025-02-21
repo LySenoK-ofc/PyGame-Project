@@ -4,8 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="продолжил работу со звуком">
-      <change afterPath="$PROJECT_DIR$/assets/data/font/pi-sheng.regular.otf" afterDir="false" />
+    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Исправил название анимации">
+      <change beforePath="$PROJECT_DIR$/.idea/PyGame_Project_demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PyGame_Project_demo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_02_2025_12_43__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_02_2025_12_43__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_02_2025_13_09__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_02_2025_13_09__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_02_2025_13_09__Changes_1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_02_2025_13_09__Changes_1.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_18_02_2025_12_43__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_18_02_2025_12_43__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_18_02_2025_13_10__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_18_02_2025_13_10__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/all_animations.py" beforeDir="false" afterPath="$PROJECT_DIR$/all_animations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/screens.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprite_groups.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_groups.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,20 +58,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Map_constructor.executor": "Run",
-    "Python.demo_map.executor": "Run",
-    "Python.demo_project.executor": "Run",
-    "Python.screens.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Kirill's-Branch",
-    "last_opened_file_path": "E:/PyCharmProjects/YandexGameProject/assets/data/font",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Map_constructor.executor&quot;: &quot;Run&quot;,
+    &quot;Python.demo_map.executor&quot;: &quot;Run&quot;,
+    &quot;Python.demo_project.executor&quot;: &quot;Run&quot;,
+    &quot;Python.screens.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Kirill's-Branch&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/PyCharmProjects/YandexGameProject/assets/data/font&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\PyCharmProjects\YandexGameProject\assets\data\font" />
@@ -206,7 +216,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-495700d161d3-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.22562.220" />
+        <option value="bundled-python-sdk-50da183f06c8-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13135.95" />
       </set>
     </attachedChunks>
   </component>
