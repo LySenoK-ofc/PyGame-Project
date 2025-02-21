@@ -10,7 +10,7 @@ from animated_objects import AnimatedMapObject
 from Units import *
 from Mobs import *
 
-from constant import FPS, WIDTH, HEIGHT
+from constant import FPS, WIDTH, HEIGHT, ENTITIES_DESCRIPTIONS
 import pygame.freetype
 
 pygame.init()
@@ -206,7 +206,7 @@ def dictionary_screen(page=0, entity='Knight'):
     Entity_view_button.characters_view.empty()
     Entity_view_button.mobs_view.empty()
 
-    Button(1300, 650, 'return', 'open_main_lobby')
+    Button(1325, 650, 'return', 'open_main_lobby')
     Sketch_button(300, 60, 'open_characters_page', 'Characters')
     Sketch_button(800, 60, 'open_mobs_page', 'Mobs')
 
@@ -219,16 +219,16 @@ def dictionary_screen(page=0, entity='Knight'):
     Entity_view_button(740, 440, 'Knight_Templar', 'Unit', groups['characters_page'])
     Entity_view_button(740, 560, 'Lancer', 'Unit', groups['characters_page'])
 
-    Entity_view_button(970, 200, 'Orc', 'Mob', groups['mobs_page'])
-    Entity_view_button(970, 320, 'Armored_Orc', 'Mob', groups['mobs_page'])
-    Entity_view_button(970, 440, 'Elite_Orc', 'Mob', groups['mobs_page'])
-    Entity_view_button(970, 560, 'Skeleton', 'Mob', groups['mobs_page'])
-    Entity_view_button(1100, 200, 'Armored_Skeleton', 'Mob', groups['mobs_page'])
-    Entity_view_button(1100, 320, 'Greatsword_Skeleton', 'Mob', groups['mobs_page'])
-    Entity_view_button(1100, 440, 'Slime', 'Mob', groups['mobs_page'])
-    Entity_view_button(1100, 560, 'Werewolf', 'Mob', groups['mobs_page'])
-    Entity_view_button(1230, 200, 'Werebear', 'Mob', groups['mobs_page'])
-    Entity_view_button(1230, 320, 'Rider_Orc', 'Mob', groups['mobs_page'])
+    Entity_view_button(1020, 200, 'Orc', 'Mob', groups['mobs_page'])
+    Entity_view_button(1020, 320, 'Armored_Orc', 'Mob', groups['mobs_page'])
+    Entity_view_button(1020, 440, 'Elite_Orc', 'Mob', groups['mobs_page'])
+    Entity_view_button(1020, 560, 'Skeleton', 'Mob', groups['mobs_page'])
+    Entity_view_button(1150, 200, 'Armored_Skeleton', 'Mob', groups['mobs_page'])
+    Entity_view_button(1150, 320, 'Greatsword_Skeleton', 'Mob', groups['mobs_page'])
+    Entity_view_button(1150, 440, 'Slime', 'Mob', groups['mobs_page'])
+    Entity_view_button(1150, 560, 'Werewolf', 'Mob', groups['mobs_page'])
+    Entity_view_button(1280, 200, 'Werebear', 'Mob', groups['mobs_page'])
+    Entity_view_button(1280, 320, 'Rider_Orc', 'Mob', groups['mobs_page'])
 
     if page:
         groups['characters_page'].empty()
@@ -237,7 +237,8 @@ def dictionary_screen(page=0, entity='Knight'):
 
     dictionary_field = load_image('assets/other_textures/dictionary_field.png')
     current_entity = pygame.sprite.Group()
-    entity = View_entity((375, 450), ANIMATIONS[entity.upper()], 'view', 250, current_entity)
+    View_entity((375, 450), ANIMATIONS[entity.upper()], 'view', 250, current_entity)
+    entity_description = ENTITIES_DESCRIPTIONS[entity.upper()]
 
     while True:
         for event in pygame.event.get():
@@ -258,12 +259,16 @@ def dictionary_screen(page=0, entity='Knight'):
             groups['mobs_page'].draw(screen)
             Entity_view_button.mobs_view.draw(screen)
             pygame.draw.rect(screen, 'black', pygame.Rect(
-                590, 200, 370, 470), 0, 35)
+                580, 200, 430, 470), 0, 35)
+            for i in range(len(entity_description)):
+                screen.blit(font2.render(entity_description[i], True, 'white'), (590, 225 + 30 * i))
         else:
             groups['characters_page'].draw(screen)
             Entity_view_button.characters_view.draw(screen)
             pygame.draw.rect(screen, 'black', pygame.Rect(
-                870, 200, 420, 470), 0, 35)
+                870, 200, 460, 470), 0, 35)
+            for i in range(len(entity_description)):
+                screen.blit(font2.render(entity_description[i], True, 'white'), (880, 225 + 30 * i))
 
         for txt in Sketch_button.texts:
             screen.blit(txt[0], txt[1])
