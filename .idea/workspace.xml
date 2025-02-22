@@ -4,17 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="продолжил работу со звуком">
+    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Исправил то, что было необходимо">
       <change beforePath="$PROJECT_DIR$/.idea/PyGame_Project_demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PyGame_Project_demo.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Board.py" beforeDir="false" afterPath="$PROJECT_DIR$/Board.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Map_constructor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game_Board.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mobs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Units.py" beforeDir="false" afterPath="$PROJECT_DIR$/Units.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Waves_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_manager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/all_animations.py" beforeDir="false" afterPath="$PROJECT_DIR$/all_animations.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/pi-sheng.regular.otf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/font/pi-sheng.regular.otf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/animated_objects.py" beforeDir="false" afterPath="$PROJECT_DIR$/animated_objects.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/data/database/statistics.db" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/database/statistics.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sounds/background_sounds/lvl/lvl2_sound.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sounds/background_sounds/lvl/lvl2_sound.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/constant.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game_statistics.py" beforeDir="false" afterPath="$PROJECT_DIR$/game_dynamic_parameters.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sale_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/sale_func.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/save_statistics.py" beforeDir="false" afterPath="$PROJECT_DIR$/save_statistics.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/screens.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop_units.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop_units.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sounds_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/sounds_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprite_groups.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_groups.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +42,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Kirill's-Branch" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -59,6 +70,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python.Game.executor": "Run",
     "Python.Map_constructor.executor": "Run",
     "Python.demo_map.executor": "Run",
     "Python.demo_project.executor": "Run",
@@ -66,7 +78,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "Kirill's-Branch",
     "last_opened_file_path": "E:/PyCharmProjects/YandexGameProject/assets/data/font",
     "settings.editor.selected.configurable": "preferences.lookFeel"
   }
@@ -205,17 +217,17 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.screens" />
+        <item itemvalue="Python.Game" />
         <item itemvalue="Python.demo_project" />
         <item itemvalue="Python.demo_map" />
         <item itemvalue="Python.Map_constructor" />
-        <item itemvalue="Python.Game" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-495700d161d3-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.22562.220" />
+        <option value="bundled-python-sdk-50da183f06c8-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13135.95" />
       </set>
     </attachedChunks>
   </component>
@@ -300,7 +312,23 @@
       <option name="project" value="LOCAL" />
       <updated>1739369044218</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="/">
+      <option name="closed" value="true" />
+      <created>1739874532605</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1739874532605</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Исправил то, что было необходимо">
+      <option name="closed" value="true" />
+      <created>1740118418410</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1740118418410</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -336,6 +364,19 @@
     <MESSAGE value="Волны мобов. Возможность покупать юнитов." />
     <MESSAGE value="добавил звуков" />
     <MESSAGE value="продолжил работу со звуком" />
-    <option name="LAST_COMMIT_MESSAGE" value="продолжил работу со звуком" />
+    <MESSAGE value="/" />
+    <MESSAGE value="Исправил то, что было необходимо" />
+    <option name="LAST_COMMIT_MESSAGE" value="Исправил то, что было необходимо" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Board.py</url>
+          <line>34</line>
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

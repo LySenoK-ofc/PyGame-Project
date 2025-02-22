@@ -1,18 +1,14 @@
 import sys
 
-import pygame.sprite
-
 import Game
+import constant
+from all_animations import ANIMATIONS
+from animated_objects import AnimatedMapObject
 from load_image_func import load_image
-from sounds_manager import play_background_music
-from sprite_groups import update_group
-# from Map_constructor import MapTile, AnimatedMapObject
-from shop_units import Shop
+from sounds_manager import play_background_music, play_sound, sounds
+from sprite_groups import update_group, groups
 
-from Units import *
-from Mobs import *
-
-from constant import FPS, WIDTH, HEIGHT
+from constant import FPS, WIDTH, HEIGHT, ENTITIES_DESCRIPTIONS
 import pygame.freetype
 
 pygame.init()
@@ -31,17 +27,38 @@ def terminate():
     sys.exit()
 
 
-class View_entity(pygame.sprite.Sprite):
-    def __init__(self, coord, animations, type_entity, frame_rate, group):
-        super().__init__(group)
-        self.animations = animations
-        self.mode = 'idle'
-        self.frames = self.animations[self.mode]
+class DialogKnight(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__(groups['shop_units'])
+        self.frame_rate = 250
+
+        self.frames = [pygame.transform.scale(img, (1700, 1700)) for img in ANIMATIONS['KNIGHT']['idle']]
         self.frame = 0
+
+        self.image = self.frames[self.frame]
+        self.rect = self.image.get_rect(center=(150, 600))
+        self.mask = pygame.mask.from_surface(self.image)
+        self.last_update = pygame.time.get_ticks()
+
+    def update_animation(self):
+        now = pygame.time.get_ticks()
+        if now - self.last_update > self.frame_rate:
+            self.last_update = now
+            self.frame = (self.frame + 1) % len(self.frames)
+            self.image = self.frames[self.frame]
+
+
+class ViewEntity(pygame.sprite.Sprite):
+    def __init__(self, coord, animations, type_entity, frame_rate, group, scale=(300, 300)):
+        super().__init__(group)
+        self.frames = [pygame.transform.scale(img, scale) for img in animations['idle']]
+        self.frame = 0
+
         self.image = self.frames[self.frame]
         self.rect = self.image.get_rect(center=coord)
         self.last_update = pygame.time.get_ticks()
         self.frame_rate = frame_rate
+
         self.type_entity = type_entity
 
     def update(self, *args, **kwargs):
@@ -72,7 +89,7 @@ class Button(pygame.sprite.Sprite):
     def update(self, *args, **kwargs):
         if args and args[0].type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
             update_group()
-            Sketch_button.texts.clear()
+            SketchButton.texts.clear()
             play_sound(sounds['button_click'])
             if not pygame.mixer.music.get_busy():
                 play_background_music('assets/sounds/background_sounds/lobby/lobby_sound.mp3')
@@ -80,7 +97,6 @@ class Button(pygame.sprite.Sprite):
             if self.command == 'open_pick_level_screen':
                 pick_level_screen()
                 # rulers_screen()
-                update_group()
                 Game.game_loop()
             if self.command == 'open_main_lobby':
                 main_lobby()
@@ -97,10 +113,11 @@ class Button(pygame.sprite.Sprite):
             if self.command == 'replay':
                 Game.game_loop()
             if self.command == 'next_level':
+                constant.CURRENT_LVL = f'lvl{3 - int(constant.CURRENT_LVL[-1])}'
                 Game.game_loop()
 
 
-class Sketch_button(Button):
+class SketchButton(Button):
     texts = []
 
     def __init__(self, x, y, command, text=None, group=groups['buttons']):
@@ -108,23 +125,20 @@ class Sketch_button(Button):
         self.texts.append([font.render(text, True, 'black'), (x + 30, y + 15)])
 
 
-class Entity_view_button(Button):
-    characters_view = pygame.sprite.Group()
-    mobs_view = pygame.sprite.Group()
-
+class EntityViewButton(Button):
     def __init__(self, x, y, entity=None, entity_type=None, group=groups['buttons']):
         super().__init__(x, y, 'entity_view', None, group)
         self.entity = entity
         self.entity_type = entity_type
         if self.entity_type == 'Unit':
-            View_entity((x + 50, y + 50), ANIMATIONS[entity.upper()], None, 250, self.characters_view)
+            ViewEntity((x + 50, y + 50), ANIMATIONS[entity.upper()], None, 250, groups['characters_view'])
         else:
-            View_entity((x + 57, y + 50), ANIMATIONS[entity.upper()], None, 250, self.mobs_view)
+            ViewEntity((x + 57, y + 50), ANIMATIONS[entity.upper()], None, 250, groups['mobs_view'])
 
     def update(self, *args, **kwargs):
         if args and args[0].type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
             groups['buttons'].empty()
-            Sketch_button.texts.clear()
+            SketchButton.texts.clear()
             play_sound(sounds['button_click'], 0.2)
             if self.entity_type == 'Unit':
                 dictionary_screen(0, self.entity)
@@ -132,7 +146,7 @@ class Entity_view_button(Button):
                 dictionary_screen(1, self.entity)
 
 
-class Door_lock(pygame.sprite.Sprite):
+class DoorLock(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__(groups['level_doors'])
         self.image = load_image('assets/doors/lock.png')
@@ -141,7 +155,7 @@ class Door_lock(pygame.sprite.Sprite):
         self.rect.y = y
 
 
-class Level_door(pygame.sprite.Sprite):
+class LevelDoor(pygame.sprite.Sprite):
     def __init__(self, x, y, lock=True):
         super().__init__(groups['level_doors'])
         self.image = load_image('assets/doors/close_door.png')
@@ -150,7 +164,7 @@ class Level_door(pygame.sprite.Sprite):
         self.rect.y = y
         self.click = 0
         if lock:
-            self.lock = Door_lock(x + 110, y + 150)
+            self.lock = DoorLock(x + 110, y + 150)
         else:
             self.lock = None
 
@@ -179,10 +193,10 @@ def main_lobby(restart_music=False):
     if restart_music:
         play_background_music('assets/sounds/background_sounds/lobby/lobby_sound.mp3')
 
-    Sketch_button(900, 300, 'open_pick_level_screen', 'Continue')
-    Sketch_button(900, 425, 'open_dictionary_screen', 'Dictionary')
-    Sketch_button(900, 550, 'open_options_screen', 'Options')
-    Sketch_button(900, 675, 'quit', 'Quit')
+    SketchButton(900, 300, 'open_pick_level_screen', 'Continue')
+    SketchButton(900, 425, 'open_dictionary_screen', 'Dictionary')
+    SketchButton(900, 550, 'open_options_screen', 'Options')
+    SketchButton(900, 675, 'quit', 'Quit')
 
     pygame.display.set_caption('Главное Лобби')
 
@@ -195,7 +209,7 @@ def main_lobby(restart_music=False):
 
         screen.blit(background, (0, 0))
         groups['buttons'].draw(screen)
-        for txt in Sketch_button.texts:
+        for txt in SketchButton.texts:
             screen.blit(txt[0], txt[1])
 
         pygame.display.flip()
@@ -206,32 +220,32 @@ def dictionary_screen(page=0, entity='Knight'):
     pygame.display.set_caption('Бестиарий')
     background = load_image('assets/backgrounds/levels_background.png')
 
-    Entity_view_button.characters_view.empty()
-    Entity_view_button.mobs_view.empty()
+    groups['characters_view'].empty()
+    groups['mobs_view'].empty()
 
     Button(1325, 650, 'return', 'open_main_lobby')
-    Sketch_button(300, 60, 'open_characters_page', 'Characters')
-    Sketch_button(800, 60, 'open_mobs_page', 'Mobs')
+    SketchButton(300, 60, 'open_characters_page', 'Characters')
+    SketchButton(800, 60, 'open_mobs_page', 'Mobs')
 
-    Entity_view_button(600, 200, 'Knight', 'Unit', groups['characters_page'])
-    Entity_view_button(600, 320, 'Archer', 'Unit', groups['characters_page'])
-    Entity_view_button(600, 440, 'Wizard', 'Unit', groups['characters_page'])
-    Entity_view_button(600, 560, 'Armored_Axeman', 'Unit', groups['characters_page'])
-    Entity_view_button(740, 200, 'SwordsMan', 'Unit', groups['characters_page'])
-    Entity_view_button(740, 320, 'Priest', 'Unit', groups['characters_page'])
-    Entity_view_button(740, 440, 'Knight_Templar', 'Unit', groups['characters_page'])
-    Entity_view_button(740, 560, 'Lancer', 'Unit', groups['characters_page'])
+    EntityViewButton(600, 200, 'Knight', 'Unit', groups['characters_page'])
+    EntityViewButton(600, 320, 'Archer', 'Unit', groups['characters_page'])
+    EntityViewButton(600, 440, 'Wizard', 'Unit', groups['characters_page'])
+    EntityViewButton(600, 560, 'Armored_Axeman', 'Unit', groups['characters_page'])
+    EntityViewButton(740, 200, 'SwordsMan', 'Unit', groups['characters_page'])
+    EntityViewButton(740, 320, 'Priest', 'Unit', groups['characters_page'])
+    EntityViewButton(740, 440, 'Knight_Templar', 'Unit', groups['characters_page'])
+    EntityViewButton(740, 560, 'Lancer', 'Unit', groups['characters_page'])
 
-    Entity_view_button(1020, 200, 'Orc', 'Mob', groups['mobs_page'])
-    Entity_view_button(1020, 320, 'Armored_Orc', 'Mob', groups['mobs_page'])
-    Entity_view_button(1020, 440, 'Elite_Orc', 'Mob', groups['mobs_page'])
-    Entity_view_button(1020, 560, 'Skeleton', 'Mob', groups['mobs_page'])
-    Entity_view_button(1150, 200, 'Armored_Skeleton', 'Mob', groups['mobs_page'])
-    Entity_view_button(1150, 320, 'Greatsword_Skeleton', 'Mob', groups['mobs_page'])
-    Entity_view_button(1150, 440, 'Slime', 'Mob', groups['mobs_page'])
-    Entity_view_button(1150, 560, 'Werewolf', 'Mob', groups['mobs_page'])
-    Entity_view_button(1280, 200, 'Werebear', 'Mob', groups['mobs_page'])
-    Entity_view_button(1280, 320, 'Rider_Orc', 'Mob', groups['mobs_page'])
+    EntityViewButton(1020, 200, 'Orc', 'Mob', groups['mobs_page'])
+    EntityViewButton(1020, 320, 'Armored_Orc', 'Mob', groups['mobs_page'])
+    EntityViewButton(1020, 440, 'Elite_Orc', 'Mob', groups['mobs_page'])
+    EntityViewButton(1020, 560, 'Skeleton', 'Mob', groups['mobs_page'])
+    EntityViewButton(1150, 200, 'Armored_Skeleton', 'Mob', groups['mobs_page'])
+    EntityViewButton(1150, 320, 'Greatsword_Skeleton', 'Mob', groups['mobs_page'])
+    EntityViewButton(1150, 440, 'Slime', 'Mob', groups['mobs_page'])
+    EntityViewButton(1150, 560, 'Werewolf', 'Mob', groups['mobs_page'])
+    EntityViewButton(1280, 200, 'Werebear', 'Mob', groups['mobs_page'])
+    EntityViewButton(1280, 320, 'Rider_Orc', 'Mob', groups['mobs_page'])
 
     if page:
         groups['characters_page'].empty()
@@ -240,7 +254,7 @@ def dictionary_screen(page=0, entity='Knight'):
 
     dictionary_field = load_image('assets/other_textures/dictionary_field.png')
     current_entity = pygame.sprite.Group()
-    View_entity((375, 450), ANIMATIONS[entity.upper()], 'view', 250, current_entity)
+    ViewEntity((375, 450), ANIMATIONS[entity.upper()], 'view', 250, current_entity, scale=(700, 700))
     entity_description = ENTITIES_DESCRIPTIONS[entity.upper()]
 
     while True:
@@ -260,20 +274,20 @@ def dictionary_screen(page=0, entity='Knight'):
 
         if page:
             groups['mobs_page'].draw(screen)
-            Entity_view_button.mobs_view.draw(screen)
+            groups['mobs_view'].draw(screen)
             pygame.draw.rect(screen, 'black', pygame.Rect(
                 580, 200, 430, 470), 0, 35)
             for i in range(len(entity_description)):
                 screen.blit(font2.render(entity_description[i], True, 'white'), (590, 225 + 30 * i))
         else:
             groups['characters_page'].draw(screen)
-            Entity_view_button.characters_view.draw(screen)
+            groups['characters_view'].draw(screen)
             pygame.draw.rect(screen, 'black', pygame.Rect(
                 870, 200, 460, 470), 0, 35)
             for i in range(len(entity_description)):
                 screen.blit(font2.render(entity_description[i], True, 'white'), (880, 225 + 30 * i))
 
-        for txt in Sketch_button.texts:
+        for txt in SketchButton.texts:
             screen.blit(txt[0], txt[1])
 
         current_entity.update()
@@ -305,11 +319,11 @@ def pick_level_screen():
 
     pygame.display.set_caption('Выбор уровня')
 
-    Level_door(174, 120, False)
-    Level_door(606, 120)
-    Level_door(1038, 120)
-    Level_door(375, 470)
-    Level_door(825, 470)
+    LevelDoor(174, 120, False)
+    LevelDoor(606, 120)
+    LevelDoor(1038, 120)
+    LevelDoor(375, 470)
+    LevelDoor(825, 470)
 
     text_level1 = font.render('Level 1', True, 'black')
     text_level2 = font.render('Level 2', True, 'black')
@@ -327,7 +341,7 @@ def pick_level_screen():
                 if event.button == 1:
                     groups['level_doors'].update(event)
                     for door in groups['level_doors']:
-                        if type(door) == Level_door:
+                        if type(door) == LevelDoor:
                             if door.check():
                                 return
                     groups['buttons'].update(event)
@@ -352,7 +366,7 @@ def rulers_screen():
     rulers_map = load_image('assets/other_textures/rulers_screen_map.png')
     dialog = load_image('assets/other_textures/dialog.png')
 
-    AnimatedMapObject((600, 300), 'BIG_CAMP_FIRE')
+    AnimatedMapObject((600, 300), [pygame.transform.scale(img, (250, 250)) for img in ANIMATIONS['CAMP_FIRE']['idle']])
 
     continue_text = font2.render('Нажмите ПРОБЕЛ, чтобы продолжить', True, 'white')
     rulers_text = (('Приветствую! Ваша задча - защитить этот лагерь',
@@ -379,7 +393,7 @@ def rulers_screen():
                     '5-Дровосек, 6-Мастер Меча, 7-Королевский страж)'))
     dialog_page = 0
 
-    Dialog_Knight()
+    DialogKnight()
     play_sound(sounds['mumble'])
 
     while True:
@@ -432,8 +446,8 @@ def pause_screen():
     Button(420, 275, 'replay', 'replay')
     Button(420, 425, 'return', 'open_pick_level_screen')
 
-    Sketch_button(550, 280, 'replay', 'Replay')
-    Sketch_button(550, 440, 'open_pick_level_screen', 'Back to lobby')
+    SketchButton(550, 280, 'replay', 'Replay')
+    SketchButton(550, 440, 'open_pick_level_screen', 'Back to lobby')
 
     pause_text = load_image('assets/other_textures/pause.png')
 
@@ -459,13 +473,13 @@ def pause_screen():
         screen.blit(menu, (284, 97))
         screen.blit(pause_text, (537, 115))
         groups['buttons'].draw(screen)
-        for txt in Sketch_button.texts:
+        for txt in SketchButton.texts:
             screen.blit(txt[0], txt[1])
         pygame.display.flip()
         clock.tick(FPS)
 
 
-def win_screen(lvl=None):
+def win_screen():
     pygame.mixer.music.stop()
     pygame.mixer.stop()
     pygame.display.set_caption('Победа!')
@@ -478,9 +492,9 @@ def win_screen(lvl=None):
     Button(420, 425, 'return', 'open_pick_level_screen')
     Button(420, 575, 'continue', 'next_level')
 
-    Sketch_button(550, 280, 'replay', 'Replay')
-    Sketch_button(550, 440, 'open_main_lobby', 'Back to lobby')
-    Sketch_button(550, 600, 'next_level', 'Next level')
+    SketchButton(550, 280, 'replay', 'Replay')
+    SketchButton(550, 440, 'open_main_lobby', 'Back to lobby')
+    SketchButton(550, 600, 'next_level', 'Next level')
 
     play_sound(sounds['game_win'])
 
@@ -506,7 +520,7 @@ def win_screen(lvl=None):
         screen.blit(menu, (284, 97))
         screen.blit(victory_text, (549, 100))
         groups['buttons'].draw(screen)
-        for txt in Sketch_button.texts:
+        for txt in SketchButton.texts:
             screen.blit(txt[0], txt[1])
         pygame.display.flip()
         clock.tick(FPS)
@@ -524,8 +538,8 @@ def lose_screen():
     Button(420, 275, 'replay', 'replay')
     Button(420, 425, 'return', 'open_pick_level_screen')
 
-    Sketch_button(550, 280, 'replay', 'Replay')
-    Sketch_button(550, 440, 'open_main_lobby', 'Back to lobby')
+    SketchButton(550, 280, 'replay', 'Replay')
+    SketchButton(550, 440, 'open_main_lobby', 'Back to lobby')
 
     play_sound(sounds['game_lose'])
 
@@ -551,7 +565,7 @@ def lose_screen():
         screen.blit(menu, (284, 97))
         screen.blit(defeat_text, (549, 100))
         groups['buttons'].draw(screen)
-        for txt in Sketch_button.texts:
+        for txt in SketchButton.texts:
             screen.blit(txt[0], txt[1])
         pygame.display.flip()
         clock.tick(FPS)

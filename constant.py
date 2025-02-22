@@ -3,8 +3,6 @@ FPS = 30
 
 WIDTH, HEIGHT = 1500, 825
 
-GAME_MODE = 'GAME'
-
 CURRENT_LVL = 'lvl1'
 
 # Настройки уровней

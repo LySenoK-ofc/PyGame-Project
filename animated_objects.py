@@ -7,7 +7,7 @@ from sprite_groups import groups
 class AnimatedMapObject(pygame.sprite.Sprite):
     def __init__(self, coord, anim):
         super().__init__(groups['animated_map_objects'], groups['all_sprites'])
-        self.frames = ANIMATIONS[anim]['idle']
+        self.frames = anim
         self.image = self.frames[0]
         self.rect = self.image.get_rect()
         self.rect.center = coord

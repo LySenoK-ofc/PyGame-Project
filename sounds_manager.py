@@ -89,8 +89,8 @@ def play_background_music(file, volume=0.2):
         pygame.mixer.music.load(file)
         pygame.mixer.music.play(-1)
         pygame.mixer.music.set_volume(volume)
-    except Exception:
-        pass
+    except Exception as er:
+        print(f'Произошла ошибка! "{er}"')
 
 
 def play_sound(sound, volume=0.5):

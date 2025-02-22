@@ -2,8 +2,7 @@ from random import randrange
 
 import pygame
 
-import constant
-import game_statistics
+import game_dynamic_parameters
 from Mobs import Slime, Skeleton, Orc, ArmoredOrc, EliteOrc, RiderOrc, ArmoredSkeleton, GreateswordSkeleton, Werewolf, \
     Werebear
 from constant import WIDTH, CURRENT_LVL, WAVES
@@ -35,7 +34,7 @@ class WaveManager:
     def start_wave(self):
         """Проверяет состояние текущей волны и переходит к следующей. Запускает новую волну."""
         if self.current_wave_done and len(self.enemies) == 0:
-            game_statistics.cash += 150  # Награда за волну
+            game_dynamic_parameters.cash += 150  # Награда за волну
             self.wave += 1
             self.current_wave_done = False
             self.wave_running = False
@@ -46,7 +45,7 @@ class WaveManager:
                     self.wave_running = True
                     pygame.mixer.Channel(1).play(sounds['wave_start'])
                 else:
-                    constant.GAME_MODE = 'WIN'
+                    game_dynamic_parameters.GAME_MODE = 'WIN'
 
     def spawn_enemy(self):
         """Создаёт мобов текущей волны."""
@@ -76,7 +75,8 @@ class WaveManager:
 
     def spawn_mob(self, enemy_class):
         row = randrange(0, self.board.height)
-        setting = ((WIDTH + randrange(100, 250), row * self.board.cell_size + self.board.top + self.board.cell_size / 2),
-                   groups['rows'][row])
+        setting = (
+            (WIDTH + randrange(100, 250), row * self.board.cell_size + self.board.top + self.board.cell_size / 2),
+            groups['rows'][row])
         enemy = enemy_class(*setting)
         self.enemies.add(enemy)

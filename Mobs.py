@@ -1,8 +1,7 @@
 from random import choice, randint, random
 import pygame
 
-import constant
-import game_statistics
+import game_dynamic_parameters
 from all_animations import ANIMATIONS
 from sounds_manager import play_sound, sounds
 from sprite_groups import groups
@@ -80,8 +79,8 @@ class Enemy(pygame.sprite.Sprite):
                 self.hp -= dmg
             if self.hp <= 0:
                 self.life = False
-                game_statistics.cash += self.money
-                game_statistics.killed_mobs += 1
+                game_dynamic_parameters.cash += self.money
+                game_dynamic_parameters.killed_mobs += 1
 
     def attack_frame_event(self):
         """Метод проверки фрейма удара. Переопределяется."""
@@ -105,13 +104,13 @@ class Enemy(pygame.sprite.Sprite):
                        sounds['sword'][8]])
 
     def update(self, *args, **kwargs):
-        if game_statistics.frame_count % 5 == 0:
+        if game_dynamic_parameters.frame_count % 5 == 0:
             if self.rect.x < 0 or self.rect.left > WIDTH + 700 or self.rect.y < 0 or self.rect.top > HEIGHT:
                 self.life = False
-                game_statistics.hp -= 1
+                game_dynamic_parameters.hp -= 1
                 # Проверка на проигрыш
-                if game_statistics.hp <= 0:
-                    constant.GAME_MODE = 'LOSE'
+                if game_dynamic_parameters.hp <= 0:
+                    game_dynamic_parameters.GAME_MODE = 'LOSE'
 
                 self.kill()
             if self.current_target:

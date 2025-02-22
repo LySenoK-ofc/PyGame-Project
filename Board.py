@@ -1,5 +1,6 @@
-import game_statistics
+import game_dynamic_parameters
 from constant import WIDTH
+from sounds_manager import play_sound, sounds
 from sprite_groups import groups
 from random import randrange
 
@@ -34,15 +35,17 @@ class Board:
             units_coord = tuple(map(lambda s: ((s.rect.centerx - self.left) // self.cell_size,
                                                (s.rect.centery - self.top) // self.cell_size),
                                     groups["characters"]))
-            if any(map(lambda coord: coord == cell, units_coord)):
+            if any(map(lambda coord: coord == cell, units_coord)) or game_dynamic_parameters.cash - entity.price < 0:
                 return False
 
             # Иначе спавним юнита и возвращаем True
             setting = ((cell[0] * self.cell_size + self.left + self.cell_size / 2,
                         cell[1] * self.cell_size + self.top + self.cell_size / 2),
                        groups['rows'][cell[1]])
-            entity(*setting)
-            game_statistics.spawn_units += 1
+            entity.unit(*setting)
+            game_dynamic_parameters.spawn_units += 1
+            game_dynamic_parameters.cash -= entity.price
+            play_sound(sounds['unit_spawn'])
             return True
         except Exception:
             return False

@@ -1,7 +1,4 @@
 import pygame
-
-import game_statistics
-from sounds_manager import play_sound, sounds
 from sprite_groups import groups
 
 
@@ -50,16 +47,14 @@ class Shop(pygame.sprite.Sprite):
                     groups['drag_units'].add(self)
 
                 if not mouse_button[0] and self in groups['drag_units']:
-                    self.drop(mouse_pos)
+                    self.spawn_unit(mouse_pos)
 
             if self in groups['drag_units']:
                 # Тащим юнита за мышкой
                 self.rect.center = mouse_pos
 
-    def drop(self, mouse_pos):
+    def spawn_unit(self, mouse_pos):
         """Покупаем и/или перемещаем юнита в магазин."""
-        if game_statistics.cash - self.price >= 0 and self.board and self.board.get_click(mouse_pos, self.unit):
-            game_statistics.cash -= self.price
-            play_sound(sounds['unit_spawn'])
         self.rect.center = self.coord
         groups['drag_units'].remove(self)
+        self.board.get_click(mouse_pos, self)
