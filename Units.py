@@ -1,6 +1,6 @@
 from random import choice, random
 import pygame
-import constant
+import game_statistics
 from sounds_manager import play_sound, sounds
 from sprite_groups import groups
 from constant import CELL_SIZE, WIDTH, HEIGHT
@@ -130,7 +130,7 @@ class Unit(pygame.sprite.Sprite):
 
     def update(self):
         # Каждый 3-й фрейм проверяем координаты и мобов поблизости
-        if constant.frame_count % 3 == 0:
+        if game_statistics.frame_count % 3 == 0:
             if self.rect.right < 0 or self.rect.left > WIDTH or self.rect.bottom < 0 or self.rect.top > HEIGHT:
                 self.kill()
             self.find_target()
@@ -586,7 +586,7 @@ class FireBall(AttackEntity):
                 self.kill()
 
             # Каждый 3-й кадр
-            if constant.frame_count % 3 == 0:
+            if game_statistics.frame_count % 3 == 0:
                 # Мобы поблизости
                 cached_nearby = [mob for mob in self.group_of_row
                                  if mob in groups['mobs'] and mob.life and abs(self.rect.x - mob.rect.x) <= CELL_SIZE]

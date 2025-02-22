@@ -6,11 +6,13 @@ import Game
 from load_image_func import load_image
 from sounds_manager import play_background_music
 from sprite_groups import update_group
-from animated_objects import AnimatedMapObject
+# from Map_constructor import MapTile, AnimatedMapObject
+from shop_units import Shop
+
 from Units import *
 from Mobs import *
 
-from constant import FPS, WIDTH, HEIGHT, ENTITIES_DESCRIPTIONS
+from constant import FPS, WIDTH, HEIGHT
 import pygame.freetype
 
 pygame.init()
@@ -77,8 +79,9 @@ class Button(pygame.sprite.Sprite):
 
             if self.command == 'open_pick_level_screen':
                 pick_level_screen()
-                rulers_screen()
-                terminate()
+                # rulers_screen()
+                update_group()
+                Game.game_loop()
             if self.command == 'open_main_lobby':
                 main_lobby()
             if self.command == 'quit':

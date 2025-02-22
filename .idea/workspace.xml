@@ -4,9 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Исправил то, что было необходимо">
+    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="продолжил работу со звуком">
+      <change beforePath="$PROJECT_DIR$/.idea/PyGame_Project_demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PyGame_Project_demo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mobs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Mobs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game.py" beforeDir="false" afterPath="$PROJECT_DIR$/Game.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Map_constructor.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Waves_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_manager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/all_animations.py" beforeDir="false" afterPath="$PROJECT_DIR$/all_animations.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/pi-sheng.regular.otf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/font/pi-sheng.regular.otf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/constant.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/screens.py" afterDir="false" />
     </list>
@@ -25,7 +31,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="Kirill's-Branch" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -51,21 +57,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.Game.executor&quot;: &quot;Run&quot;,
-    &quot;Python.Map_constructor.executor&quot;: &quot;Run&quot;,
-    &quot;Python.demo_map.executor&quot;: &quot;Run&quot;,
-    &quot;Python.demo_project.executor&quot;: &quot;Run&quot;,
-    &quot;Python.screens.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Kirill's-Branch&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/PyCharmProjects/YandexGameProject/assets/data/font&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.Map_constructor.executor": "Run",
+    "Python.demo_map.executor": "Run",
+    "Python.demo_project.executor": "Run",
+    "Python.screens.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "E:/PyCharmProjects/YandexGameProject/assets/data/font",
+    "settings.editor.selected.configurable": "preferences.lookFeel"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\PyCharmProjects\YandexGameProject\assets\data\font" />
@@ -200,17 +205,17 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.screens" />
-        <item itemvalue="Python.Game" />
         <item itemvalue="Python.demo_project" />
         <item itemvalue="Python.demo_map" />
         <item itemvalue="Python.Map_constructor" />
+        <item itemvalue="Python.Game" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-50da183f06c8-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13135.95" />
+        <option value="bundled-python-sdk-495700d161d3-aa17d162503b-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-243.22562.220" />
       </set>
     </attachedChunks>
   </component>
@@ -295,23 +300,7 @@
       <option name="project" value="LOCAL" />
       <updated>1739369044218</updated>
     </task>
-    <task id="LOCAL-00010" summary="/">
-      <option name="closed" value="true" />
-      <created>1739874532605</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1739874532605</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Исправил то, что было необходимо">
-      <option name="closed" value="true" />
-      <created>1740118418410</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1740118418410</updated>
-    </task>
-    <option name="localTasksCounter" value="12" />
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -347,8 +336,6 @@
     <MESSAGE value="Волны мобов. Возможность покупать юнитов." />
     <MESSAGE value="добавил звуков" />
     <MESSAGE value="продолжил работу со звуком" />
-    <MESSAGE value="/" />
-    <MESSAGE value="Исправил то, что было необходимо" />
-    <option name="LAST_COMMIT_MESSAGE" value="Исправил то, что было необходимо" />
+    <option name="LAST_COMMIT_MESSAGE" value="продолжил работу со звуком" />
   </component>
 </project>

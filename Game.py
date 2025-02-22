@@ -1,6 +1,8 @@
 from random import choice
 
 import constant
+import game_statistics
+import save_statistics
 import screens
 import pytmx
 
@@ -9,7 +11,7 @@ from Mobs import Slime, Skeleton, Orc, ArmoredOrc, EliteOrc, RiderOrc, ArmoredSk
     Werebear
 from Units import Archer, Knight, Wizard, Priest, ArmoredAxeman, SwordsMan, KnightTemplar, Lancer
 from Waves_manager import WaveManager
-from constant import FPS, WIDTH, HEIGHT, reset_state, CELL_SIZE, CURRENT_LVL
+from constant import FPS, WIDTH, HEIGHT, CELL_SIZE, CURRENT_LVL
 from Board import Board
 from map_creator import draw_map, get_objects
 from sale_func import sale_unit
@@ -28,8 +30,8 @@ background = pygame.Surface((WIDTH, HEIGHT))
 
 try:
     tmx_data = pytmx.load_pygame(f"assets/maps/{CURRENT_LVL}map.tmx")
-except FileNotFoundError:
-    screens.main_lobby(True)
+except Exception as er:
+    print(f'Произошла ошибка! "{er}"')
 
 pygame.display.set_caption('demo_project')
 
@@ -74,11 +76,11 @@ def info_drawer(info_text, info_font, x, y, line_spacing):
 
 def system_info_drawer(money_font, hp_font):
     """Рисуем Монеты и Хп Игрока"""
-    text_surface, text_rect = money_font.render(f"Деньги:{constant.cash}", (100, 255, 100))  # Деньги
+    text_surface, text_rect = money_font.render(f"Деньги:{game_statistics.cash}", (100, 255, 100))  # Деньги
     text_rect.x, text_rect.y = 10, 10
     screen.blit(text_surface, text_rect)
 
-    text_surface, text_rect = hp_font.render(f"Хп:{constant.hp}", (100, 255, 100))  # Хп
+    text_surface, text_rect = hp_font.render(f"Хп:{game_statistics.hp}", (100, 255, 100))  # Хп
     text_rect.x, text_rect.y = 10, text_rect.height * 2
     screen.blit(text_surface, text_rect)
 
@@ -128,7 +130,7 @@ def spaw_anim_object(anim_objects):
 def game_loop():
     """Основной игровой цикл"""
     # Сбрасываем статистику
-    reset_state()
+    game_statistics.reset_state()
 
     # Музыка уровня
     play_background_music(f'assets/sounds/background_sounds/lvl/{CURRENT_LVL}_sound.mp3')
@@ -184,7 +186,7 @@ def game_loop():
 
     running = True
     while running:
-        constant.frame_count += 1
+        game_statistics.frame_count += 1
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_LSHIFT]:
@@ -239,10 +241,13 @@ def game_loop():
         # Выигрыш/проигрыш
         if constant.GAME_MODE == 'WIN':
             pygame.mixer.Channel(1).play(sounds['game_win'])
+            pygame.mixer.Channel(2).stop()
+            save_statistics.save()
             screens.win_screen()
         elif constant.GAME_MODE == 'LOSE':
             pygame.mixer.Channel(1).play(sounds['game_lose'])
             pygame.mixer.Channel(2).stop()
+            save_statistics.save()
             screens.lose_screen()
 
         groups['all_sprites'].update()
