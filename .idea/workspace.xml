@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Сделал меню настроек с выводом статистики и выбор уровня по номеру двери">
+    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="исправил ошибку при пустой таблице статистики">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/database/statistics.db" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/database/statistics.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/save_statistics.py" beforeDir="false" afterPath="$PROJECT_DIR$/save_statistics.py" afterDir="false" />
@@ -51,21 +51,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.Game.executor": "Run",
-    "Python.Map_constructor.executor": "Run",
-    "Python.demo_map.executor": "Run",
-    "Python.demo_project.executor": "Run",
-    "Python.screens.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "E:/PyCharmProjects/YandexGameProject/assets/data/font",
-    "settings.editor.selected.configurable": "preferences.lookFeel"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Game.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Map_constructor.executor&quot;: &quot;Run&quot;,
+    &quot;Python.demo_map.executor&quot;: &quot;Run&quot;,
+    &quot;Python.demo_project.executor&quot;: &quot;Run&quot;,
+    &quot;Python.screens.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/PyCharmProjects/YandexGameProject/assets/data/font&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\PyCharmProjects\YandexGameProject\assets\data\font" />
@@ -319,7 +319,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740323143848</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="исправил ошибку при пустой таблице статистики">
+      <option name="closed" value="true" />
+      <created>1740324621505</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1740324621505</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -346,7 +354,8 @@
     <MESSAGE value="/" />
     <MESSAGE value="Исправил то, что было необходимо" />
     <MESSAGE value="Сделал меню настроек с выводом статистики и выбор уровня по номеру двери" />
-    <option name="LAST_COMMIT_MESSAGE" value="Сделал меню настроек с выводом статистики и выбор уровня по номеру двери" />
+    <MESSAGE value="исправил ошибку при пустой таблице статистики" />
+    <option name="LAST_COMMIT_MESSAGE" value="исправил ошибку при пустой таблице статистики" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

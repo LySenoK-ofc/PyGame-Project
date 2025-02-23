@@ -35,13 +35,23 @@ def get_statistic(n_lvl):
     try:
         if n_lvl == 1:
             statistic = cursor.execute(
-                '''SELECT * FROM lvl1 WHERE result = (SELECT MAX(result) FROM lvl1)''').fetchall()
+                '''SELECT * FROM lvl1 WHERE result = (SELECT MAX(result) FROM lvl1)''').fetchall()[0]
         elif n_lvl == 2:
             statistic = cursor.execute(
-                '''SELECT * FROM lvl2 WHERE result = (SELECT MAX(result) FROM lvl2)''').fetchall()
+                '''SELECT * FROM lvl2 WHERE result = (SELECT MAX(result) FROM lvl2)''').fetchall()[0]
+        statistic = (f'Лучший результат на {n_lvl} уровне:',
+                     f'Номер игры: {statistic[0]}',
+                     f'Время прохождения: {statistic[1]}',
+                     f'Использовано воинов: {statistic[2]}',
+                     f'Убито монстров: {statistic[3]}',
+                     f'Монет заработано: {statistic[4]}',
+                     f'Итоговый результат: {statistic[5]}')
+        connection.close()
+        return statistic
 
-        return statistic[0]
     except Exception as er:
-        print(f'Произошла ошибка! "{er}"')
-
-    connection.close()
+        print(er)
+        statistic = (f'Лучший результат на {n_lvl} уровне:',
+                     'Данные о проходжении этого уровня отсутствуют',)
+        connection.close()
+        return statistic
