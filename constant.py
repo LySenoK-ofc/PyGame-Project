@@ -3,6 +3,9 @@ FPS = 30
 
 WIDTH, HEIGHT = 1500, 825
 
+VOLUME_MULTIPLIERS = (0, 0.15, 0.35, 0.5, 0.75, 1)
+VOLUME_MULTIPLIER = 0.5
+
 CURRENT_LVL = 'lvl1'
 
 # Настройки уровней

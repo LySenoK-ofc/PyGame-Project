@@ -26,3 +26,16 @@ def save():
         print(f'Произошла ошибка! "{er}"')
 
     connection.close()
+
+
+def get_statistic():
+    connection = sqlite3.connect('assets/data/database/statistics.db')
+    cursor = connection.cursor()
+    try:
+        result1 = cursor.execute('''SELECT * FROM lvl1 WHERE result = (SELECT MAX(result) FROM lvl1)''').fetchall()
+        result2 = cursor.execute('''SELECT * FROM lvl2 WHERE result = (SELECT MAX(result) FROM lvl2)''').fetchall()
+        return result1[0], result2[0]
+    except Exception as er:
+        print(f'Произошла ошибка! "{er}"')
+
+    connection.close()

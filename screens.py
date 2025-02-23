@@ -2,6 +2,7 @@ import sys
 
 import Game
 import constant
+import save_statistics
 from all_animations import ANIMATIONS
 from animated_objects import AnimatedMapObject
 from load_image_func import load_image
@@ -46,6 +47,32 @@ class DialogKnight(pygame.sprite.Sprite):
             self.last_update = now
             self.frame = (self.frame + 1) % len(self.frames)
             self.image = self.frames[self.frame]
+
+    def update(self, *args, **kwargs):
+        self.update_animation()
+
+
+class Volume_control(pygame.sprite.Sprite):
+    images = {0: load_image('assets/other_textures/volume_control/0.png'),
+              0.15: load_image('assets/other_textures/volume_control/1.png'),
+              0.35: load_image('assets/other_textures/volume_control/2.png'),
+              0.5: load_image('assets/other_textures/volume_control/3.png'),
+              0.75: load_image('assets/other_textures/volume_control/4.png'),
+              1: load_image('assets/other_textures/volume_control/5.png')}
+
+    def __init__(self, x, y):
+        super().__init__(groups['buttons'])
+        self.image = self.images[constant.VOLUME_MULTIPLIER]
+        self.rect = self.image.get_rect(center=(x, y))
+        self.rect.x = x
+        self.rect.y = y
+
+    def update(self, *args, **kwargs):
+        if args and args[0].type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
+            constant.VOLUME_MULTIPLIER = constant.VOLUME_MULTIPLIERS[
+                (constant.VOLUME_MULTIPLIERS.index(constant.VOLUME_MULTIPLIER) + 1) % len(constant.VOLUME_MULTIPLIERS)]
+            self.image = self.images[constant.VOLUME_MULTIPLIER]
+            play_sound(sounds['button_click'])
 
 
 class ViewEntity(pygame.sprite.Sprite):
@@ -96,7 +123,7 @@ class Button(pygame.sprite.Sprite):
 
             if self.command == 'open_pick_level_screen':
                 pick_level_screen()
-                # rulers_screen()
+                rulers_screen()
                 Game.game_loop()
             if self.command == 'open_main_lobby':
                 main_lobby()
@@ -139,7 +166,7 @@ class EntityViewButton(Button):
         if args and args[0].type == pygame.MOUSEBUTTONDOWN and self.rect.collidepoint(args[0].pos):
             groups['buttons'].empty()
             SketchButton.texts.clear()
-            play_sound(sounds['button_click'], 0.2)
+            play_sound(sounds['button_click'])
             if self.entity_type == 'Unit':
                 dictionary_screen(0, self.entity)
             else:
@@ -156,12 +183,13 @@ class DoorLock(pygame.sprite.Sprite):
 
 
 class LevelDoor(pygame.sprite.Sprite):
-    def __init__(self, x, y, lock=True):
+    def __init__(self, x, y, number_lvl, lock=True):
         super().__init__(groups['level_doors'])
         self.image = load_image('assets/doors/close_door.png')
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+        self.number_lvl = number_lvl
         self.click = 0
         if lock:
             self.lock = DoorLock(x + 110, y + 150)
@@ -177,11 +205,10 @@ class LevelDoor(pygame.sprite.Sprite):
                 self.click += 1
                 if self.click == 1:
                     play_sound(sounds['open_door'], 1)
-                if self.check():
-                    groups['buttons'].empty()
 
     def check(self):
         if self.click >= 2:
+            constant.CURRENT_LVL = f'lvl{2 - (self.number_lvl % 2)}'
             return True
         return False
 
@@ -299,16 +326,43 @@ def dictionary_screen(page=0, entity='Knight'):
 def options_screen():
     pygame.display.set_caption('Настройки')
 
+    background = load_image('assets/backgrounds/levels_background.png')
+    statistic_menu = load_image('assets/other_textures/statistic_menu.png')
+
     Button(1300, 650, 'return', 'open_main_lobby')
+    Volume_control(150, 125)
+
+    statistic1, statistic2 = save_statistics.get_statistic()
+    statistic = ('Лучший результат на 1 уровне:',
+                 f'Номер игры: {statistic1[0]}',
+                 f'Время прохождения: {statistic1[1]}',
+                 f'Использовано воинов: {statistic1[2]}',
+                 f'Убито монстров: {statistic1[3]}',
+                 f'Монет заработано: {statistic1[4]}',
+                 f'Итговый результат: {statistic1[5]}',
+                 '',
+                 'Лучший результат на 2 уровне:',
+                 f'Номер игры: {statistic2[0]}',
+                 f'Время прохождения: {statistic2[1]}',
+                 f'Использовано воинов: {statistic2[2]}',
+                 f'Убито монстров: {statistic2[3]}',
+                 f'Монет заработано: {statistic2[4]}',
+                 f'Итговый результат: {statistic2[5]}')
 
     while True:
-        for event in pygame.event.get():
+        events = pygame.event.get()
+        for event in events:
             if event.type == pygame.QUIT:
                 terminate()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     groups['buttons'].update(event)
-        screen.fill('black')
+        screen.blit(background, (0, 0))
+        screen.blit(font.render(f'Volume Multiplier:', True, 'black'), (300, 60))
+        screen.blit(font.render(f'{constant.VOLUME_MULTIPLIER * 100}%', True, 'black'), (1050, 150))
+        screen.blit(statistic_menu, (140, 260))
+        for i in range(len(statistic)):
+            screen.blit(font2.render(statistic[i], True, 'black'), (175, 290 + i * 30))
         groups['buttons'].draw(screen)
 
         pygame.display.flip()
@@ -319,11 +373,11 @@ def pick_level_screen():
 
     pygame.display.set_caption('Выбор уровня')
 
-    LevelDoor(174, 120, False)
-    LevelDoor(606, 120)
-    LevelDoor(1038, 120)
-    LevelDoor(375, 470)
-    LevelDoor(825, 470)
+    LevelDoor(174, 120, 1, False)
+    LevelDoor(606, 120, 2, False)
+    LevelDoor(1038, 120, 3)
+    LevelDoor(375, 470, 4)
+    LevelDoor(825, 470, 5)
 
     text_level1 = font.render('Level 1', True, 'black')
     text_level2 = font.render('Level 2', True, 'black')
@@ -343,6 +397,7 @@ def pick_level_screen():
                     for door in groups['level_doors']:
                         if type(door) == LevelDoor:
                             if door.check():
+                                groups['buttons'].empty()
                                 return
                     groups['buttons'].update(event)
 
@@ -389,8 +444,8 @@ def rulers_screen():
                     'ствует возможность быстрого размещения войска,',
                     'для этого небходимо зажать цифру на ',
                     'клавиатуре и кликнуть по нужной клетке',
-                    '(1-Лучник, 2-Рыцарь, 3-Маг, 4-Жрица,',
-                    '5-Дровосек, 6-Мастер Меча, 7-Королевский страж)'))
+                    '(1-Рыцарь, 2-Лучник, 3-Маг, 4-Жрица,',
+                    '5-Дровосек, 6-Мастер Меча, 7-Королевский страж).'))
     dialog_page = 0
 
     DialogKnight()
