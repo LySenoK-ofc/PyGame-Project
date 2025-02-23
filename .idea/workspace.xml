@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="исправил ошибку при пустой таблице статистики">
+    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="создал exe версию игры">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/data/database/statistics.db" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/database/statistics.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/save_statistics.py" beforeDir="false" afterPath="$PROJECT_DIR$/save_statistics.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/screens.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -327,7 +324,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740324621505</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="создал exe версию игры">
+      <option name="closed" value="true" />
+      <created>1740328183894</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1740328183894</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -355,7 +360,8 @@
     <MESSAGE value="Исправил то, что было необходимо" />
     <MESSAGE value="Сделал меню настроек с выводом статистики и выбор уровня по номеру двери" />
     <MESSAGE value="исправил ошибку при пустой таблице статистики" />
-    <option name="LAST_COMMIT_MESSAGE" value="исправил ошибку при пустой таблице статистики" />
+    <MESSAGE value="создал exe версию игры" />
+    <option name="LAST_COMMIT_MESSAGE" value="создал exe версию игры" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
