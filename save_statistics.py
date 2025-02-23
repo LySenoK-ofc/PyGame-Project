@@ -28,13 +28,19 @@ def save():
     connection.close()
 
 
-def get_statistic():
+def get_statistic(n_lvl):
     connection = sqlite3.connect('assets/data/database/statistics.db')
     cursor = connection.cursor()
+    statistic = None
     try:
-        result1 = cursor.execute('''SELECT * FROM lvl1 WHERE result = (SELECT MAX(result) FROM lvl1)''').fetchall()
-        result2 = cursor.execute('''SELECT * FROM lvl2 WHERE result = (SELECT MAX(result) FROM lvl2)''').fetchall()
-        return result1[0], result2[0]
+        if n_lvl == 1:
+            statistic = cursor.execute(
+                '''SELECT * FROM lvl1 WHERE result = (SELECT MAX(result) FROM lvl1)''').fetchall()
+        elif n_lvl == 2:
+            statistic = cursor.execute(
+                '''SELECT * FROM lvl2 WHERE result = (SELECT MAX(result) FROM lvl2)''').fetchall()
+
+        return statistic[0]
     except Exception as er:
         print(f'Произошла ошибка! "{er}"')
 

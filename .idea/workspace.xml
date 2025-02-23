@@ -4,28 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Исправил то, что было необходимо">
-      <change afterPath="$PROJECT_DIR$/assets/other_textures/rulers_screen_map.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/other_textures/volume_control/0.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/other_textures/volume_control/1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/other_textures/volume_control/2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/other_textures/volume_control/3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/other_textures/volume_control/4.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/other_textures/volume_control/5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/PyGame_Project_demo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PyGame_Project_demo.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_02_2025_15_05__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_02_2025_15_05__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_02_2025_15_06__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_02_2025_15_06__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_02_2025_15_10__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_02_2025_15_10__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_02_2025_15_32__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_18_02_2025_15_32__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_02_2025_14_54__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_22_02_2025_14_54__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_22_02_2025_14_57__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_22_02_2025_14_57__Changes_.xml" afterDir="false" />
+    <list default="true" id="68cba61a-d91e-4579-afba-f3da8e9d2941" name="Changes" comment="Сделал меню настроек с выводом статистики и выбор уровня по номеру двери">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/assets/data/database/statistics.db" beforeDir="false" afterPath="$PROJECT_DIR$/assets/data/database/statistics.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constant.py" beforeDir="false" afterPath="$PROJECT_DIR$/constant.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/save_statistics.py" beforeDir="false" afterPath="$PROJECT_DIR$/save_statistics.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/screens.py" beforeDir="false" afterPath="$PROJECT_DIR$/screens.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sounds_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/sounds_manager.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -328,7 +311,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740118418410</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Сделал меню настроек с выводом статистики и выбор уровня по номеру двери">
+      <option name="closed" value="true" />
+      <created>1740323143848</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1740323143848</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -336,19 +327,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="master" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -366,7 +345,8 @@
     <MESSAGE value="продолжил работу со звуком" />
     <MESSAGE value="/" />
     <MESSAGE value="Исправил то, что было необходимо" />
-    <option name="LAST_COMMIT_MESSAGE" value="Исправил то, что было необходимо" />
+    <MESSAGE value="Сделал меню настроек с выводом статистики и выбор уровня по номеру двери" />
+    <option name="LAST_COMMIT_MESSAGE" value="Сделал меню настроек с выводом статистики и выбор уровня по номеру двери" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

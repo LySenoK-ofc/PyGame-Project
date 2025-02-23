@@ -332,22 +332,30 @@ def options_screen():
     Button(1300, 650, 'return', 'open_main_lobby')
     Volume_control(150, 125)
 
-    statistic1, statistic2 = save_statistics.get_statistic()
-    statistic = ('Лучший результат на 1 уровне:',
-                 f'Номер игры: {statistic1[0]}',
-                 f'Время прохождения: {statistic1[1]}',
-                 f'Использовано воинов: {statistic1[2]}',
-                 f'Убито монстров: {statistic1[3]}',
-                 f'Монет заработано: {statistic1[4]}',
-                 f'Итговый результат: {statistic1[5]}',
-                 '',
-                 'Лучший результат на 2 уровне:',
-                 f'Номер игры: {statistic2[0]}',
-                 f'Время прохождения: {statistic2[1]}',
-                 f'Использовано воинов: {statistic2[2]}',
-                 f'Убито монстров: {statistic2[3]}',
-                 f'Монет заработано: {statistic2[4]}',
-                 f'Итговый результат: {statistic2[5]}')
+    try:
+        statistic1 = save_statistics.get_statistic(1)
+        statistic1 = ('Лучший результат на 1 уровне:',
+                      f'Номер игры: {statistic1[0]}',
+                      f'Время прохождения: {statistic1[1]}',
+                      f'Использовано воинов: {statistic1[2]}',
+                      f'Убито монстров: {statistic1[3]}',
+                      f'Монет заработано: {statistic1[4]}',
+                      f'Итоговый результат: {statistic1[5]}')
+    except Exception:
+        statistic1 = ('Лучший результат на 1 уровне:',
+                      'Данные о проходжении этого уровня отсутствуют',)
+    try:
+        statistic2 = save_statistics.get_statistic(2)
+        statistic2 = ('Лучший результат на 2 уровне:',
+                      f'Номер игры: {statistic2[0]}',
+                      f'Время прохождения: {statistic2[1]}',
+                      f'Использовано воинов: {statistic2[2]}',
+                      f'Убито монстров: {statistic2[3]}',
+                      f'Монет заработано: {statistic2[4]}',
+                      f'Итоговый результат: {statistic2[5]}')
+    except Exception:
+        statistic2 = ('Лучший результат на 2 уровне:',
+                      'Данные о проходжении этого уровня отсутствуют')
 
     while True:
         events = pygame.event.get()
@@ -361,8 +369,11 @@ def options_screen():
         screen.blit(font.render(f'Volume Multiplier:', True, 'black'), (300, 60))
         screen.blit(font.render(f'{constant.VOLUME_MULTIPLIER * 100}%', True, 'black'), (1050, 150))
         screen.blit(statistic_menu, (140, 260))
-        for i in range(len(statistic)):
-            screen.blit(font2.render(statistic[i], True, 'black'), (175, 290 + i * 30))
+        for i in range(len(statistic1)):
+            screen.blit(font2.render(statistic1[i], True, 'black'), (175, 290 + i * 30))
+
+        for i in range(len(statistic2)):
+            screen.blit(font2.render(statistic2[i], True, 'black'), (175, 510 + i * 30))
         groups['buttons'].draw(screen)
 
         pygame.display.flip()
