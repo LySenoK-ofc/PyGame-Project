@@ -140,6 +140,8 @@ def game_loop():
     game_dynamic_parameters.reset_dynamic_param()
     update_group()
 
+    pygame.display.set_caption('Игра')
+
     try:
         tmx_data = pytmx.load_pygame(f"assets/maps/{constant.CURRENT_LVL}map.tmx")
     except Exception as er:

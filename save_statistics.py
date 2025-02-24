@@ -49,8 +49,7 @@ def get_statistic(n_lvl):
         connection.close()
         return statistic
 
-    except Exception as er:
-        print(er)
+    except Exception:
         statistic = (f'Лучший результат на {n_lvl} уровне:',
                      'Данные о проходжении этого уровня отсутствуют',)
         connection.close()
