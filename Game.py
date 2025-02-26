@@ -26,9 +26,9 @@ from all_animations import ANIMATIONS
 pygame.init()
 size = WIDTH, HEIGHT
 screen = pygame.display.set_mode(size)
-background = pygame.Surface((WIDTH, HEIGHT))
+background = pygame.Surface(size)
 
-pygame.display.set_caption('demo_project')
+pygame.display.set_caption('Game')
 
 
 def alpha_convert():
