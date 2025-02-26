@@ -7,3 +7,5 @@ import sqlite3
 import json
 import os
 from random import choice, randint, random, randrange
+
+# Запускать screens.py
