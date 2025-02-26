@@ -1,6 +1,5 @@
 import pygame
 
-from all_animations import ANIMATIONS
 from sprite_groups import groups
 
 

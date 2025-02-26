@@ -63,7 +63,7 @@ def step_sound_func():
 def info_drawer(info_text, info_font, x, y, line_spacing):
     """Рисуем инфу по юниту"""
     for line in info_text:
-        text_surface, text_rect = info_font.render(line, (100, 255, 100))
+        text_surface, text_rect = info_font.render(line, (200, 255, 100))
         text_rect.x, text_rect.y = x, y
         screen.blit(text_surface, text_rect)
         y += text_rect.height + line_spacing
@@ -71,11 +71,11 @@ def info_drawer(info_text, info_font, x, y, line_spacing):
 
 def system_info_drawer(money_font, hp_font):
     """Рисуем Монеты и Хп Игрока"""
-    text_surface, text_rect = money_font.render(f"Деньги:{game_dynamic_parameters.cash}", (100, 255, 100))  # Деньги
+    text_surface, text_rect = money_font.render(f"Деньги:{game_dynamic_parameters.cash}", (200, 255, 100))  # Деньги
     text_rect.x, text_rect.y = 10, 10
     screen.blit(text_surface, text_rect)
 
-    text_surface, text_rect = hp_font.render(f"Хп:{game_dynamic_parameters.hp}", (100, 255, 100))  # Хп
+    text_surface, text_rect = hp_font.render(f"Хп:{game_dynamic_parameters.hp}", (200, 255, 100))  # Хп
     text_rect.x, text_rect.y = 10, text_rect.height * 2
     screen.blit(text_surface, text_rect)
 

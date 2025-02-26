@@ -412,7 +412,7 @@ def rulers_screen():
 
     AnimatedMapObject((600, 300), [pygame.transform.scale(img, (250, 250)) for img in ANIMATIONS['CAMP_FIRE']['idle']])
 
-    continue_text = font2.render('Нажмите ПРОБЕЛ, чтобы продолжить', True, 'white')
+    continue_text = font2.render('Нажмите ПРОБЕЛ, чтобы продолжить/ВЛЕВО, чтобы вернуться', True, 'white')
     rulers_text = (('Приветствую! Ваша задча - защитить этот лагерь',
                     'от монстров, для этого вам было выделено войско.',
                     'Но помните - никто не работает за бесплатно,',
@@ -447,15 +447,16 @@ def rulers_screen():
             if event.type == pygame.KEYDOWN:
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_SPACE]:
-                    if dialog_page + 1 == len(rulers_text):
-                        return
-                    else:
-                        dialog_page += 1
-                        if not pygame.mixer.Channel(1).get_busy():
-                            pygame.mixer.Channel(1).play(sounds['mumble'])
+                    dialog_page += 1
+                    if not pygame.mixer.Channel(1).get_busy():
+                        pygame.mixer.Channel(1).play(sounds['mumble'])
+                if keys[pygame.K_s]:
+                    dialog_page += len(rulers_text)
                 if keys[pygame.K_LEFT]:
                     if dialog_page > 0:
                         dialog_page -= 1
+                if dialog_page + 1 >= len(rulers_text):
+                    return
 
         screen.fill('black')
         screen.blit(rulers_map, (0, 0))
@@ -467,7 +468,7 @@ def rulers_screen():
         groups['shop_units'].update()
 
         screen.blit(dialog, (240, 400))
-        screen.blit(continue_text, (385, 20))
+        screen.blit(continue_text, (WIDTH / 2 - continue_text.get_size()[0] / 2, 20))
         for i in range(len(rulers_text[dialog_page])):
             screen.blit(font2.render(rulers_text[dialog_page][i], True, 'black'), (410, 540 + i * 30))
 
@@ -616,5 +617,4 @@ def lose_screen():
 
 
 if __name__ == '__main__':
-    play_background_music('assets/sounds/background_sounds/lobby/lobby_sound.mp3')
-    main_lobby()
+    main_lobby(restart_music=True)
