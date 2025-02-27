@@ -1,11 +1,2 @@
-import pygame
-import sys
-import pygame.freetype
-import pytmx
-import time
-import sqlite3
-import json
-import os
-from random import choice, randint, random, randrange
-
-# Запускать screens.py
+pygame==2.6.1
+PyTMX==3.32
