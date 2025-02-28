@@ -506,12 +506,19 @@ class KnightTemplar(Unit):
             if self.mode in ('hurt', 'block', 'attack01', 'attack02', 'attack03') and self.frame == len(
                     self.frames) - 1:
                 self.set_mode('idle')
-            elif self.mode == 'idle' and self.current_target:
-                mode = choice(['attack01', 'attack02', 'attack03'])
-                if mode != 'attack01':
-                    play_sound(*choice([(sounds['sword'][8], 0.3),
-                                        (sounds['sword'][9], 0.3)]))
-                self.set_mode(mode)
+            elif self.mode == 'idle':
+
+                if self.current_target:
+                    mode = choice(['attack01', 'attack02', 'attack03'])
+                    if mode != 'attack01':
+                        play_sound(*choice([(sounds['sword'][8], 0.3),
+                                            (sounds['sword'][9], 0.3)]))
+                    self.set_mode(mode)
+                else:
+                    now = pygame.time.get_ticks()
+                    if now - self.last_walk > 20000 and not self.cached_nearby_mobs and self.rect.x < WIDTH - 500:
+                        self.last_walk = now
+                        self.set_mode('walk_block')
 
 
 class AttackEntity(pygame.sprite.Sprite):

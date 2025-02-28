@@ -2,10 +2,11 @@ from random import randrange
 
 import pygame
 
+import constant
 import game_dynamic_parameters
 from Mobs import Slime, Skeleton, Orc, ArmoredOrc, EliteOrc, RiderOrc, ArmoredSkeleton, GreateswordSkeleton, Werewolf, \
     Werebear
-from constant import WIDTH, CURRENT_LVL, WAVES
+from constant import WIDTH, WAVES
 from sounds_manager import sounds
 from sprite_groups import groups
 
@@ -15,7 +16,7 @@ class WaveManager:
         self.wave = 0  # Текущая волна
 
         try:
-            self.waves = WAVES[CURRENT_LVL]
+            self.waves = WAVES[constant.CURRENT_LVL]
         except KeyError:
             self.waves = []
 
